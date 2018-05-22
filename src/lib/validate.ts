@@ -17,7 +17,7 @@ export interface Config {
 
 export function run_number_validation(config: Config) : Response {
   // validates that 'number' exists in 'array_of_numbers'
-  if ((config.number_config as number_config).array_of_numbers.includes((config.number_config as number_config).number)) {
+  if (config.number_config && config.number_config.array_of_numbers.includes(config.number_config.number)) {
     return {
       messages: [],
       status: Status.Green
@@ -35,9 +35,8 @@ export function run_number_validation(config: Config) : Response {
 
 export function run_optional_string_validation(config: Config) {
   // validates that optional_string is in strings, if it exists
-
-  if ((config.string_config as string_config).hasOwnProperty('optional_string')) {
-    if ((config.string_config as string_config).strings.includes((config.string_config as string_config).optional_string as string)) {
+  if (config.string_config && config.string_config.optional_string) {
+    if (config.string_config && config.string_config.strings.includes(config.string_config.optional_string)) {
       return {
         messages: [],
         status: Status.Green
