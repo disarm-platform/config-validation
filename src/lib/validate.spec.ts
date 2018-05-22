@@ -9,7 +9,7 @@ test('valid config number', t => {
     number: 1
   }
 
-  const result: Response = run_number_validation(validConfig)
+  const result: Response = run_number_validation({number_config: validConfig})
 
   t.is(result.status, Status.Green)
   t.is(result.messages.length, 0)
@@ -21,7 +21,7 @@ test('invalid config number', t => {
     number: 4
   }
 
-  const result: Response = run_number_validation(invalidConfig)
+  const result: Response = run_number_validation({number_config: invalidConfig})
 
   t.is(result.status, Status.Yellow)
   t.is(result.messages.length, 1)
@@ -32,7 +32,7 @@ test('valid config string', t => {
     strings: ['hi', 'hello']
   }
 
-  const result: Response = run_optional_string_validation(validConfig)
+  const result: Response = run_optional_string_validation({string_config: validConfig})
 
   t.is(result.status, Status.Green)
   t.is(result.messages.length, 0)
@@ -44,7 +44,7 @@ test('invalid config string', async t => {
     optional_string: 'not hello'
   }
 
-  const result: Response = run_optional_string_validation(validConfig)
+  const result: Response = run_optional_string_validation({string_config: validConfig})
 
   t.is(result.status, Status.Yellow)
   t.is(result.messages.length, 1)

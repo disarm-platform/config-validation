@@ -5,9 +5,19 @@ export interface number_config {
   array_of_numbers: number[];
 }
 
-export function run_number_validation(config: number_config) : Response {
+export interface string_config {
+  strings: string[],
+  optional_string?: string
+}
+
+export interface Config {
+  number_config?: number_config,
+  string_config?: string_config
+}
+
+export function run_number_validation(config: Config) : Response {
   // validates that 'number' exists in 'array_of_numbers'
-  if (config.array_of_numbers.includes(config.number)) {
+  if ((config.number_config as number_config).array_of_numbers.includes((config.number_config as number_config).number)) {
     return {
       messages: [],
       status: Status.Green
@@ -20,17 +30,14 @@ export function run_number_validation(config: number_config) : Response {
   }
 }
 
-export interface string_config {
-  strings: string[],
-  optional_string?: string
-}
 
 
-export function run_optional_string_validation(config: string_config) {
+
+export function run_optional_string_validation(config: Config) {
   // validates that optional_string is in strings, if it exists
 
-  if (config.hasOwnProperty('optional_string')) {
-    if (config.strings.includes(config.optional_string as string)) {
+  if ((config.string_config as string_config).hasOwnProperty('optional_string')) {
+    if ((config.string_config as string_config).strings.includes((config.string_config as string_config).optional_string as string)) {
       return {
         messages: [],
         status: Status.Green
