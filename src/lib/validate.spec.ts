@@ -1,50 +1,50 @@
 // tslint:disable:no-expression-statement
 import {test} from 'ava'
 import { Response, Status } from './response';
-import { run_number_validation, number_config, string_config, run_optional_string_validation } from './validate'
+import { NumberConfig, runNumberValidation, runOptionalStringValidation, StringConfig  } from './validate'
 
 test('valid config number', t => {
-  const validConfig : number_config = {
+  const validConfig : NumberConfig = {
     array_of_numbers: [1, 2],
     number: 1
   }
 
-  const result: Response = run_number_validation({number_config: validConfig})
+  const result: Response = runNumberValidation({number_config: validConfig})
 
   t.is(result.status, Status.Green)
   t.is(result.messages.length, 0)
 })
 
 test('invalid config number', t => {
-  const invalidConfig: number_config = {
+  const invalidConfig: NumberConfig = {
     array_of_numbers: [1, 2],
     number: 4
   }
 
-  const result: Response = run_number_validation({number_config: invalidConfig})
+  const result: Response = runNumberValidation({number_config: invalidConfig})
 
   t.is(result.status, Status.Yellow)
   t.is(result.messages.length, 1)
 })
 
 test('valid config string', t => {
-  const validConfig: string_config = {
+  const validConfig: StringConfig = {
     strings: ['hi', 'hello']
   }
 
-  const result: Response = run_optional_string_validation({string_config: validConfig})
+  const result: Response = runOptionalStringValidation({string_config: validConfig})
 
   t.is(result.status, Status.Green)
   t.is(result.messages.length, 0)
 })
 
 test('invalid config string', async t => {
-  const validConfig: string_config = {
-    strings: ['hi', 'hello'],
-    optional_string: 'not hello'
+  const validConfig: StringConfig = {
+    optional_string: 'not hello',
+    strings: ['hello', 'hi']
   }
 
-  const result: Response = run_optional_string_validation({string_config: validConfig})
+  const result: Response = runOptionalStringValidation({string_config: validConfig})
 
   t.is(result.status, Status.Yellow)
   t.is(result.messages.length, 1)

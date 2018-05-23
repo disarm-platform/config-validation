@@ -1,21 +1,21 @@
 import {Response, Status} from './response'
 
-export interface number_config {
+export interface NumberConfig {
   number: number;
   array_of_numbers: number[];
 }
 
-export interface string_config {
+export interface StringConfig {
   strings: string[],
   optional_string?: string
 }
 
 export interface Config {
-  number_config?: number_config,
-  string_config?: string_config
+  number_config?: NumberConfig,
+  string_config?: StringConfig
 }
 
-export function run_number_validation(config: Config) : Response {
+export function runNumberValidation(config: Config) : Response {
   // validates that 'number' exists in 'array_of_numbers'
   if (config.number_config && config.number_config.array_of_numbers.includes(config.number_config.number)) {
     return {
@@ -33,7 +33,7 @@ export function run_number_validation(config: Config) : Response {
 
 
 
-export function run_optional_string_validation(config: Config) {
+export function runOptionalStringValidation(config: Config) : Response {
   // validates that optional_string is in strings, if it exists
   if (config.string_config && config.string_config.optional_string) {
     if (config.string_config && config.string_config.strings.includes(config.string_config.optional_string)) {
