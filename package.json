@@ -51,7 +51,10 @@
   "engines": {
     "node": ">=8.9"
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash.get": "^4.4.2",
+    "xml2js": "^0.4.19"
+  },
   "devDependencies": {
     "ava": "^1.0.0-beta.3",
     "codecov": "^3.0.0",
