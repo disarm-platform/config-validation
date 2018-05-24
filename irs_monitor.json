@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://disarm.io/schemas/applets/irs_monitor.json",
+  "title": "IRS_monitor",
+  "description": "The configuration for the IRS Monitor applet for douma",
+  "type": "object",
+  "properties": {
+    "title": {
+      "description": "The title for the applet",
+      "type": "string"
+    },
+    "season_start_dates": {
+      "description": "The start of the current season",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "map": {
+      "description": "Map configuration",
+      "type": "object",
+      "properties": {
+        "chart_type": {
+          "type": "string",
+          "enum": [
+            "map"
+          ]
+        },
+        "bin_by": {
+          "type": "string"
+        },
+        "aggregation_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "response_point_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "property_layers": {
+          "$ref": "#/definitions/property_layers"
+        }
+      },
+      "required": [
+        "chart_type",
+        "bin_by",
+        "aggregation_names",
+        "response_point_fields"
+      ]
+    },
+    "table": {
+      "description": "Table configuration",
+      "type": "object",
+      "properties": {
+        "chart_type": {
+          "type": "string",
+          "enum": [
+            "table"
+          ]
+        },
+        "bin_by": {
+          "type": "string"
+        },
+        "aggregation_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "property_layers": {
+          "$ref": "#/definitions/property_layers"
+        }
+      },
+      "required": [
+        "chart_type",
+        "bin_by",
+        "aggregation_names"
+      ]
+    },
+    "charts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "style": {
+            "type": "object"
+          },
+          "options": {
+            "type": "object"
+          }
+        },
+        "required": ["id", "style", "options"]
+      }
+    }
+  },
+  "required": [
+    "map",
+    "table",
+    "season_start_dates"
+  ],
+  "definitions": {
+    "property_layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "property": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "property",
+          "label"
+        ]
+      }
+    }
+  }
+}
