@@ -10,45 +10,97 @@ export interface PropertyLayer {
   label: string;
 }
 
-export interface MultiSeries {
-  aggregation_name: string
-  colour?: string
+export interface ChartMultiSeries {
+  aggregation_name: string;
+  colour?: string;
+}
+
+export interface ChartSingleSeries {
+  aggregation_name: string;
+};
+
+export enum HeightConstraint {
+  'none',
+  'full'
+}
+
+export enum WidthConstraint {
+  'half',
+  'full'
+}
+
+export interface ChartStyle {
+  // need to check if full or something else
+  height_constraint: HeightConstraint;
+  width_constraint: WidthConstraint;
+}
+
+export interface ChartOptionsLayoutAxis {
+  title: string;
+};
+
+export enum BarMode {
+  'stack'
+}
+
+export interface ChartOptionsLayout {
+  showlegend?: boolean;
+  title: string;
+  yaxis?: ChartOptionsLayoutAxis;
+  xaxis?: ChartOptionsLayoutAxis;
+  barmode?: BarMode;
+}
+
+export enum ChartType {
+  'bar', 
+  'text', 
+  'line', 
+  'pie'
+}
+
+export interface ChartOptions {
+  chart_type: ChartType;
+  title?: string;
+  text?: string;
+  layout?: ChartOptionsLayout;
+  cumulative?: boolean;
+  time_series?: boolean;
+  bin_by?: string;
+  geographic_level_refactor_this_key_name?: string;
+  multi_series?: ChartMultiSeries[];
+  single_series?: ChartSingleSeries;
+  generate_series_from?: string;
 }
 
 
 export interface ChartConfig {
   // id is required for all
   id: string;
-  style: {
-    // need to check if full or something else
-    height_constraint: 'none' | 'full',
-    width_constraint: 'half' | 'full'
-  };
-  options: {
-    chart_type: 'bar' | 'line' | 'line' | 'pie',
-    title?: string,
-    text?: string,
-    layout?: {
-      showlegend?:  boolean,
-      title: string,
-      yaxis?: {
-        title: string,
-      },
-      xaxis?: {
-        title: string,
-      },
-      barmode?: 'stack'
-    },
-    cumulative?: boolean,
-    time_series?: boolean,
-    bin_by?: string,
-    geographic_level_refactor_this_key_name?: string,
-    multi_series?: MultiSeries[]
-    single_series?: {
-      aggregation_name: string
-    }
-    generate_series_from?: string,
-  };
+  style: ChartStyle;
+  options: ChartOptions
+}
+
+export enum Map {
+  'map'
+}
+
+export interface ChartMap {
+  chart_type: Map;
+  bin_by: string;
+  aggregation_names: string[];
+  response_point_fields: string[];
+  property_layers: PropertyLayer[];
+}
+
+export enum Table {
+  'table'
+}
+
+export interface ChartTable {
+  chart_type: Table;
+  bin_by: string;
+  aggregation_names: string[];
+  property_layers: PropertyLayer[];
 }
 
 /**
@@ -72,21 +124,10 @@ export interface IrsMonitor {
   /**
    * Map configuration
    */
-  map: {
-    chart_type: "map";
-    bin_by: string;
-    aggregation_names: string[];
-    response_point_fields: string[];
-    property_layers: PropertyLayer[];
-  };
+  map: ChartMap;
   /**
    * Table configuration
    */
-  table: {
-    chart_type: "table";
-    bin_by: string;
-    aggregation_names: string[];
-    property_layers: PropertyLayer[];
-  };
+  table: ChartTable;
   charts?: ChartConfig[];
 }
