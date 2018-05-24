@@ -1,31 +1,52 @@
 {
+    "$ref": "#/definitions/Config",
     "$schema": "http://json-schema.org/draft-06/schema#",
     "definitions": {
-        "Message": {
-            "type": "string"
-        },
-        "Response": {
+        "Config": {
             "properties": {
-                "messages": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
+                "number_config": {
+                    "$ref": "#/definitions/NumberConfig"
                 },
-                "status": {
-                    "$ref": "#/definitions/Status"
+                "string_config": {
+                    "$ref": "#/definitions/StringConfig"
                 }
             },
             "type": "object"
         },
-        "Status": {
-            "enum": [
-                0,
-                1,
-                2,
-                3
+        "NumberConfig": {
+            "properties": {
+                "array_of_numbers": {
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "number": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "array_of_numbers",
+                "number"
             ],
-            "type": "number"
+            "type": "object"
+        },
+        "StringConfig": {
+            "properties": {
+                "optional_string": {
+                    "type": "string"
+                },
+                "strings": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "strings"
+            ],
+            "type": "object"
         }
     }
 }

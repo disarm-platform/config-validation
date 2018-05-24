@@ -1,19 +1,5 @@
-import {Response, Status} from './response'
-
-export interface NumberConfig {
-  number: number;
-  array_of_numbers: number[];
-}
-
-export interface StringConfig {
-  strings: string[],
-  optional_string?: string
-}
-
-export interface Config {
-  number_config?: NumberConfig,
-  string_config?: StringConfig
-}
+import {Config, Response, Status } from './response'
+import { validateJsonSchema } from './validate_json_schema'
 
 export function runNumberValidation(config: Config) : Response {
   // validates that 'number' exists in 'array_of_numbers'
@@ -34,6 +20,18 @@ export function runNumberValidation(config: Config) : Response {
 
 
 export function runOptionalStringValidation(config: Config) : Response {
+  // first runtime validate
+  const valid = validateJsonSchema('StringConfig', config.string_config)
+  // tslint:disable:no-console
+  // @ts-ignore
+  console.log('valid', valid);
+  if (!valid) {
+    return {
+      messages: ['failed internal validation'],
+      status: Status.Red
+    }
+  }
+  
   // validates that optional_string is in strings, if it exists
   if (config.string_config && config.string_config.optional_string) {
     if (config.string_config && config.string_config.strings.includes(config.string_config.optional_string)) {

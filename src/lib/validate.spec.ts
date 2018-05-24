@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import {test} from 'ava'
-import { Response, Status } from './response';
-import { NumberConfig, runNumberValidation, runOptionalStringValidation, StringConfig  } from './validate'
+import { NumberConfig, Response, Status, StringConfig } from './response';
+import { runNumberValidation, runOptionalStringValidation } from './validate'
 
 test('valid config number', t => {
   const validConfig : NumberConfig = {
@@ -47,5 +47,17 @@ test('invalid config string', async t => {
   const result: Response = runOptionalStringValidation({string_config: validConfig})
 
   t.is(result.status, Status.Yellow)
+  t.is(result.messages.length, 1)
+})
+
+
+test('internally invalid config string', async t => {
+  const internallyInvalidConfig = {
+    not_strings: ['hello', 'hi']
+  }
+  // @ts-ignore
+  const result: Response = runOptionalStringValidation({ string_config: internallyInvalidConfig })
+
+  t.is(result.status, Status.Red)
   t.is(result.messages.length, 1)
 })

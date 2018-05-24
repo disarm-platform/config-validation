@@ -9,7 +9,7 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
-    "generate-types": "typescript-json-schema './tsconfig.json' '*' --include ./src/**/* --out 'src/schema.json'",
+    "generate-types": "typescript-json-schema './tsconfig.json' 'Config' --include ./src/**/* --out 'src/schema.json' --required true --topRef true",
     "info": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
     "build:main": "tsc -p tsconfig.json",
@@ -52,7 +52,9 @@
   "engines": {
     "node": ">=8.9"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ajv": "^6.5.0"
+  },
   "devDependencies": {
     "ava": "^1.0.0-beta.3",
     "codecov": "^3.0.0",
