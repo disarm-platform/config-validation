@@ -9,6 +9,7 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
+    "generate-types": "typescript-json-schema './tsconfig.json' '*' --include ./src/**/* --out 'src/schema.json'",
     "info": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
     "build:main": "tsc -p tsconfig.json",
@@ -69,7 +70,8 @@
     "tslint-config-prettier": "^1.8.0",
     "tslint-immutable": "^4.5.1",
     "typedoc": "^0.11.1",
-    "typescript": "^2.4.1"
+    "typescript": "^2.4.1",
+    "typescript-json-schema": "^0.24.1"
   },
   "ava": {
     "failFast": true,
