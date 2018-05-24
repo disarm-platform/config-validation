@@ -53,6 +53,8 @@
     "node": ">=8.9"
   },
   "dependencies": {
+    "lodash.get": "^4.4.2",
+    "xml2js": "^0.4.19",
     "ajv": "^6.5.0"
   },
   "devDependencies": {

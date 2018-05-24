@@ -1,3 +1,4 @@
+.idea
 node_modules
 build
 test
@@ -9,3 +10,5 @@ coverage
 
 yarn.lock
 /.idea
+graph_scripts/input/
+graph_scripts/output/
