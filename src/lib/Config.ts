@@ -5,7 +5,7 @@ export interface TConfig {
 
 export interface TNumberConfig {
   number: number;
-  array_of_numbers?: number[];
+  array_of_numbers: number[];
 }
 
 export interface TStringConfig {
