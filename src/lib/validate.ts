@@ -58,7 +58,7 @@ export function runNumberValidation(config: TConfig): TEdgeResponse {
 
 export function runOptionalStringValidation(config: TConfig): TEdgeResponse {
   // first runtime validate
-  const valid = validateJsonSchema('StringConfig', config.string_config);
+  const valid = validateJsonSchema(config);
   if (!valid) {
     return {
       messages: [{ description: 'failed internal validation' }],
