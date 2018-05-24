@@ -1,1 +1,1 @@
-export * from './lib/validate';
+export {validate} from './lib/validate';
