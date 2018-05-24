@@ -4,7 +4,7 @@ import {
   TNumberConfig,
   TStringConfig
 } from './Config';
-import { ENodeStatus, TNodeResponse } from './NodeResponse';
+import { EEdgeStatus, TEdgeResponse } from './EdgeResponse';
 import { EUnifiedStatus, TUnifiedResponse } from './UnifiedResponse';
 import { validateJsonSchema } from './validate_json_schema';
 
@@ -27,18 +27,18 @@ export function validate(config: TConfig): TUnifiedResponse {
 /**
  * Take individual nodes of the config, and figure if they are valid.
  */
-export function validate_node(
+export function validate_edge(
   node: TNumberConfig | TStringConfig | TInstanceConfig
-): TNodeResponse {
+): TEdgeResponse {
   const description = (node as TNumberConfig).number ? 'one' : 'zero';
 
   return {
     messages: [{ description }],
-    status: ENodeStatus.Blue
+    status: EEdgeStatus.Blue
   };
 }
 
-export function runNumberValidation(config: TConfig): TNodeResponse {
+export function runNumberValidation(config: TConfig): TEdgeResponse {
   // validates that 'number' exists in 'array_of_numbers'
   if (
     config.number_config &&
@@ -46,23 +46,23 @@ export function runNumberValidation(config: TConfig): TNodeResponse {
   ) {
     return {
       messages: [],
-      status: ENodeStatus.Green
+      status: EEdgeStatus.Green
     };
   } else {
     return {
       messages: [{ description: 'number does not exist' }],
-      status: ENodeStatus.Yellow
+      status: EEdgeStatus.Yellow
     };
   }
 }
 
-export function runOptionalStringValidation(config: TConfig): TNodeResponse {
+export function runOptionalStringValidation(config: TConfig): TEdgeResponse {
   // first runtime validate
   const valid = validateJsonSchema('StringConfig', config.string_config);
   if (!valid) {
     return {
       messages: [{ description: 'failed internal validation' }],
-      status: ENodeStatus.Red
+      status: EEdgeStatus.Red
     };
   }
 
@@ -76,18 +76,18 @@ export function runOptionalStringValidation(config: TConfig): TNodeResponse {
     ) {
       return {
         messages: [],
-        status: ENodeStatus.Green
+        status: EEdgeStatus.Green
       };
     } else {
       return {
         messages: [{ description: 'optional_string does not exist' }],
-        status: ENodeStatus.Yellow
+        status: EEdgeStatus.Yellow
       };
     }
   } else {
     return {
       messages: [],
-      status: ENodeStatus.Green
+      status: EEdgeStatus.Green
     };
   }
 }

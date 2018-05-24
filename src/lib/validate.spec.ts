@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
 import { TNumberConfig, TStringConfig } from './Config';
-import { ENodeStatus, TNodeResponse } from './NodeResponse';
+import { EEdgeStatus, TEdgeResponse } from './EdgeResponse';
 import { runNumberValidation, runOptionalStringValidation } from './validate';
 
 test('valid config number', t => {
@@ -10,11 +10,11 @@ test('valid config number', t => {
     number: 1
   };
 
-  const result: TNodeResponse = runNumberValidation({
+  const result: TEdgeResponse = runNumberValidation({
     number_config: validConfig
   });
 
-  t.is(result.status, ENodeStatus.Green);
+  t.is(result.status, EEdgeStatus.Green);
   t.is(result.messages.length, 0);
 });
 
@@ -24,11 +24,11 @@ test('invalid config number', t => {
     number: 4
   };
 
-  const result: TNodeResponse = runNumberValidation({
+  const result: TEdgeResponse = runNumberValidation({
     number_config: invalidConfig
   });
 
-  t.is(result.status, ENodeStatus.Yellow);
+  t.is(result.status, EEdgeStatus.Yellow);
   t.is(result.messages.length, 1);
 });
 
@@ -37,11 +37,11 @@ test('valid config string', t => {
     strings: ['hi', 'hello']
   };
 
-  const result: TNodeResponse = runOptionalStringValidation({
+  const result: TEdgeResponse = runOptionalStringValidation({
     string_config: validConfig
   });
 
-  t.is(result.status, ENodeStatus.Green);
+  t.is(result.status, EEdgeStatus.Green);
   t.is(result.messages.length, 0);
 });
 
@@ -51,11 +51,11 @@ test('invalid config string', async t => {
     strings: ['hello', 'hi']
   };
 
-  const result: TNodeResponse = runOptionalStringValidation({
+  const result: TEdgeResponse = runOptionalStringValidation({
     string_config: validConfig
   });
 
-  t.is(result.status, ENodeStatus.Yellow);
+  t.is(result.status, EEdgeStatus.Yellow);
   t.is(result.messages.length, 1);
 });
 
@@ -64,10 +64,10 @@ test('internally invalid config string', async t => {
     not_strings: ['hello', 'hi']
   };
   // @ts-ignore
-  const result: TNodeResponse = runOptionalStringValidation({
+  const result: TEdgeResponse = runOptionalStringValidation({
     string_config: internallyInvalidConfig
   });
 
-  t.is(result.status, ENodeStatus.Red);
+  t.is(result.status, EEdgeStatus.Red);
   t.is(result.messages.length, 1);
 });
