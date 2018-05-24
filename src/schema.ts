@@ -1,50 +1,44 @@
 export default {
-    "$schema": "http://json-schema.org/draft-06/schema#",
-    "definitions": {
-        "NumberConfig": {
-            "properties": {
-                "array_of_numbers": {
-                    "items": {
-                        "type": "number"
-                    },
-                    "type": "array"
-                },
-                "number": {
-                    "type": "number"
-                }
-            },
-            "required": [
-                "array_of_numbers",
-                "number"
-            ],
-            "type": "object"
+  $schema: 'http://json-schema.org/draft-06/schema#',
+  definitions: {
+    NumberConfig: {
+      properties: {
+        array_of_numbers: {
+          items: {
+            type: 'number'
+          },
+          type: 'array'
         },
-        "StringConfig": {
-            "properties": {
-                "optional_string": {
-                    "type": "string"
-                },
-                "strings": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                }
-            },
-            "required": [
-                "strings"
-            ],
-            "type": "object"
+        number: {
+          type: 'number'
         }
+      },
+      required: ['array_of_numbers', 'number'],
+      type: 'object'
     },
-    "properties": {
-        "number_config": {
-            "$ref": "#/definitions/NumberConfig"
+    StringConfig: {
+      properties: {
+        optional_string: {
+          type: 'string'
         },
-        "string_config": {
-            "$ref": "#/definitions/StringConfig"
+        strings: {
+          items: {
+            type: 'string'
+          },
+          type: 'array'
         }
+      },
+      required: ['strings'],
+      type: 'object'
+    }
+  },
+  properties: {
+    number_config: {
+      $ref: '#/definitions/NumberConfig'
     },
-    "type": "object"
-}
-
+    string_config: {
+      $ref: '#/definitions/StringConfig'
+    }
+  },
+  type: 'object'
+};
