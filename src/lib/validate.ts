@@ -1,42 +1,54 @@
-import {
-  TConfig,
-  TInstanceConfig,
-  TNumberConfig,
-  TStringConfig
-} from './Config';
-import { ENodeStatus, TNodeResponse } from './NodeResponse';
-import { EUnifiedStatus, TUnifiedResponse } from './UnifiedResponse';
+import {Config, Response, Status } from './response'
+import { validateJsonSchema } from './validate_json_schema'
 
-/**
- * Take the whole config and figure if it's valid.
- * @param {TConfig} config
- * @returns {TUnifiedResponse}
- */
-export function validate(config: TConfig): TUnifiedResponse {
-  // Figure all the parts needed
-  // Validate each in turn
-  const description = `${
-    config.number_config ? config.number_config.number : 0
-  }`;
-
-  return {
-    messages: [{ description }],
-    status: EUnifiedStatus.Green
-  };
+export function runNumberValidation(config: Config) : Response {
+  // validates that 'number' exists in 'array_of_numbers'
+  if (config.number_config && config.number_config.array_of_numbers.includes(config.number_config.number)) {
+    return {
+      messages: [],
+      status: Status.Green
+    }
+  } else {
+    return {
+      messages: ['number does not exist'],
+      status: Status.Yellow
+    }
+  }
 }
 
-/**
- * Take individual nodes of the config, and figure if they are valid.
- * @param {TNumberConfig | TStringConfig} node
- * @returns {TNodeResponse}
- */
-export function validate_node(
-  node: TNumberConfig | TStringConfig | TInstanceConfig
-): TNodeResponse {
-  const description = (node as TNumberConfig).number ? 'one' : 'zero';
 
-  return {
-    messages: [{ description }],
-    status: ENodeStatus.Blue
-  };
+
+
+export function runOptionalStringValidation(config: Config) : Response {
+  // first runtime validate
+  const valid = validateJsonSchema('StringConfig', config.string_config)
+  // tslint:disable:no-console
+  // @ts-ignore
+  console.log('valid', valid);
+  if (!valid) {
+    return {
+      messages: ['failed internal validation'],
+      status: Status.Red
+    }
+  }
+  
+  // validates that optional_string is in strings, if it exists
+  if (config.string_config && config.string_config.optional_string) {
+    if (config.string_config && config.string_config.strings.includes(config.string_config.optional_string)) {
+      return {
+        messages: [],
+        status: Status.Green
+      }
+    } else {
+      return {
+        messages: ['optional_string does not exist'],
+        status: Status.Yellow
+      }
+    }
+  } else {
+    return {
+      messages: [],
+      status: Status.Green
+    }
+  }
 }
