@@ -9,6 +9,7 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
+    "generate-types": "typescript-json-schema './tsconfig.json' 'Config' --include ./src/**/* --out 'src/schema.ts' --required true; sed -i.old '1s;^;export default ;' src/schema.ts; rm src/schema.ts.old",
     "info": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
     "build:main": "tsc -p tsconfig.json",
@@ -53,7 +54,8 @@
   },
   "dependencies": {
     "lodash.get": "^4.4.2",
-    "xml2js": "^0.4.19"
+    "xml2js": "^0.4.19",
+    "ajv": "^6.5.0"
   },
   "devDependencies": {
     "ava": "^1.0.0-beta.3",
@@ -72,7 +74,8 @@
     "tslint-config-prettier": "^1.8.0",
     "tslint-immutable": "^4.5.1",
     "typedoc": "^0.11.1",
-    "typescript": "^2.4.1"
+    "typescript": "^2.4.1",
+    "typescript-json-schema": "^0.24.1"
   },
   "ava": {
     "failFast": true,
