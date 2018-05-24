@@ -4,93 +4,14 @@ import Ajv from 'ajv'
 // @ts-ignore
 import draft_6 from 'ajv/lib/refs/json-schema-draft-06.json'
 
-// TODO: Import from file
-const schemaDefinitions = {
-  // TOOD: Add the $id property dynammically after importing it, it's required for the defitions to work.
-  "$id": "defs.json",
-  
-  "$schema": "http://json-schema.org/draft-06/schema#",
-  "definitions": {
-    "Config": {
-      "properties": {
-        "number_config": {
-          "$ref": "#/definitions/NumberConfig"
-        },
-        "string_config": {
-          "$ref": "#/definitions/StringConfig"
-        }
-      },
-      "type": "object"
-    },
-    "Message": {
-      "type": "string"
-    },
-    "NumberConfig": {
-      "properties": {
-        "array_of_numbers": {
-          "items": {
-            "type": "number"
-          },
-          "type": "array"
-        },
-        "number": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "array_of_numbers",
-        "number"
-      ],
-      "type": "object"
-    },
-    "Response": {
-      "properties": {
-        "messages": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        }
-      },
-      "required": [
-        "messages",
-        "status"
-      ],
-      "type": "object"
-    },
-    "Status": {
-      "enum": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "type": "number"
-    },
-    "StringConfig": {
-      "properties": {
-        "optional_string": {
-          "type": "string"
-        },
-        "strings": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "strings"
-      ],
-      "type": "object"
-    }
-  }
-}
+import schemaDefinitions from '../schema'
+// @ts-ignore
+// tslint:disable:no-expression-statement
+// tslint:disable:no-object-mutation
+// tslint:disable:no-string-literal
 
-
+// We need to add the $id, so we can reference it below
+schemaDefinitions["$id"] = "defs.json"
 
 const ajv = new Ajv()
 

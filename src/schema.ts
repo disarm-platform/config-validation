@@ -1,18 +1,6 @@
-{
-    "$ref": "#/definitions/Config",
+export default {
     "$schema": "http://json-schema.org/draft-06/schema#",
     "definitions": {
-        "Config": {
-            "properties": {
-                "number_config": {
-                    "$ref": "#/definitions/NumberConfig"
-                },
-                "string_config": {
-                    "$ref": "#/definitions/StringConfig"
-                }
-            },
-            "type": "object"
-        },
         "NumberConfig": {
             "properties": {
                 "array_of_numbers": {
@@ -48,6 +36,15 @@
             ],
             "type": "object"
         }
-    }
+    },
+    "properties": {
+        "number_config": {
+            "$ref": "#/definitions/NumberConfig"
+        },
+        "string_config": {
+            "$ref": "#/definitions/StringConfig"
+        }
+    },
+    "type": "object"
 }
 
