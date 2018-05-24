@@ -1,6 +1,6 @@
 export enum EUnifiedStatus {
-  Red,
-  Green
+  Red = 'Red',
+  Green = 'Green'
 }
 
 export interface TUnifiedResponseMessage {
