@@ -2,8 +2,9 @@
 import { test } from 'ava';
 import { TNumberConfig, TStringConfig } from './Config';
 import { EEdgeStatus, TEdgeResponse } from './EdgeResponse';
-import { TUnifiedResponse } from './UnifiedResponse'
+import { TUnifiedResponse, EUnifiedStatus } from './UnifiedResponse'
 import { runNumberValidation, runOptionalStringValidation, validate } from './validate';
+import { HeightConstraint, WidthConstraint } from '../definitions/applets/irs_monitor';
 
 test('valid config number', t => {
   const validConfig: TNumberConfig = {
@@ -139,8 +140,8 @@ test('returns Green for a valid config', t => {
           {
             "id": "room_coverage_by_week",
             "style": {
-              "height_constraint": "none",
-              "width_constraint": "half"
+              "height_constraint": "none" as HeightConstraint,
+              "width_constraint": "half" as WidthConstraint
             },
             "options": {
               "chart_type": "bar",
@@ -11518,4 +11519,6 @@ test('returns Green for a valid config', t => {
     }
   }
   const response: TUnifiedResponse = validate(namConfig)
+
+  t.is(response.status, EUnifiedStatus.Green)
 })
