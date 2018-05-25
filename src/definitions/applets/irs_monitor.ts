@@ -16,15 +16,9 @@ export interface ChartSingleSeries {
   aggregation_name: string;
 };
 
-export enum HeightConstraint {
-  'none',
-  'full'
-}
+export type HeightConstraint  = 'none' | 'full'
 
-export enum WidthConstraint {
-  'half',
-  'full'
-}
+export type WidthConstraint = 'half' | 'full'
 
 export interface ChartStyle {
   // need to check if full or something else
@@ -36,9 +30,7 @@ export interface ChartOptionsLayoutAxis {
   title: string;
 };
 
-export enum BarMode {
-  'stack'
-}
+export type BarMode = 'stack'
 
 export interface ChartOptionsLayout {
   showlegend?: boolean;
@@ -48,12 +40,7 @@ export interface ChartOptionsLayout {
   barmode?: BarMode;
 }
 
-export enum ChartType {
-  'bar', 
-  'text', 
-  'line', 
-  'pie'
-}
+export type ChartType = 'bar' | 'text' | 'line' | 'pie'
 
 export interface ChartOptions {
   chart_type: ChartType;
@@ -77,9 +64,7 @@ export interface ChartConfig {
   options: ChartOptions
 }
 
-export enum Map {
-  'map'
-}
+export type Map = 'map'
 
 export interface ChartMap {
   chart_type: Map;
@@ -89,9 +74,8 @@ export interface ChartMap {
   property_layers: PropertyLayer[];
 }
 
-export enum Table {
-  'table'
-}
+export type Table = 'table'
+
 
 export interface ChartTable {
   chart_type: Table;
