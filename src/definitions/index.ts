@@ -1,7 +1,13 @@
-import {Applets} from './applets'
+import { Aggregations } from './aggregations';
+import { Applets } from './applets'
+import { Decorators } from './decorators';
+import { Form } from './form';
 import { Instance } from './instance';
+import { LocationSelection } from './location_selection';
 import { MapFocus } from './map_focus';
+import { Presenters } from './presenters';
 import { SpatialHierarchy } from './spatial_hierarchy';
+import { Validations } from './validations';
 
 export interface Config {
   config_id: string;
@@ -12,11 +18,11 @@ export interface Config {
   instance: Instance;
 
   spatial_hierarchy: SpatialHierarchy;
-  form: any;
-  aggregations: any;
-  fake_form: any;
-  validations: any;
-  presenters: any;
-  decorators: any;
-  location_selection: any;
+  form: Form;
+  aggregations: Aggregations;
+  fake_form: any[];
+  validations: Validations;
+  presenters: Presenters;
+  decorators: Decorators;
+  location_selection: LocationSelection;
 }

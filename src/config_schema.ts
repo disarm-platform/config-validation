@@ -1,6 +1,27 @@
 export default {
     "$schema": "http://json-schema.org/draft-06/schema#",
     "definitions": {
+        "Aggregation": {
+            "properties": {
+                "denominator_aggregation": {
+                    "type": "string"
+                },
+                "denominator_field": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "numerator_expr": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "numerator_expr"
+            ],
+            "type": "object"
+        },
         "Applet": {
             "properties": {
                 "icon": {
@@ -46,6 +67,21 @@ export default {
                 "irs_tasker",
                 "meta",
                 "seasons"
+            ],
+            "type": "object"
+        },
+        "Centre": {
+            "properties": {
+                "lat": {
+                    "type": "number"
+                },
+                "lng": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "lat",
+                "lng"
             ],
             "type": "object"
         },
@@ -263,12 +299,81 @@ export default {
             ],
             "type": "number"
         },
+        "DecoratorOption": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "Decorators": {
+            "additionalProperties": {
+                "items": {
+                    "$ref": "#/definitions/DecoratorOption"
+                },
+                "type": "array"
+            },
+            "type": "object"
+        },
+        "DenominatorFields": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "Description": {
+            "properties": {
+                "field": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "field",
+                "title"
+            ],
+            "type": "object"
+        },
+        "Form": {
+            "properties": {
+                "pages": {
+                    "items": {
+                        "$ref": "#/definitions/Page"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "pages"
+            ],
+            "type": "object"
+        },
         "HeightConstraint": {
             "enum": [
                 0,
                 1
             ],
             "type": "number"
+        },
+        "Instance": {
+            "properties": {
+                "location_name": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "location_name",
+                "slug",
+                "title"
+            ],
+            "type": "object"
         },
         "IrsMonitor": {
             "description": "The configuration for the IRS Monitor applet for douma",
@@ -351,11 +456,95 @@ export default {
             ],
             "type": "object"
         },
+        "Level": {
+            "properties": {
+                "display_field_name": {
+                    "type": "string"
+                },
+                "field_name": {
+                    "type": "string"
+                },
+                "group_by_field": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "display_field_name",
+                "field_name",
+                "name"
+            ],
+            "type": "object"
+        },
+        "LocationSelection": {
+            "additionalProperties": {
+                "$ref": "#/definitions/LocationSelectionOption"
+            },
+            "type": "object"
+        },
+        "LocationSelectionOption": {
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "category",
+                "id",
+                "name"
+            ],
+            "type": "object"
+        },
         "Map": {
             "enum": [
                 0
             ],
             "type": "number"
+        },
+        "MapFocus": {
+            "properties": {
+                "centre": {
+                    "$ref": "#/definitions/Centre"
+                },
+                "zoom": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "centre",
+                "zoom"
+            ],
+            "type": "object"
+        },
+        "Markers": {
+            "properties": {
+                "denominator_fields": {
+                    "$ref": "#/definitions/DenominatorFields"
+                },
+                "planning_level_name": {
+                    "type": "string"
+                },
+                "record_location_selection_level_name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "denominator_fields",
+                "planning_level_name",
+                "record_location_selection_level_name"
+            ],
+            "type": "object"
         },
         "MetaData": {
             "properties": {
@@ -375,6 +564,37 @@ export default {
             ],
             "type": "object"
         },
+        "Page": {
+            "properties": {
+                "elements": {
+                    "items": {
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "elements",
+                "name"
+            ],
+            "type": "object"
+        },
+        "Presenters": {
+            "properties": {
+                "popup_description": {
+                    "items": {
+                        "$ref": "#/definitions/Description"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "popup_description"
+            ],
+            "type": "object"
+        },
         "PropertyLayer": {
             "properties": {
                 "label": {
@@ -387,6 +607,31 @@ export default {
             "required": [
                 "label",
                 "property"
+            ],
+            "type": "object"
+        },
+        "SpatialHierarchy": {
+            "properties": {
+                "data_version": {
+                    "type": "number"
+                },
+                "ignore_planning_level_restriction": {
+                    "type": "boolean"
+                },
+                "levels": {
+                    "items": {
+                        "$ref": "#/definitions/Level"
+                    },
+                    "type": "array"
+                },
+                "markers": {
+                    "$ref": "#/definitions/Markers"
+                }
+            },
+            "required": [
+                "data_version",
+                "levels",
+                "markers"
             ],
             "type": "object"
         },
@@ -411,6 +656,32 @@ export default {
             ],
             "type": "object"
         },
+        "Validation": {
+            "properties": {
+                "expression": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "precondition": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "expression",
+                "message",
+                "name",
+                "type"
+            ],
+            "type": "object"
+        },
         "WidthConstraint": {
             "enum": [
                 0,
@@ -421,6 +692,10 @@ export default {
     },
     "properties": {
         "aggregations": {
+            "items": {
+                "$ref": "#/definitions/Aggregation"
+            },
+            "type": "array"
         },
         "applets": {
             "$ref": "#/definitions/Applets"
@@ -432,22 +707,36 @@ export default {
             "type": "string"
         },
         "decorators": {
+            "$ref": "#/definitions/Decorators"
         },
         "fake_form": {
+            "items": {
+            },
+            "type": "array"
         },
         "form": {
+            "$ref": "#/definitions/Form"
         },
         "instance": {
+            "$ref": "#/definitions/Instance"
         },
         "location_selection": {
+            "$ref": "#/definitions/LocationSelection"
         },
         "map_focus": {
+            "$ref": "#/definitions/MapFocus"
         },
         "presenters": {
+            "$ref": "#/definitions/Presenters"
         },
         "spatial_hierarchy": {
+            "$ref": "#/definitions/SpatialHierarchy"
         },
         "validations": {
+            "items": {
+                "$ref": "#/definitions/Validation"
+            },
+            "type": "array"
         }
     },
     "required": [
