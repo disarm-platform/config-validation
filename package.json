@@ -9,7 +9,7 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
-    "generate-types": "typescript-json-schema './tsconfig.json' 'TConfig' --include ./src/**/* --out 'src/schema.ts' --required true; sed -i.old '1s;^;export default ;' src/schema.ts; rm src/schema.ts.old",
+    "generate-types": "typescript-json-schema './tsconfig.json' 'Config' --include ./src/definitions/index.ts --out 'src/config_schema.ts' --required true; sed -i.old '1s;^;export default ;' src/config_schema.ts; rm src/config_schema.ts.old",
     "info": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
     "build:main": "tsc -p tsconfig.json",
