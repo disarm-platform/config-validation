@@ -1,14 +1,17 @@
 import {Applets} from './applets'
+import { Instance } from './instance';
+import { MapFocus } from './map_focus';
+import { SpatialHierarchy } from './spatial_hierarchy';
 
 export interface Config {
   config_id: string;
   config_version: string;
 
   applets: Applets;
-  map_focus: any;
-  instance: any;
+  map_focus: MapFocus;
+  instance: Instance;
 
-  spatial_hierarchy: any;
+  spatial_hierarchy: SpatialHierarchy;
   form: any;
   aggregations: any;
   fake_form: any;
