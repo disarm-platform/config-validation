@@ -1,3 +1,5 @@
+import { Applet } from "./applet";
+
 // tslint:disable:no-mixed-interface
 
 export interface PropertyLayer {
@@ -101,17 +103,7 @@ export interface ChartTable {
 /**
  * The configuration for the IRS Monitor applet for douma
  */
-export interface IrsMonitor {
-  /**
-   * The title for the applet
-   */
-  title?: string;
-
-  /**
-   * The icon for the applet
-   */
-  icon?: string;
-
+export interface IrsMonitor extends Applet {
   /**
    * The start of the current season
    */
