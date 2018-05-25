@@ -3,7 +3,7 @@
 import Ajv from 'ajv';
 // @ts-ignore
 import draft_6 from 'ajv/lib/refs/json-schema-draft-06.json';
-import schemaDefinitions from '../schema';
+import schemaDefinitions from '../config_schema';
 
 const ajv = new Ajv();
 
