@@ -1,10 +1,10 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
+import { HeightConstraint, WidthConstraint } from '../definitions/applets/irs_monitor';
 import { TNumberConfig, TStringConfig } from './Config';
 import { EEdgeStatus, TEdgeResponse } from './EdgeResponse';
-import { TUnifiedResponse, EUnifiedStatus } from './UnifiedResponse'
+import { EUnifiedStatus, TUnifiedResponse } from './UnifiedResponse'
 import { runNumberValidation, runOptionalStringValidation, validate } from './validate';
-import { HeightConstraint, WidthConstraint } from '../definitions/applets/irs_monitor';
 
 test('valid config number', t => {
   const validConfig: TNumberConfig = {
