@@ -14,7 +14,7 @@ test('returns Blue if no irs_monitor', t => {
   t.is(result.status, EEdgeStatus.Blue)
 })
 
-test('returns Yellow if no spatial_hierarchy is missin g', t => {
+test('returns Yellow if no spatial_hierarchy', t => {
   // @ts-ignore
   const config = {
     applets: {
