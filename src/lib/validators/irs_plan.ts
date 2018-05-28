@@ -8,12 +8,21 @@ import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
 
 //
 
+function invalidObject(object: any) : boolean {
+  return typeof object === 'undefined' || object === null;
+}
+
  function failsOptional(config: Config) : boolean{
-   return !config.map_focus
+   return invalidObject(config.map_focus)
  }
 
 function failsRequired (config: Config) : boolean{
-   return !config.spatial_hierarchy.markers.planning_level_name
+  try {
+    return invalidObject(config.spatial_hierarchy.markers.planning_level_name)
+  }catch {
+    return false
+  }
+
 }
 
 export function irs_plan_validations (config: Config) : TEdgeResponse {
