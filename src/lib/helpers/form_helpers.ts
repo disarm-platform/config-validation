@@ -9,7 +9,7 @@ export interface FormElement {
 }
 
 function get_form_elements(form: Form): FormElement[] {
-
+  // TODO: Should rewrite with .map().filter() instead of forEach, then enable tslint again.
   // tslint:disable
   let arr: FormElement[] = []
   form.pages.forEach((page, i) => {

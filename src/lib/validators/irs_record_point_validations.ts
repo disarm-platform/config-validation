@@ -5,7 +5,7 @@ import { get_form_fields } from "../helpers/form_helpers";
 
 // checks that irs_record_point has the validations that it needs. 
 // The function is named accordingly.
-export function irs_record_point_validations (config: Config) : TEdgeResponse {
+export function irs_record_point_validations(config: Config) : TEdgeResponse {
   /**
    * 1. Check the pieces we require for this validations exist.
    *    If they don't return Blue
