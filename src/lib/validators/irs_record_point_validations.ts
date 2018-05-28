@@ -33,7 +33,7 @@ export function irs_record_point_validations(config: Config) : TEdgeResponse {
    *    Return Yellow if not passing.
    */
 
-
+  // TODO: This should not be here, should be in validations_fields_helper
   const formFields: string[] = get_form_fields(config.form)
   const validationFields: string[] = get_form_fields_for_validations(config.validations)
 
