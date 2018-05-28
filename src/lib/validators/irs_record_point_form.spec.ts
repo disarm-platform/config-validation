@@ -14,7 +14,7 @@ test('returns Blue status if no irs_record_point', t => {
   t.is(result.messages.length, 0)
 })
 
-test('returns Red status if form is missing', t => {
+test('returns Yellow status if form is missing', t => {
   const config = {
     applets: {
       irs_record_point: {}
@@ -23,12 +23,12 @@ test('returns Red status if form is missing', t => {
   // @ts-ignore
   const result = irs_record_point_form(config)
 
-  t.is(result.status, EEdgeStatus.Red)
+  t.is(result.status, EEdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
 
-test('returns Red status if form has no pages', t => {
+test('returns Yellow status if form has no pages', t => {
   const config = {
     applets: {
       irs_record_point: {}
@@ -40,7 +40,7 @@ test('returns Red status if form has no pages', t => {
   // @ts-ignore
   const result = irs_record_point_form(config)
 
-  t.is(result.status, EEdgeStatus.Red)
+  t.is(result.status, EEdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 

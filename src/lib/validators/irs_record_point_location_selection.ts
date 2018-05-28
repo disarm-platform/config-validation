@@ -13,7 +13,7 @@ export function irs_record_point_location_selection(config: Config) : TEdgeRespo
   if (!config.location_selection || Object.keys(config.location_selection).length === 0) {
     return {
       messages: [{description: 'Location selection missing, is required for irs_record_point.'}],
-      status: EEdgeStatus.Red
+      status: EEdgeStatus.Yellow
     }
   }
 

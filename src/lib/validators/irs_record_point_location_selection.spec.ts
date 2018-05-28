@@ -14,7 +14,7 @@ test('returns Blue status if no irs_record_point', t => {
   t.is(result.messages.length, 0)
 })
 
-test('returns Red status if location_selection is missing', t => {
+test('returns Yellow status if location_selection is missing', t => {
   const config = {
     applets: {
       irs_record_point: {}
@@ -23,12 +23,12 @@ test('returns Red status if location_selection is missing', t => {
   // @ts-ignore
   const result = irs_record_point_location_selection(config)
 
-  t.is(result.status, EEdgeStatus.Red)
+  t.is(result.status, EEdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
 
-test('returns Red status if location_selection is an object with no keys', t => {
+test('returns Yellow status if location_selection is an object with no keys', t => {
   const config = {
     applets: {
       irs_record_point: {}
@@ -38,7 +38,7 @@ test('returns Red status if location_selection is an object with no keys', t => 
   // @ts-ignore
   const result = irs_record_point_location_selection(config)
 
-  t.is(result.status, EEdgeStatus.Red)
+  t.is(result.status, EEdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
