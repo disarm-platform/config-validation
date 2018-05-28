@@ -1,3 +1,4 @@
+import { Config } from '../definitions';
 import {
   TConfig,
   TInstanceConfig,
@@ -11,15 +12,19 @@ import { validateJsonSchema } from './validate_json_schema';
 /**
  * Take the whole config and figure if it's valid.
  */
-export function validate(config: TConfig): TUnifiedResponse {
+export function validate(config: Config): TUnifiedResponse {
   // Figure all the parts needed
   // Validate each in turn
-  const description = `${
-    config.number_config ? config.number_config.number : 0
-  }`;
+  const valid = validateJsonSchema(config);
+  if (!valid) {
+    return {
+      messages: [{ description: 'failed internal validation' }],
+      status: EUnifiedStatus.Red
+    };
+  }
 
   return {
-    messages: [{ description }],
+    messages: [],
     status: EUnifiedStatus.Green
   };
 }
