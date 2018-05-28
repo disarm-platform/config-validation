@@ -2,6 +2,10 @@ import {Parser} from 'expr-eval'
 import { Validation } from '../../definitions/validations';
 
 export function get_validation_variables(expressionString: string) : string[] {
+  if (!expressionString.length) {
+    return []
+  }
+
   const expression = new Parser().parse(expressionString)
   return expression.variables()
 }

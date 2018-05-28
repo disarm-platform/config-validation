@@ -1,7 +1,7 @@
 import { Config } from "../../definitions";
 import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
-import { get_form_fields_for_validations } from "../helpers/expression_helpers";
-import { get_form_fields } from "../helpers/form_helpers";
+import { get_form_fields_for_validations } from "../helper_functions/expression_helpers";
+import { get_form_fields } from "../helper_functions/form_helpers";
 
 // checks that irs_record_point has the validations that it needs. 
 // The function is named accordingly.
