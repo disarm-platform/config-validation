@@ -14,7 +14,7 @@ test('returns Blue status if no irs_record_point', t => {
   t.is(result.messages.length, 0)
 })
 
-test('returns Red status if no location_selection is missing', t => {
+test('returns Red status if location_selection is missing', t => {
   const config = {
     applets: {
       irs_record_point: {}
