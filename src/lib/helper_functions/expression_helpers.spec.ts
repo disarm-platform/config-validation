@@ -1,22 +1,22 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
 import { Validation } from '../../definitions/validations';
-import { get_form_fields_for_validations, get_validation_variables } from './expression_helpers';
+import { get_expresion_variables, get_form_fields_for_validations } from './expression_helpers';
 
 test('get_validation_variables returns empty array if expression has no variables', t => {
-  const variables = get_validation_variables('')
+  const variables = get_expresion_variables('')
 
   t.is(variables.length, 0)
 })
 
 test('get_validation_variables returns one variable if expression has one variable', t => {
-  const variables = get_validation_variables('a')
+  const variables = get_expresion_variables('a')
 
   t.is(variables.length, 1)
 })
 
 test('get_validation_variables returns two variables if expression has two variables', t => {
-  const variables = get_validation_variables('a - b')
+  const variables = get_expresion_variables('a - b')
 
   t.is(variables.length, 2)
 })
