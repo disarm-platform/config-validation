@@ -18,6 +18,8 @@ export function irs_monitor_spatial_hierarchy(config: Config): TEdgeResponse {
     }
   }
 
+  // check  property_layers[].property exist on spatial_hiearchy
+
   return {
     messages: [],
     status: EEdgeStatus.Green
