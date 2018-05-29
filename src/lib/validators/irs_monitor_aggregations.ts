@@ -71,8 +71,6 @@ export function irs_monitor_aggregations(config: Config): TEdgeResponse {
         }
       }
     }
-
-    // TODO: have to check pie charts
   }
   
   return {
