@@ -1,5 +1,5 @@
 import { Config } from "../../definitions";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EdgeStatus, TEdgeResponse } from "../EdgeResponse";
 
 // checks that irs_record_point has the validations that it needs. 
 // The function is named accordingly.
@@ -12,7 +12,7 @@ export function irs_record_point_validations(config: Config) : TEdgeResponse {
     // if irs_record_point does not exist, then we don't want to run the rest of the validations
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: EdgeStatus.Blue
     }
   }
 
@@ -25,7 +25,7 @@ export function irs_record_point_validations(config: Config) : TEdgeResponse {
     // so if none, the config is valid, but not "Green" valid
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: EdgeStatus.Blue
     }
   }
 
@@ -35,6 +35,6 @@ export function irs_record_point_validations(config: Config) : TEdgeResponse {
    */
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: EdgeStatus.Green
   }
 }

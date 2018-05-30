@@ -1,5 +1,5 @@
 import { Config } from "../../definitions";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EdgeStatus, TEdgeResponse } from "../EdgeResponse";
 
 
 
@@ -13,20 +13,20 @@ export function irs_plan_spatial_hierarchy_validations (config: Config) : TEdgeR
   if(!config.applets.irs_plan){
     return {
       messages: [{description:'Irs plan Applet was found'}],
-      status: EEdgeStatus.Blue
+      status: EdgeStatus.Blue
     }
   }
 
   if(config.spatial_hierarchy.markers.planning_level_name){
     return {
       messages: [{description:'planning level name required by irs plan is available'}],
-      status: EEdgeStatus.Green
+      status: EdgeStatus.Green
     }
   }
 
   return {
     messages: [{description:'config.spatial_hierarchy.markers.planning_level_name required by irs plan was not found'}],
-    status: EEdgeStatus.Yellow
+    status: EdgeStatus.Yellow
   }
 
 }

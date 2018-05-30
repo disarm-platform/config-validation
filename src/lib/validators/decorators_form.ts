@@ -1,5 +1,5 @@
 import { Config } from "../../definitions";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EdgeStatus, TEdgeResponse } from "../EdgeResponse";
 import { get_expresion_variables } from "../helper_functions/expression_helpers";
 import { get_form_fields } from "../helper_functions/form_helpers";
 
@@ -8,7 +8,7 @@ export function decorators_form(config: Config) : TEdgeResponse {
   if (!Object.keys(config.decorators).length) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: EdgeStatus.Blue
     }  
   }
 
@@ -28,7 +28,7 @@ export function decorators_form(config: Config) : TEdgeResponse {
         if (!formFields.includes(variable)) {
           return {
             messages: [{description: `Field '${variable}' in decorator '${decoratorName}' does not exist on form`}],
-            status: EEdgeStatus.Yellow
+            status: EdgeStatus.Yellow
           }
         }
       }
@@ -39,6 +39,6 @@ export function decorators_form(config: Config) : TEdgeResponse {
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: EdgeStatus.Green
   }
 }

@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../EdgeResponse';
+import { EdgeStatus } from '../EdgeResponse';
 import { validations_fields_helper } from './validations_fields_helper';
 
 
@@ -41,7 +41,7 @@ test('returns Yellow status if validations expression form field is not in form'
   // @ts-ignore
   const result = validations_fields_helper(config)
 
-  t.is(result.status, EEdgeStatus.Yellow)
+  t.is(result.status, EdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
@@ -83,6 +83,6 @@ test('returns Green status if validations are valid', t => {
   // @ts-ignore
   const result = validations_fields_helper(config)
 
-  t.is(result.status, EEdgeStatus.Green)
+  t.is(result.status, EdgeStatus.Green)
   t.is(result.messages.length, 0)
 })

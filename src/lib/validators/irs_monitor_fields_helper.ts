@@ -1,5 +1,5 @@
 import { Config } from "../../definitions";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EdgeStatus, TEdgeResponse } from "../EdgeResponse";
 import { get_decorator_field_names } from "../helper_functions/fields_helper";
 import { get_form_fields } from "../helper_functions/form_helpers";
 
@@ -8,7 +8,7 @@ export function irs_monitor_fields_helper(config: Config) : TEdgeResponse {
   if (!config.applets.irs_monitor) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: EdgeStatus.Blue
     }
   }
 
@@ -28,7 +28,7 @@ export function irs_monitor_fields_helper(config: Config) : TEdgeResponse {
     if (!decoratorsFromConfig.includes(decorator)) {
       return {
         messages: [{ description: `The field '_decorated.${decorator}' in map configuration is not in the decorators` }],
-        status: EEdgeStatus.Yellow
+        status: EdgeStatus.Yellow
       }
     }
   }
@@ -47,7 +47,7 @@ export function irs_monitor_fields_helper(config: Config) : TEdgeResponse {
     if (!formFieldsFromConfig.includes(formField)) {
       return {
         messages: [{ description: `The field 'form_data.${formField}' in map configuration is not in the form` }],
-        status: EEdgeStatus.Yellow
+        status: EdgeStatus.Yellow
       }
     }
   }
@@ -82,7 +82,7 @@ export function irs_monitor_fields_helper(config: Config) : TEdgeResponse {
     if (!formFieldsFromConfig.includes(formField)) {
       return {
         messages: [{ description: `The field 'form_data.${formField}' in chart configuration with is not in the form` }],
-        status: EEdgeStatus.Yellow
+        status: EdgeStatus.Yellow
       }
     }
   }
@@ -100,13 +100,13 @@ export function irs_monitor_fields_helper(config: Config) : TEdgeResponse {
     if (!decoratorsFromConfig.includes(decorator)) {
       return {
         messages: [{ description: `The field '_decorated.${decorator}' in map configuration is not in the decorators` }],
-        status: EEdgeStatus.Yellow
+        status: EdgeStatus.Yellow
       }
     }
   }
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: EdgeStatus.Green
   }
 }

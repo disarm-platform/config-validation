@@ -1,5 +1,5 @@
 import { Config } from "../../definitions";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EdgeStatus, TEdgeResponse } from "../EdgeResponse";
 
 
 
@@ -11,7 +11,7 @@ export function irs_plan_map_focus_validations (config: Config) : TEdgeResponse 
   if(!config.applets.irs_plan){
     return {
       messages: [{description:'Irs plan Applet was found'}],
-      status: EEdgeStatus.Blue
+      status: EdgeStatus.Blue
     }
   }
 
@@ -21,13 +21,13 @@ export function irs_plan_map_focus_validations (config: Config) : TEdgeResponse 
   if(config.map_focus){
     return {
       messages: [{description:'Optional map focus is available'}],
-        status: EEdgeStatus.Green
+        status: EdgeStatus.Green
     }
   }
 
   return {
     messages: [{description:'Optional Map focus is not found'}],
-    status: EEdgeStatus.Blue
+    status: EdgeStatus.Blue
   }
 
 }

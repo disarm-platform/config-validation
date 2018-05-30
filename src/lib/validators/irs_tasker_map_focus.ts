@@ -1,5 +1,5 @@
 import { Config } from "../../definitions";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EdgeStatus, TEdgeResponse } from "../EdgeResponse";
 
 
 
@@ -12,13 +12,13 @@ export function irs_tasker_map_focus_validations (config: Config) : TEdgeRespons
   if(config.map_focus){
     return {
       messages: [{description:'Required Field Not Found'}],
-      status: EEdgeStatus.Green
+      status: EdgeStatus.Green
     }
   }
 
   return {
     messages: [{description:'Required Field Not Found'}],
-    status: EEdgeStatus.Blue
+    status: EdgeStatus.Blue
   }
 
 }

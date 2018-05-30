@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import {test} from 'ava';
 import {Config} from '../../definitions'
-import {EEdgeStatus , TEdgeResponse} from "../EdgeResponse";
+import {EdgeStatus , TEdgeResponse} from "../EdgeResponse";
 import {irs_plan_map_focus_validations} from "./irs_plan_map_focus";
 
 
@@ -14,7 +14,7 @@ test('map focus not available', t => {
   }
 
   const result: TEdgeResponse =  irs_plan_map_focus_validations(config);
-  t.is(result.status,EEdgeStatus.Blue)
+  t.is(result.status,EdgeStatus.Blue)
 })
 
 test('Unavailble irs_plan applet should return Blue Status for missing optional node', t => {
@@ -25,7 +25,7 @@ test('Unavailble irs_plan applet should return Blue Status for missing optional 
   }
 
   const result: TEdgeResponse =  irs_plan_map_focus_validations(config);
-  t.is(result.status,EEdgeStatus.Blue)
+  t.is(result.status,EdgeStatus.Blue)
 })
 
 test('map focus availble' , t =>{
@@ -40,5 +40,5 @@ test('map focus availble' , t =>{
   }
 
   const result: TEdgeResponse =  irs_plan_map_focus_validations(config);
-  t.is(result.status,EEdgeStatus.Green)
+  t.is(result.status,EdgeStatus.Green)
 })

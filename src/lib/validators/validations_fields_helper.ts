@@ -1,5 +1,5 @@
 import { Config } from "../../definitions";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EdgeStatus, TEdgeResponse } from "../EdgeResponse";
 import { get_form_fields_for_validations } from "../helper_functions/expression_helpers";
 import { get_form_fields } from "../helper_functions/form_helpers";
 
@@ -10,7 +10,7 @@ export function validations_fields_helper(config: Config): TEdgeResponse {
   if (!config.validations.length) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: EdgeStatus.Blue
     }
   }
 
@@ -21,13 +21,13 @@ export function validations_fields_helper(config: Config): TEdgeResponse {
     if (!formFields.includes(field)) {
       return {
         messages: [{ description: `'${field}' not in form fields` }],
-        status: EEdgeStatus.Yellow
+        status: EdgeStatus.Yellow
       }
     }
   }
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: EdgeStatus.Green
   }
 }

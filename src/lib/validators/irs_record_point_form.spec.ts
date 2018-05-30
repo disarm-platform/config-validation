@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../EdgeResponse';
+import { EdgeStatus } from '../EdgeResponse';
 import { irs_record_point_form } from './irs_record_point_form';
 
 test('returns Blue status if no irs_record_point', t => {
@@ -10,7 +10,7 @@ test('returns Blue status if no irs_record_point', t => {
   // @ts-ignore
   const result = irs_record_point_form(config)
 
-  t.is(result.status, EEdgeStatus.Blue)
+  t.is(result.status, EdgeStatus.Blue)
   t.is(result.messages.length, 0)
 })
 
@@ -23,7 +23,7 @@ test('returns Yellow status if form is missing', t => {
   // @ts-ignore
   const result = irs_record_point_form(config)
 
-  t.is(result.status, EEdgeStatus.Yellow)
+  t.is(result.status, EdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
@@ -40,7 +40,7 @@ test('returns Yellow status if form has no pages', t => {
   // @ts-ignore
   const result = irs_record_point_form(config)
 
-  t.is(result.status, EEdgeStatus.Yellow)
+  t.is(result.status, EdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
@@ -58,6 +58,6 @@ test('returns Green status if form is there and has pages', t => {
   // @ts-ignore
   const result = irs_record_point_form(config)
 
-  t.is(result.status, EEdgeStatus.Green)
+  t.is(result.status, EdgeStatus.Green)
   t.is(result.messages.length, 0)
 })

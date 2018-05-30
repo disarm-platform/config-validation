@@ -1,5 +1,5 @@
 import { Config } from "../../definitions";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EdgeStatus, TEdgeResponse } from "../EdgeResponse";
 import { get_expresion_variables } from "../helper_functions/expression_helpers";
 import { get_all_field_names } from "../helper_functions/fields_helper";
 
@@ -8,7 +8,7 @@ export function aggregations_field_helper(config: Config): TEdgeResponse {
   if (!config.aggregations.length) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: EdgeStatus.Blue
     }
   }
 
@@ -21,7 +21,7 @@ export function aggregations_field_helper(config: Config): TEdgeResponse {
       if (!allFields.includes(variable)) {
         return {
           messages: [{description: `The field '${variable}' does not exist in the form or the decorators`}],
-          status: EEdgeStatus.Yellow
+          status: EdgeStatus.Yellow
         }
       }
     }
@@ -29,6 +29,6 @@ export function aggregations_field_helper(config: Config): TEdgeResponse {
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: EdgeStatus.Green
   }
 }

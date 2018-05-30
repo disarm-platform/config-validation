@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../EdgeResponse';
+import { EdgeStatus } from '../EdgeResponse';
 import { irs_monitor_aggregations } from './irs_monitor_aggregations';
 
 test('returns Blue status if no irs_monitor', t => {
@@ -10,7 +10,7 @@ test('returns Blue status if no irs_monitor', t => {
   // @ts-ignore
   const result = irs_monitor_aggregations(config)
 
-  t.is(result.status, EEdgeStatus.Blue)
+  t.is(result.status, EdgeStatus.Blue)
   t.is(result.messages.length, 0)
 })
 
@@ -24,7 +24,7 @@ test('returns Blue status if no aggregations', t => {
   // @ts-ignore
   const result = irs_monitor_aggregations(config)
 
-  t.is(result.status, EEdgeStatus.Blue)
+  t.is(result.status, EdgeStatus.Blue)
   t.is(result.messages.length, 0)
 })
 
@@ -72,7 +72,7 @@ test('returns Yellow status if aggregation in map is not in aggregations', t => 
   // @ts-ignore
   const result = irs_monitor_aggregations(config)
 
-  t.is(result.status, EEdgeStatus.Yellow)
+  t.is(result.status, EdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
@@ -113,7 +113,7 @@ test('returns Yellow status if aggregation in table is not in aggregations', t =
   // @ts-ignore
   const result = irs_monitor_aggregations(config)
 
-  t.is(result.status, EEdgeStatus.Yellow)
+  t.is(result.status, EdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
@@ -169,7 +169,7 @@ test('returns Yellow status if aggregation in multiseries chart is not in aggreg
   // @ts-ignore
   const result = irs_monitor_aggregations(config)
 
-  t.is(result.status, EEdgeStatus.Yellow)
+  t.is(result.status, EdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
@@ -219,6 +219,6 @@ test('returns Yellow status if aggregation in singleseries chart is not in aggre
   // @ts-ignore
   const result = irs_monitor_aggregations(config)
 
-  t.is(result.status, EEdgeStatus.Yellow)
+  t.is(result.status, EdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })

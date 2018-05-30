@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../EdgeResponse';
+import { EdgeStatus } from '../EdgeResponse';
 import { irs_monitor_map_focus } from './irs_monitor_map_focus';
 
 test('returns Blue status if no irs_monitor', t => {
@@ -10,7 +10,7 @@ test('returns Blue status if no irs_monitor', t => {
   // @ts-ignore
   const result = irs_monitor_map_focus(config)
 
-  t.is(result.status, EEdgeStatus.Blue)
+  t.is(result.status, EdgeStatus.Blue)
   t.is(result.messages.length, 0)
 })
 
@@ -23,7 +23,7 @@ test('returns Blue status if map_focus is missing', t => {
   // @ts-ignore
   const result = irs_monitor_map_focus(config)
 
-  t.is(result.status, EEdgeStatus.Blue)
+  t.is(result.status, EdgeStatus.Blue)
   t.is(result.messages.length, 0)
 })
 
@@ -39,6 +39,6 @@ test('returns Green status if map focus is there', t => {
   // @ts-ignore
   const result = irs_monitor_map_focus(config)
 
-  t.is(result.status, EEdgeStatus.Green)
+  t.is(result.status, EdgeStatus.Green)
   t.is(result.messages.length, 0)
 })

@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
 import { HeightConstraint, WidthConstraint } from '../definitions/applets/irs_monitor';
-import { EUnifiedStatus, TUnifiedResponse } from './UnifiedResponse'
+import { UnifiedStatus, UnifiedResponse } from './UnifiedResponse'
 import {validate} from './validate'
 
 test('returns Green for a valid config', t => {
@@ -11448,8 +11448,8 @@ test('returns Green for a valid config', t => {
     }
   }
   // @ts-ignore
-  const response: TUnifiedResponse = validate(namConfig)
+  const response: UnifiedResponse = validate(namConfig)
 
-  t.is(response.status, EUnifiedStatus.Green)
+  t.is(response.status, UnifiedStatus.Green)
   t.is(response.messages.length, 0)
 })

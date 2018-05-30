@@ -1,26 +1,26 @@
 import { Config } from "../../definitions";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EdgeStatus, TEdgeResponse } from "../EdgeResponse";
 
 
 export function irs_record_point_form(config: Config): TEdgeResponse {
   if (!config.applets.irs_record_point) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: EdgeStatus.Blue
     }
   }
 
   if (!config.form) {
     return {
       messages: [{ description: 'Form missing, is required for irs_record_point.' }],
-      status: EEdgeStatus.Yellow
+      status: EdgeStatus.Yellow
     }
   }
 
   if (config.form.pages.length === 0) {
     return {
       messages: [{ description: 'Form has no pages, is required for irs_record_point.' }],
-      status: EEdgeStatus.Yellow
+      status: EdgeStatus.Yellow
     }
   }
 
@@ -28,6 +28,6 @@ export function irs_record_point_form(config: Config): TEdgeResponse {
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: EdgeStatus.Green
   }
 }

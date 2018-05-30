@@ -1,19 +1,19 @@
 import { Config } from "../../definitions";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EdgeStatus, TEdgeResponse } from "../EdgeResponse";
 
 
 export function irs_monitor_aggregations(config: Config): TEdgeResponse {
   if (!config.applets.irs_monitor) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: EdgeStatus.Blue
     }
   }
 
   if (!config.aggregations.length) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: EdgeStatus.Blue
     }
   }
 
@@ -23,7 +23,7 @@ export function irs_monitor_aggregations(config: Config): TEdgeResponse {
     if (!aggregationNames.includes(aggregation)){
       return {
         messages: [{ description: `The aggregation '${aggregation}' in map configuration is not in the aggregations`}],
-        status: EEdgeStatus.Yellow
+        status: EdgeStatus.Yellow
       }
     }
   }
@@ -32,7 +32,7 @@ export function irs_monitor_aggregations(config: Config): TEdgeResponse {
     if (!aggregationNames.includes(aggregation)) {
       return {
         messages: [{ description: `The aggregation '${aggregation}' in table configuration is not in the aggregations` }],
-        status: EEdgeStatus.Yellow
+        status: EdgeStatus.Yellow
       }
     }
   }
@@ -57,7 +57,7 @@ export function irs_monitor_aggregations(config: Config): TEdgeResponse {
         if (!aggregationNames.includes(series.aggregation_name)) {
           return {
             messages: [{ description: `The aggregation '${series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations` }],
-            status: EEdgeStatus.Yellow
+            status: EdgeStatus.Yellow
           }
         }
       }
@@ -67,7 +67,7 @@ export function irs_monitor_aggregations(config: Config): TEdgeResponse {
       if (!aggregationNames.includes(chart.options.single_series.aggregation_name)) {
         return {
           messages: [{ description: `The aggregation '${chart.options.single_series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations` }],
-          status: EEdgeStatus.Yellow
+          status: EdgeStatus.Yellow
         }
       }
     }
@@ -75,6 +75,6 @@ export function irs_monitor_aggregations(config: Config): TEdgeResponse {
   
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: EdgeStatus.Green
   }
 }
