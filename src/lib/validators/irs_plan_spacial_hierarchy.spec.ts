@@ -22,6 +22,23 @@ test('planning_level  available', t => {
   t.is(result.status,EEdgeStatus.Green)
 })
 
+test('Unavailble irs plan applet should return blue status for unavailble optional node', t => {
+  // @ts-ignore
+  const config: Config = {
+    "applets": {
+
+    },
+    "spatial_hierarchy": {
+      "markers": {
+        "planning_level_name": "village"
+      }
+    }
+  }
+
+  const result: TEdgeResponse =  irs_plan_spatial_hierarchy_validations(config);
+  t.is(result.status,EEdgeStatus.Blue)
+})
+
 test('planing level available, map focus not availble' , t =>{
   // @ts-ignore
   const config: Config = {
