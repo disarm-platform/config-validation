@@ -9,7 +9,6 @@ export function validate(config: Config): UnifiedResponse {
   // Figure all the parts needed
   // Validate each in turn
   const valid = validateJsonSchema(config);
-  console.log('valid', valid);
   if (!valid) {
     return {
       messages: [{ description: 'failed internal validation' }],
