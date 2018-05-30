@@ -1,8 +1,8 @@
 export enum EEdgeStatus {
-  Red,
-  Yellow,
-  Green,
-  Blue
+  Red = 'Red - fails internal validation',
+  Yellow = 'Yellow - failes external validation',
+  Green = 'Green - passed internal validation',
+  Blue = 'Blue - node not required'
 }
 
 export interface TNodeResponseMessage {
