@@ -8,16 +8,25 @@ export function irs_plan_map_focus_validations (config: Config) : TEdgeResponse 
 
 // check the validations exist, if they are not valid, then return EEdgeStatus.Yellow
 
+  if(!config.applets.irs_plan){
+    return {
+      messages: [{description:'Irs plan Applet was found'}],
+      status: EEdgeStatus.Blue
+    }
+  }
+
+
+
 // if everything is ok then return EEdgeStatus.Green
   if(config.map_focus){
     return {
-      messages: [{description:'Required Field Not Found'}],
+      messages: [{description:'Optional map focus is available'}],
         status: EEdgeStatus.Green
     }
   }
 
   return {
-    messages: [{description:'Required Field Not Found'}],
+    messages: [{description:'Optional Map focus is not found'}],
     status: EEdgeStatus.Blue
   }
 

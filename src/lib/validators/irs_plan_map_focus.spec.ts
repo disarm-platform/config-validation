@@ -17,6 +17,17 @@ test('map focus not available', t => {
   t.is(result.status,EEdgeStatus.Blue)
 })
 
+test('Unavailble irs_plan applet should return Blue Status for missing optional node', t => {
+  // @ts-ignore
+  const config: Config = {
+    "applets": {
+    }
+  }
+
+  const result: TEdgeResponse =  irs_plan_map_focus_validations(config);
+  t.is(result.status,EEdgeStatus.Blue)
+})
+
 test('map focus availble' , t =>{
   // @ts-ignore
   const config: Config = {
