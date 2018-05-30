@@ -60,13 +60,7 @@ export default {
                 }
             },
             "required": [
-                "debug",
-                "irs_monitor",
-                "irs_plan",
-                "irs_record_point",
-                "irs_tasker",
-                "meta",
-                "seasons"
+                "meta"
             ],
             "type": "object"
         },
@@ -87,6 +81,12 @@ export default {
         },
         "ChartConfig": {
             "properties": {
+                "chart_type": {
+                    "enum": [
+                        "text"
+                    ],
+                    "type": "string"
+                },
                 "id": {
                     "type": "string"
                 },
@@ -98,6 +98,7 @@ export default {
                 }
             },
             "required": [
+                "chart_type",
                 "id",
                 "options",
                 "style"
@@ -116,7 +117,10 @@ export default {
                     "type": "string"
                 },
                 "chart_type": {
-                    "$ref": "#/definitions/Map"
+                    "enum": [
+                        "map"
+                    ],
+                    "type": "string"
                 },
                 "property_layers": {
                     "items": {
@@ -202,9 +206,9 @@ export default {
             "properties": {
                 "barmode": {
                     "enum": [
-                        0
+                        "stack"
                     ],
-                    "type": "number"
+                    "type": "string"
                 },
                 "showlegend": {
                     "type": "boolean"
@@ -273,7 +277,10 @@ export default {
                     "type": "string"
                 },
                 "chart_type": {
-                    "$ref": "#/definitions/Table"
+                    "enum": [
+                        "table"
+                    ],
+                    "type": "string"
                 },
                 "property_layers": {
                     "items": {
@@ -292,12 +299,12 @@ export default {
         },
         "ChartType": {
             "enum": [
-                0,
-                1,
-                2,
-                3
+                "bar",
+                "line",
+                "pie",
+                "text"
             ],
-            "type": "number"
+            "type": "string"
         },
         "DecoratorOption": {
             "additionalProperties": {
@@ -351,10 +358,10 @@ export default {
         },
         "HeightConstraint": {
             "enum": [
-                0,
-                1
+                "full",
+                "none"
             ],
-            "type": "number"
+            "type": "string"
         },
         "Instance": {
             "properties": {
@@ -409,6 +416,7 @@ export default {
                 }
             },
             "required": [
+                "charts",
                 "map",
                 "season_start_dates",
                 "table"
@@ -505,12 +513,6 @@ export default {
                 "name"
             ],
             "type": "object"
-        },
-        "Map": {
-            "enum": [
-                0
-            ],
-            "type": "number"
         },
         "MapFocus": {
             "properties": {
@@ -635,12 +637,6 @@ export default {
             ],
             "type": "object"
         },
-        "Table": {
-            "enum": [
-                0
-            ],
-            "type": "number"
-        },
         "TableOutput": {
             "properties": {
                 "display_name": {
@@ -684,10 +680,10 @@ export default {
         },
         "WidthConstraint": {
             "enum": [
-                0,
-                1
+                "full",
+                "half"
             ],
-            "type": "number"
+            "type": "string"
         }
     },
     "properties": {

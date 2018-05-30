@@ -1,14 +1,11 @@
 import { Config } from "../../definitions";
 import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
-import { get_form_fields_for_validations } from "../helper_functions/expression_helpers";
-import { get_form_fields } from "../helper_functions/form_helpers";
 
 // checks that irs_record_point has the validations that it needs. 
 // The function is named accordingly.
 export function irs_record_point_validations(config: Config) : TEdgeResponse {
   /**
    * 1. Check the pieces we require for this validations exist.
-   *    If they don't return Blue
    */
 
   if (!config.applets.irs_record_point) {
@@ -19,6 +16,10 @@ export function irs_record_point_validations(config: Config) : TEdgeResponse {
     }
   }
 
+  /**
+   * 2. Run the custom validation logic for this function
+   */
+
   // irs_record_point doesn't require validations, but will use them if they exists. 
   if (config.validations && !config.validations.length) {
     // so if none, the config is valid, but not "Green" valid
@@ -28,28 +29,9 @@ export function irs_record_point_validations(config: Config) : TEdgeResponse {
     }
   }
 
-  /**
-   * 2. Run the custom validation logic for this function
-   *    Return Yellow if not passing.
-   */
-
-
-  const formFields: string[] = get_form_fields(config.form)
-  const validationFields: string[] = get_form_fields_for_validations(config.validations)
-
-  for (const field of validationFields) {
-    if (!formFields.includes(field)) {
-      return {
-        messages: [{description: `'${field}' not in form fields`}],
-        status: EEdgeStatus.Yellow
-      }
-    }
-  }
-
 
   /**
    * 3. Return success
-   *    Return Green.
    */
   return {
     messages: [],

@@ -56,12 +56,14 @@ export interface ChartOptions {
   generate_series_from?: string;
 }
 
+export type TextChart = 'text'
 
 export interface ChartConfig {
   // id is required for all
   id: string;
   style: ChartStyle;
-  options: ChartOptions
+  options: ChartOptions;
+  chart_type: TextChart;
 }
 
 export type Map = 'map'
@@ -100,5 +102,5 @@ export interface IrsMonitor extends Applet {
    * Table configuration
    */
   table: ChartTable;
-  charts?: ChartConfig[];
+  charts: ChartConfig[];
 }
