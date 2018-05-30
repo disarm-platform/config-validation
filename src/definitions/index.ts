@@ -5,7 +5,6 @@ import { Form } from './form';
 import { Instance } from './instance';
 import { LocationSelection } from './location_selection';
 import { MapFocus } from './map_focus';
-import { Presenters } from './presenters';
 import { SpatialHierarchy } from './spatial_hierarchy';
 import { Validations } from './validations';
 
@@ -22,7 +21,6 @@ export interface Config {
   aggregations: Aggregations;
   fake_form: any[];
   validations: Validations;
-  presenters: Presenters;
   decorators: Decorators;
   location_selection: LocationSelection;
 }
