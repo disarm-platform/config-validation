@@ -54,8 +54,10 @@
     "node": ">=8.9"
   },
   "dependencies": {
+    "@types/graphlib": "^2.1.4",
     "ajv": "^6.5.0",
     "expr-eval": "^1.2.1",
+    "graphlib": "^2.1.5",
     "lodash.get": "^4.4.2",
     "xml2js": "^0.4.19"
   },
