@@ -3,7 +3,7 @@ import { TConfig } from '../definitions/TConfig';
 import { ENodeResponseStatus, TNodeResponse } from './TNodeResponse';
 import { TUnifiedResponse, UnifiedStatus } from './TUnifiedResponse';
 
-import { Edge, Graph, Node} from 'graphlib';
+import { Edge, Graph} from 'graphlib';
 import { EEdgeStatus, TEdgeResponse } from './EdgeResponse';
 import pathMap from './helpers/path_map'
 
@@ -11,12 +11,14 @@ import pathMap from './helpers/path_map'
  * Take the whole config and figure if it's valid.
  */
 export function validate(config: TConfig): TUnifiedResponse {
-  const responses: TNodeResponse[]
+  // Check config passes some basic checks, like it's an object
+
+  let responses: TEdgeResponse[]
   // Find or map a path map, that converts node_names into config object paths
   // e.g. irs_monitor --> applets.irs_monitor
   // used to simplify locating
 
-  // Graph or array of edges
+  // Graph or array of edges from config
   // get edges, create graph
   const graph = new Graph()
 
@@ -49,7 +51,7 @@ function validate_nodes(config: TConfig, edge: Edge): TNodeResponse[] {
   ]
 }
 
-function validate_node(config: TConfig, node: Node): TNodeResponse {
+function validate_node(config: TConfig, node: string): TNodeResponse {
   return {
     messages: ['Node xx fine'],
     status: ENodeResponseStatus.Green
