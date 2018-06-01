@@ -1,9 +1,9 @@
-export enum UnifiedStatus {
+export enum EUnifiedStatus {
   Red = 'Red',
   Green = 'Green'
 }
 
 export interface TUnifiedResponse {
-  status: UnifiedStatus;
+  status: EUnifiedStatus;
   messages: string[];
 }

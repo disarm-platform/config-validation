@@ -1,9 +1,8 @@
-
 import { TConfig } from '../definitions/TConfig';
 import { ENodeResponseStatus, TNodeResponse } from './TNodeResponse';
-import { TUnifiedResponse, UnifiedStatus } from './TUnifiedResponse';
+import { TUnifiedResponse, EUnifiedStatus } from './TUnifiedResponse';
 
-import { Edge, Graph} from 'graphlib';
+import { Edge, Graph } from 'graphlib';
 import { EEdgeStatus, TEdgeResponse } from './EdgeResponse';
 import pathMap from './helpers/path_map'
 
@@ -12,8 +11,14 @@ import pathMap from './helpers/path_map'
  */
 export function validate(config: TConfig): TUnifiedResponse {
   // Check config passes some basic checks, like it's an object
+  if (typeof config !== 'object') return {
+    status: EUnifiedStatus.Red,
+    messages: ['This config is not an object']
+  }
 
-  let responses: TEdgeResponse[]
+  // Create reference
+
+  const responses: TEdgeResponse[]
   // Find or map a path map, that converts node_names into config object paths
   // e.g. irs_monitor --> applets.irs_monitor
   // used to simplify locating
@@ -23,7 +28,7 @@ export function validate(config: TConfig): TUnifiedResponse {
   const graph = new Graph()
 
   // find graph's sources, and recursively find each child
-  recurse_graph(config, graph)
+  // recurse_graph(config, graph)
 
   // Combine all responses, to figure out what is correct response
   return determine_end_result([])
@@ -36,7 +41,7 @@ function recurse_graph(config: TConfig, graph: Graph): TEdgeResponse[] {
 
 function validate_edge(config: TConfig, edge: Edge): TEdgeResponse {
   // check both nodes
-  validate_nodes(config, edge)
+  // validate_nodes(config, edge)
 
   return {
     messages: ['Edge fine'],
@@ -62,6 +67,6 @@ function determine_end_result(response_messages: string[]): TUnifiedResponse {
   // Figure implications from all the messages
   return {
     messages: response_messages,
-    status: UnifiedStatus.Green,
+    status: EUnifiedStatus.Green,
   }
 }
