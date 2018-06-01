@@ -9,7 +9,6 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
-    "generate-schema": "typescript-json-schema './tsconfig.json' 'TConfig' --include ./src/definitions/TConfig.ts --out 'src/config_schema.ts' --required true; sed -i.old '1s;^;export default ;' src/config_schema.ts; rm src/config_schema.ts.old",
     "info": "npm-scripts-info",
     "build": "run-s clean && run-p build:*",
     "build:main": "tsc -p tsconfig.json",
@@ -34,10 +33,10 @@
     "reset": "git clean -dfx && git reset --hard && npm i",
     "clean": "trash build test",
     "all": "run-s reset test cov:check doc:html",
-    "prepare-release": "run-s all version doc:publish"
+    "prepare-release": "run-s all version doc:publish",
+    "generate-schema": "typescript-json-schema './tsconfig.json' 'TConfig' --include ./src/definitions/TConfig.ts --out 'src/config_schema.ts' --required true; sed -i.old '1s;^;export default ;' src/config_schema.ts; rm src/config_schema.ts.old"
   },
   "scripts-info": {
-    "generate-schema": "Convert TConfig type to json-schema",
     "info": "Display information about the package scripts",
     "build": "Clean and rebuild the project",
     "fix": "Try to automatically fix any linting problems",
@@ -48,7 +47,8 @@
     "doc:json": "Generate API documentation in typedoc JSON format",
     "version": "Bump package.json version, update CHANGELOG.md, tag release",
     "reset": "Delete all untracked files and reset the repo to the last commit",
-    "prepare-release": "One-step: clean, build, test, publish docs, and prep a release"
+    "prepare-release": "One-step: clean, build, test, publish docs, and prep a release",
+    "generate-schema": "Convert TConfig type to json-schema, output to src/config_schema.ts"
   },
   "engines": {
     "node": ">=8.9"

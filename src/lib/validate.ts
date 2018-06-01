@@ -5,6 +5,7 @@ import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse';
 import { Edge, Graph } from 'graphlib';
 import { EEdgeStatus, TEdgeResponse } from './EdgeResponse';
 import pathMap from './helpers/path_map'
+import { validateJsonSchema } from './validate_json_schema';
 
 /**
  * Take the whole config and figure if it's valid.
@@ -19,24 +20,27 @@ export function validate(config: TConfig): TUnifiedResponse {
   }
 
   // Check config is a valid schema, with minimum required properties
+  return {
+    messages: ['Who knows'],
+    status: validateJsonSchema(config) ? EUnifiedStatus.Green : EUnifiedStatus.Red
+  }
 
+  // const test = create_object_to_validate(config)
 
-  const test = create_object_to_validate(config)
-
-  const responses: TEdgeResponse[]
+  // const responses: TEdgeResponse[]
   // Find or map a path map, that converts node_names into config object paths
   // e.g. irs_monitor --> applets.irs_monitor
   // used to simplify locating
 
   // Graph or array of edges from config
   // get edges, create graph
-  const graph = new Graph()
+  // const graph = new Graph()
 
   // find graph's sources, and recursively find each child
   // recurse_edges(config, graph)
 
   // Combine all responses, to figure out what is correct response
-  return determine_end_result([])
+  // return determine_end_result([])
 }
 
 function create_object_to_validate(config: TConfig): any {
