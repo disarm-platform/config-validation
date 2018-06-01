@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { HeightConstraint, WidthConstraint } from '../definitions/applets/irs_monitor';
-import { TUnifiedResponse, EUnifiedStatus } from './TUnifiedResponse'
+import { HeightConstraint, WidthConstraint } from '../definitions/irs_monitor';
+import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse'
 import { validate } from './validate'
 
 test('returns Green for a valid config', t => {

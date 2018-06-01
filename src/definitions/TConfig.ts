@@ -13,14 +13,14 @@ export interface TConfig {
   config_version: string;
 
   applets: Applets;
-  map_focus: MapFocus;
+  map_focus?: MapFocus;
   instance: Instance;
 
-  spatial_hierarchy: SpatialHierarchy;
-  form: Form;
-  aggregations: Aggregations;
-  fake_form: any[];
-  validations: Validations;
-  decorators: Decorators;
-  location_selection: LocationSelection;
+  spatial_hierarchy?: SpatialHierarchy;
+  form?: Form;
+  aggregations?: Aggregations;
+  fake_form?: any[];
+  validations?: Validations;
+  decorators?: Decorators;
+  location_selection?: LocationSelection;
 }

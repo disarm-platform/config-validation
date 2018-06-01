@@ -1,6 +1,6 @@
 import { TConfig } from '../definitions/TConfig';
 import { ENodeResponseStatus, TNodeResponse } from './TNodeResponse';
-import { TUnifiedResponse, EUnifiedStatus } from './TUnifiedResponse';
+import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse';
 
 import { Edge, Graph } from 'graphlib';
 import { EEdgeStatus, TEdgeResponse } from './EdgeResponse';
@@ -11,12 +11,17 @@ import pathMap from './helpers/path_map'
  */
 export function validate(config: TConfig): TUnifiedResponse {
   // Check config passes some basic checks, like it's an object
-  if (typeof config !== 'object') return {
-    status: EUnifiedStatus.Red,
-    messages: ['This config is not an object']
+  if (typeof config !== 'object') {
+    return {
+      messages: ['This config is not an object'],
+      status: EUnifiedStatus.Red,
+    }
   }
 
-  // Create reference
+  // Check config is a valid schema, with minimum required properties
+
+
+  const test = create_object_to_validate(config)
 
   const responses: TEdgeResponse[]
   // Find or map a path map, that converts node_names into config object paths
@@ -28,15 +33,23 @@ export function validate(config: TConfig): TUnifiedResponse {
   const graph = new Graph()
 
   // find graph's sources, and recursively find each child
-  // recurse_graph(config, graph)
+  // recurse_edges(config, graph)
 
   // Combine all responses, to figure out what is correct response
   return determine_end_result([])
 }
 
+function create_object_to_validate(config: TConfig): any {
+  return {}
+}
 
-function recurse_graph(config: TConfig, graph: Graph): TEdgeResponse[] {
-  return graph.edges().map(edge => validate_edge(config, edge))
+function recurse_edges(config: TConfig, graph: Graph): TEdgeResponse[] {
+  // Whether array or graph strategy, iterate through _all_
+  // returning the status for each
+
+  const edges = graph.edges()
+
+  return edges.map(edge => validate_edge(config, edge))
 }
 
 function validate_edge(config: TConfig, edge: Edge): TEdgeResponse {

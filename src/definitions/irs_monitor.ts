@@ -1,4 +1,4 @@
-import { Applet } from "./applet";
+import { TApplet } from "./TApplet";
 
 // tslint:disable:no-mixed-interface
 
@@ -16,7 +16,7 @@ export interface ChartSingleSeries {
   aggregation_name: string;
 };
 
-export type HeightConstraint  = 'none' | 'full'
+export type HeightConstraint = 'none' | 'full'
 
 export type WidthConstraint = 'half' | 'full'
 
@@ -89,7 +89,7 @@ export interface ChartTable {
 /**
  * The configuration for the IRS Monitor applet for douma
  */
-export interface IrsMonitor extends Applet {
+export interface IrsMonitor extends TApplet {
   /**
    * The start of the current season
    */

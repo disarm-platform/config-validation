@@ -22,23 +22,10 @@ export default {
             ],
             "type": "object"
         },
-        "Applet": {
-            "properties": {
-                "icon": {
-                    "description": "The icon for the applet",
-                    "type": "string"
-                },
-                "title": {
-                    "description": "The title for the applet",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
         "Applets": {
             "properties": {
                 "debug": {
-                    "$ref": "#/definitions/Applet"
+                    "$ref": "#/definitions/TApplet"
                 },
                 "irs_monitor": {
                     "$ref": "#/definitions/IrsMonitor"
@@ -50,13 +37,13 @@ export default {
                     "$ref": "#/definitions/IrsRecordPoint"
                 },
                 "irs_tasker": {
-                    "$ref": "#/definitions/Applet"
+                    "$ref": "#/definitions/TApplet"
                 },
                 "meta": {
-                    "$ref": "#/definitions/Applet"
+                    "$ref": "#/definitions/TApplet"
                 },
                 "seasons": {
-                    "$ref": "#/definitions/Applet"
+                    "$ref": "#/definitions/TApplet"
                 }
             },
             "required": [
@@ -327,21 +314,6 @@ export default {
             },
             "type": "object"
         },
-        "Description": {
-            "properties": {
-                "field": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "field",
-                "title"
-            ],
-            "type": "object"
-        },
         "Form": {
             "properties": {
                 "pages": {
@@ -583,20 +555,6 @@ export default {
             ],
             "type": "object"
         },
-        "Presenters": {
-            "properties": {
-                "popup_description": {
-                    "items": {
-                        "$ref": "#/definitions/Description"
-                    },
-                    "type": "array"
-                }
-            },
-            "required": [
-                "popup_description"
-            ],
-            "type": "object"
-        },
         "PropertyLayer": {
             "properties": {
                 "label": {
@@ -635,6 +593,19 @@ export default {
                 "levels",
                 "markers"
             ],
+            "type": "object"
+        },
+        "TApplet": {
+            "properties": {
+                "icon": {
+                    "description": "The icon for the applet",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "The title for the applet",
+                    "type": "string"
+                }
+            },
             "type": "object"
         },
         "TableOutput": {
@@ -722,9 +693,6 @@ export default {
         "map_focus": {
             "$ref": "#/definitions/MapFocus"
         },
-        "presenters": {
-            "$ref": "#/definitions/Presenters"
-        },
         "spatial_hierarchy": {
             "$ref": "#/definitions/SpatialHierarchy"
         },
@@ -736,19 +704,10 @@ export default {
         }
     },
     "required": [
-        "aggregations",
         "applets",
         "config_id",
         "config_version",
-        "decorators",
-        "fake_form",
-        "form",
-        "instance",
-        "location_selection",
-        "map_focus",
-        "presenters",
-        "spatial_hierarchy",
-        "validations"
+        "instance"
     ],
     "type": "object"
 }

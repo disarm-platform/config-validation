@@ -1,4 +1,4 @@
-export interface Applet {
+export interface TApplet {
   /**
    * The title for the applet
    */
