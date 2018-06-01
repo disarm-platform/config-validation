@@ -1,14 +1,21 @@
 import { TDecorators } from "../../definitions/TDecorators";
 import { TConfig } from "../../definitions/TConfig";
-import { get_form_fields } from "./form_helpers";
+import { form_fields } from "./index";
 
-export function get_decorator_field_names(decorators: TDecorators) : string[] {
+export type TFields = string[]
+
+export function decorator_fields(decorators: TDecorators) : string[] {
   return Object.keys(decorators)
 }
 
-export function get_all_field_names(config: TConfig) : string[] {
-  const formFields = get_form_fields(config.form)
-  const decoratorFields = get_decorator_field_names(config.decorators)
+export function all_fields(config: TConfig) : TFields {
+  if (!config.form || !config.decorators) {
+    console.log('Some problem. Bad way to handle it... this looks like an array of fields')
+    return []
+  }
+
+  const formFields = form_fields(config.form)
+  const decoratorFields = decorator_fields(config.decorators)
 
   return [...formFields, ...decoratorFields]
 }

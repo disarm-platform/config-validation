@@ -1,10 +1,24 @@
 import { TConfig } from "../../definitions/TConfig";
 import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
-import { get_decorator_field_names } from "../helpers/fields_helper";
-import { get_form_fields } from "../helpers/form_helpers";
+import { decorator_fields } from "../helpers";
+import { form_fields } from "../helpers";
 
 
 export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
+  if (!config.decorators) {
+    return {
+      messages: ['Could be BLue'],
+      status: EEdgeStatus.Red
+    }
+  }
+
+  if (!config.form) {
+    return {
+      messages: ['Could be BLue'],
+      status: EEdgeStatus.Red
+    }
+  }
+
   if (!config.applets.irs_monitor) {
     return {
       messages: [],
@@ -22,7 +36,7 @@ export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
       return field.replace('_decorated.', '')
     })
   
-  const decoratorsFromConfig = get_decorator_field_names(config.decorators)
+  const decoratorsFromConfig = decorator_fields(config.decorators)
 
   for (const decorator of decorators) {
     if (!decoratorsFromConfig.includes(decorator)) {
@@ -33,7 +47,7 @@ export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
     }
   }
 
-  const formFieldsFromConfig = get_form_fields(config.form)
+  const formFieldsFromConfig = form_fields(config.form)
 
   const formFields = fields
     .filter(field => {

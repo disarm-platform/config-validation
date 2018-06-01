@@ -5,6 +5,12 @@ import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
 
 export function irs_plan_spatial_hierarchy_validations (config: TConfig) : TEdgeResponse {
 // if the piece is not required and does not exist then return EEdgeStatus.Blue
+  if (!config.spatial_hierarchy) {
+    return {
+      messages: ['Could be BLue'],
+      status: EEdgeStatus.Red
+    }
+  }
 
 // check the validations exist, if they are not valid, then return EEdgeStatus.Yellow
 

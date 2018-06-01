@@ -1,10 +1,24 @@
 import { TConfig } from "../../definitions/TConfig";
 import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
-import { get_expresion_variables } from "../helpers/expression_helpers";
-import { get_form_fields } from "../helpers/form_helpers";
+import { expression_variables } from "../helpers";
+import { form_fields } from "../helpers";
 
 
 export function decorators_form(config: TConfig) : TEdgeResponse {
+  if (!config.decorators) {
+    return {
+      messages: ['Could be BLue'],
+      status: EEdgeStatus.Red
+    }
+  }
+
+  if (!config.form) {
+    return {
+      messages: ['Could be BLue'],
+      status: EEdgeStatus.Red
+    }
+  }
+
   if (!Object.keys(config.decorators).length) {
     return {
       messages: [],
@@ -12,7 +26,7 @@ export function decorators_form(config: TConfig) : TEdgeResponse {
     }  
   }
 
-  const formFields = get_form_fields(config.form)
+  const formFields = form_fields(config.form)
 
   const decoratorNames = Object.keys(config.decorators)
 
@@ -22,7 +36,7 @@ export function decorators_form(config: TConfig) : TEdgeResponse {
     for (const decoratorPart of decorator) {
       const possibleFieldName = Object.keys(decoratorPart)[0]
       const expression = decoratorPart[possibleFieldName]
-      const variables = get_expresion_variables(expression)
+      const variables = expression_variables(expression)
 
       for (const variable of variables) {
         if (!formFields.includes(variable)) {

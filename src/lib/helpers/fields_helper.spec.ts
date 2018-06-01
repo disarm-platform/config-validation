@@ -1,11 +1,11 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
 import { TDecorators } from '../../definitions/TDecorators';
-import { get_all_field_names, get_decorator_field_names } from './fields_helper';
+import { all_fields, decorator_fields } from './fields_helper';
 
 test('get_decorator_field_names returns empty array if no decorators', t => {
   const decorators: TDecorators = {}
-  const fields = get_decorator_field_names(decorators)
+  const fields = decorator_fields(decorators)
 
   t.is(fields.length, 0)
 })
@@ -25,7 +25,7 @@ test('get_decorator_field_names returns number of decorators', t => {
       }
     ]
   }
-  const fields = get_decorator_field_names(decorators)
+  const fields = decorator_fields(decorators)
 
   t.is(fields.length, 1)
   t.is(fields[0], 'status')
@@ -38,7 +38,7 @@ test('get_all_field_names returns empty array when no decorators and no form pag
   }
 
   // @ts-ignore
-  const fields = get_all_field_names(config)
+  const fields = all_fields(config)
 
   t.is(fields.length, 0)
 })
@@ -95,7 +95,7 @@ test('get_all_field_names returns form field names and decorator names', t => {
   }
 
   // @ts-ignore
-  const fields = get_all_field_names(config)
+  const fields = all_fields(config)
   const expected = [
     'number_sprayable',
     'number_unsprayable',

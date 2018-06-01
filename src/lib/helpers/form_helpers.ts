@@ -2,20 +2,20 @@ import { TForm } from "../../definitions/TForm";
 
 // Copied from douma
 
-export interface FormElement {
+export interface TFormElement {
   page: number;
   name: string;
   type: string;
 }
 
-function get_form_elements(form: TForm): FormElement[] {
+function get_form_elements(form: TForm): TFormElement[] {
   // TODO: Should rewrite with .map().filter() instead of forEach, then enable tslint again.
   // tslint:disable
   if (!form.pages) {
     return []
   }
 
-  let arr: FormElement[] = []
+  let arr: TFormElement[] = []
   form.pages.forEach((page, i) => {
     if (page.elements)
       page.elements.forEach(element => {
@@ -31,8 +31,8 @@ function get_form_elements(form: TForm): FormElement[] {
   return arr
 }
 
-function get_form_fields(form: TForm) : string[] {
+function form_fields(form: TForm) : string[] {
   return get_form_elements(form).map(e => e.name)
 }
 
-export { get_form_elements, get_form_fields }
+export { get_form_elements, form_fields }
