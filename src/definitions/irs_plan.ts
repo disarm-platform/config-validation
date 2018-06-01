@@ -5,6 +5,6 @@ export interface TableOutput {
   source_field: string;
 }
 
-export interface IrsPlan extends TApplet {
+export interface TIrsPlan extends TApplet {
   table_output: TableOutput[];
 }

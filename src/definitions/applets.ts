@@ -1,13 +1,14 @@
+import { TIrsMonitor } from './irs_monitor'
+import { TIrsPlan } from './irs_plan';
+import { TIrsRecordPoint } from './irs_record_point';
+import { TIrsTasker } from './irs_tasker';
 import { TApplet } from './TApplet';
-import { IrsMonitor } from './irs_monitor'
-import { IrsPlan } from './irs_plan';
-import { IrsRecordPoint } from './irs_record_point';
 
 export interface Applets {
-  irs_monitor?: IrsMonitor;
-  irs_plan?: IrsPlan;
-  irs_record_point?: IrsRecordPoint;
-  irs_tasker?: TApplet;
+  irs_monitor?: TIrsMonitor;
+  irs_plan?: TIrsPlan;
+  irs_record_point?: TIrsRecordPoint;
+  irs_tasker?: TIrsTasker;
   meta: TApplet;
   seasons?: TApplet;
   debug?: TApplet;

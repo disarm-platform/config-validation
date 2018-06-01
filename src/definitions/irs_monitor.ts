@@ -89,7 +89,7 @@ export interface ChartTable {
 /**
  * The configuration for the IRS Monitor applet for douma
  */
-export interface IrsMonitor extends TApplet {
+export interface TIrsMonitor extends TApplet {
   /**
    * The start of the current season
    */

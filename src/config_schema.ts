@@ -28,13 +28,13 @@ export default {
                     "$ref": "#/definitions/TApplet"
                 },
                 "irs_monitor": {
-                    "$ref": "#/definitions/IrsMonitor"
+                    "$ref": "#/definitions/TIrsMonitor"
                 },
                 "irs_plan": {
-                    "$ref": "#/definitions/IrsPlan"
+                    "$ref": "#/definitions/TIrsPlan"
                 },
                 "irs_record_point": {
-                    "$ref": "#/definitions/IrsRecordPoint"
+                    "$ref": "#/definitions/TIrsRecordPoint"
                 },
                 "irs_tasker": {
                     "$ref": "#/definitions/TApplet"

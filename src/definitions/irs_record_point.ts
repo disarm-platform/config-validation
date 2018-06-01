@@ -5,6 +5,6 @@ export interface MetaData {
   optional_fields: string[];
 }
 
-export interface IrsRecordPoint extends TApplet {
+export interface TIrsRecordPoint extends TApplet {
   metadata: MetaData
 }
