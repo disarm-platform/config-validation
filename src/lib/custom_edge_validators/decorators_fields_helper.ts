@@ -1,49 +1,48 @@
-import { TConfig } from "../../definitions/TConfig";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
-import { expression_variables } from "../helpers";
-import { form_fields } from "../helpers";
+import { TConfig } from '../../definitions/TConfig';
+import { EEdgeStatus, TEdgeResponse } from '../EdgeResponse';
+import { expression_variables, form_fields } from '../helpers';
 
 
-export function decorators_form(config: TConfig) : TEdgeResponse {
+export function decorators_fields_helper(config: TConfig): TEdgeResponse {
   if (!config.decorators) {
     return {
       messages: ['Could be BLue'],
       status: EEdgeStatus.Red
-    }
+    };
   }
 
   if (!config.form) {
     return {
       messages: ['Could be BLue'],
       status: EEdgeStatus.Red
-    }
+    };
   }
 
   if (!Object.keys(config.decorators).length) {
     return {
       messages: [],
       status: EEdgeStatus.Blue
-    }  
+    };
   }
 
-  const formFields = form_fields(config.form)
+  const formFields = form_fields(config.form);
 
-  const decoratorNames = Object.keys(config.decorators)
+  const decoratorNames = Object.keys(config.decorators);
 
   for (const decoratorName of decoratorNames) {
-    const decorator = config.decorators[decoratorName]
+    const decorator = config.decorators[decoratorName];
 
     for (const decoratorPart of decorator) {
-      const possibleFieldName = Object.keys(decoratorPart)[0]
-      const expression = decoratorPart[possibleFieldName]
-      const variables = expression_variables(expression)
+      const possibleFieldName = Object.keys(decoratorPart)[0];
+      const expression = decoratorPart[possibleFieldName];
+      const variables = expression_variables(expression);
 
       for (const variable of variables) {
         if (!formFields.includes(variable)) {
           return {
             messages: [`Field '${variable}' in decorator '${decoratorName}' does not exist on form`],
             status: EEdgeStatus.Yellow
-          }
+          };
         }
       }
     }
@@ -54,5 +53,5 @@ export function decorators_form(config: TConfig) : TEdgeResponse {
   return {
     messages: [],
     status: EEdgeStatus.Green
-  }
+  };
 }
