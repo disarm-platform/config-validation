@@ -5,7 +5,7 @@ import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse';
 import { Edge, Graph } from 'graphlib';
 import { EEdgeStatus, TEdgeResponse } from './EdgeResponse';
 import pathMap from './helpers/path_map'
-import { validateJsonSchema } from './validate_json_schema';
+import { validate_json_schema } from './validate_json_schema';
 
 /**
  * Take the whole config and figure if it's valid.
@@ -22,7 +22,7 @@ export function validate(config: TConfig): TUnifiedResponse {
   // Check config is a valid schema, with minimum required properties
   return {
     messages: ['Who knows'],
-    status: validateJsonSchema(config) ? EUnifiedStatus.Green : EUnifiedStatus.Red
+    status: validate_json_schema(config) ? EUnifiedStatus.Green : EUnifiedStatus.Red
   }
 
   // const test = create_object_to_validate(config)

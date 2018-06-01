@@ -1,26 +1,26 @@
-import { Aggregations } from './aggregations';
-import { Applets } from './applets'
-import { Decorators } from './decorators';
-import { Form } from './form';
-import { Instance } from './instance';
-import { LocationSelection } from './location_selection';
-import { MapFocus } from './map_focus';
-import { SpatialHierarchy } from './spatial_hierarchy';
-import { Validations } from './validations';
+import { TAggregations } from './TAggregations';
+import { TApplets } from './TApplets'
+import { TDecorators } from './TDecorators';
+import { TForm } from './TForm';
+import { TInstance } from './TInstance';
+import { TLocationSelection } from './TLocationSelection';
+import { TMapFocus } from './TMapFocus';
+import { TSpatialHierarchy } from './TSpatialHierarchy';
+import { TValidations } from './TValidations';
 
 export interface TConfig {
   config_id: string;
   config_version: string;
 
-  applets: Applets;
-  map_focus?: MapFocus;
-  instance: Instance;
+  applets: TApplets;
+  map_focus?: TMapFocus;
+  instance: TInstance;
 
-  spatial_hierarchy?: SpatialHierarchy;
-  form?: Form;
-  aggregations?: Aggregations;
+  spatial_hierarchy?: TSpatialHierarchy;
+  form?: TForm;
+  aggregations?: TAggregations;
   fake_form?: any[];
-  validations?: Validations;
-  decorators?: Decorators;
-  location_selection?: LocationSelection;
+  validations?: TValidations;
+  decorators?: TDecorators;
+  location_selection?: TLocationSelection;
 }

@@ -1,10 +1,10 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { Decorators } from '../../definitions/decorators';
+import { TDecorators } from '../../definitions/TDecorators';
 import { get_all_field_names, get_decorator_field_names } from './fields_helper';
 
 test('get_decorator_field_names returns empty array if no decorators', t => {
-  const decorators: Decorators = {}
+  const decorators: TDecorators = {}
   const fields = get_decorator_field_names(decorators)
 
   t.is(fields.length, 0)
@@ -12,7 +12,7 @@ test('get_decorator_field_names returns empty array if no decorators', t => {
 
 
 test('get_decorator_field_names returns number of decorators', t => {
-  const decorators : Decorators = {
+  const decorators : TDecorators = {
     "status": [
       {
         "red": "numbersprayed_ddt + numbersprayed_delta == 0"

@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { HeightConstraint, WidthConstraint } from '../definitions/irs_monitor';
+import { THeightConstraint, TWidthConstraint } from '../definitions/TIrsMonitor';
 import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse'
 import { validate } from './validate'
 
@@ -69,8 +69,8 @@ test('returns Green for a valid config', t => {
           {
             "id": "room_coverage_by_week",
             "style": {
-              "height_constraint": "none" as HeightConstraint,
-              "width_constraint": "half" as WidthConstraint
+              "height_constraint": "none" as THeightConstraint,
+              "width_constraint": "half" as TWidthConstraint
             },
             "options": {
               "chart_type": "bar",

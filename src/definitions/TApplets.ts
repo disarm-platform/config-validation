@@ -1,10 +1,10 @@
-import { TIrsMonitor } from './irs_monitor'
-import { TIrsPlan } from './irs_plan';
-import { TIrsRecordPoint } from './irs_record_point';
-import { TIrsTasker } from './irs_tasker';
+import { TIrsMonitor } from './TIrsMonitor'
+import { TIrsPlan } from './TIrsPlan';
+import { TIrsRecordPoint } from './TIrsRecordPoint';
+import { TIrsTasker } from './TIrsTasker';
 import { TApplet } from './TApplet';
 
-export interface Applets {
+export interface TApplets {
   irs_monitor?: TIrsMonitor;
   irs_plan?: TIrsPlan;
   irs_record_point?: TIrsRecordPoint;

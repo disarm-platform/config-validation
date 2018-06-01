@@ -12,8 +12,6 @@ const ajv = new Ajv();
 ajv.addMetaSchema(draft_6);
 
 export function validate_json_schema(config: TConfig): boolean {
-  console.log(config, config_schema)
-  return true
   const validate = ajv.compile(schemaDefinitions);
-  return validate(data) as boolean;
+  return validate(config) as boolean;
 }

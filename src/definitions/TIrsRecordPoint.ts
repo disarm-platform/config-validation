@@ -1,10 +1,10 @@
 import { TApplet } from "./TApplet";
 
-export interface MetaData {
+export interface TMetaData {
   show: boolean;
   optional_fields: string[];
 }
 
 export interface TIrsRecordPoint extends TApplet {
-  metadata: MetaData
+  metadata: TMetaData
 }

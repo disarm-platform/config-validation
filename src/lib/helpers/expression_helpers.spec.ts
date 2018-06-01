@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { Validation } from '../../definitions/validations';
+import { TValidation } from '../../definitions/TValidations';
 import { get_expresion_variables, get_form_fields_for_validations } from './expression_helpers';
 
 test('get_validation_variables returns empty array if expression has no variables', t => {
@@ -22,14 +22,14 @@ test('get_validation_variables returns two variables if expression has two varia
 })
 
 test('get_validation_variables returns empty array', t => {
-  const validations : Validation[] = []
+  const validations : TValidation[] = []
   const variables = get_form_fields_for_validations(validations)
 
   t.is(variables.length, 0)
 })
 
 test('get_validation_variables returns two variables', t => {
-  const validations: Validation[] = [
+  const validations: TValidation[] = [
     {
       expression: 'a - b',
       message: '',
@@ -43,7 +43,7 @@ test('get_validation_variables returns two variables', t => {
 })
 
 test('get_validation_variables returns four variables', t => {
-  const validations: Validation[] = [
+  const validations: TValidation[] = [
     {
       expression: 'a - b',
       message: '',

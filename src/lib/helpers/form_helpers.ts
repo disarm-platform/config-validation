@@ -1,4 +1,4 @@
-import { Form } from "../../definitions/form";
+import { TForm } from "../../definitions/TForm";
 
 // Copied from douma
 
@@ -8,7 +8,7 @@ export interface FormElement {
   type: string;
 }
 
-function get_form_elements(form: Form): FormElement[] {
+function get_form_elements(form: TForm): FormElement[] {
   // TODO: Should rewrite with .map().filter() instead of forEach, then enable tslint again.
   // tslint:disable
   if (!form.pages) {
@@ -31,7 +31,7 @@ function get_form_elements(form: Form): FormElement[] {
   return arr
 }
 
-function get_form_fields(form: Form) : string[] {
+function get_form_fields(form: TForm) : string[] {
   return get_form_elements(form).map(e => e.name)
 }
 

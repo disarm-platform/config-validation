@@ -1,4 +1,4 @@
-export interface Validation {
+export interface TValidation {
   name: string;
   expression: string;
   message: string;
@@ -6,4 +6,4 @@ export interface Validation {
   precondition?: string;
 }
 
-export type Validations = Validation[]
+export type TValidations = TValidation[]

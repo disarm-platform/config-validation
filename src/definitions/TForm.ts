@@ -4,6 +4,6 @@ export interface Page {
   name: string;
 }
 
-export interface Form {
+export interface TForm {
   pages: Page[];
 }

@@ -1,24 +1,24 @@
-export interface DenominatorFields {
+export interface TDenominatorFields {
   [k: string]: string;
 }
 
-export interface Markers {
+export interface TMarkers {
   planning_level_name: string;
   record_location_selection_level_name: string;
-  denominator_fields: DenominatorFields;
+  denominator_fields: TDenominatorFields;
 }
 
 
-export interface Level {
+export interface TLevel {
   group_by_field?: string;
   field_name: string;
   display_field_name: string;
   name: string;
 }
 
-export interface SpatialHierarchy {
+export interface TSpatialHierarchy {
   ignore_planning_level_restriction?: boolean;
   data_version: number;
-  markers: Markers;
-  levels: Level[];
+  markers: TMarkers;
+  levels: TLevel[];
 }
