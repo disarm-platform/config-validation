@@ -3,6 +3,11 @@ import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
 
 
 export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
+  if (!config.aggregations) return {
+    messages: ['Missing aggregations'],
+    status: EEdgeStatus.Red
+  }
+
   if (!config.applets.irs_monitor) {
     return {
       messages: [],
@@ -22,7 +27,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
   for (const aggregation of config.applets.irs_monitor.map.aggregation_names) {
     if (!aggregationNames.includes(aggregation)){
       return {
-        messages: [{ description: `The aggregation '${aggregation}' in map configuration is not in the aggregations`}],
+        messages: [`The aggregation '${aggregation}' in map configuration is not in the aggregations`],
         status: EEdgeStatus.Yellow
       }
     }
@@ -31,7 +36,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
   for (const aggregation of config.applets.irs_monitor.table.aggregation_names) {
     if (!aggregationNames.includes(aggregation)) {
       return {
-        messages: [{ description: `The aggregation '${aggregation}' in table configuration is not in the aggregations` }],
+        messages: [`The aggregation '${aggregation}' in table configuration is not in the aggregations`],
         status: EEdgeStatus.Yellow
       }
     }
@@ -50,7 +55,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
 
     return true
   })
-    
+
   for (const chart of charts) {
     if (chart.options.multi_series) {
       for (const series of chart.options.multi_series) {
@@ -62,7 +67,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
         }
       }
     }
-    
+
     if (chart.options.single_series) {
       if (!aggregationNames.includes(chart.options.single_series.aggregation_name)) {
         return {
@@ -72,7 +77,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
       }
     }
   }
-  
+
   return {
     messages: [],
     status: EEdgeStatus.Green
