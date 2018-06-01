@@ -20,7 +20,7 @@ export function aggregations_field_helper(config: TConfig): TEdgeResponse {
     for (const variable of aggregationVariables) {
       if (!allFields.includes(variable)) {
         return {
-          messages: [{description: `The field '${variable}' does not exist in the form or the decorators`}],
+          messages: [`The field '${variable}' does not exist in the form or the decorators`],
           status: EEdgeStatus.Yellow
         }
       }

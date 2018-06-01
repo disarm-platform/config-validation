@@ -27,7 +27,7 @@ export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
   for (const decorator of decorators) {
     if (!decoratorsFromConfig.includes(decorator)) {
       return {
-        messages: [{ description: `The field '_decorated.${decorator}' in map configuration is not in the decorators` }],
+        messages: [`The field '_decorated.${decorator}' in map configuration is not in the decorators` ],
         status: EEdgeStatus.Yellow
       }
     }
@@ -46,7 +46,7 @@ export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
   for (const formField of formFields) {
     if (!formFieldsFromConfig.includes(formField)) {
       return {
-        messages: [{ description: `The field 'form_data.${formField}' in map configuration is not in the form` }],
+        messages: [`The field 'form_data.${formField}' in map configuration is not in the form` ],
         status: EEdgeStatus.Yellow
       }
     }
@@ -81,7 +81,7 @@ export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
   for (const formField of generateSeriesFromFieldsForm) {
     if (!formFieldsFromConfig.includes(formField)) {
       return {
-        messages: [{ description: `The field 'form_data.${formField}' in chart configuration with is not in the form` }],
+        messages: [`The field 'form_data.${formField}' in chart configuration with is not in the form` ],
         status: EEdgeStatus.Yellow
       }
     }
@@ -99,7 +99,7 @@ export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
   for (const decorator of generateSeriesFromFieldsDecorated) {
     if (!decoratorsFromConfig.includes(decorator)) {
       return {
-        messages: [{ description: `The field '_decorated.${decorator}' in map configuration is not in the decorators` }],
+        messages: [`The field '_decorated.${decorator}' in map configuration is not in the decorators` ],
         status: EEdgeStatus.Yellow
       }
     }

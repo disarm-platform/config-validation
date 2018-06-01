@@ -20,7 +20,7 @@ export function validations_fields_helper(config: TConfig): TEdgeResponse {
   for (const field of validationFields) {
     if (!formFields.includes(field)) {
       return {
-        messages: [{ description: `'${field}' not in form fields` }],
+        messages: [`'${field}' not in form fields` ],
         status: EEdgeStatus.Yellow
       }
     }

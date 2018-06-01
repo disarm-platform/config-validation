@@ -13,7 +13,7 @@ export function irs_monitor_spatial_hierarchy(config: TConfig): TEdgeResponse {
 
   if (!config.spatial_hierarchy) {
     return {
-      messages: [{description: 'spatial_hierarchy is required for irs_monitor'}],
+      messages: ['spatial_hierarchy is required for irs_monitor'],
       status: EEdgeStatus.Yellow
     }
   }

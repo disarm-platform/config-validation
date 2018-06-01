@@ -61,7 +61,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
       for (const series of chart.options.multi_series) {
         if (!aggregationNames.includes(series.aggregation_name)) {
           return {
-            messages: [{ description: `The aggregation '${series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations` }],
+            messages: [`The aggregation '${series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations`],
             status: EEdgeStatus.Yellow
           }
         }
@@ -71,7 +71,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
     if (chart.options.single_series) {
       if (!aggregationNames.includes(chart.options.single_series.aggregation_name)) {
         return {
-          messages: [{ description: `The aggregation '${chart.options.single_series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations` }],
+          messages: [`The aggregation '${chart.options.single_series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations`],
           status: EEdgeStatus.Yellow
         }
       }

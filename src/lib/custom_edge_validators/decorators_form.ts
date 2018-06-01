@@ -27,7 +27,7 @@ export function decorators_form(config: TConfig) : TEdgeResponse {
       for (const variable of variables) {
         if (!formFields.includes(variable)) {
           return {
-            messages: [{description: `Field '${variable}' in decorator '${decoratorName}' does not exist on form`}],
+            messages: [`Field '${variable}' in decorator '${decoratorName}' does not exist on form`],
             status: EEdgeStatus.Yellow
           }
         }

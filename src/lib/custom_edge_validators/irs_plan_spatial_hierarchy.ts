@@ -12,20 +12,20 @@ export function irs_plan_spatial_hierarchy_validations (config: TConfig) : TEdge
 
   if(!config.applets.irs_plan){
     return {
-      messages: [{description:'Irs plan Applet was found'}],
+      messages: ['Irs plan Applet was found'],
       status: EEdgeStatus.Blue
     }
   }
 
   if(config.spatial_hierarchy.markers.planning_level_name){
     return {
-      messages: [{description:'planning level name required by irs plan is available'}],
+      messages: ['planning level name required by irs plan is available'],
       status: EEdgeStatus.Green
     }
   }
 
   return {
-    messages: [{description:'config.spatial_hierarchy.markers.planning_level_name required by irs plan was not found'}],
+    messages: ['config.spatial_hierarchy.markers.planning_level_name required by irs plan was not found'],
     status: EEdgeStatus.Yellow
   }
 

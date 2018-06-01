@@ -11,13 +11,13 @@ export function irs_tasker_map_focus_validations (config: TConfig) : TEdgeRespon
 // if everything is ok then return EEdgeStatus.Green
   if(config.map_focus){
     return {
-      messages: [{description:'Required Field Not Found'}],
+      messages: ['Required Field Not Found'],
       status: EEdgeStatus.Green
     }
   }
 
   return {
-    messages: [{description:'Required Field Not Found'}],
+    messages: ['Required Field Not Found'],
     status: EEdgeStatus.Blue
   }
 

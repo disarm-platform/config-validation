@@ -10,7 +10,7 @@ export function irs_plan_map_focus_validations (config: TConfig) : TEdgeResponse
 
   if(!config.applets.irs_plan){
     return {
-      messages: [{description:'Irs plan Applet was found'}],
+      messages: ['Irs plan Applet was found'],
       status: EEdgeStatus.Blue
     }
   }
@@ -20,13 +20,13 @@ export function irs_plan_map_focus_validations (config: TConfig) : TEdgeResponse
 // if everything is ok then return EEdgeStatus.Green
   if(config.map_focus){
     return {
-      messages: [{description:'Optional map focus is available'}],
+      messages: ['Optional map focus is available'],
         status: EEdgeStatus.Green
     }
   }
 
   return {
-    messages: [{description:'Optional Map focus is not found'}],
+    messages: ['Optional Map focus is not found'],
     status: EEdgeStatus.Blue
   }
 

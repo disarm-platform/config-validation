@@ -11,13 +11,13 @@ export function irs_tasker_spatial_hierarchy_validations (config: TConfig) : TEd
 // if everything is ok then return EEdgeStatus.Green
   if(config.spatial_hierarchy.markers.planning_level_name){
     return {
-      messages: [{description:'Required Field Not Found'}],
+      messages: ['Required Field Not Found'],
       status: EEdgeStatus.Green
     }
   }
 
   return {
-    messages: [{description:'Required Field Not Found'}],
+    messages: ['Required Field Not Found'],
     status: EEdgeStatus.Yellow
   }
 

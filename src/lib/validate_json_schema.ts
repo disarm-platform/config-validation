@@ -1,3 +1,4 @@
+// tslint:disable
 // tslint:disable:no-submodule-imports
 // @ts-ignore
 import Ajv from 'ajv';
@@ -10,7 +11,9 @@ const ajv = new Ajv();
 // tslint:disable:no-expression-statement
 ajv.addMetaSchema(draft_6);
 
-export function validateJsonSchema(data: TConfig): boolean {
+export function validate_json_schema(config: TConfig): boolean {
+  console.log(config, config_schema)
+  return true
   const validate = ajv.compile(schemaDefinitions);
   return validate(data) as boolean;
 }
