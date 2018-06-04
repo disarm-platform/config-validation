@@ -1,5 +1,6 @@
 import { JSONSchema6 } from 'json-schema';
 import ConfigSchema from '../config_schema.json';
+import { EdgeDefinitions } from '../EdgeDefinitions';
 import { TConfig } from './config_types/TConfig';
 import { determine_unified_response } from './determine_unified_response';
 import PathMap from './helpers/path_map';
@@ -7,14 +8,13 @@ import { ESchemaStatus } from './TSchemaResponse';
 import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse';
 import { validate_edges } from './validate_edges';
 import { validate_schema } from './validate_schema';
-import { EdgeDefinitions } from '../EdgeDefinitions';
 
 
 export function validate(config: TConfig): TUnifiedResponse {
   // Step 0: gather what you need
   const config_schema: JSONSchema6 = ConfigSchema;
   const path_map = PathMap;
-  const edge_definitions = EdgeDefinitions
+  const edge_definitions = EdgeDefinitions;
 
   //
   // STEP 1: Schema validation
