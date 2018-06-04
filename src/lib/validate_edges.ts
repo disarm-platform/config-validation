@@ -1,20 +1,20 @@
 import { flatten, get, has } from 'lodash';
 import { TConfig } from './config_types/TConfig';
 import custom_validations from './custom_edge_validators';
-import { THash } from './helpers/path_map';
+import { TPathMap } from './helpers/path_mapping';
 import { ECustomEdgeStatus, TCustomEdgeResponse } from './TCustomEdgeResponse';
 import { TEdgeDefinition } from './TEdgeDefinition';
 import { EStandardEdgeStatus, TStandardEdgeResponse } from './TStandardEdgeResponse';
 
-export function validate_edges(config: TConfig, path_map: THash, edge_definitions: TEdgeDefinition[]): TStandardEdgeResponse[] {
+export function validate_edges(config: TConfig, path_map: TPathMap[], edge_definitions: TEdgeDefinition[]): TStandardEdgeResponse[] {
   // For every edge_definition
-  const nodes = flat_nodes(config, path_map);
+  const nodes = mapped_nodes(config, path_map);
   return edge_definitions.map(edge_definition => {
     return validate_edge(config, nodes, edge_definition);
   });
 }
 
-function validate_edge(config: TConfig, nodes: THash, edge_definition: TEdgeDefinition): TStandardEdgeResponse {
+function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TEdgeDefinition): TStandardEdgeResponse {
   let messages = [];
   let status = EStandardEdgeStatus.Red;
 
@@ -55,10 +55,16 @@ function validate_edge(config: TConfig, nodes: THash, edge_definition: TEdgeDefi
   };
 }
 
-function flat_nodes(config: TConfig, path_map: THash): THash {
-  const keys = Object.keys(path_map)
-  return Object.keys(path_map).reduce((acc, key) => {
-    acc[key] = get(config, path_map.key, 'unknown');
-    return acc;
-  }, {});
+interface MappedNode {
+  name: string;
+  node: object;
+}
+
+function mapped_nodes(config: TConfig, path_map: TPathMap[]): MappedNode[] {
+  return path_map.map(el => {
+    return {
+      name: el.name,
+      node: get(config, el.path)
+    }
+  })
 }

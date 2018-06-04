@@ -3,7 +3,7 @@ import ConfigSchema from '../config_schema.json';
 import { EdgeDefinitions } from '../EdgeDefinitions';
 import { TConfig } from './config_types/TConfig';
 import { determine_unified_response } from './determine_unified_response';
-import PathMap from './helpers/path_map';
+import PathMap from './helpers/path_mapping';
 import { ESchemaStatus } from './TSchemaResponse';
 import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse';
 import { validate_edges } from './validate_edges';
