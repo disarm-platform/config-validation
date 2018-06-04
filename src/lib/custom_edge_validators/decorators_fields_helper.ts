@@ -1,4 +1,4 @@
-import { TConfig } from '../../definitions/TConfig';
+import { TConfig } from '../config_types/TConfig';
 import { EEdgeStatus, TEdgeResponse } from '../TEdgeResponse';
 import { expression_variables, form_fields } from '../helpers';
 

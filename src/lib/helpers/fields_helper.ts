@@ -1,5 +1,5 @@
-import { TConfig } from "../../definitions/TConfig";
-import { TDecorators } from "../../definitions/TDecorators";
+import { TConfig } from "../config_types/TConfig";
+import { TDecorators } from "../config_types/TDecorators";
 import { form_fields } from "./index";
 
 export type TFields = string[]

@@ -1,6 +1,6 @@
 import { JSONSchema6 } from 'json-schema';
 import ConfigSchema from '../config_schema.json';
-import { TConfig } from '../definitions/TConfig';
+import { TConfig } from './config_types/TConfig';
 import { determine_unified_response } from './determine_unified_response';
 import PathMap from './helpers/path_map';
 import { ESchemaStatus } from './TSchemaResponse';

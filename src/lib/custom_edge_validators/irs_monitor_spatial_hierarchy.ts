@@ -1,4 +1,4 @@
-import { TConfig } from "../../definitions/TConfig";
+import { TConfig } from "../config_types/TConfig";
 import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
 
 // TODO: Need to write a property version of this, 

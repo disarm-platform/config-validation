@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { THeightConstraint, TWidthConstraint } from '../definitions/TIrsMonitor';
+import { THeightConstraint, TWidthConstraint } from './config_types/TIrsMonitor';
 import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse'
 import { validate } from './validate'
 

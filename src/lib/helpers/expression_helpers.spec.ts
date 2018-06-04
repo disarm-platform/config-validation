@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { TValidation } from '../../config_types/TValidations';
+import { TValidation } from '../config_types/TValidations';
 import { expression_variables, get_form_fields_for_validations } from './expression_helpers';
 
 test('get_validation_variables returns empty array if expression has no variables', t => {

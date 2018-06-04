@@ -1,4 +1,4 @@
-import { TConfig } from "../../config_types/TConfig";
+import { TConfig } from "../config_types/TConfig";
 import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
 
 

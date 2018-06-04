@@ -1,5 +1,5 @@
 import { Graph } from 'graphlib';
-import { TConfig } from '../definitions/TConfig';
+import { TConfig } from './config_types/TConfig';
 import { THash } from './helpers/path_map';
 import { EEdgeStatus, TEdgeResponse } from './TEdgeResponse';
 

@@ -4,7 +4,7 @@
 import Ajv from 'ajv';
 // @ts-ignore
 import draft_6 from 'ajv/lib/refs/json-schema-draft-06.json';
-import { TConfig } from '../definitions/TConfig';
+import { TConfig } from './config_types/TConfig';
 import { ESchemaStatus, TSchemaResponse } from './TSchemaResponse';
 import { JSONSchema6 } from 'json-schema';
 

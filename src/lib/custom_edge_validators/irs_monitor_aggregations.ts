@@ -1,5 +1,5 @@
-import { TConfig } from "../../definitions/TConfig";
-import { TChartConfig } from '../../definitions/TIrsMonitor';
+import { TConfig } from "../config_types/TConfig";
+import { TChartConfig } from '../config_types/TIrsMonitor';
 import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
 
 
