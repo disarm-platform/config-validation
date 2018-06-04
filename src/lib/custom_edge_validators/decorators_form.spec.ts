@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../EdgeResponse';
+import { EEdgeStatus } from '../TEdgeResponse';
 import { decorators_form } from './decorators_form';
 
 test('returns Blue status if no decorators', t => {

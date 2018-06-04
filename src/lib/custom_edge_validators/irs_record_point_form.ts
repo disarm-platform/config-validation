@@ -1,5 +1,5 @@
 import { TConfig } from "../../definitions/TConfig";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
 
 
 export function irs_record_point_form(config: TConfig): TEdgeResponse {

@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../EdgeResponse';
+import { EEdgeStatus } from '../TEdgeResponse';
 import { aggregations_field_helper } from './aggregations_field_helper';
 
 test('returns Blue status if no aggregations', t => {

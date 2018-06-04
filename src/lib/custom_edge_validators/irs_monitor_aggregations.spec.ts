@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../EdgeResponse';
+import { EEdgeStatus } from '../TEdgeResponse';
 import { irs_monitor_aggregations } from './irs_monitor_aggregations';
 
 test('returns Blue status if no irs_monitor', t => {

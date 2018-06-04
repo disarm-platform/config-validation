@@ -3,7 +3,7 @@ import { ENodeResponseStatus, TNodeResponse } from './TNodeResponse';
 import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse';
 
 import { Edge, Graph } from 'graphlib';
-import { EEdgeStatus, TEdgeResponse } from './EdgeResponse';
+import { EEdgeStatus, TEdgeResponse } from './TEdgeResponse';
 import pathMap from './helpers/path_map'
 import { validate_json_schema } from './validate_json_schema';
 
