@@ -34,8 +34,8 @@
     "clean": "trash build test",
     "all": "run-s reset test cov:check doc:html",
     "prepare-release": "run-s all version doc:publish",
-    "copy-schema": "cp src/config_schema.json build/main/; cp src/config_schema.json build/module/",
-    "generate-schema": "typescript-json-schema './tsconfig.json' 'TConfig' --include ./src/definitions/TConfig.ts --out 'src/config_schema.json' --required true"
+    "generate-schema": "typescript-json-schema './tsconfig.json' 'TConfig' --include ./src/definitions/TConfig.ts --out 'src/config_schema.json' --required true",
+    "copy-schema": "cp src/config_schema.json build/main/; cp src/config_schema.json build/module/"
   },
   "scripts-info": {
     "info": "Display information about the package scripts",
@@ -49,7 +49,8 @@
     "version": "Bump package.json version, update CHANGELOG.md, tag release",
     "reset": "Delete all untracked files and reset the repo to the last commit",
     "prepare-release": "One-step: clean, build, test, publish docs, and prep a release",
-    "generate-schema": "Convert TConfig type to json-schema, output to src/config_schema.ts"
+    "generate-schema": "Convert TConfig type to json-schema, output to src/config_schema.ts",
+    "copy-schema": "Copy the generated schema into the build folders"
   },
   "engines": {
     "node": ">=8.9"
