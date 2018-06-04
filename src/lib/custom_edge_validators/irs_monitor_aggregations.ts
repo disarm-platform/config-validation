@@ -1,88 +1,116 @@
-import { TConfig } from "../config_types/TConfig";
+import { get } from 'lodash';
+import { TConfig } from '../config_types/TConfig';
 import { TChartConfig } from '../config_types/TIrsMonitor';
-import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
+import { ECustomEdgeStatus, TCustomEdgeResponse } from '../TCustomEdgeResponse';
 
+export function irs_monitor_aggregations(irs_monitor_config: object, aggregations_config: Array<{ name: string }>): TCustomEdgeResponse {
+  const messages: string[] = [];
+  let status = ECustomEdgeStatus.Red;
 
-export function irs_monitor_aggregations(config: TConfig): TCustomEdgeResponse {
-  if (!config.aggregations) {
-    return {
-      messages: ['Missing aggregations'],
-      status: ECustomEdgeStatus.Red
+  const possible_aggregations: string[] = extract_aggregations_from_irs_monitor(irs_monitor_config);
+  const required_aggregations: string[] = aggregations_config.map(a => a.name); // aggregations
+
+  required_aggregations.forEach(a => {
+    if (possible_aggregations.includes(a)) {
+      messages.push(`Aggregation ${a} is required and is included`)
+      status = ECustomEdgeStatus.Green
+    } else {
+      messages.push(`Aggregation ${a} is required but is not included`)
+      status = ECustomEdgeStatus.Red
     }
-  }
-
-  if (!config.applets.irs_monitor) {
-    return {
-      messages: [],
-      status: ECustomEdgeStatus.Blue
-    }
-  }
-
-  if (!config.aggregations.length) {
-    return {
-      messages: [],
-      status: ECustomEdgeStatus.Blue
-    }
-  }
-
-  const aggregationNames = config.aggregations.map(a => a.name)
-
-  for (const aggregation of config.applets.irs_monitor.map.aggregation_names) {
-    if (!aggregationNames.includes(aggregation)){
-      return {
-        messages: [`The aggregation '${aggregation}' in map configuration is not in the aggregations`],
-        status: ECustomEdgeStatus.Yellow
-      }
-    }
-  }
-
-  for (const aggregation of config.applets.irs_monitor.table.aggregation_names) {
-    if (!aggregationNames.includes(aggregation)) {
-      return {
-        messages: [`The aggregation '${aggregation}' in table configuration is not in the aggregations`],
-        status: ECustomEdgeStatus.Yellow
-      }
-    }
-  }
-
-  // check they all exist in config.aggregations
-
-  const charts = config.applets.irs_monitor.charts.filter((chartConfig: TChartConfig) => {
-    if (chartConfig.chart_type === 'text') {
-      return false
-    }
-
-    if (chartConfig.options.generate_series_from) {
-      return false
-    }
-
-    return true
-  });
-
-  for (const chart of charts) {
-    if (chart.options.multi_series) {
-      for (const series of chart.options.multi_series) {
-        if (!aggregationNames.includes(series.aggregation_name)) {
-          return {
-            messages: [`The aggregation '${series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations`],
-            status: ECustomEdgeStatus.Yellow
-          }
-        }
-      }
-    }
-
-    if (chart.options.single_series) {
-      if (!aggregationNames.includes(chart.options.single_series.aggregation_name)) {
-        return {
-          messages: [`The aggregation '${chart.options.single_series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations`],
-          status: ECustomEdgeStatus.Yellow
-        }
-      }
-    }
-  }
-
+  })
+  
   return {
-    messages: [],
-    status: ECustomEdgeStatus.Green
+    messages,
+    status
   }
+}
+
+
+// export function irs_monitor_aggregations(config: TConfig): TCustomEdgeResponse {
+//   if (!config.aggregations) {
+//     return {
+//       messages: ['Missing aggregations'],
+//       status: ECustomEdgeStatus.Red
+//     }
+//   }
+//
+//   if (!config.applets.irs_monitor) {
+//     return {
+//       messages: [],
+//       status: ECustomEdgeStatus.Blue
+//     }
+//   }
+//
+//   if (!config.aggregations.length) {
+//     return {
+//       messages: [],
+//       status: ECustomEdgeStatus.Blue
+//     }
+//   }
+//
+//   const aggregationNames = config.aggregations.map(a => a.name)
+//
+//   for (const aggregation of config.applets.irs_monitor.map.aggregation_names) {
+//     if (!aggregationNames.includes(aggregation)){
+//       return {
+//         messages: [`The aggregation '${aggregation}' in map configuration is not in the aggregations`],
+//         status: ECustomEdgeStatus.Yellow
+//       }
+//     }
+//   }
+//
+//   for (const aggregation of config.applets.irs_monitor.table.aggregation_names) {
+//     if (!aggregationNames.includes(aggregation)) {
+//       return {
+//         messages: [`The aggregation '${aggregation}' in table configuration is not in the aggregations`],
+//         status: ECustomEdgeStatus.Yellow
+//       }
+//     }
+//   }
+//
+//   // check they all exist in config.aggregations
+//
+//   const charts = config.applets.irs_monitor.charts.filter((chartConfig: TChartConfig) => {
+//     if (chartConfig.chart_type === 'text') {
+//       return false
+//     }
+//
+//     if (chartConfig.options.generate_series_from) {
+//       return false
+//     }
+//
+//     return true
+//   });
+//
+//   for (const chart of charts) {
+//     if (chart.options.multi_series) {
+//       for (const series of chart.options.multi_series) {
+//         if (!aggregationNames.includes(series.aggregation_name)) {
+//           return {
+//             messages: [`The aggregation '${series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations`],
+//             status: ECustomEdgeStatus.Yellow
+//           }
+//         }
+//       }
+//     }
+//
+//     if (chart.options.single_series) {
+//       if (!aggregationNames.includes(chart.options.single_series.aggregation_name)) {
+//         return {
+//           messages: [`The aggregation '${chart.options.single_series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations`],
+//           status: ECustomEdgeStatus.Yellow
+//         }
+//       }
+//     }
+//   }
+//
+//   return {
+//     messages: [],
+//     status: ECustomEdgeStatus.Green
+//   }
+// }
+
+function extract_aggregations_from_irs_monitor(irs_monitor_config: object): string[] {
+  return get(irs_monitor_config, 'map.aggregation_names');
 }
