@@ -9,7 +9,7 @@ async function run(input_filename) {
   const result = create_list(res);
 
   const basename = path.basename(input_filename);
-  const output_filename = path.join('output', `${basename}.json`);
+  const output_filename = path.join('output', `edge_graph.json`);
   fs.writeFileSync(output_filename, JSON.stringify(result));
 }
 
