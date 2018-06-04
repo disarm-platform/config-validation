@@ -17,7 +17,6 @@ export function validate(config: TConfig): TUnifiedResponse {
   // STEP 1: Schema validation
   // Ensure that config meets basic schema validation requirements
   //
-  console.log(config_schema)
   const schema_response = validate_schema(config, config_schema);
   // Return early if failing schema validation
   if (schema_response.status === ESchemaStatus.Red) {
