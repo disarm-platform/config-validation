@@ -1,4 +1,4 @@
-import ConfigSchema from '../config_schema';
+import ConfigSchema from '../config_schema.json';
 import { TConfig } from '../definitions/TConfig';
 import { determine_unified_response } from './determine_unified_response';
 import PathMap from './helpers/path_map';
