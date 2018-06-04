@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { TDecorators } from '../../config_types/TDecorators';
+import { TDecorators } from '../config_types/TDecorators';
 import { all_fields, decorator_fields } from './fields_helper';
 
 test('get_decorator_field_names returns empty array if no decorators', t => {

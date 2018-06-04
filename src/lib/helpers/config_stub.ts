@@ -1,3 +1,5 @@
+// Helper object for creating a valid stub of a config element, without needing to remember required properties each time
+
 import { TConfig } from '../config_types/TConfig';
 
 const config_stub: TConfig ={

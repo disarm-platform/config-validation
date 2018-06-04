@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { TConfig } from '../../config_types/TConfig';
+import { TConfig } from '../config_types/TConfig';
 import { config_stub } from '../helpers/config_stub';
 import { EEdgeStatus, TEdgeResponse } from '../TEdgeResponse';
 import { irs_plan_spatial_hierarchy_validations } from './irs_plan_spatial_hierarchy';
