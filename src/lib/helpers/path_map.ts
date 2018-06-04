@@ -1,7 +1,9 @@
 // TODO: Group applets? Put them out of alpha order
-// TODO: Pathmap Interface?
+export interface THash {
+  [k: string] : string;
+}
 
-export default {
+const path_map: THash = {
   aggregations: 'aggregations',
   decorators: 'decorators',
   instance: 'instance',
@@ -13,5 +15,7 @@ export default {
   map_focus: 'map_focus',
   meta: 'applets.meta',
   spatial_hierarchy: 'spatial_hierarchy',
-  validations: 'validations',
+  validations: 'validations'
 }
+
+export default path_map
