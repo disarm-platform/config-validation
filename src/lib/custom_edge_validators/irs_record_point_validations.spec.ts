@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../TEdgeResponse';
+import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { irs_record_point_validations } from './irs_record_point_validations';
 
 test('returns Blue status if no irs_record_point', t => {
@@ -10,7 +10,7 @@ test('returns Blue status if no irs_record_point', t => {
   // @ts-ignore
   const result = irs_record_point_validations(config) 
 
-  t.is(result.status, EEdgeStatus.Blue)
+  t.is(result.status, ECustomEdgeStatus.Blue)
   t.is(result.messages.length, 0)
 })
 
@@ -24,7 +24,7 @@ test('returns Blue status if no validations', t => {
   // @ts-ignore
   const result = irs_record_point_validations(config)
 
-  t.is(result.status, EEdgeStatus.Blue)
+  t.is(result.status, ECustomEdgeStatus.Blue)
   t.is(result.messages.length, 0)
 })
 
@@ -44,7 +44,7 @@ test('returns Green if validations', t => {
   // @ts-ignore
   const result = irs_record_point_validations(config)
 
-  t.is(result.status, EEdgeStatus.Green)
+  t.is(result.status, ECustomEdgeStatus.Green)
   t.is(result.messages.length, 0)
-  
+
 })

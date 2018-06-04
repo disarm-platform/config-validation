@@ -1,25 +1,25 @@
 import { TConfig } from "../config_types/TConfig";
-import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
+import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
 import { get_form_fields_for_validations } from "../helpers/expression_helpers";
 import { form_fields } from "../helpers";
 
-// checks that irs_record_point has the validations that it needs. 
+// checks that irs_record_point has the validations that it needs.
 // The function is named accordingly.
-export function validations_fields_helper(config: TConfig): TEdgeResponse {
+export function validations_fields_helper(config: TConfig): TCustomEdgeResponse {
   if (!config.validations) return {
     messages: ['Missing validations - could be Blue too'],
-    status: EEdgeStatus.Red
+    status: ECustomEdgeStatus.Red
   }
 
   if (!config.form) return {
     messages: ['Missing Form - could be Blue too'],
-    status: EEdgeStatus.Red
+    status: ECustomEdgeStatus.Red
   }
 
   if (!config.validations.length) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: ECustomEdgeStatus.Blue
     }
   }
 
@@ -30,13 +30,13 @@ export function validations_fields_helper(config: TConfig): TEdgeResponse {
     if (!formFields.includes(field)) {
       return {
         messages: [`'${field}' not in form fields` ],
-        status: EEdgeStatus.Yellow
+        status: ECustomEdgeStatus.Yellow
       }
     }
   }
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: ECustomEdgeStatus.Green
   }
 }

@@ -1,19 +1,19 @@
 import { TConfig } from '../config_types/TConfig';
-import { EEdgeStatus, TEdgeResponse } from '../TEdgeResponse';
+import { ECustomEdgeStatus, TCustomEdgeResponse } from '../TCustomEdgeResponse';
 import { all_fields, expression_variables } from './index';
 
-export function aggregations_field_helper(config: TConfig): TEdgeResponse {
+export function aggregations_field_helper(config: TConfig): TCustomEdgeResponse {
   if (!config.aggregations) {
     return {
       messages: ['Could be BLue'],
-      status: EEdgeStatus.Red
+      status: ECustomEdgeStatus.Red
     };
   }
 
   if (!config.aggregations.length) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: ECustomEdgeStatus.Blue
     };
   }
 
@@ -26,7 +26,7 @@ export function aggregations_field_helper(config: TConfig): TEdgeResponse {
       if (!allFields.includes(variable)) {
         return {
           messages: [`The field '${variable}' does not exist in the form or the decorators`],
-          status: EEdgeStatus.Yellow
+          status: ECustomEdgeStatus.Yellow
         };
       }
     }
@@ -34,6 +34,6 @@ export function aggregations_field_helper(config: TConfig): TEdgeResponse {
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: ECustomEdgeStatus.Green
   };
 }

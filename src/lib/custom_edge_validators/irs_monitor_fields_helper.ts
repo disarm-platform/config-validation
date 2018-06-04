@@ -1,27 +1,27 @@
 import { TConfig } from "../config_types/TConfig";
 import { decorator_fields, form_fields } from "../helpers";
-import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
+import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
 
 
-export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
+export function irs_monitor_fields_helper(config: TConfig) : TCustomEdgeResponse {
   if (!config.decorators) {
     return {
       messages: ['Could be BLue'],
-      status: EEdgeStatus.Red
+      status: ECustomEdgeStatus.Red
     }
   }
 
   if (!config.form) {
     return {
       messages: ['Could be BLue'],
-      status: EEdgeStatus.Red
+      status: ECustomEdgeStatus.Red
     }
   }
 
   if (!config.applets.irs_monitor) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: ECustomEdgeStatus.Blue
     }
   }
 
@@ -34,14 +34,14 @@ export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
     .map(field => {
       return field.replace('_decorated.', '')
     })
-  
+
   const decoratorsFromConfig = decorator_fields(config.decorators)
 
   for (const decorator of decorators) {
     if (!decoratorsFromConfig.includes(decorator)) {
       return {
         messages: [`The field '_decorated.${decorator}' in map configuration is not in the decorators` ],
-        status: EEdgeStatus.Yellow
+        status: ECustomEdgeStatus.Yellow
       }
     }
   }
@@ -60,7 +60,7 @@ export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
     if (!formFieldsFromConfig.includes(formField)) {
       return {
         messages: [`The field 'form_data.${formField}' in map configuration is not in the form` ],
-        status: EEdgeStatus.Yellow
+        status: ECustomEdgeStatus.Yellow
       }
     }
   }
@@ -95,12 +95,12 @@ export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
     if (!formFieldsFromConfig.includes(formField)) {
       return {
         messages: [`The field 'form_data.${formField}' in chart configuration with is not in the form` ],
-        status: EEdgeStatus.Yellow
+        status: ECustomEdgeStatus.Yellow
       }
     }
   }
-  
-  
+
+
   const generateSeriesFromFieldsDecorated = generateSeriesFromFields
     .filter(field => {
       return field.startsWith('_decorated.')
@@ -113,13 +113,13 @@ export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {
     if (!decoratorsFromConfig.includes(decorator)) {
       return {
         messages: [`The field '_decorated.${decorator}' in map configuration is not in the decorators` ],
-        status: EEdgeStatus.Yellow
+        status: ECustomEdgeStatus.Yellow
       }
     }
   }
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: ECustomEdgeStatus.Green
   }
 }

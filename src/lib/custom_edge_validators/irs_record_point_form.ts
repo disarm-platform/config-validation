@@ -1,26 +1,26 @@
 import { TConfig } from "../config_types/TConfig";
-import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
+import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
 
 
-export function irs_record_point_form(config: TConfig): TEdgeResponse {
+export function irs_record_point_form(config: TConfig): TCustomEdgeResponse {
   if (!config.applets.irs_record_point) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: ECustomEdgeStatus.Blue
     }
   }
 
   if (!config.form) {
     return {
       messages: ['Form missing, is required for irs_record_point.'],
-      status: EEdgeStatus.Yellow
+      status: ECustomEdgeStatus.Yellow
     }
   }
 
   if (config.form.pages.length === 0) {
     return {
       messages: ['Form has no pages, is required for irs_record_point.'],
-      status: EEdgeStatus.Yellow
+      status: ECustomEdgeStatus.Yellow
     }
   }
 
@@ -28,6 +28,6 @@ export function irs_record_point_form(config: TConfig): TEdgeResponse {
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: ECustomEdgeStatus.Green
   }
 }

@@ -2,10 +2,11 @@ import { get, has } from 'lodash';
 import { TConfig } from './config_types/TConfig';
 import custom_validations from './custom_edge_validators';
 import { THash } from './helpers/path_map';
+import { ECustomEdgeStatus, TCustomEdgeResponse } from './TCustomEdgeResponse';
 import { TEdgeDefinition } from './TEdgeDefinition';
-import { EEdgeStatus, TEdgeResponse } from './TEdgeResponse';
+import { TStandardEdgeResponse } from './TStandardEdgeResponse';
 
-export function validate_edges(config: TConfig, path_map: THash, edge_definitions: TEdgeDefinition[]): TEdgeResponse[] {
+export function validate_edges(config: TConfig, path_map: THash, edge_definitions: TEdgeDefinition[]): TStandardEdgeResponse[] {
   // For every edge_definition
   const nodes = flat_nodes(config, path_map);
   return edge_definitions.map(edge_definition => {
@@ -13,9 +14,9 @@ export function validate_edges(config: TConfig, path_map: THash, edge_definition
   });
 }
 
-function validate_edge(nodes: THash, edge_definition: TEdgeDefinition): TEdgeResponse {
+function validate_edge(nodes: THash, edge_definition: TEdgeDefinition): TStandardEdgeResponse {
   const messages = [];
-  let status = EEdgeStatus.Red;
+  let status = ECustomEdgeStatus.Red;
 
   // Basic checks for existence
   const source_node = get(nodes, edge_definition.source_node_name);
@@ -32,17 +33,17 @@ function validate_edge(nodes: THash, edge_definition: TEdgeDefinition): TEdgeRes
 
   // Find and run custom validation
   if (has(custom_validations, edge_name)) {
-    const edge_fn: (config: TConfig) => TEdgeResponse = get(custom_validations, edge_name);
+    const edge_fn: (config: TConfig) => TCustomEdgeResponse = get(custom_validations, edge_name);
     const thing = edge_fn.call(null, nodes);
   } else {
     messages.push(`Cannot find custom validation function ${edge_name}`)
-    status = EEdgeStatus.Red
+    status = ECustomEdgeStatus.Red
   }
 
   // Send something back!
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: ECustomEdgeStatus.Green
   };
 }
 

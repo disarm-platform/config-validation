@@ -1,27 +1,27 @@
 import { TConfig } from '../config_types/TConfig';
-import { EEdgeStatus, TEdgeResponse } from '../TEdgeResponse';
+import { ECustomEdgeStatus, TCustomEdgeResponse } from '../TCustomEdgeResponse';
 import { expression_variables, form_fields } from '../helpers';
 
 
-export function decorators_fields_helper(config: TConfig): TEdgeResponse {
+export function decorators_fields_helper(config: TConfig): TCustomEdgeResponse {
   if (!config.decorators) {
     return {
       messages: ['Could be BLue'],
-      status: EEdgeStatus.Red
+      status: ECustomEdgeStatus.Red
     };
   }
 
   if (!config.form) {
     return {
       messages: ['Could be BLue'],
-      status: EEdgeStatus.Red
+      status: ECustomEdgeStatus.Red
     };
   }
 
   if (!Object.keys(config.decorators).length) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: ECustomEdgeStatus.Blue
     };
   }
 
@@ -41,7 +41,7 @@ export function decorators_fields_helper(config: TConfig): TEdgeResponse {
         if (!formFields.includes(variable)) {
           return {
             messages: [`Field '${variable}' in decorator '${decoratorName}' does not exist on form`],
-            status: EEdgeStatus.Yellow
+            status: ECustomEdgeStatus.Yellow
           };
         }
       }
@@ -52,6 +52,6 @@ export function decorators_fields_helper(config: TConfig): TEdgeResponse {
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: ECustomEdgeStatus.Green
   };
 }

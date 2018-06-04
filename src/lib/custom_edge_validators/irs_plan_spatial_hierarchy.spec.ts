@@ -2,7 +2,7 @@
 import { test } from 'ava';
 import { TConfig } from '../config_types/TConfig';
 import { config_stub } from '../helpers/config_stub';
-import { EEdgeStatus, TEdgeResponse } from '../TEdgeResponse';
+import { ECustomEdgeStatus, TCustomEdgeResponse } from '../TCustomEdgeResponse';
 import { irs_plan_spatial_hierarchy } from './irs_plan_spatial_hierarchy';
 
 
@@ -17,8 +17,8 @@ test('planning_level  available', t => {
     }
   };
 
-  const result: TEdgeResponse = irs_plan_spatial_hierarchy(config);
-  t.is(result.status, EEdgeStatus.Green);
+  const result: TCustomEdgeResponse = irs_plan_spatial_hierarchy(config);
+  t.is(result.status, ECustomEdgeStatus.Green);
 });
 
 test('Unavailble irs plan applet should return blue status for unavailble optional node', t => {
@@ -32,8 +32,8 @@ test('Unavailble irs plan applet should return blue status for unavailble option
     }
   };
 
-  const result: TEdgeResponse = irs_plan_spatial_hierarchy(config);
-  t.is(result.status, EEdgeStatus.Blue);
+  const result: TCustomEdgeResponse = irs_plan_spatial_hierarchy(config);
+  t.is(result.status, ECustomEdgeStatus.Blue);
 });
 
 test('planing level available, map focus not availble', t => {
@@ -47,6 +47,6 @@ test('planing level available, map focus not availble', t => {
     }
   };
 
-  const result: TEdgeResponse = irs_plan_spatial_hierarchy(config);
-  t.is(result.status, EEdgeStatus.Yellow);
+  const result: TCustomEdgeResponse = irs_plan_spatial_hierarchy(config);
+  t.is(result.status, ECustomEdgeStatus.Yellow);
 });

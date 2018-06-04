@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../TEdgeResponse';
+import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { decorators_fields_helper } from '../helpers/decorators_fields_helper';
 
 test('returns Yellow if fields in decorator is not in form', t => {
@@ -53,7 +53,7 @@ test('returns Yellow if fields in decorator is not in form', t => {
   // @ts-ignore
   const result = decorators_fields_helper(config)
 
-  t.is(result.status, EEdgeStatus.Yellow)
+  t.is(result.status, ECustomEdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
@@ -107,6 +107,6 @@ test('returns Green if fields in decorator is in form', t => {
   // @ts-ignore
   const result = decorators_fields_helper(config)
 
-  t.is(result.status, EEdgeStatus.Green)
+  t.is(result.status, ECustomEdgeStatus.Green)
   t.is(result.messages.length, 0)
 })

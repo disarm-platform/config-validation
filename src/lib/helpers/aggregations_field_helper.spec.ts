@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../TEdgeResponse';
+import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { aggregations_field_helper } from './aggregations_field_helper';
 
 test('returns Blue status if no aggregations', t => {
@@ -10,7 +10,7 @@ test('returns Blue status if no aggregations', t => {
   // @ts-ignore
   const result = aggregations_field_helper(config)
 
-  t.is(result.status, EEdgeStatus.Blue)
+  t.is(result.status, ECustomEdgeStatus.Blue)
   t.is(result.messages.length, 0)
 })
 
@@ -59,7 +59,7 @@ test('returns Yellow status if aggregation field not present in form', t => {
   // @ts-ignore
   const result = aggregations_field_helper(config)
 
-  t.is(result.status, EEdgeStatus.Yellow)
+  t.is(result.status, ECustomEdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
@@ -100,7 +100,7 @@ test('returns Yellow status if aggregation field not present in decorators', t =
   // @ts-ignore
   const result = aggregations_field_helper(config)
 
-  t.is(result.status, EEdgeStatus.Yellow)
+  t.is(result.status, ECustomEdgeStatus.Yellow)
   t.is(result.messages.length, 1)
 })
 
@@ -150,6 +150,6 @@ test('returns Green status if aggregation fields exist', t => {
   // @ts-ignore
   const result = aggregations_field_helper(config)
 
-  t.is(result.status, EEdgeStatus.Green)
+  t.is(result.status, ECustomEdgeStatus.Green)
   t.is(result.messages.length, 0)
 })

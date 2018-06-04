@@ -1,24 +1,24 @@
 import { TConfig } from "../config_types/TConfig";
-import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
+import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
 
 
-export function irs_record_point_location_selection(config: TConfig) : TEdgeResponse {
+export function irs_record_point_location_selection(config: TConfig) : TCustomEdgeResponse {
   if (!config.applets.irs_record_point) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: ECustomEdgeStatus.Blue
     }
   }
 
   if (!config.location_selection || Object.keys(config.location_selection).length === 0) {
     return {
       messages: ['Location selection missing, is required for irs_record_point.'],
-      status: EEdgeStatus.Yellow
+      status: ECustomEdgeStatus.Yellow
     }
   }
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: ECustomEdgeStatus.Green
   }
 }

@@ -1,27 +1,27 @@
 import { TConfig } from "../config_types/TConfig";
 import { TChartConfig } from '../config_types/TIrsMonitor';
-import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
+import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
 
 
-export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
+export function irs_monitor_aggregations(config: TConfig): TCustomEdgeResponse {
   if (!config.aggregations) {
     return {
       messages: ['Missing aggregations'],
-      status: EEdgeStatus.Red
+      status: ECustomEdgeStatus.Red
     }
   }
 
   if (!config.applets.irs_monitor) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: ECustomEdgeStatus.Blue
     }
   }
 
   if (!config.aggregations.length) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: ECustomEdgeStatus.Blue
     }
   }
 
@@ -31,7 +31,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
     if (!aggregationNames.includes(aggregation)){
       return {
         messages: [`The aggregation '${aggregation}' in map configuration is not in the aggregations`],
-        status: EEdgeStatus.Yellow
+        status: ECustomEdgeStatus.Yellow
       }
     }
   }
@@ -40,7 +40,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
     if (!aggregationNames.includes(aggregation)) {
       return {
         messages: [`The aggregation '${aggregation}' in table configuration is not in the aggregations`],
-        status: EEdgeStatus.Yellow
+        status: ECustomEdgeStatus.Yellow
       }
     }
   }
@@ -65,7 +65,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
         if (!aggregationNames.includes(series.aggregation_name)) {
           return {
             messages: [`The aggregation '${series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations`],
-            status: EEdgeStatus.Yellow
+            status: ECustomEdgeStatus.Yellow
           }
         }
       }
@@ -75,7 +75,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
       if (!aggregationNames.includes(chart.options.single_series.aggregation_name)) {
         return {
           messages: [`The aggregation '${chart.options.single_series.aggregation_name}' in the chart configuration for ${chart.id} is not in the aggregations`],
-          status: EEdgeStatus.Yellow
+          status: ECustomEdgeStatus.Yellow
         }
       }
     }
@@ -83,6 +83,6 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: ECustomEdgeStatus.Green
   }
 }

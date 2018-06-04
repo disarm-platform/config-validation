@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../TEdgeResponse';
+import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { irs_monitor_spatial_hierarchy } from './irs_monitor_spatial_hierarchy';
 
 test('returns Blue if no irs_monitor', t => {
@@ -11,7 +11,7 @@ test('returns Blue if no irs_monitor', t => {
   // @ts-ignore
   const result = irs_monitor_spatial_hierarchy(config)
 
-  t.is(result.status, EEdgeStatus.Blue)
+  t.is(result.status, ECustomEdgeStatus.Blue)
 })
 
 test('returns Yellow if no spatial_hierarchy', t => {
@@ -24,7 +24,7 @@ test('returns Yellow if no spatial_hierarchy', t => {
   // @ts-ignore
   const result = irs_monitor_spatial_hierarchy(config)
 
-  t.is(result.status, EEdgeStatus.Yellow)
+  t.is(result.status, ECustomEdgeStatus.Yellow)
 })
 
 test('returns Green if valid', t => {
@@ -38,5 +38,5 @@ test('returns Green if valid', t => {
   // @ts-ignore
   const result = irs_monitor_spatial_hierarchy(config)
 
-  t.is(result.status, EEdgeStatus.Green)
+  t.is(result.status, ECustomEdgeStatus.Green)
 })

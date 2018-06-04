@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import {test} from 'ava';
 import {TConfig} from '../config_types/TConfig'
-import {EEdgeStatus , TEdgeResponse} from "../TEdgeResponse";
+import {ECustomEdgeStatus , TCustomEdgeResponse} from "../TCustomEdgeResponse";
 import {irs_tasker_map_focus} from "./irs_tasker_map_focus";
 
 
@@ -13,8 +13,8 @@ test('map focus not available', t => {
     }
   }
 
-  const result: TEdgeResponse =  irs_tasker_map_focus(config);
-  t.is(result.status,EEdgeStatus.Blue)
+  const result: TCustomEdgeResponse =  irs_tasker_map_focus(config);
+  t.is(result.status,ECustomEdgeStatus.Blue)
 })
 
 test('map focus availble' , t =>{
@@ -28,6 +28,6 @@ test('map focus availble' , t =>{
     },
   }
 
-  const result: TEdgeResponse =  irs_tasker_map_focus(config);
-  t.is(result.status,EEdgeStatus.Green)
+  const result: TCustomEdgeResponse =  irs_tasker_map_focus(config);
+  t.is(result.status,ECustomEdgeStatus.Green)
 })

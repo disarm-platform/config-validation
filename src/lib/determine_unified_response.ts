@@ -1,14 +1,14 @@
 import { flatten } from 'lodash';
-import { EEdgeStatus, TEdgeResponse } from './TEdgeResponse';
+import { ECustomEdgeStatus, TCustomEdgeResponse } from './TCustomEdgeResponse';
 import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse';
 
-export function determine_unified_response(/*schema_response: TSchemaResponse,*/ edge_responses: TEdgeResponse[]): TUnifiedResponse {
+export function determine_unified_response(/*schema_response: TSchemaResponse,*/ edge_responses: TCustomEdgeResponse[]): TUnifiedResponse {
   const statuses = edge_responses.map(e => e.status);
   const messages = flatten(edge_responses.map(e => e.messages));
 
-  const any_red = statuses.includes(EEdgeStatus.Red);
-  const blue_and_green = statuses.every(s => [EEdgeStatus.Green, EEdgeStatus.Blue].includes(s));
-  const all_green = statuses.every(s => s === EEdgeStatus.Green);
+  const any_red = statuses.includes(ECustomEdgeStatus.Red);
+  const blue_and_green = statuses.every(s => [ECustomEdgeStatus.Green, ECustomEdgeStatus.Blue].includes(s));
+  const all_green = statuses.every(s => s === ECustomEdgeStatus.Green);
 
   // if any Red edges, then Red unified
   if (any_red) {

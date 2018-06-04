@@ -1,24 +1,24 @@
 import { TConfig } from "../config_types/TConfig";
-import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
+import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
 
 
-export function irs_monitor_map_focus(config: TConfig): TEdgeResponse {
+export function irs_monitor_map_focus(config: TConfig): TCustomEdgeResponse {
   if (!config.applets.irs_monitor) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: ECustomEdgeStatus.Blue
     }
   }
 
   if (!config.map_focus) {
     return {
       messages: [],
-      status: EEdgeStatus.Blue
+      status: ECustomEdgeStatus.Blue
     }
   }
 
   return {
     messages: [],
-    status: EEdgeStatus.Green
+    status: ECustomEdgeStatus.Green
   }
 }

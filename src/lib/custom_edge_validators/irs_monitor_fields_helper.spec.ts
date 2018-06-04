@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../TEdgeResponse';
+import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { irs_monitor_fields_helper } from './irs_monitor_fields_helper';
 
 test.skip('returns Blue status if no irs_monitor', t => {
@@ -19,7 +19,7 @@ test.skip('returns Blue status if no irs_monitor', t => {
   // @ts-ignore
   const result = irs_monitor_fields_helper(config);
 
-  t.is(result.status, EEdgeStatus.Blue);
+  t.is(result.status, ECustomEdgeStatus.Blue);
   t.is(result.messages.length, 0);
 });
 
@@ -52,7 +52,7 @@ test('returns Yellow status if response_point_fields from form are missing', t =
   // @ts-ignore
   const result = irs_monitor_fields_helper(config);
 
-  t.is(result.status, EEdgeStatus.Yellow);
+  t.is(result.status, ECustomEdgeStatus.Yellow);
   t.is(result.messages.length, 1);
 });
 
@@ -85,7 +85,7 @@ test('returns Yellow status if response_point_fields from decorators are missing
   // @ts-ignore
   const result = irs_monitor_fields_helper(config);
 
-  t.is(result.status, EEdgeStatus.Yellow);
+  t.is(result.status, ECustomEdgeStatus.Yellow);
   t.is(result.messages.length, 1);
 });
 
@@ -132,7 +132,7 @@ test('returns Yellow status if generate_series_from from decorators are missing'
   // @ts-ignore
   const result = irs_monitor_fields_helper(config);
 
-  t.is(result.status, EEdgeStatus.Yellow);
+  t.is(result.status, ECustomEdgeStatus.Yellow);
   t.is(result.messages.length, 1);
 });
 
@@ -179,6 +179,6 @@ test('returns Yellow status if generate_series_from from form are missing', t =>
   // @ts-ignore
   const result = irs_monitor_fields_helper(config);
 
-  t.is(result.status, EEdgeStatus.Yellow);
+  t.is(result.status, ECustomEdgeStatus.Yellow);
   t.is(result.messages.length, 1);
 });

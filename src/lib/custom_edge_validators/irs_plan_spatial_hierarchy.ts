@@ -1,38 +1,38 @@
 import { TConfig } from "../config_types/TConfig";
-import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
+import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
 
 
 
-export function irs_plan_spatial_hierarchy (config: TConfig) : TEdgeResponse {
-// if the piece is not required and does not exist then return EEdgeStatus.Blue
+export function irs_plan_spatial_hierarchy (config: TConfig) : TCustomEdgeResponse {
+// if the piece is not required and does not exist then return ECustomEdgeStatus.Blue
   if (!config.spatial_hierarchy) {
     return {
       messages: ['Could be BLue'],
-      status: EEdgeStatus.Red
+      status: ECustomEdgeStatus.Red
     }
   }
 
-// check the validations exist, if they are not valid, then return EEdgeStatus.Yellow
+// check the validations exist, if they are not valid, then return ECustomEdgeStatus.Yellow
 
-// if everything is ok then return EEdgeStatus.Green
+// if everything is ok then return ECustomEdgeStatus.Green
 
   if(!config.applets.irs_plan){
     return {
       messages: ['Irs plan Applet was found'],
-      status: EEdgeStatus.Blue
+      status: ECustomEdgeStatus.Blue
     }
   }
 
   if(config.spatial_hierarchy.markers.planning_level_name){
     return {
       messages: ['planning level name required by irs plan is available'],
-      status: EEdgeStatus.Green
+      status: ECustomEdgeStatus.Green
     }
   }
 
   return {
     messages: ['config.spatial_hierarchy.markers.planning_level_name required by irs plan was not found'],
-    status: EEdgeStatus.Yellow
+    status: ECustomEdgeStatus.Yellow
   }
 
 }
