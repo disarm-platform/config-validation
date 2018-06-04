@@ -3,31 +3,6 @@ import { test } from 'ava';
 import { EEdgeStatus } from '../TEdgeResponse';
 import { irs_monitor_aggregations } from './irs_monitor_aggregations';
 
-test('returns Blue status if no irs_monitor', t => {
-  const config = {
-    applets: {}
-  }
-  // @ts-ignore
-  const result = irs_monitor_aggregations(config)
-
-  t.is(result.status, EEdgeStatus.Blue)
-  t.is(result.messages.length, 0)
-})
-
-test('returns Blue status if no aggregations', t => {
-  const config = {
-    aggregations: [],
-    applets: {
-      irs_monitor: {}
-    }
-  }
-  // @ts-ignore
-  const result = irs_monitor_aggregations(config)
-
-  t.is(result.status, EEdgeStatus.Blue)
-  t.is(result.messages.length, 0)
-})
-
 test('returns Yellow status if aggregation in map is not in aggregations', t => {
   const config = {
     aggregations: [{

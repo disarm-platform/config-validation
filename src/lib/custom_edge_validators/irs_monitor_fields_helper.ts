@@ -1,7 +1,6 @@
 import { TConfig } from "../../definitions/TConfig";
+import { decorator_fields, form_fields } from "../helpers";
 import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
-import { decorator_fields } from "../helpers";
-import { form_fields } from "../helpers";
 
 
 export function irs_monitor_fields_helper(config: TConfig) : TEdgeResponse {

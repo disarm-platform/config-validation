@@ -3,17 +3,6 @@ import { test } from 'ava';
 import { EEdgeStatus } from '../TEdgeResponse';
 import { decorators_form } from './decorators_form';
 
-test('returns Blue status if no decorators', t => {
-  const config = {
-    decorators: {}
-  }
-  // @ts-ignore
-  const result = decorators_form(config)
-
-  t.is(result.status, EEdgeStatus.Blue)
-  t.is(result.messages.length, 0)
-})
-
 test('returns Yellow if fields in decorator is not in form', t => {
   const config = {
     "decorators": {
