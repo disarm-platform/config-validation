@@ -24,7 +24,7 @@ test('planning_level  available', t => {
 test('Unavailble irs plan applet should return blue status for unavailble optional node', t => {
   // @ts-ignore
   const config: TConfig = {
-    'applets': {},
+    ...config_stub,
     'spatial_hierarchy': {
       'markers': {
         'planning_level_name': 'village'
