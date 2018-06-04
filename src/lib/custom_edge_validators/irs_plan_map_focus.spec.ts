@@ -2,7 +2,7 @@
 import {test} from 'ava';
 import {TConfig} from '../config_types/TConfig'
 import {EEdgeStatus , TEdgeResponse} from "../TEdgeResponse";
-import {irs_plan_map_focus_validations} from "./irs_plan_map_focus";
+import {irs_plan_map_focus} from "./irs_plan_map_focus";
 
 
 test('map focus not available', t => {
@@ -13,7 +13,7 @@ test('map focus not available', t => {
     }
   }
 
-  const result: TEdgeResponse =  irs_plan_map_focus_validations(config);
+  const result: TEdgeResponse =  irs_plan_map_focus(config);
   t.is(result.status,EEdgeStatus.Blue)
 })
 
@@ -24,7 +24,7 @@ test('Unavailble irs_plan applet should return Blue Status for missing optional 
     }
   }
 
-  const result: TEdgeResponse =  irs_plan_map_focus_validations(config);
+  const result: TEdgeResponse =  irs_plan_map_focus(config);
   t.is(result.status,EEdgeStatus.Blue)
 })
 
@@ -39,6 +39,6 @@ test('map focus availble' , t =>{
     },
   }
 
-  const result: TEdgeResponse =  irs_plan_map_focus_validations(config);
+  const result: TEdgeResponse =  irs_plan_map_focus(config);
   t.is(result.status,EEdgeStatus.Green)
 })

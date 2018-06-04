@@ -3,7 +3,7 @@ import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
 
 
 
-export function irs_plan_map_focus_validations (config: TConfig) : TEdgeResponse {
+export function irs_plan_map_focus (config: TConfig) : TEdgeResponse {
 // if the piece is not required and does not exist then return EEdgeStatus.Blue
 
 // check the validations exist, if they are not valid, then return EEdgeStatus.Yellow

@@ -1,6 +1,6 @@
 import { TConfig } from '../config_types/TConfig';
 import { EEdgeStatus, TEdgeResponse } from '../TEdgeResponse';
-import { all_fields, expression_variables } from '../helpers';
+import { all_fields, expression_variables } from './index';
 
 export function aggregations_field_helper(config: TConfig): TEdgeResponse {
   if (!config.aggregations) {

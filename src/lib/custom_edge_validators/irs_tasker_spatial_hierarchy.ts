@@ -3,7 +3,7 @@ import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
 
 
 
-export function irs_tasker_spatial_hierarchy_validations (config: TConfig) : TEdgeResponse {
+export function irs_tasker_spatial_hierarchy (config: TConfig) : TEdgeResponse {
 // if the piece is not required and does not exist then return EEdgeStatus.Blue
   if (!config.spatial_hierarchy) {
     return {

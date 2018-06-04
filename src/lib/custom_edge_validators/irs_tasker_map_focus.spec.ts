@@ -2,7 +2,7 @@
 import {test} from 'ava';
 import {TConfig} from '../config_types/TConfig'
 import {EEdgeStatus , TEdgeResponse} from "../TEdgeResponse";
-import {irs_tasker_map_focus_validations} from "./irs_tasker_map_focus";
+import {irs_tasker_map_focus} from "./irs_tasker_map_focus";
 
 
 test('map focus not available', t => {
@@ -13,7 +13,7 @@ test('map focus not available', t => {
     }
   }
 
-  const result: TEdgeResponse =  irs_tasker_map_focus_validations(config);
+  const result: TEdgeResponse =  irs_tasker_map_focus(config);
   t.is(result.status,EEdgeStatus.Blue)
 })
 
@@ -28,6 +28,6 @@ test('map focus availble' , t =>{
     },
   }
 
-  const result: TEdgeResponse =  irs_tasker_map_focus_validations(config);
+  const result: TEdgeResponse =  irs_tasker_map_focus(config);
   t.is(result.status,EEdgeStatus.Green)
 })

@@ -3,7 +3,7 @@ import { test } from 'ava';
 import { TConfig } from '../config_types/TConfig';
 import { config_stub } from '../helpers/config_stub';
 import { EEdgeStatus, TEdgeResponse } from '../TEdgeResponse';
-import { irs_plan_spatial_hierarchy_validations } from './irs_plan_spatial_hierarchy';
+import { irs_plan_spatial_hierarchy } from './irs_plan_spatial_hierarchy';
 
 
 test('planning_level  available', t => {
@@ -17,7 +17,7 @@ test('planning_level  available', t => {
     }
   };
 
-  const result: TEdgeResponse = irs_plan_spatial_hierarchy_validations(config);
+  const result: TEdgeResponse = irs_plan_spatial_hierarchy(config);
   t.is(result.status, EEdgeStatus.Green);
 });
 
@@ -32,7 +32,7 @@ test('Unavailble irs plan applet should return blue status for unavailble option
     }
   };
 
-  const result: TEdgeResponse = irs_plan_spatial_hierarchy_validations(config);
+  const result: TEdgeResponse = irs_plan_spatial_hierarchy(config);
   t.is(result.status, EEdgeStatus.Blue);
 });
 
@@ -47,6 +47,6 @@ test('planing level available, map focus not availble', t => {
     }
   };
 
-  const result: TEdgeResponse = irs_plan_spatial_hierarchy_validations(config);
+  const result: TEdgeResponse = irs_plan_spatial_hierarchy(config);
   t.is(result.status, EEdgeStatus.Yellow);
 });
