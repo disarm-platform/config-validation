@@ -37,8 +37,8 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
 
   // Find and run custom validation
   if (has(custom_validations, edge_name)) {
-    const edge_fn: (config: TConfig) => TCustomEdgeResponse = get(custom_validations, edge_name);
-    const custom_edge_response = edge_fn(config);
+    const edge_fn: (source_node: object, target_node: object) => TCustomEdgeResponse = get(custom_validations, edge_name);
+    const custom_edge_response = edge_fn(source_node, target_node);
     messages = messages.concat(custom_edge_response.messages);
     if (custom_edge_response.status === ECustomEdgeStatus.Red) {
       status = EStandardEdgeStatus.Red;

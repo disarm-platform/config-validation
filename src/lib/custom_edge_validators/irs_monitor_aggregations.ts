@@ -1,9 +1,10 @@
 import { get } from 'lodash';
 import { TConfig } from '../config_types/TConfig';
-import { TChartConfig } from '../config_types/TIrsMonitor';
+import { TChartConfig, TIrsMonitor } from '../config_types/TIrsMonitor';
 import { ECustomEdgeStatus, TCustomEdgeResponse } from '../TCustomEdgeResponse';
+import { TAggregations } from '../config_types/TAggregations';
 
-export function irs_monitor_aggregations(irs_monitor_config: object, aggregations_config: Array<{ name: string }>): TCustomEdgeResponse {
+export function irs_monitor_aggregations(irs_monitor_config: TIrsMonitor, aggregations_config: TAggregations): TCustomEdgeResponse {
   const messages: string[] = [];
   let status = ECustomEdgeStatus.Red;
 
