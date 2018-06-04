@@ -1,11 +1,14 @@
 import { TConfig } from "../../definitions/TConfig";
+import { TChartConfig } from '../../definitions/TIrsMonitor';
 import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
 
 
 export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
-  if (!config.aggregations) return {
-    messages: ['Missing aggregations'],
-    status: EEdgeStatus.Red
+  if (!config.aggregations) {
+    return {
+      messages: ['Missing aggregations'],
+      status: EEdgeStatus.Red
+    }
   }
 
   if (!config.applets.irs_monitor) {
@@ -44,7 +47,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
 
   // check they all exist in config.aggregations
 
-  const charts = config.applets.irs_monitor.charts.filter(chartConfig => {
+  const charts = config.applets.irs_monitor.charts.filter((chartConfig: TChartConfig) => {
     if (chartConfig.chart_type === 'text') {
       return false
     }
@@ -54,7 +57,7 @@ export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {
     }
 
     return true
-  })
+  });
 
   for (const chart of charts) {
     if (chart.options.multi_series) {
