@@ -27,6 +27,7 @@ function read_graphml(filename) {
 function create_list(res) {
   const nodes = get(res, 'graphml.graph[0].node');
   const edges = get(res, 'graphml.graph[0].edge');
+  console.log(nodes, edges);
   const parsed_nodes = nodes.map(parse_node);
   const parsed_edges = edges.map(parse_edge);
 
@@ -37,41 +38,54 @@ function parse_node(node) {
   const id = get(node, '$.id');
   const label = get(
     node,
-    "data[0]['y:ShapeNode'][0]['y:NodeLabel'][0]._",
-    'no_label'
+    'data[0][\'y:ShapeNode\'][0][\'y:NodeLabel\'][0]._',
+    'no_id'
   )
     .split('\n')[0]
     .split('*')[0];
   return { id, label };
 }
 
-function parse_edge(edge) {
+function parse_edge(edge, parsed_nodes) {
   const id = get(edge, '$.id');
-  const source_node_id = get(edge, '$.source');
-  const target_node_id = get(edge, '$.target');
-  const label = get(
+  let required = true
+  let label = get(
     edge,
-    "data[0]['y:PolyLineEdge'][0]['y:EdgeLabel'][0]._",
+    'data[0][\'y:PolyLineEdge\'][0][\'y:EdgeLabel\'][0]._',
     'no_label'
   ).split('\n')[0];
-  return { id, label, source_node_id, target_node_id };
+  if (label.match(/^\*/)) {
+    label = label.split('*')[1]
+    required = false
+  }
+  const source_node_id = get(edge, '$.source');
+  const target_node_id = get(edge, '$.target');
+
+  return { id, label, required, source_node_id, target_node_id };
 }
 
 function functions_needed(nodes, edges) {
   return edges.map(edge => {
-    const source_node_name = get(
+    const source_node_id = get(
       nodes.find(n => n.id === edge.source_node_id),
       'label',
       'not found'
     );
-    const target_node_name = get(
+    const target_node_id = get(
       nodes.find(n => n.id === edge.target_node_id),
       'label',
       'not found'
     );
-    const label = edge.label;
-    return { source_node_name, target_node_name, relationship: label };
+
+
+
+    return {
+      source_node_name: source_node_id,
+      target_node_name: target_node_id,
+      relationship_hint: edge.label,
+      required: edge.required
+    };
   });
 }
 
-run('./input/config graph v13.graphml');
+run('./input/config graph v16.graphml');

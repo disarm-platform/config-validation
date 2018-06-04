@@ -1,0 +1,152 @@
+[
+  {
+    "source_node_name": "irs_record_point",
+    "target_node_name": "fields_helper",
+    "relationship_hint": "form exists",
+    "required": true
+  },
+  {
+    "source_node_name": "irs_monitor",
+    "target_node_name": "fields_helper",
+    "relationship_hint": "fields exist (for filters)",
+    "required": true
+  },
+  {
+    "source_node_name": "validations",
+    "target_node_name": "fields_helper",
+    "relationship_hint": "fields exist",
+    "required": true
+  },
+  {
+    "source_node_name": "aggregations",
+    "target_node_name": "fields_helper",
+    "relationship_hint": "fields exist",
+    "required": true
+  },
+  {
+    "source_node_name": "irs_plan",
+    "target_node_name": "spatial_hierarchy",
+    "relationship_hint": "planning_level",
+    "required": true
+  },
+  {
+    "source_node_name": "irs_monitor",
+    "target_node_name": "spatial_hierarchy",
+    "relationship_hint": "chart/table/map configs",
+    "required": true
+  },
+  {
+    "source_node_name": "irs_monitor",
+    "target_node_name": "aggregations",
+    "relationship_hint": "aggregations exist",
+    "required": true
+  },
+  {
+    "source_node_name": "irs_tasker",
+    "target_node_name": "spatial_hierarchy",
+    "relationship_hint": "layers required",
+    "required": true
+  },
+  {
+    "source_node_name": "irs_record_point",
+    "target_node_name": "location_selection",
+    "relationship_hint": "exists",
+    "required": true
+  },
+  {
+    "source_node_name": "location_selection",
+    "target_node_name": "spatial_hierarchy",
+    "relationship_hint": "takes data from",
+    "required": true
+  },
+  {
+    "source_node_name": "irs_plan",
+    "target_node_name": "map_focus",
+    "relationship_hint": "will use if exists",
+    "required": false
+  },
+  {
+    "source_node_name": "irs_tasker",
+    "target_node_name": "map_focus",
+    "relationship_hint": "will use if exists",
+    "required": false
+  },
+  {
+    "source_node_name": "irs_monitor",
+    "target_node_name": "map_focus",
+    "relationship_hint": "will use if exists",
+    "required": false
+  },
+  {
+    "source_node_name": "aggregations",
+    "target_node_name": "spatial_hierarchy",
+    "relationship_hint": "denominator exists",
+    "required": true
+  },
+  {
+    "source_node_name": "fields_helper",
+    "target_node_name": "form",
+    "relationship_hint": "no_label",
+    "required": true
+  },
+  {
+    "source_node_name": "decorators",
+    "target_node_name": "form",
+    "relationship_hint": "fields exist",
+    "required": true
+  },
+  {
+    "source_node_name": "fields_helper",
+    "target_node_name": "decorators",
+    "relationship_hint": "if exist",
+    "required": false
+  },
+  {
+    "source_node_name": "spatial_hierarchy",
+    "target_node_name": "geodata_levels",
+    "relationship_hint": "fields exist",
+    "required": true
+  },
+  {
+    "source_node_name": "irs_record_point",
+    "target_node_name": "validations",
+    "relationship_hint": "will use if exists",
+    "required": false
+  },
+  {
+    "source_node_name": "admin",
+    "target_node_name": "instance",
+    "relationship_hint": "no_label",
+    "required": true
+  },
+  {
+    "source_node_name": "applets",
+    "target_node_name": "irs_monitor",
+    "relationship_hint": "optional",
+    "required": false
+  },
+  {
+    "source_node_name": "applets",
+    "target_node_name": "irs_record_point",
+    "relationship_hint": "optional",
+    "required": false
+  },
+  {
+    "source_node_name": "applets",
+    "target_node_name": "admin",
+    "relationship_hint": "no_label",
+    "required": true
+  },
+  {
+    "source_node_name": "applets",
+    "target_node_name": "irs_plan",
+    "relationship_hint": "optional",
+    "required": false
+  },
+  {
+    "source_node_name": "applets",
+    "target_node_name": "irs_tasker",
+    "relationship_hint": "optional",
+    "required": false
+  }
+]
