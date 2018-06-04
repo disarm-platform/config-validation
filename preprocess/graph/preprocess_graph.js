@@ -88,4 +88,4 @@ function functions_needed(nodes, edges) {
   });
 }
 
-run('./input/config graph v16.graphml');
+run('./input/config graph v17.graphml');

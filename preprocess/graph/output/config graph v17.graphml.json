@@ -114,7 +114,7 @@
     "required": false
   },
   {
-    "source_node_name": "admin",
+    "source_node_name": "meta",
     "target_node_name": "instance",
     "relationship_hint": "no_label",
     "required": true
@@ -133,7 +133,7 @@
   },
   {
     "source_node_name": "applets",
-    "target_node_name": "admin",
+    "target_node_name": "meta",
     "relationship_hint": "no_label",
     "required": true
   },
