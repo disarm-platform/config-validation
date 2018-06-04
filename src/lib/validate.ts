@@ -1,3 +1,4 @@
+import { JSONSchema6 } from 'json-schema';
 import ConfigSchema from '../config_schema.json';
 import { TConfig } from '../definitions/TConfig';
 import { determine_unified_response } from './determine_unified_response';
@@ -10,7 +11,7 @@ import { validate_schema } from './validate_schema';
 
 export function validate(config: TConfig): TUnifiedResponse {
   // Step 0: gather what you need
-  const config_schema = ConfigSchema;
+  const config_schema: JSONSchema6 = ConfigSchema;
   const path_map = PathMap;
 
   //
