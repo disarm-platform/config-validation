@@ -1,37 +1,20 @@
-import { TConfig } from "../config_types/TConfig";
-import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
+import {has} from 'lodash'
+import { TIrsTasker } from '../config_types/TIrsTasker';
+import { TSpatialHierarchy } from '../config_types/TSpatialHierarchy';
+import { ECustomEdgeStatus, TCustomEdgeResponse } from '../TCustomEdgeResponse';
 
 
+export function irs_tasker_spatial_hierarchy(irs_tasker_config: TIrsTasker, spatial_hierarchy_config: TSpatialHierarchy): TCustomEdgeResponse {
+  const messages = [];
+  let status = ECustomEdgeStatus.Red;
 
-export function irs_tasker_spatial_hierarchy (config: TConfig) : TCustomEdgeResponse {
-// if the piece is not required and does not exist then return ECustomEdgeStatus.Blue
-  if (!config.spatial_hierarchy) {
-    return {
-      messages: ['Could be BLue'],
-      status: ECustomEdgeStatus.Red
-    }
+  if (has(spatial_hierarchy_config, 'markers.planning_level_name')) {
+    messages.push('markers.planning_level_name required and found');
+    status = ECustomEdgeStatus.Green;
+  } else {
+    messages.push('markers.planning_level_name required and NOT found');
+    status = ECustomEdgeStatus.Red;
   }
 
-  if (!config.form) {
-    return {
-      messages: ['Could be BLue'],
-      status: ECustomEdgeStatus.Red
-    }
-  }
-
-// check the validations exist, if they are not valid, then return ECustomEdgeStatus.Yellow
-
-// if everything is ok then return ECustomEdgeStatus.Green
-  if(config.spatial_hierarchy.markers.planning_level_name){
-    return {
-      messages: ['Required Field Not Found'],
-      status: ECustomEdgeStatus.Green
-    }
-  }
-
-  return {
-    messages: ['Required Field Not Found'],
-    status: ECustomEdgeStatus.Yellow
-  }
-
+  return {messages, status}
 }
