@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../EdgeResponse';
+import { EEdgeStatus } from '../TEdgeResponse';
 import { decorators_fields_helper } from './decorators_fields_helper';
 
 test('returns Yellow if fields in decorator is not in form', t => {

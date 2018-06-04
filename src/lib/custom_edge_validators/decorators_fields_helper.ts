@@ -1,5 +1,5 @@
 import { TConfig } from '../../definitions/TConfig';
-import { EEdgeStatus, TEdgeResponse } from '../EdgeResponse';
+import { EEdgeStatus, TEdgeResponse } from '../TEdgeResponse';
 import { expression_variables, form_fields } from '../helpers';
 
 

@@ -1,5 +1,5 @@
 import { TConfig } from '../../definitions/TConfig';
-import { EEdgeStatus, TEdgeResponse } from '../EdgeResponse';
+import { EEdgeStatus, TEdgeResponse } from '../TEdgeResponse';
 import { all_fields, expression_variables } from '../helpers';
 
 export function aggregations_field_helper(config: TConfig): TEdgeResponse {
