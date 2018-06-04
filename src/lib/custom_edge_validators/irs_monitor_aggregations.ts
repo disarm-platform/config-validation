@@ -7,19 +7,19 @@ export function irs_monitor_aggregations(irs_monitor_config: object, aggregation
   const messages: string[] = [];
   let status = ECustomEdgeStatus.Red;
 
-  const possible_aggregations: string[] = extract_aggregations_from_irs_monitor(irs_monitor_config);
+  const available_aggregations: string[] = extract_aggregations_from_irs_monitor(irs_monitor_config);
   const required_aggregations: string[] = aggregations_config.map(a => a.name); // aggregations
 
-  required_aggregations.forEach(a => {
-    if (possible_aggregations.includes(a)) {
-      messages.push(`Aggregation ${a} is required and is included`)
+  required_aggregations.forEach(required_aggregation => {
+    if (available_aggregations.includes(required_aggregation)) {
+      messages.push(`Aggregation ${required_aggregation} is required and is available`)
       status = ECustomEdgeStatus.Green
     } else {
-      messages.push(`Aggregation ${a} is required but is not included`)
+      messages.push(`Aggregation ${required_aggregation} is required but is not available`)
       status = ECustomEdgeStatus.Red
     }
   })
-  
+
   return {
     messages,
     status
