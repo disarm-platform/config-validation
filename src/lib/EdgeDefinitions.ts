@@ -1,17 +1,19 @@
-// tslint:disable:object-literal-sort-keys
+// tslint:disable:object-literal-sort-keys // So you can have name, from and to in correct order.
+import { TEdgeDefinition } from './TEdgeDefinition';
 
-export interface EdgeDefition {
-  name: string;
-  from: string;
-  to: string;
-}
-
-
-export const EdgeDefitions : EdgeDefition[] = [
+/**
+ * TODO: Should be generated from the graph
+ * @type {{name: string; from: string; to: string}[]}
+ */
+export const EdgeDefinitions: TEdgeDefinition[] = [
   {
-    // do we need the function here as well? Seems nicer to have the actual function referenced, instead of doing it using strings
     name: 'irs_monitor_aggregations',
     from: 'irs_monitor',
-    to: 'aggregations',
+    to: 'aggregations'
+  },
+  {
+    name: 'a_b',
+    from: 'a',
+    to: 'b'
   }
-]
+];

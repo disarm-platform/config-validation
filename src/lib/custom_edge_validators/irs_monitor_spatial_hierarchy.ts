@@ -1,5 +1,5 @@
 import { TConfig } from "../../definitions/TConfig";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
 
 // TODO: Need to write a property version of this, 
 // is blocked by us not generating a spatial_hierarchy with extracted fields.

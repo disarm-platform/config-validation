@@ -1,6 +1,6 @@
-import { TConfig } from '../../definitions/TConfig';
+import { TConfig } from "../../definitions/TConfig";
 import { TChartConfig } from '../../definitions/TIrsMonitor';
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
 
 
 export function irs_monitor_aggregations(config: TConfig): TEdgeResponse {

@@ -1,5 +1,5 @@
 import { TConfig } from "../../definitions/TConfig";
-import { EEdgeStatus, TEdgeResponse } from "../EdgeResponse";
+import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
 
 // checks that irs_record_point has the validations that it needs. 
 // The function is named accordingly.

@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { EEdgeStatus } from '../EdgeResponse';
+import { EEdgeStatus } from '../TEdgeResponse';
 import { validations_fields_helper } from './validations_fields_helper';
 
 
