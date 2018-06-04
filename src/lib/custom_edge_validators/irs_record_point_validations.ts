@@ -1,4 +1,4 @@
-import { TConfig } from "../../definitions/TConfig";
+import { TConfig } from "../../config_types/TConfig";
 import { EEdgeStatus, TEdgeResponse } from "../TEdgeResponse";
 
 // checks that irs_record_point has the validations that it needs. 

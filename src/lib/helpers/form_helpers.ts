@@ -1,4 +1,4 @@
-import { TForm } from "../../definitions/TForm";
+import { TForm } from "../../config_types/TForm";
 
 // Copied from douma
 

@@ -1,5 +1,5 @@
 import {Parser} from 'expr-eval'
-import { TValidation } from '../../definitions/TValidations';
+import { TValidation } from '../../config_types/TValidations';
 
 export function expression_variables(expressionString: string) : string[] {
   if (!expressionString.length) {
