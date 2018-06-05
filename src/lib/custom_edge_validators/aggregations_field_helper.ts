@@ -1,7 +1,7 @@
 import {flatten} from 'lodash'
 import { TAggregations } from '../config_types/TAggregations';
 import { TConfig } from '../config_types/TConfig';
-import { THelpers } from '../helpers/create_helpers';
+import { THelpers } from '../helpers/create_helper_objects';
 import {expression_variables} from '../helpers/expression_helpers'
 import { ECustomEdgeStatus, TCustomEdgeResponse, TCustomEdgeResponses } from '../TCustomEdgeResponse';
 

@@ -2,7 +2,7 @@ import { TConfig } from "../config_types/TConfig";
 import { decorator_fields, form_fields } from "../helpers";
 import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse";
 import { TIrsMonitor } from "../config_types/TIrsMonitor";
-import { THelpers } from "../helpers/create_helpers";
+import { THelpers } from "../helpers/create_helper_objects";
 
 // Where are fields used
 export function irs_monitor_fields_helper(irs_monitor_config: TIrsMonitor, target: object, helpers: THelpers) : TCustomEdgeResponses {

@@ -2,7 +2,7 @@ import { get } from 'lodash';
 import { TAggregations } from '../config_types/TAggregations';
 import { TConfig } from '../config_types/TConfig';
 import { TChartConfig, TIrsMonitor } from '../config_types/TIrsMonitor';
-import { THelpers } from '../helpers/create_helpers';
+import { THelpers } from '../helpers/create_helper_objects';
 import { ECustomEdgeStatus, TCustomEdgeResponses } from '../TCustomEdgeResponse';
 
 export function irs_monitor_aggregations(irs_monitor_config: TIrsMonitor, aggregations_config: TAggregations): TCustomEdgeResponses {

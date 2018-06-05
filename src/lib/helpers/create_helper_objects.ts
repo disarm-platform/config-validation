@@ -9,7 +9,7 @@ export interface THelpers {
   [k: string]: string []
 }
 
-export function create_helpers(config: TConfig): THelpers{
+export function create_helper_objects(config: TConfig): THelpers{
 
   return {
     all_fields: the_all_fields(config),

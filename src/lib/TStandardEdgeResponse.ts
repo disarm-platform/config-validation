@@ -7,5 +7,7 @@ export enum EStandardEdgeStatus {
 
 export interface TStandardEdgeResponse {
   status: EStandardEdgeStatus;
-  messages: string[];
+  message: string;
 }
+
+export type TStandardEdgeResponses = TStandardEdgeResponse[]

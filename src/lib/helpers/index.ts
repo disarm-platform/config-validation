@@ -1,3 +1,3 @@
-import {create_helpers} from './create_helpers'
+import {create_helper_objects} from './create_helper_objects'
 
-export {create_helpers}
+export {create_helper_objects}
