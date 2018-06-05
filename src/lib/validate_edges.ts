@@ -36,7 +36,7 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
   }
 
   const required = edge_definition.required;
-  const edge_name: FnNames = `${source_node}_${target_node}`
+  const edge_name = `${source_node}_${target_node}`
 
   // if required and missing either node => Red
   if (edge_definition.required && (!source_node || !target_node)) {
