@@ -1,14 +1,12 @@
 import { TForm } from "../config_types/TForm";
 
-// Copied from douma
-
 export interface TFormElement {
   page: number;
   name: string;
   type: string;
 }
 
-function get_form_elements(form: TForm): TFormElement[] {
+export function get_form_elements(form: TForm): TFormElement[] {
   // TODO: Should rewrite with .map().filter() instead of forEach, then enable tslint again.
   // tslint:disable
   if (!form.pages) {
@@ -31,8 +29,7 @@ function get_form_elements(form: TForm): TFormElement[] {
   return arr
 }
 
-function form_fields(form: TForm) : string[] {
+export function form_fields(form: TForm) : string[] {
   return get_form_elements(form).map(e => e.name)
 }
 
-export { get_form_elements, form_fields }

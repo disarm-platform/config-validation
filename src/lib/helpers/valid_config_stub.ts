@@ -1,8 +1,7 @@
-// Helper object for creating a valid stub of a config element, without needing to remember required properties each time
-
 import { TConfig } from '../config_types/TConfig';
 
-const config_stub: TConfig ={
+// Minimum required properties for a valid config
+const valid_config_stub: TConfig = {
   applets: {
     irs_plan: {
       table_output: [
@@ -23,4 +22,4 @@ const config_stub: TConfig ={
   }
 }
 
-export {config_stub}
+export {valid_config_stub}
