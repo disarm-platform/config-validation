@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
 import { THeightConstraint, TWidthConstraint } from './config_types/TIrsMonitor';
-import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse'
+import { EUnifiedStatus } from './TUnifiedResponse'
 import { validate } from './validate'
 
 test('returns Green for a valid config', t => {

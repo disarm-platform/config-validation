@@ -1,7 +1,7 @@
 import {has} from 'lodash'
-import { TIrsTasker } from '../config_types/TIrsTasker';
-import { TSpatialHierarchy } from '../config_types/TSpatialHierarchy';
-import { ECustomEdgeStatus, TCustomEdgeResponse } from '../TCustomEdgeResponse';
+import { TIrsTasker } from '../src/lib/config_types/TIrsTasker';
+import { TSpatialHierarchy } from '../src/lib/config_types/TSpatialHierarchy';
+import { ECustomEdgeStatus, TCustomEdgeResponse } from '../src/lib/TCustomEdgeResponse';
 
 
 export function irs_tasker_spatial_hierarchy(irs_tasker_config: TIrsTasker, spatial_hierarchy_config: TSpatialHierarchy): TCustomEdgeResponse {

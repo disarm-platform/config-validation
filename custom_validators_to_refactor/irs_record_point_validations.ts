@@ -1,5 +1,5 @@
-import { TConfig } from "../config_types/TConfig";
-import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
+import { TConfig } from "../src/lib/config_types/TConfig";
+import { ECustomEdgeStatus, TCustomEdgeResponse } from "../src/lib/TCustomEdgeResponse";
 
 // checks that irs_record_point has the validations that it needs.
 // The function is named accordingly.

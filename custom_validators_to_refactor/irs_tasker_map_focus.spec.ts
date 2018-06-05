@@ -1,8 +1,8 @@
 // tslint:disable:no-expression-statement
 import {test} from 'ava';
-import {TConfig} from '../config_types/TConfig'
-import {ECustomEdgeStatus , TCustomEdgeResponse} from "../TCustomEdgeResponse";
-import {irs_tasker_map_focus} from "../custom_edge_validators/irs_tasker_map_focus";
+import {TConfig} from '../src/lib/config_types/TConfig'
+import {ECustomEdgeStatus , TCustomEdgeResponse} from "../src/lib/TCustomEdgeResponse";
+import {irs_tasker_map_focus} from "../src/lib/custom_edge_validators/irs_tasker_map_focus";
 
 
 test('map focus not available', t => {

@@ -13,8 +13,8 @@ export function determine_unified_response(edge_responses: TStandardEdgeResponse
   if (any_red_edges) {
     return {
       message: 'Failed',
+      status: EUnifiedStatus.Red,
       support_messages: edge_messages,
-      status: EUnifiedStatus.Red
     };
   }
 
@@ -22,8 +22,8 @@ export function determine_unified_response(edge_responses: TStandardEdgeResponse
   if (blue_and_green_edges) {
     return {
       message: 'Passed with some optional edges',
+      status: EUnifiedStatus.Green,
       support_messages: edge_messages,
-      status: EUnifiedStatus.Green
     };
   }
 
@@ -31,14 +31,14 @@ export function determine_unified_response(edge_responses: TStandardEdgeResponse
   if (all_green_edges) {
     return {
       message: 'All passed',
+      status: EUnifiedStatus.Green,
       support_messages: edge_messages,
-      status: EUnifiedStatus.Green
     };
   }
 
   return {
     message: 'Unknown Unified Status result',
+    status: EUnifiedStatus.Red,
     support_messages: edge_messages,
-    status: EUnifiedStatus.Red
   };
 }

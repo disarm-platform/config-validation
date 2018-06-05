@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import {test} from 'ava';
-import {TConfig} from '../config_types/TConfig'
-import {ECustomEdgeStatus, TCustomEdgeResponse} from "../TCustomEdgeResponse";
+import {TConfig} from '../src/lib/config_types/TConfig'
+import {ECustomEdgeStatus, TCustomEdgeResponse} from "../src/lib/TCustomEdgeResponse";
 import {irs_tasker_spatial_hierarchy} from "./irs_tasker_spatial_hierarchy";
 
 

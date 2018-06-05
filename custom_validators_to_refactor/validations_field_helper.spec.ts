@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
+import { ECustomEdgeStatus } from '../src/lib/TCustomEdgeResponse';
 import { validations_fields_helper } from './validations_fields_helper';
 
 

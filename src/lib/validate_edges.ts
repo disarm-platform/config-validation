@@ -1,14 +1,14 @@
-import { flatten, get } from 'lodash';
+import { get } from 'lodash';
 import { TConfig } from './config_types/TConfig';
 import custom_validations from './custom_edge_validators/index';
+import { mapped_nodes, MappedNode } from './flatten_nodes';
+import { THelpers } from './helpers/create_helper_objects';
 import { create_helper_objects } from './helpers/index';
 import { TPathMap } from './helpers/path_mapping';
 import { ECustomEdgeStatus, TCustomEdgeResponses } from './TCustomEdgeResponse';
 import { TEdgeDefinition } from './TEdgeDefinition';
-import { EStandardEdgeStatus, TStandardEdgeResponse } from './TStandardEdgeResponse';
-import { THelpers } from './helpers/create_helper_objects';
-import { mapped_nodes, MappedNode } from './flatten_nodes';
 import { ENodeResponseStatus, TNodeResponse } from './TNodeResponse';
+import { EStandardEdgeStatus, TStandardEdgeResponse } from './TStandardEdgeResponse';
 
 export function validate_edges(config: TConfig, path_map: TPathMap[], edge_definitions: TEdgeDefinition[]): TStandardEdgeResponse[] {
   // create helpers
@@ -17,13 +17,12 @@ export function validate_edges(config: TConfig, path_map: TPathMap[], edge_defin
 
   // For every edge_definition do all the validation
   return edge_definitions.map(edge_definition => {
-    return validate_edge(config, nodes, edge_definition, helper_objects);
+    return validate_edge(nodes, edge_definition, helper_objects);
   });
 }
 
-function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TEdgeDefinition, helpers: THelpers): TStandardEdgeResponse {
+function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, helpers: THelpers): TStandardEdgeResponse {
   const node_responses: TNodeResponse[] = [];
-  const response = [];
 
   // Basic checks for Node existence
   const source_node = get(nodes, edge_definition.source_node_name);
@@ -40,8 +39,8 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
     custom_edge_responses = edge_fn(source_node, target_node, helpers);
   } else {
     return {
-      message: `Cannot find ${edge_name} edge`,
       edge_name,
+      message: `Cannot find ${edge_name} edge`,
       status: EStandardEdgeStatus.Red,
     }
   }
@@ -51,7 +50,7 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
 
 function determine_edge_result(edge_name: string, node_responses: TNodeResponse[], edge_required: boolean, custom_edge_responses?: TCustomEdgeResponses, ): TStandardEdgeResponse {
   // Create a default response in case none of the other cases match.
-  let response = {edge_name, status: EStandardEdgeStatus.Red, message: 'Default response - not caught by any other cases'}
+  const response = {edge_name, status: EStandardEdgeStatus.Red, message: 'Default response - not caught by any other cases'}
 
   // All the tools
   const edge_optional = !edge_required

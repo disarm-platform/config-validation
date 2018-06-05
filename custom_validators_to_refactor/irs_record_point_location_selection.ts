@@ -1,5 +1,5 @@
-import { TConfig } from "../config_types/TConfig";
-import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
+import { TConfig } from "../src/lib/config_types/TConfig";
+import { ECustomEdgeStatus, TCustomEdgeResponse } from "../src/lib/TCustomEdgeResponse";
 
 
 export function irs_record_point_location_selection(config: TConfig) : TCustomEdgeResponse {

@@ -2,9 +2,15 @@ import {flatten} from 'lodash'
 import { TAggregations } from '../config_types/TAggregations';
 import { THelpers } from '../helpers/create_helper_objects';
 import {expression_variables} from '../helpers/expression_helpers'
-import { ECustomEdgeStatus, TCustomEdgeResponse, TCustomEdgeResponses } from '../TCustomEdgeResponse';
+import { ECustomEdgeStatus, TCustomEdgeResponses } from '../TCustomEdgeResponse';
 
 export function aggregations_field_helper(aggregations_config: TAggregations, ignore: object, helpers: THelpers): TCustomEdgeResponses {
+  if (ignore.hasOwnProperty('dummy'))  {
+    return [{
+      message: `Dummy`,
+      status: ECustomEdgeStatus.Red
+    }] as TCustomEdgeResponses
+  }
   const available_fields = helpers.all_fields
   
   const required_fields = flatten(aggregations_config.map(aggregation => {

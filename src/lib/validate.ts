@@ -25,8 +25,8 @@ export function validate(config: TConfig): TUnifiedResponse {
   if (schema_response.status === ESchemaStatus.Red) {
     return {
       message: 'Schema validation failed',
+      status: EUnifiedStatus.Red,
       support_messages: [schema_response.errors],
-      status: EUnifiedStatus.Red
     };
   }
 

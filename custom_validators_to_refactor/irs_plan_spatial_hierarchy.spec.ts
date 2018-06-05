@@ -1,8 +1,8 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { TConfig } from '../config_types/TConfig';
-import { valid_config_stub } from '../helpers/valid_config_stub';
-import { ECustomEdgeStatus, TCustomEdgeResponse } from '../TCustomEdgeResponse';
+import { TConfig } from '../src/lib/config_types/TConfig';
+import { valid_config_stub } from '../src/lib/helpers/valid_config_stub';
+import { ECustomEdgeStatus, TCustomEdgeResponse } from '../src/lib/TCustomEdgeResponse';
 import { irs_plan_spatial_hierarchy } from './irs_plan_spatial_hierarchy';
 
 
