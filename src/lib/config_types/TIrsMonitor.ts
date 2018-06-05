@@ -43,7 +43,7 @@ export interface TChartOptionsLayout {
 export type TChartType = 'bar' | 'text' | 'line' | 'pie'
 
 export interface TChartOptions {
-  chart_type: TChartType;
+  chart_type?: TChartType;
   title?: string;
   text?: string;
   layout?: TChartOptionsLayout;
@@ -63,13 +63,13 @@ export interface TChartConfig {
   id: string;
   style: TChartStyle;
   options: TChartOptions;
-  chart_type: TTextChart;
+  chart_type?: TTextChart;
 }
 
 export type TMap = 'map'
 
 export interface TChartMap {
-  chart_type: TMap;
+  chart_type?: TMap;
   bin_by: string;
   aggregation_names: string[];
   response_point_fields: string[];
@@ -80,7 +80,7 @@ export type TTable = 'table'
 
 
 export interface TChartTable {
-  chart_type: TTable;
+  chart_type?: TTable;
   bin_by: string;
   aggregation_names: string[];
   property_layers: TPropertyLayer[];

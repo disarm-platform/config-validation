@@ -34,7 +34,7 @@
     "clean": "trash build test",
     "all": "run-s reset test cov:check doc:html",
     "prepare-release": "run-s all version doc:publish",
-    "generate-schema": "typescript-json-schema './tsconfig.json' 'TConfig' --include ./src/definitions/TConfig.ts --out 'src/config_schema.json' --required true",
+    "generate-schema": "typescript-json-schema './tsconfig.json' 'TConfig' --include ./src/lib/config_types/TConfig.ts --out 'src/config_schema.json' --required true",
     "copy-schema": "cp src/config_schema.json build/main/; cp src/config_schema.json build/module/",
     "copy-edge-graph": "cp src/edge_graph.json build/main/; cp src/edge_graph.json build/module/"
   },

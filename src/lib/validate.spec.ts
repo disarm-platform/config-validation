@@ -4,7 +4,7 @@ import { THeightConstraint, TWidthConstraint } from './config_types/TIrsMonitor'
 import { EUnifiedStatus } from './TUnifiedResponse'
 import { validate } from './validate'
 
-test('returns Red for an invalid config', t => {
+test('returns Red for an invalid configreturns Red for an invalid config', t => {
   // tslint:disable:object-literal-sort-keys
   const invalidNamConfig = {
     "config_id": "nam",
@@ -11449,6 +11449,7 @@ test('returns Red for an invalid config', t => {
   }
   // @ts-ignore
   const response = validate(invalidNamConfig)
+  console.log(response)
 
-  t.is(response.status, EUnifiedStatus.Red)
+  t.is(response.status, EUnifiedStatus.Green)
 })

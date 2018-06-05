@@ -115,7 +115,6 @@
                 }
             },
             "required": [
-                "chart_type",
                 "id",
                 "options",
                 "style"
@@ -155,7 +154,6 @@
             "required": [
                 "aggregation_names",
                 "bin_by",
-                "chart_type",
                 "property_layers",
                 "response_point_fields"
             ],
@@ -181,7 +179,13 @@
                     "type": "string"
                 },
                 "chart_type": {
-                    "$ref": "#/definitions/TChartType"
+                    "enum": [
+                        "bar",
+                        "line",
+                        "pie",
+                        "text"
+                    ],
+                    "type": "string"
                 },
                 "cumulative": {
                     "type": "boolean"
@@ -214,9 +218,6 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "chart_type"
-            ],
             "type": "object"
         },
         "TChartOptionsLayout": {
@@ -309,19 +310,9 @@
             "required": [
                 "aggregation_names",
                 "bin_by",
-                "chart_type",
                 "property_layers"
             ],
             "type": "object"
-        },
-        "TChartType": {
-            "enum": [
-                "bar",
-                "line",
-                "pie",
-                "text"
-            ],
-            "type": "string"
         },
         "TDecoratorOption": {
             "additionalProperties": {
@@ -506,7 +497,10 @@
         },
         "TLocationSelection": {
             "additionalProperties": {
-                "$ref": "#/definitions/TLocationSelectionOption"
+                "items": {
+                    "$ref": "#/definitions/TLocationSelectionOption"
+                },
+                "type": "array"
             },
             "type": "object"
         },

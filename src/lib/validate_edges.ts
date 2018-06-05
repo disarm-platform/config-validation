@@ -25,12 +25,12 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
   const node_responses: TNodeResponse[] = [];
 
   // Basic checks for Node existence
-  const source_node = get(nodes, edge_definition.source_node_name);
-  const target_node = get(nodes, edge_definition.target_node_name);
+  const source_node = nodes.find(n => n.name === edge_definition.source_node_name);
+  const target_node = nodes.find(n => n.name === edge_definition.target_node_name);
 
   // Tell me about this Edge
   const edge_required = edge_definition.required;
-  const edge_name = `${source_node}_${target_node}`;
+  const edge_name = `${source_node.name}_${target_node.name}`;
 
   // Find and run the custom edge validation
   let custom_edge_responses

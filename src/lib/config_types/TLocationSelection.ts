@@ -5,5 +5,5 @@ export interface TLocationSelectionOption {
 }
 
 export interface TLocationSelection {
-  [k: string]: TLocationSelectionOption;
+  [k: string]: TLocationSelectionOption[];
 }
