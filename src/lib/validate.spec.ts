@@ -11448,8 +11448,7 @@ test('returns Green for a valid config', t => {
     }
   }
   // @ts-ignore
-  const response: TUnifiedResponse = validate(namConfig)
+  const response = validate(namConfig)
 
   t.is(response.status, EUnifiedStatus.Green)
-  t.is(response.messages.length, 0)
 })

@@ -1,116 +1,74 @@
 // // tslint:disable:no-expression-statement
 // import { test } from 'ava';
 // import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
-// import { aggregations_field_helper } from './aggregations_field_helper';
+// import { decorators_fields_helper } from '../helpers/decorators_fields_helper';
 //
-// test.skip('returns Blue status if no aggregations', t => {
+// test('returns Yellow if fields in decorator is not in form', t => {
 //   const config = {
-//     aggregations: []
-//   }
-//   // @ts-ignore
-//   const result = aggregations_field_helper(config)
-//
-//   t.is(result[0].status, ECustomEdgeStatus.Green)
-//   t.is(result[0].message.length, 0)
-// })
-//
-// test.skip('returns Yellow status if aggregation field not present in form', t => {
-//   const config = {
-//     aggregations: [{
-//       "name": "number of rooms sprayed",
-//       "numerator_expr": "number_sprayed"
-//     }],
-//     decorators: {},
-//     form: {
-//       "pages": [
+//     "decorators": {
+//       "status": [
 //         {
-//           "elements": [
-//             {
-//               "inputType": "number",
-//               "isRequired": true,
-//               "name": "number_sprayable",
-//               "title": "How many sprayable structures in the household/homestead?",
-//               "type": "text",
-//               "validators": [
-//                 {
-//                   "text": "Minimum Value is Zero",
-//                   "type": "numeric"
-//                 }
-//               ]
-//             },
-//             {
-//               "inputType": "number",
-//               "name": "number_unsprayable",
-//               "title": "How many unsprayable sleeping structures are in the household/homestead?",
-//               "type": "text",
-//               "validators": [
-//                 {
-//                   "text": "Minimum Value is Zero",
-//                   "type": "numeric"
-//                 }
-//               ]
-//             }
-//           ],
-//           "name": "page1"
+//           "red": "number_unsprayable == number_sprayable"
+//         },
+//         {
+//           "green": "number_sprayable == numbersprayed_ddt + numbersprayed_delta"
 //         }
 //       ]
-//     }
-//   }
-//   // @ts-ignore
-//   const result = aggregations_field_helper(config)
-//
-//   t.is(result[0].status, ECustomEdgeStatus.Red)
-//   t.is(result[0].message.length, 1)
-// })
-//
-// test.skip('returns Yellow status if aggregation field not present in decorators', t => {
-//   const config = {
-//     aggregations: [
-//       {
-//         "name": "number of rooms sprayable",
-//         "numerator_expr": "number_sprayable + not_in_decorator"
-//       }
-//     ],
-//     decorators: {
-//       'decorator_name': {}
 //     },
 //     form: {
-//     "pages": [
-//       {
-//         "elements": [
-//           {
-//             "inputType": "number",
-//             "isRequired": true,
-//             "name": "number_sprayable",
-//             "title": "How many sprayable structures in the household/homestead?",
-//             "type": "text",
-//             "validators": [
-//               {
-//                 "text": "Minimum Value is Zero",
-//                 "type": "numeric"
-//               }
-//             ]
-//           }
-//         ],
-//         "name": "page1"
-//       }
-//     ]
-//   }
+//       "pages": [
+//         {
+//           "elements": [
+//             {
+//               "inputType": "number",
+//               "isRequired": true,
+//               "name": "number_sprayable",
+//               "title": "How many sprayable structures in the household/homestead?",
+//               "type": "text",
+//               "validators": [
+//                 {
+//                   "text": "Minimum Value is Zero",
+//                   "type": "numeric"
+//                 }
+//               ]
+//             },
+//             {
+//               "inputType": "number",
+//               "name": "number_unsprayable",
+//               "title": "How many unsprayable sleeping structures are in the household/homestead?",
+//               "type": "text",
+//               "validators": [
+//                 {
+//                   "text": "Minimum Value is Zero",
+//                   "type": "numeric"
+//                 }
+//               ]
+//             }
+//           ],
+//           "name": "page1"
+//         }
+//       ]
+//     }
 //   }
 //   // @ts-ignore
-//   const result = aggregations_field_helper(config)
+//   const result = decorators_fields_helper(config)
 //
-//   t.is(result[0].status, ECustomEdgeStatus.Red)
-//   t.is(result[0].message.length, 1)
+//   t.is(result.status, ECustomEdgeStatus.Yellow)
+//   t.is(result.messages.length, 1)
 // })
 //
-// test.skip('returns Green status if aggregation fields exist', t => {
+// test('returns Green if fields in decorator is in form', t => {
 //   const config = {
-//     aggregations: [{
-//       "name": "number of rooms sprayable",
-//       "numerator_expr": "number_sprayable"
-//     }],
-//     decorators: {},
+//     "decorators": {
+//       "status": [
+//         {
+//           "red": "number_unsprayable == number_sprayable"
+//         },
+//         {
+//           "green": "number_sprayable == 1"
+//         }
+//       ]
+//     },
 //     form: {
 //       "pages": [
 //         {
@@ -147,8 +105,8 @@
 //     }
 //   }
 //   // @ts-ignore
-//   const result = aggregations_field_helper(config)
+//   const result = decorators_fields_helper(config)
 //
-//   t.is(result[0].status, ECustomEdgeStatus.Green)
-//   t.is(result[0].message.length, 0)
+//   t.is(result.status, ECustomEdgeStatus.Green)
+//   t.is(result.messages.length, 0)
 // })

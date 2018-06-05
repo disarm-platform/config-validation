@@ -1,5 +1,5 @@
 import { TConfig } from "../config_types/TConfig";
-import { decorator_fields, form_fields } from "../helpers";
+import { decorator_fields, form_fields } from "../helpers/index";
 import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse";
 import { TIrsMonitor } from "../config_types/TIrsMonitor";
 import { THelpers } from "../helpers/create_helper_objects";

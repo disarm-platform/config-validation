@@ -2,7 +2,7 @@
 import {test} from 'ava';
 import {TConfig} from '../config_types/TConfig'
 import {ECustomEdgeStatus , TCustomEdgeResponse} from "../TCustomEdgeResponse";
-import {irs_tasker_map_focus} from "./irs_tasker_map_focus";
+import {irs_tasker_map_focus} from "../custom_edge_validators/irs_tasker_map_focus";
 
 
 test('map focus not available', t => {
