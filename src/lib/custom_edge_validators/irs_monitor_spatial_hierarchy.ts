@@ -1,6 +1,11 @@
 import { TConfig } from "../config_types/TConfig";
 import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
 
+interface thing {
+  (config: TConfig) => TCustomEdgeResponse
+}
+
+
 // TODO: Need to write a property version of this,
 // is blocked by us not generating a spatial_hierarchy with extracted fields.
 export function irs_monitor_spatial_hierarchy(config: TConfig): TCustomEdgeResponse {

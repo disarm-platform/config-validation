@@ -1,15 +1,16 @@
 import { get } from 'lodash';
+import { TAggregations } from '../config_types/TAggregations';
 import { TConfig } from '../config_types/TConfig';
 import { TChartConfig, TIrsMonitor } from '../config_types/TIrsMonitor';
 import { ECustomEdgeStatus, TCustomEdgeResponse } from '../TCustomEdgeResponse';
-import { TAggregations } from '../config_types/TAggregations';
+import { THelpers } from '../helpers/create_helpers';
 
 export function irs_monitor_aggregations(irs_monitor_config: TIrsMonitor, aggregations_config: TAggregations): TCustomEdgeResponse {
   const messages: string[] = [];
   let status = ECustomEdgeStatus.Red;
 
-  const available_aggregations: string[] = extract_aggregations_from_irs_monitor(irs_monitor_config);
   const required_aggregations: string[] = aggregations_config.map(a => a.name); // aggregations
+  const available_aggregations: string[] = extract_aggregations_from_irs_monitor(irs_monitor_config);
 
   required_aggregations.forEach(required_aggregation => {
     if (available_aggregations.includes(required_aggregation)) {

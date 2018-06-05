@@ -1,31 +1,11 @@
 import { TConfig } from "../config_types/TConfig";
 import { decorator_fields, form_fields } from "../helpers";
 import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
+import { TIrsMonitor } from "../config_types/TIrsMonitor";
 
 
-export function irs_monitor_fields_helper(config: TConfig) : TCustomEdgeResponse {
-  if (!config.decorators) {
-    return {
-      messages: ['Could be BLue'],
-      status: ECustomEdgeStatus.Red
-    }
-  }
-
-  if (!config.form) {
-    return {
-      messages: ['Could be BLue'],
-      status: ECustomEdgeStatus.Red
-    }
-  }
-
-  if (!config.applets.irs_monitor) {
-    return {
-      messages: [],
-      status: ECustomEdgeStatus.Blue
-    }
-  }
-
-  const fields = config.applets.irs_monitor.map.response_point_fields
+export function irs_monitor_fields_helper(irs_monitor_config: TIrsMonitor, target: object, helpers: object) : TCustomEdgeResponse {
+  const fields = irs_monitor_config.map.response_point_fields
 
   const decorators = fields
     .filter(field => {
@@ -35,7 +15,7 @@ export function irs_monitor_fields_helper(config: TConfig) : TCustomEdgeResponse
       return field.replace('_decorated.', '')
     })
 
-  const decoratorsFromConfig = decorator_fields(config.decorators)
+  const decoratorsFromConfig = helpers.decorator_fields
 
   for (const decorator of decorators) {
     if (!decoratorsFromConfig.includes(decorator)) {
