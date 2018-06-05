@@ -1,41 +1,44 @@
-import { flatten } from 'lodash';
 import { EStandardEdgeStatus, TStandardEdgeResponse } from './TStandardEdgeResponse';
 import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse';
 
-export function determine_unified_response(/*schema_response: TSchemaResponse,*/ edge_responses: TStandardEdgeResponse[]): TUnifiedResponse {
-  const statuses = edge_responses.map(e => e.status);
-  const messages = flatten(edge_responses.map(e => e.messages));
+export function determine_unified_response(edge_responses: TStandardEdgeResponse[]): TUnifiedResponse {
+  const edge_statuses = edge_responses.map(e => e.status);
+  const edge_messages = edge_responses.map(e => e.message);
 
-  const any_red = statuses.includes(EStandardEdgeStatus.Red);
-  const blue_and_green = statuses.every(s => [EStandardEdgeStatus.Green, EStandardEdgeStatus.Blue].includes(s));
-  const all_green = statuses.every(s => s === EStandardEdgeStatus.Green);
+  const any_red_edges = edge_statuses.includes(EStandardEdgeStatus.Red);
+  const blue_and_green_edges = edge_statuses.every(s => [EStandardEdgeStatus.Green, EStandardEdgeStatus.Blue].includes(s));
+  const all_green_edges = edge_statuses.every(s => s === EStandardEdgeStatus.Green);
 
   // if any Red edges, then Red unified
-  if (any_red) {
+  if (any_red_edges) {
     return {
-      messages,
+      message: 'Failed',
+      support_messages: edge_messages,
       status: EUnifiedStatus.Red
     };
   }
 
   // if any Blue edges, and rest Green edges, then Green unified
-  if (blue_and_green) {
+  if (blue_and_green_edges) {
     return {
-      messages,
+      message: 'Passed with some optional edges',
+      support_messages: edge_messages,
       status: EUnifiedStatus.Green
     };
   }
 
   // if all Green edges, then Green unified
-  if (all_green) {
+  if (all_green_edges) {
     return {
-      messages,
+      message: 'All passed',
+      support_messages: edge_messages,
       status: EUnifiedStatus.Green
     };
   }
 
   return {
-    messages: ['Unknown Unified Status result', ...messages],
+    message: 'Unknown Unified Status result',
+    support_messages: edge_messages,
     status: EUnifiedStatus.Red
   };
 }

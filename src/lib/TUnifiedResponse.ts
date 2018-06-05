@@ -12,5 +12,6 @@ export enum EUnifiedStatus {
  */
 export interface TUnifiedResponse {
   status: EUnifiedStatus;
-  messages: string[];
+  message: string;
+  support_messages?: string[]
 }

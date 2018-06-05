@@ -21,10 +21,11 @@ export function validate(config: TConfig): TUnifiedResponse {
   // Ensure that config meets basic schema validation requirements
   //
   const schema_response = validate_schema(config, config_schema);
-  // Return early if failing schema validation
+  // Return early if failing schema validation. End of the road.
   if (schema_response.status === ESchemaStatus.Red) {
     return {
-      messages: ['Schema validation failed', ...schema_response.errors],
+      message: 'Schema validation failed',
+      support_messages: [schema_response.errors],
       status: EUnifiedStatus.Red
     };
   }
