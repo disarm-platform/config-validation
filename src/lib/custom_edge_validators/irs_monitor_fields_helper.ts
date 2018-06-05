@@ -1,18 +1,16 @@
 import { TConfig } from "../config_types/TConfig";
 import { decorator_fields, form_fields } from "../helpers";
-import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
+import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse";
 import { TIrsMonitor } from "../config_types/TIrsMonitor";
+import { THelpers } from "../helpers/create_helpers";
 
+// Where are fields used
+export function irs_monitor_fields_helper(irs_monitor_config: TIrsMonitor, target: object, helpers: THelpers) : TCustomEdgeResponses {
+  const required_fields = irs_monitor_config.map.response_point_fields
 
-export function irs_monitor_fields_helper(irs_monitor_config: TIrsMonitor, target: object, helpers: object) : TCustomEdgeResponse {
-  const fields = irs_monitor_config.map.response_point_fields
-
-  const decorators = fields
-    .filter(field => {
-      return field.startsWith('_decorated.')
-    })
+  const decorators = required_fields
     .map(field => {
-      return field.replace('_decorated.', '')
+      return field.replace(/^_decorated\./, '')
     })
 
   const decoratorsFromConfig = helpers.decorator_fields
@@ -28,7 +26,7 @@ export function irs_monitor_fields_helper(irs_monitor_config: TIrsMonitor, targe
 
   const formFieldsFromConfig = form_fields(config.form)
 
-  const formFields = fields
+  const formFields = required_fields
     .filter(field => {
       return field.startsWith('form_data.')
     })

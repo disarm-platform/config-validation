@@ -4,5 +4,7 @@ export enum ECustomEdgeStatus {
 }
 export interface TCustomEdgeResponse {
   status: ECustomEdgeStatus;
-  messages: string[];
+  message: string;
 }
+
+export type TCustomEdgeResponses = TCustomEdgeResponse[]

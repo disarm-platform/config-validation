@@ -20,7 +20,7 @@ export function validate_edges(config: TConfig, path_map: TPathMap[], edge_defin
 }
 
 function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TEdgeDefinition, helpers: THelpers): TStandardEdgeResponse {
-  const response = [];
+  const response: TStandardEdgeResponse = [];
   let messages = [];
   let status = EStandardEdgeStatus.Red;
 

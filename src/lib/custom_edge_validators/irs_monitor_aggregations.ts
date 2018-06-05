@@ -2,30 +2,26 @@ import { get } from 'lodash';
 import { TAggregations } from '../config_types/TAggregations';
 import { TConfig } from '../config_types/TConfig';
 import { TChartConfig, TIrsMonitor } from '../config_types/TIrsMonitor';
-import { ECustomEdgeStatus, TCustomEdgeResponse } from '../TCustomEdgeResponse';
 import { THelpers } from '../helpers/create_helpers';
+import { ECustomEdgeStatus, TCustomEdgeResponses } from '../TCustomEdgeResponse';
 
-export function irs_monitor_aggregations(irs_monitor_config: TIrsMonitor, aggregations_config: TAggregations): TCustomEdgeResponse {
-  const messages: string[] = [];
-  let status = ECustomEdgeStatus.Red;
+export function irs_monitor_aggregations(irs_monitor_config: TIrsMonitor, aggregations_config: TAggregations): TCustomEdgeResponses {
+  const required_aggregations = aggregations_config.map(a => a.name);
+  const available_aggregations = extract_aggregations_from_irs_monitor(irs_monitor_config);// TODO: Add missing aggregations from commented code 
 
-  const required_aggregations: string[] = aggregations_config.map(a => a.name); // aggregations
-  const available_aggregations: string[] = extract_aggregations_from_irs_monitor(irs_monitor_config);
-
-  required_aggregations.forEach(required_aggregation => {
+  return required_aggregations.map(required_aggregation => {
     if (available_aggregations.includes(required_aggregation)) {
-      messages.push(`Aggregation ${required_aggregation} is required and is available`)
-      status = ECustomEdgeStatus.Green
+      return {
+        message: `Aggregation ${required_aggregation} is required and is available`,
+        status: ECustomEdgeStatus.Green
+      }
     } else {
-      messages.push(`Aggregation ${required_aggregation} is required but is not available`)
-      status = ECustomEdgeStatus.Red
+      return {
+        message: `Aggregation ${required_aggregation} is required but is not available`,
+        status: ECustomEdgeStatus.Red
+      }
     }
   })
-
-  return {
-    messages,
-    status
-  }
 }
 
 
@@ -72,19 +68,8 @@ export function irs_monitor_aggregations(irs_monitor_config: TIrsMonitor, aggreg
 //   }
 //
 //   // check they all exist in config.aggregations
-//
-//   const charts = config.applets.irs_monitor.charts.filter((chartConfig: TChartConfig) => {
-//     if (chartConfig.chart_type === 'text') {
-//       return false
-//     }
-//
-//     if (chartConfig.options.generate_series_from) {
-//       return false
-//     }
-//
-//     return true
-//   });
-//
+
+
 //   for (const chart of charts) {
 //     if (chart.options.multi_series) {
 //       for (const series of chart.options.multi_series) {
@@ -113,6 +98,20 @@ export function irs_monitor_aggregations(irs_monitor_config: TIrsMonitor, aggreg
 //   }
 // }
 
-function extract_aggregations_from_irs_monitor(irs_monitor_config: object): string[] {
-  return get(irs_monitor_config, 'map.aggregation_names');
+function extract_aggregations_from_irs_monitor(irs_monitor_config: TIrsMonitor): string[] {
+  const chart_aggregations = irs_monitor_config.charts.filter((chartConfig: TChartConfig) => {
+    if (chartConfig.chart_type === 'text') {
+      return false
+    }
+
+    if (chartConfig.options.generate_series_from) {
+      return false
+    }
+
+    return true
+  })
+
+  const map_aggregations = get(irs_monitor_config, 'map.aggregation_names')
+  
+  return [...chart_aggregations, ...map_aggregations];
 }
