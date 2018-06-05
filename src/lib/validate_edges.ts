@@ -10,20 +10,19 @@ import { THelpers } from './helpers/create_helper_objects';
 import { mapped_nodes, MappedNode } from './flatten_nodes';
 import { ENodeResponseStatus, TNodeResponse } from './TNodeResponse';
 
-export function validate_edges(config: TConfig, path_map: TPathMap[], edge_definitions: TEdgeDefinition[]): TStandardEdgeResponse {
-  // For every edge_definition
-
+export function validate_edges(config: TConfig, path_map: TPathMap[], edge_definitions: TEdgeDefinition[]): TStandardEdgeResponse[] {
   // create helpers
-  const helper_objects = create_helper_objects(config);
+  const helper_objects = create_helper_objects(config); // TODO: Remove any pure functions from here
   const nodes = mapped_nodes(config, path_map);
 
-  return flatten(edge_definitions.map(edge_definition => {
+  // For every edge_definition do all the validation
+  return edge_definitions.map(edge_definition => {
     return validate_edge(config, nodes, edge_definition, helper_objects);
-  }));
+  });
 }
 
 function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TEdgeDefinition, helpers: THelpers): TStandardEdgeResponse {
-  const node_responses = [];
+  const node_responses: TNodeResponse[] = [];
   const response = [];
 
   // Basic checks for Node existence
@@ -31,45 +30,23 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
   const target_node = get(nodes, edge_definition.target_node_name);
 
   // Tell me about this Edge
-  const required = edge_definition.required;
+  const edge_required = edge_definition.required;
   const edge_name = `${source_node}_${target_node}`;
-  const missing_a_node = !source_node || !target_node;
-
-  // if edge required and either nodes is missing => Red
-  if (required && missing_a_node) {
-    node_responses.push({
-      message: `Required nodes (${source_node} & ${target_node}) are not found`,
-      status: EStandardEdgeStatus.Red
-    });
-    return determine_edge_result(edge_name, node_responses, required); // Return early, nothing else you can do
-  }
-
-  // if edge not required and missing either node => Blue
-  if (!required && missing_a_node) {
-    node_responses.push({
-      message: 'Something missing, but edge not required anyway',
-      status: EStandardEdgeStatus.Blue
-    });
-    return determine_edge_result(edge_name, node_responses, required); // Return early, nothing else to do
-  }
 
   // Find and run the custom edge validation
+  let custom_edge_responses
   if (edge_name in custom_validations) {
     const edge_fn: (source_node: object, target_node: object, helpers: THelpers) => TCustomEdgeResponses = get(custom_validations, edge_name);
-
-    const custom_edge_response = edge_fn(source_node, target_node, helpers);
-    // TODO:: What to do with return TCustomEdgeResponses?
-    response.push(flatten(custom_edge_response));
-
+    custom_edge_responses = edge_fn(source_node, target_node, helpers);
   } else {
-    response.push({
-      message: `Cannot find custom validation function ${edge_name}`,
-      status: EStandardEdgeStatus.Red
-    });
+    return {
+      message: `Cannot find ${edge_name} edge`,
+      edge_name,
+      status: EStandardEdgeStatus.Red,
+    }
   }
 
-  // Send something back!
-  return response;
+  return determine_edge_result(edge_name, node_responses, edge_required, custom_edge_responses)
 }
 
 function determine_edge_result(edge_name: string, node_responses: TNodeResponse[], edge_required: boolean, custom_edge_responses?: TCustomEdgeResponses, ): TStandardEdgeResponse {
