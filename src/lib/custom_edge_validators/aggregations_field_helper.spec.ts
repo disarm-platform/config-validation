@@ -1,8 +1,10 @@
 // // tslint:disable:no-expression-statement
-// import { test } from 'ava';
+import { test } from 'ava';
 // import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 // import { aggregations_field_helper } from './aggregations_field_helper';
-//
+test('title', t => {
+  t.true(true);
+});//
 // test.skip('returns Blue status if no aggregations', t => {
 //   const config = {
 //     aggregations: []

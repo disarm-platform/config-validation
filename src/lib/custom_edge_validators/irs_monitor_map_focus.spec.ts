@@ -1,7 +1,12 @@
 // // tslint:disable:no-expression-statement
-// import { test } from 'ava';
+import { test } from 'ava';
 // import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 // import { irs_monitor_map_focus } from './irs_monitor_map_focus';
+
+test('title', t => {
+  t.true(true);
+});
+
 //
 // test('returns Blue status if no irs_monitor', t => {
 //   const config = {

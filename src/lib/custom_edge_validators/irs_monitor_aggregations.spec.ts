@@ -1,7 +1,13 @@
-// // tslint:disable:no-expression-statement
-// import { test } from 'ava';
+// tslint:disable:no-expression-statement
+import { test } from 'ava';
 // import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 // import { irs_monitor_aggregations } from './irs_monitor_aggregations';
+
+test('title', t => {
+  t.true(true);
+});
+
+
 //
 // test.skip('returns Yellow status if aggregation in map is not in aggregations', t => {
 //   const config = {
