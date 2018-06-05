@@ -13,23 +13,17 @@ const ajv = new Ajv();
 ajv.addMetaSchema(draft_6); // TODO: Is required?
 
 export function validate_schema(config: TConfig, config_schema: JSONSchema6): TSchemaResponse {
-  const valid = ajv.validate(config_schema, config);
+  const schema_valid = ajv.validate(config_schema, config);
 
-  switch (valid) {
-    case (true):
-      return {
-        status: ESchemaStatus.Green,
-        errors: 'No errors'
-      };
-    case (false):
-      return {
-        status: ESchemaStatus.Red,
-        errors: ajv.errorsText()
-      };
-    default:
-      return {
-        status: ESchemaStatus.Red,
-        errors: 'Unknown schema status'
-      };
+  if (schema_valid) {
+    return {
+      status: ESchemaStatus.Green,
+      errors: 'Schema validation passed'
+    };
+  } else {
+    return {
+      status: ESchemaStatus.Red,
+      errors: `Schema validation errors: ${ajv.errorsText()}`
+    };
   }
 }
