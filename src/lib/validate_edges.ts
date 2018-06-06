@@ -5,14 +5,14 @@ import { mapped_nodes, MappedNode } from './flatten_nodes';
 import { THelpers } from './helpers/create_helper_objects';
 import { create_helper_objects } from './helpers/index';
 import { TPathMap } from './helpers/path_mapping';
-import { ECustomEdgeStatus, TCustomEdgeResponses } from './TCustomEdgeResponse';
+import { ECustomEdgeStatus, TCustomEdgeResponse, TCustomEdgeResponses } from './TCustomEdgeResponse';
 import { TEdgeDefinition } from './TEdgeDefinition';
 import { ENodeResponseStatus, TNodeResponse } from './TNodeResponse';
 import { EStandardEdgeStatus, TStandardEdgeResponse } from './TStandardEdgeResponse';
 
 export function validate_edges(config: TConfig, path_map: TPathMap[], edge_definitions: TEdgeDefinition[]): TStandardEdgeResponse[] {
   // create helpers
-  const helper_objects = create_helper_objects(config); // TODO: Remove any pure functions from here
+  const helper_objects = create_helper_objects(config);
   const nodes = mapped_nodes(config, path_map);
 
   // For every edge_definition do all the validation
@@ -21,22 +21,34 @@ export function validate_edges(config: TConfig, path_map: TPathMap[], edge_defin
   });
 }
 
-function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, helpers: THelpers): TStandardEdgeResponse {
-  const node_responses: TNodeResponse[] = [];
+function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, helpers_object: THelpers): TStandardEdgeResponse {
+  let nodes_exist: TNodeResponse;
 
   // Basic checks for Node existence
   const source_node = nodes.find(n => n.name === edge_definition.source_node_name);
   const target_node = nodes.find(n => n.name === edge_definition.target_node_name);
 
+  if (!source_node || !target_node) {
+    nodes_exist = {
+      message: 'Missing source or target node',
+      status: ENodeResponseStatus.Red
+    }
+  } else {
+    nodes_exist = {
+      message: 'Both nodes exist',
+      status: ENodeResponseStatus.Green
+    }
+  }
+
   // Tell me about this Edge
   const edge_required = edge_definition.required;
-  const edge_name = `${source_node.name}_${target_node.name}`;
+  const edge_name = `${edge_definition.source_node_name}_${edge_definition.target_node_name}`;
 
   // Find and run the custom edge validation
   let custom_edge_responses
   if (edge_name in custom_validations) {
-    const edge_fn: (source_node: object, target_node: object, helpers: THelpers) => TCustomEdgeResponses = get(custom_validations, edge_name);
-    custom_edge_responses = edge_fn(source_node, target_node, helpers);
+    const edge_fn: (source_node: object, target_node: object, helpers_object: THelpers) => TCustomEdgeResponse[] = get(custom_validations, edge_name);
+    custom_edge_responses = edge_fn(source_node, target_node, helpers_object);
   } else {
     return {
       edge_name,
@@ -45,7 +57,7 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
     }
   }
 
-  return determine_edge_result(edge_name, node_responses, edge_required, custom_edge_responses)
+  return determine_edge_result(edge_name, nodes_exist, edge_required, custom_edge_responses)
 }
 
 function determine_edge_result(edge_name: string, node_responses: TNodeResponse[], edge_required: boolean, custom_edge_responses?: TCustomEdgeResponses, ): TStandardEdgeResponse {
