@@ -11,8 +11,9 @@ export function aggregations_field_helper(aggregations_config: TAggregations, ig
       status: ECustomEdgeStatus.Red
     }] as TCustomEdgeResponses
   }
+
   const available_fields = helpers.all_fields
-  
+
   const required_fields = flatten(aggregations_config.map(aggregation => {
     const aggregationVariables = expression_variables(aggregation.numerator_expr);
     return flatten(aggregationVariables)

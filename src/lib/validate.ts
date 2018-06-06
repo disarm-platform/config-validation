@@ -11,7 +11,9 @@ import { validate_schema } from './validate_schema';
 
 
 export function validate(config: TConfig): TUnifiedResponse {
-  // Step 0: gather what you need
+  //
+  // STEP 0: gather what you need - after this point, no data/config is imported
+  //
   const config_schema: JSONSchema6 = ConfigSchema;
   const path_map = PathMap;
   const edge_definitions = EdgeDefinitions;
@@ -39,7 +41,6 @@ export function validate(config: TConfig): TUnifiedResponse {
   //
   // STEP 3: Combine responses, and determine unified response
   // Put it all together, and what have you got?
-  // TODO: Decide if want to return early for failing schema?
   //
   return determine_unified_response(edge_responses);
 }

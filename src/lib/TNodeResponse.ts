@@ -1,6 +1,6 @@
 export enum ENodeResponseStatus {
-  Green = 'Green',
-  Red = 'Red'
+  Green = 'Green, both required nodes exist',
+  Red = 'Red, one or both nodes missing'
 }
 
 export interface TNodeResponse {

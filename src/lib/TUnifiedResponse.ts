@@ -7,9 +7,6 @@ export enum EUnifiedStatus {
   Green = 'Green'
 }
 
-/**
- * `messages` - TODO: should be more detailed than just a bunch of strings, e.g. exact location where message comes from?
- */
 export interface TUnifiedResponse {
   status: EUnifiedStatus;
   message: string;
