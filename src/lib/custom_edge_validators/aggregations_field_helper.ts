@@ -4,14 +4,7 @@ import { THelpers } from '../helper_functions/create_helper_objects';
 import {expression_variables} from '../helper_functions/expression_helpers'
 import { ECustomEdgeStatus, TCustomEdgeResponses } from '../TCustomEdgeResponse';
 
-export function aggregations_field_helper(aggregations_config: TAggregations, ignore: object, helpers: THelpers): TCustomEdgeResponses {
-  if (ignore.hasOwnProperty('dummy'))  {
-    return [{
-      message: `Dummy`,
-      status: ECustomEdgeStatus.Red
-    }] as TCustomEdgeResponses
-  }
-
+export function aggregations_field_helper(aggregations_config: TAggregations, _ignore: object, helpers: THelpers): TCustomEdgeResponses {
   const available_fields = helpers.all_fields
 
   const required_fields = flatten(aggregations_config.map(aggregation => {
