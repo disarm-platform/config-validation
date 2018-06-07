@@ -17,8 +17,7 @@ import { TPathMap } from './helper_functions/path_mapping';
 
 export interface MappedNode {
   name: string;
-  node: TApplet &
-  TDecorators &
+  node: TDecorators &
   TAggregation[] &
   TForm &
   TInstance &
