@@ -49,17 +49,16 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
   }
 
   // Find and run the custom edge validation
-  let custom_edge_responses
-  if (edge_name in custom_validations) {
-    const edge_fn: (source_node: object, target_node: object, helpers_object: THelpers) => TCustomEdgeResponse[] = get(custom_validations, edge_name);
-    custom_edge_responses = edge_fn(source_node as MappedNode, target_node as MappedNode, helpers_object);
-  } else {
+  if (!(edge_name in custom_validations)) {
     return {
       edge_name,
       message: `Cannot find ${edge_name} edge`,
       status: EStandardEdgeStatus.Red,
     }
   }
+  
+  const edge_fn: (source_node: object, target_node: object, helpers_object: THelpers) => TCustomEdgeResponse[] = get(custom_validations, edge_name);
+  const custom_edge_responses = edge_fn(source_node as MappedNode, target_node as MappedNode, helpers_object);
 
   return determine_edge_result(edge_name, nodes_exist, edge_required, custom_edge_responses)
 }
