@@ -1,6 +1,5 @@
 import { get } from 'lodash'
 import { TAggregation } from './config_types/TAggregations';
-import { TApplet } from './config_types/TApplet';
 import { TConfig } from './config_types/TConfig';
 import { TDecorators } from './config_types/TDecorators';
 import { TForm } from './config_types/TForm';
