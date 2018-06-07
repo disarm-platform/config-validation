@@ -2,6 +2,7 @@
 import { test } from 'ava';
 import { TAggregations } from '../config_types/TAggregations';
 import { TIrsMonitor } from '../config_types/TIrsMonitor';
+import { THelpers } from '../helper_functions/create_helper_objects';
 import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { irs_monitor_aggregations } from './irs_monitor_aggregations';
 
@@ -31,7 +32,8 @@ test('returns Red status if aggregation in map is not in aggregations', t => {
     }
   }
   
-  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config)
+  const empty_object = {}
+  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config, empty_object as THelpers)
 
 
   t.is(result.length, 2)
@@ -66,7 +68,8 @@ test('returns Red status if aggregation in table is not in aggregations', t => {
     }
   }
 
-  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config)
+  const empty_object = {}
+  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config, empty_object as THelpers)
 
   t.is(result.length, 1)
   t.is(result[0].status, ECustomEdgeStatus.Red)
@@ -124,7 +127,8 @@ test('returns Red status if aggregation in multiseries chart is not in aggregati
     }
   }
 
-  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config)
+  const empty_object = {}
+  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config, empty_object as THelpers)
 
   t.is(result.length, 1)
   t.is(result[0].status, ECustomEdgeStatus.Red)
@@ -179,7 +183,8 @@ test('returns Red status if aggregation in singleseries chart is not in aggregat
     }
   }
 
-  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config)
+  const empty_object = {}
+  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config, empty_object as THelpers)
 
   t.is(result.length, 1)
   t.is(result[0].status, ECustomEdgeStatus.Red)
