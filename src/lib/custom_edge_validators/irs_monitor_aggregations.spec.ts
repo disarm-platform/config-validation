@@ -73,7 +73,7 @@ test('returns Red status if aggregation in table is not in aggregations', t => {
   t.is(result[0].message, "Aggregation room spray coverage (%) is required but is not available")
 })
 
-test('returns Yellow status if aggregation in multiseries chart is not in aggregations', t => {
+test('returns Red status if aggregation in multiseries chart is not in aggregations', t => {
   const aggregations_config: TAggregations = [{
     "name": "number of rooms sprayed",
     "numerator_expr": "number_sprayed"
@@ -131,52 +131,57 @@ test('returns Yellow status if aggregation in multiseries chart is not in aggreg
   t.is(result[0].message, "Aggregation room spray coverage (%) is required but is not available")
 })
 //
-// test.skip('returns Yellow status if aggregation in singleseries chart is not in aggregations', t => {
-//   const config = {
-//     aggregations: [{
-//       "name": "number of rooms sprayed",
-//       "numerator_expr": "number_sprayed"
-//     }],
-//     applets: {
-//       irs_monitor: {
-//         charts: [
-//           {
-//             "id": "spray_status_absolute",
-//             "options": {
-//               "bin_by": "_decorated.sprayed_status",
-//               "chart_type": "bar",
-//               "layout": {
-//                 "showlegend": true,
-//                 "title": "Spray status",
-//                 "xaxis": {
-//                   "title": "Spray status"
-//                 },
-//                 "yaxis": {
-//                   "title": "# of households"
-//                 }
-//               },
-//               "single_series": {
-//                 "aggregation_name": "count"
-//               }
-//             },
-//             "style": {
-//               "height_constraint": "none",
-//               "width_constraint": "half"
-//             }
-//           }
-//         ],
-//         "map": {
-//           "aggregation_names": []
-//         },
-//         table: {
-//           "aggregation_names": []
-//         }
-//       }
-//     }
-//   }
-//   // @ts-ignore
-//   const result = irs_monitor_aggregations(config)
-//
-//   t.is(result[0].status, ECustomEdgeStatus.Red)
-//   t.is(result[0].message.length, 1)
-// })
+test('returns Red status if aggregation in singleseries chart is not in aggregations', t => {
+  const aggregations_config: TAggregations = [{
+    "name": "number of rooms sprayed",
+    "numerator_expr": "number_sprayed"
+  }]
+
+  const irs_monitor_config: TIrsMonitor = {
+    charts: [{
+      id: "room_coverage",
+      options: {
+        bin_by: "recorded_on",
+        chart_type: "line",
+        cumulative: true,
+        geographic_level_refactor_this_key_name: "location.selection.id",
+        layout: {
+          showlegend: true,
+          title: "Room coverage as % of target",
+          xaxis: {
+            title: "Period commencing"
+          },
+          yaxis: {
+            title: "% coverage"
+          },
+        },
+        single_series: {
+          aggregation_name: "count"
+        }
+      },
+      style: {
+        height_constraint: "none",
+        width_constraint: "half"
+      }
+    }],
+    map: {
+      aggregation_names: [],
+      bin_by: "location.selection.id",
+      chart_type: "map",
+      property_layers: [],
+      response_point_fields: []
+    },
+    season_start_dates: [],
+    table: {
+      aggregation_names: [],
+      bin_by: "location.selection.id",
+      property_layers: []
+    }
+  }
+
+  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config)
+
+  t.is(result.length, 1)
+  t.is(result[0].status, ECustomEdgeStatus.Red)
+  t.is(result[0].message, "Aggregation count is required but is not available")
+})
