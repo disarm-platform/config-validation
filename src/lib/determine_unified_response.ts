@@ -18,19 +18,19 @@ export function determine_unified_response(edge_responses: TStandardEdgeResponse
     };
   }
 
-  // if any Blue edges, and rest Green edges, then Green unified
-  if (blue_and_green_edges) {
+  // if all Green edges, then Green unified
+  if (all_green_edges) {
     return {
-      message: 'Passed with some optional edges',
+      message: 'All passed',
       status: EUnifiedStatus.Green,
       support_messages: edge_messages,
     };
   }
 
-  // if all Green edges, then Green unified
-  if (all_green_edges) {
+  // if any Blue edges, and rest Green edges, then Green unified
+  if (blue_and_green_edges) {
     return {
-      message: 'All passed',
+      message: 'Passed with some optional edges',
       status: EUnifiedStatus.Green,
       support_messages: edge_messages,
     };
