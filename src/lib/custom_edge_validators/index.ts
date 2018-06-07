@@ -3,11 +3,13 @@ import { irs_monitor_aggregations } from './irs_monitor_aggregations';
 import { irs_monitor_map_focus } from './irs_monitor_map_focus';
 import { irs_plan_map_focus } from './irs_plan_map_focus'
 import { irs_tasker_map_focus } from './irs_tasker_map_focus';
+import { validations_fields_helper } from './validations_fields_helper';
 
 export default {
   aggregations_field_helper,
   irs_monitor_aggregations,
   irs_monitor_map_focus,
   irs_plan_map_focus,
-  irs_tasker_map_focus
+  irs_tasker_map_focus,
+  validations_fields_helper
 };
