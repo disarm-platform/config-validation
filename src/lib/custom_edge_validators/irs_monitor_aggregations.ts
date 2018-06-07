@@ -4,8 +4,8 @@ import { TChartConfig, TIrsMonitor } from '../config_types/TIrsMonitor';
 import { ECustomEdgeStatus, TCustomEdgeResponses } from '../TCustomEdgeResponse';
 
 export function irs_monitor_aggregations(irs_monitor_config: TIrsMonitor, aggregations_config: TAggregations): TCustomEdgeResponses {
-  const required_aggregations = aggregations_config.map(a => a.name);
-  const available_aggregations = extract_aggregations_from_irs_monitor(irs_monitor_config);// TODO: Add missing aggregations from commented code 
+  const available_aggregations = aggregations_config.map(a => a.name);
+  const required_aggregations = extract_aggregations_from_irs_monitor(irs_monitor_config);// TODO: Add missing aggregations from commented code 
 
   return required_aggregations.map(required_aggregation => {
     if (available_aggregations.includes(required_aggregation)) {

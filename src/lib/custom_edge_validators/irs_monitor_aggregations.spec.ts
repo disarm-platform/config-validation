@@ -1,61 +1,48 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-// import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
-// import { irs_monitor_aggregations } from './irs_monitor_aggregations';
-
-test('title', t => {
-  t.true(true);
-});
+import { TAggregations } from '../config_types/TAggregations';
+import { TIrsMonitor } from '../config_types/TIrsMonitor';
+import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
+import { irs_monitor_aggregations } from './irs_monitor_aggregations';
 
 
-//
-// test.skip('returns Yellow status if aggregation in map is not in aggregations', t => {
-//   const config = {
-//     aggregations: [{
-//       "name": "number of rooms sprayed",
-//       "numerator_expr": "number_sprayed"
-//     }],
-//     applets: {
-//       irs_monitor: {
-//         charts: [],
-//         "map": {
-//           "aggregation_names": [
-//             "number of rooms sprayed",
-//             "room spray coverage (%)"
-//           ],
-//           "bin_by": "location.selection.id",
-//           "chart_type": "map",
-//           "property_layers": [
-//             {
-//               "label": "Risk",
-//               "property": "risk",
-//             },
-//             {
-//               "label": "Number of rooms",
-//               "property": "Num_Rooms",
-//             }
-//           ],
-//           "response_point_fields": [
-//             "recorded_on",
-//             "form_data.number_of_buildings_in_homesteads",
-//             "form_data.number_of_rooms",
-//             "_decorated.sprayed_status",
-//             "form_data.number_sprayed",
-//             "form_data.number_of_rooms_not_sprayed"
-//           ]
-//         },
-//         table: {
-//           "aggregation_names": []
-//         }
-//       }
-//     }
-//   }
-//   // @ts-ignore
-//   const result = irs_monitor_aggregations(config)
-//
-//   t.is(result[0].status, ECustomEdgeStatus.Red)
-//   t.is(result[0].message.length, 1)
-// })
+
+test('returns Red status if aggregation in map is not in aggregations', t => {
+  const aggregations_config: TAggregations = [{
+    "name": "number of rooms sprayed",
+    "numerator_expr": "number_sprayed"
+  }]
+
+  const irs_monitor_config : TIrsMonitor = {
+    charts: [],
+    map: {
+      aggregation_names: [
+        "number of rooms sprayed",
+        "room spray coverage (%)"
+      ],
+      bin_by: "location.selection.id",
+      chart_type: "map",
+      property_layers: [],
+      response_point_fields: []
+    },
+    season_start_dates: [],
+    table: {
+      aggregation_names: [],
+      bin_by: "location.selection.id",
+      property_layers: []
+    }
+  }
+  // @ts-ignore
+  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config)
+
+
+  t.is(result.length, 2)
+  t.is(result[1].status, ECustomEdgeStatus.Red)
+  t.is(result[1].message, "Aggregation room spray coverage (%) is required but is not available")
+
+  t.is(result[0].status, ECustomEdgeStatus.Green)
+  t.is(result[0].message, "Aggregation number of rooms sprayed is required and is available")
+})
 //
 // test.skip('returns Yellow status if aggregation in table is not in aggregations', t => {
 //   const config = {
