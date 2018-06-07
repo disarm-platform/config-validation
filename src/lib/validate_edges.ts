@@ -44,11 +44,15 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
   const edge_required = edge_definition.required;
   const edge_name = `${edge_definition.source_node_name}_${edge_definition.target_node_name}`;
 
+  if (nodes_exist.status === ENodeResponseStatus.Green) {
+    return determine_edge_result(edge_name, nodes_exist, edge_required)
+  }
+
   // Find and run the custom edge validation
   let custom_edge_responses
   if (edge_name in custom_validations) {
     const edge_fn: (source_node: object, target_node: object, helpers_object: THelpers) => TCustomEdgeResponse[] = get(custom_validations, edge_name);
-    custom_edge_responses = edge_fn(source_node, target_node, helpers_object);
+    custom_edge_responses = edge_fn(source_node as MappedNode, target_node as MappedNode, helpers_object);
   } else {
     return {
       edge_name,
@@ -60,13 +64,13 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
   return determine_edge_result(edge_name, nodes_exist, edge_required, custom_edge_responses)
 }
 
-function determine_edge_result(edge_name: string, node_responses: TNodeResponse[], edge_required: boolean, custom_edge_responses?: TCustomEdgeResponses, ): TStandardEdgeResponse {
+function determine_edge_result(edge_name: string, node_response: TNodeResponse, edge_required: boolean, custom_edge_responses?: TCustomEdgeResponses, ): TStandardEdgeResponse {
   // Create a default response in case none of the other cases match.
   const response = {edge_name, status: EStandardEdgeStatus.Red, message: 'Default response - not caught by any other cases'}
 
   // All the tools
   const edge_optional = !edge_required
-  const nodes_pass = node_responses.every(r => r.status === ENodeResponseStatus.Green)
+  const nodes_pass = node_response.status === ENodeResponseStatus.Green
   const nodes_fail = !nodes_pass
   const edge_passes = custom_edge_responses && custom_edge_responses.every(r => r.status === ECustomEdgeStatus.Green)
   const edge_fails  = !edge_passes
