@@ -97,19 +97,21 @@ export function irs_monitor_aggregations(irs_monitor_config: TIrsMonitor, aggreg
 // }
 
 function extract_aggregations_from_irs_monitor(irs_monitor_config: TIrsMonitor): string[] {
-  const chart_aggregations = irs_monitor_config.charts.filter((chartConfig: TChartConfig) => {
-    if (chartConfig.chart_type === 'text') {
-      return false
+  const chart_aggregations: string[] = []
+
+  for (const chart of irs_monitor_config.charts) {
+    if (chart.options.single_series) {
+      chart_aggregations.push(chart.options.single_series.aggregation_name)
     }
 
-    if (chartConfig.options.generate_series_from) {
-      return false
+    if (chart.options.multi_series) {
+      chart.options.multi_series.forEach(({ aggregation_name }) => chart_aggregations.push(aggregation_name))
     }
-
-    return true
-  })
+  }
 
   const map_aggregations = get(irs_monitor_config, 'map.aggregation_names')
+
+  const table_aggregations = get(irs_monitor_config, 'table.aggregation_names')
   
-  return [...chart_aggregations, ...map_aggregations];
+  return [...chart_aggregations, ...map_aggregations, ...table_aggregations];
 }
