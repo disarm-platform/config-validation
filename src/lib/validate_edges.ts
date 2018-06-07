@@ -1,11 +1,10 @@
-import { get } from 'lodash';
 import { TConfig } from './config_types/TConfig';
-import custom_validations from './custom_edge_validators/index';
+import { CustomEdgeValidators } from './custom_edge_validators/index';
 import { mapped_nodes, MappedNode } from './flatten_nodes';
 import { THelpers } from './helper_functions/create_helper_objects';
 import { create_helper_objects } from './helper_functions/index';
 import { TPathMap } from './helper_functions/path_mapping';
-import { ECustomEdgeStatus, TCustomEdgeResponse, TCustomEdgeResponses } from './TCustomEdgeResponse';
+import { ECustomEdgeStatus, TCustomEdgeResponses } from './TCustomEdgeResponse';
 import { TEdgeDefinition } from './TEdgeDefinition';
 import { ENodeResponseStatus, TNodeResponse } from './TNodeResponse';
 import { EStandardEdgeStatus, TStandardEdgeResponse } from './TStandardEdgeResponse';
@@ -46,7 +45,7 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
   }
   
   // Find and run the custom edge validation
-  if (!(edge_name in custom_validations)) {
+  if (!(edge_name in CustomEdgeValidators)) {
     return {
       edge_name,
       message: `Cannot find ${edge_name} edge`,
@@ -54,7 +53,7 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
     }
   }
   
-  const edge_fn: (source_node: MappedNode, target_node: MappedNode, helpers_object: THelpers) => TCustomEdgeResponse[] = custom_validations[edge_name]
+  const edge_fn = CustomEdgeValidators[edge_name]
   const custom_edge_responses = edge_fn(source_node, target_node, helpers_object);
 
   return determine_edge_result(edge_name, nodes_exist, edge_required, custom_edge_responses)

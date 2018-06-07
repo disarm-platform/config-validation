@@ -14,20 +14,22 @@ import { TSpatialHierarchy } from './config_types/TSpatialHierarchy';
 import { TValidation } from './config_types/TValidations';
 import { TPathMap } from './helper_functions/path_mapping';
 
+export type Node =  TDecorators |
+  TAggregation[] |
+  TForm |
+  TInstance |
+  TIrsMonitor |
+  TIrsPlan |
+  TIrsRecordPoint |
+  TIrsTasker |
+  TLocationSelection |
+  TMapFocus |
+  TSpatialHierarchy |
+  TValidation[]; 
+
 export interface MappedNode {
   name: string;
-  node: TDecorators &
-  TAggregation[] &
-  TForm &
-  TInstance &
-  TIrsMonitor &
-  TIrsPlan &
-  TIrsRecordPoint &
-  TIrsTasker &
-  TLocationSelection &
-  TMapFocus &
-  TSpatialHierarchy &
-  TValidation[];
+  node: Node
 }
 
 export function mapped_nodes(config: TConfig, path_map: TPathMap[]): MappedNode[] {
