@@ -11,6 +11,7 @@ export function expression_variables(expressionString: string) : string[] {
 }
 
 export function get_form_fields_for_validations(validations: TValidation[]) : string[] {
+  // TODO: return a array of unique elements, currently has duplicates
   return validations.reduce((acc: string[], validation: TValidation) => {
     return [...acc, ...expression_variables(validation.expression)]
   }, [])
