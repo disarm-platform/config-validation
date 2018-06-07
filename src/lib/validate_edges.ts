@@ -63,7 +63,7 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
   return determine_edge_result(edge_name, nodes_exist, edge_required, custom_edge_responses)
 }
 
-function determine_edge_result(edge_name: string, node_response: TNodeResponse, edge_required: boolean, custom_edge_responses?: TCustomEdgeResponses, ): TStandardEdgeResponse {
+export function determine_edge_result(edge_name: string, node_response: TNodeResponse, edge_required: boolean, custom_edge_responses?: TCustomEdgeResponses, ): TStandardEdgeResponse {
   // Create a default response in case none of the other cases match.
   const response = {edge_name, status: EStandardEdgeStatus.Red, message: 'Default response - not caught by any other cases'}
 
@@ -78,22 +78,51 @@ function determine_edge_result(edge_name: string, node_response: TNodeResponse, 
   // 2 cases are dealt with by short-circuiting if nodes fail
   // Leaves 6 cases to deal with explicitly
   if (nodes_fail && edge_required) {
-    return {...response, status: EStandardEdgeStatus.Red, message: 'Failed - some missing node' }
+    return {
+      ...response, 
+      message: 'Failed - some missing node' ,
+      status: EStandardEdgeStatus.Red
+    }
   }
+
   if (nodes_fail && edge_optional) {
-    return {...response, status: EStandardEdgeStatus.Blue, message: 'One or more missing nodes, but edge not required' }
+    return {
+      ...response, 
+      message: 'One or more missing nodes, but edge not required',
+      status: EStandardEdgeStatus.Blue
+    }
   }
+
   if (nodes_pass && edge_required && edge_passes) {
-    return {...response, status: EStandardEdgeStatus.Green, message: 'Required edge, nodes present and edge passes' }
+    return {
+      ...response, 
+      message: 'Required edge, nodes present and edge passes',
+      status: EStandardEdgeStatus.Green
+    }
   }
+
   if (nodes_pass && edge_optional && edge_passes) {
-    return {...response, status: EStandardEdgeStatus.Green, message: 'Optional edge, nodes present and edge passes' }
+    return {
+      ...response, 
+      message: 'Optional edge, nodes present and edge passes',
+      status: EStandardEdgeStatus.Green
+    }
   }
+
   if (nodes_pass && edge_required && edge_fails) {
-    return {...response, status: EStandardEdgeStatus.Red, message: 'Required edge, nodes present and edge fails' }
+    return {
+      ...response, 
+      message: 'Required edge, nodes present and edge fails',
+      status: EStandardEdgeStatus.Red
+    }
   }
+
   if (nodes_pass && edge_optional && edge_fails) {
-    return {...response, status: EStandardEdgeStatus.Red, message: 'Optional edge, nodes present and edge fails' }
+    return {
+      ...response, 
+      message: 'Optional edge, nodes present and edge fails',
+      status: EStandardEdgeStatus.Red
+    }
   }
 
   // Only used for fallthrough
