@@ -44,7 +44,7 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
   const edge_required = edge_definition.required;
   const edge_name = `${edge_definition.source_node_name}_${edge_definition.target_node_name}`;
 
-  if (nodes_exist.status === ENodeResponseStatus.Green) {
+  if (nodes_exist.status === ENodeResponseStatus.Red) {
     return determine_edge_result(edge_name, nodes_exist, edge_required)
   }
 
