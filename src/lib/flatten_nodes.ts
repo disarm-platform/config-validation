@@ -1,6 +1,6 @@
 import {get} from 'lodash'
 import { TConfig } from './config_types/TConfig';
-import { TPathMap } from './helpers/path_mapping';
+import { TPathMap } from './helper_functions/path_mapping';
 
 export interface MappedNode {
   name: string;
