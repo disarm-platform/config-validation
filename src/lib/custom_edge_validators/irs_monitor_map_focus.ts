@@ -1,9 +1,9 @@
-import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
+import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse";
 
-export function irs_monitor_map_focus(): TCustomEdgeResponse {
+export function irs_monitor_map_focus(): TCustomEdgeResponses {
   // Nothing to check. Schema validity and existence of nodes should already have been confirmed
-  return {
+  return [{
     message: 'Nothing to check',
     status: ECustomEdgeStatus.Green
-  }
+  }]
 }
