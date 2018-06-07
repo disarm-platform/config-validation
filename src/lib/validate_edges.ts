@@ -24,6 +24,10 @@ export function validate_edges(config: TConfig, path_map: TPathMap[], edge_defin
 function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, helpers_object: THelpers): TStandardEdgeResponse {
   let nodes_exist: TNodeResponse;
 
+  // Tell me about this Edge
+  const edge_required = edge_definition.required;
+  const edge_name = `${edge_definition.source_node_name}_${edge_definition.target_node_name}`;
+
   // Basic checks for Node existence
   const source_node = nodes.find(n => n.name === edge_definition.source_node_name);
   const target_node = nodes.find(n => n.name === edge_definition.target_node_name);
@@ -33,21 +37,14 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
       message: 'Missing source or target node',
       status: ENodeResponseStatus.Red
     }
-  } else {
-    nodes_exist = {
-      message: 'Both nodes exist',
-      status: ENodeResponseStatus.Green
-    }
-  }
-
-  // Tell me about this Edge
-  const edge_required = edge_definition.required;
-  const edge_name = `${edge_definition.source_node_name}_${edge_definition.target_node_name}`;
-
-  if (nodes_exist.status === ENodeResponseStatus.Red) {
     return determine_edge_result(edge_name, nodes_exist, edge_required)
+  } 
+  
+  nodes_exist = {
+    message: 'Both nodes exist',
+    status: ENodeResponseStatus.Green
   }
-
+  
   // Find and run the custom edge validation
   if (!(edge_name in custom_validations)) {
     return {
@@ -57,8 +54,8 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
     }
   }
   
-  const edge_fn: (source_node: object, target_node: object, helpers_object: THelpers) => TCustomEdgeResponse[] = get(custom_validations, edge_name);
-  const custom_edge_responses = edge_fn(source_node as MappedNode, target_node as MappedNode, helpers_object);
+  const edge_fn: (source_node: MappedNode, target_node: MappedNode, helpers_object: THelpers) => TCustomEdgeResponse[] = custom_validations[edge_name]
+  const custom_edge_responses = edge_fn(source_node, target_node, helpers_object);
 
   return determine_edge_result(edge_name, nodes_exist, edge_required, custom_edge_responses)
 }
