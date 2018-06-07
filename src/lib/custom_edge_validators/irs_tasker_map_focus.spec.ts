@@ -5,5 +5,5 @@ import { irs_tasker_map_focus } from './irs_tasker_map_focus';
 
 test('should return Green status', t => {
   const result = irs_tasker_map_focus()
-  t.is(result.status, ECustomEdgeStatus.Green)
+  t.is(result[0].status, ECustomEdgeStatus.Green)
 })
