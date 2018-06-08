@@ -1,10 +1,17 @@
 // // tslint:disable:no-expression-statement
-// import { test } from 'ava';
-// import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
-// import { decorators_fields_helper } from '../helpers/decorators_fields_helper';
-//
-// test('returns Yellow if fields in decorator is not in form', t => {
-//   const config = {
+import { test } from 'ava';
+import { TConfig } from '../config_types/TConfig';
+import { ECustomEdgeStatus } from "../TCustomEdgeResponse";
+import { decorators_form } from './decorators_form';
+
+test.failing('should return Green status', t => {
+  const empty_object = {}
+  const result = decorators_form(empty_object as TConfig)
+  t.is(result[0].status, ECustomEdgeStatus.Green)
+})
+
+test.skip('returns Yellow if fields in decorator is not in form', t => {
+// const config = {
 //     "decorators": {
 //       "status": [
 //         {
@@ -50,14 +57,10 @@
 //       ]
 //     }
 //   }
-//   // @ts-ignore
-//   const result = decorators_fields_helper(config)
-//
-//   t.is(result.status, ECustomEdgeStatus.Yellow)
-//   t.is(result.messages.length, 1)
-// })
-//
-// test('returns Green if fields in decorator is in form', t => {
+  t.true(true)
+})
+
+test.skip('returns Green if fields in decorator is in form', t => {
 //   const config = {
 //     "decorators": {
 //       "status": [
@@ -104,9 +107,5 @@
 //       ]
 //     }
 //   }
-//   // @ts-ignore
-//   const result = decorators_fields_helper(config)
-//
-//   t.is(result.status, ECustomEdgeStatus.Green)
-//   t.is(result.messages.length, 0)
-// })
+  t.true(true)
+})
