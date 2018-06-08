@@ -1,17 +1,17 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
+import { TConfig } from '../config_types/TConfig';
 import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { irs_monitor_aggregations } from './irs_monitor_aggregations';
-import { TConfig } from '../config_types/TConfig';
 
 test('returns Red status if aggregation in map is not in aggregations', t => {
   const config = {
     aggregations: [{
-      "name": "number of rooms sprayed",
-      "numerator_expr": "number_sprayed"
+      name: "number of rooms sprayed",
+      numerator_expr: "number_sprayed"
     }],
-    applets:{
-      irs_monitor:{
+    applets: {
+      irs_monitor: {
         charts: [],
         map: {
           aggregation_names: [
@@ -27,10 +27,10 @@ test('returns Red status if aggregation in map is not in aggregations', t => {
         table: {
           aggregation_names: [],
           bin_by: "location.selection.id",
+          chart_type: 'table',
           property_layers: []
         }
       }
-    
     }
   }
 
