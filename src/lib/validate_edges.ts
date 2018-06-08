@@ -1,8 +1,6 @@
 import { TConfig } from './config_types/TConfig';
 import { CustomEdgeValidators } from './custom_edge_validators/index';
 import { mapped_nodes, MappedNode } from './flatten_nodes';
-import { THelpers } from './helper_functions/create_helper_objects';
-import { create_helper_objects } from './helper_functions/index';
 import { TPathMap } from './helper_functions/path_mapping';
 import { ECustomEdgeStatus, TCustomEdgeResponses } from './TCustomEdgeResponse';
 import { TEdgeDefinition } from './TEdgeDefinition';
@@ -11,16 +9,15 @@ import { EStandardEdgeStatus, TStandardEdgeResponse } from './TStandardEdgeRespo
 
 export function validate_edges(config: TConfig, path_map: TPathMap[], edge_definitions: TEdgeDefinition[]): TStandardEdgeResponse[] {
   // create helpers
-  const helper_objects = create_helper_objects(config);
   const nodes = mapped_nodes(config, path_map);
 
   // For every edge_definition do all the validation
   return edge_definitions.map(edge_definition => {
-    return validate_edge(nodes, edge_definition, helper_objects);
+    return validate_edge(config, nodes, edge_definition);
   });
 }
 
-function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, helpers_object: THelpers): TStandardEdgeResponse {
+function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TEdgeDefinition): TStandardEdgeResponse {
   let nodes_exist: TNodeResponse;
 
   // Tell me about this Edge
@@ -54,7 +51,7 @@ function validate_edge(nodes: MappedNode[], edge_definition: TEdgeDefinition, he
   }
   
   const edge_fn = CustomEdgeValidators[edge_name]
-  const custom_edge_responses = edge_fn(source_node.node, target_node.node, helpers_object);
+  const custom_edge_responses = edge_fn(config);
 
   return determine_edge_result(edge_name, nodes_exist, edge_required, custom_edge_responses)
 }
