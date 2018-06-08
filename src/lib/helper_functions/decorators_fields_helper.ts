@@ -1,8 +1,8 @@
-import uniq from 'lodash.uniq'
+import {uniq} from 'lodash'
 import { TDecorators } from "../config_types/TDecorators";
 import { expression_variables } from "./expression_helpers";
 
-// TODO: Test this function
+
 export function fields_in_decorators(decorators: TDecorators): string[] {
   let all_variables : string[] = []
   const decoratorNames = Object.keys(decorators);
