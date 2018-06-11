@@ -1,7 +1,6 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
 import { TConfig } from '../config_types/TConfig';
-import { create_helper_objects } from '../helper_functions';
 import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { validations_fields_helper } from './validations_fields_helper';
 
@@ -36,12 +35,10 @@ test('returns Red status if validations expression form field is not in form', t
     "type": "error"
   }]
 
-  const fields_helper_not_fields_helper = {}
-
   const config = { form, validations, decorators: {}}
-  const helpers = create_helper_objects(config as TConfig)
+  
 
-  const result = validations_fields_helper(validations, fields_helper_not_fields_helper, helpers)
+  const result = validations_fields_helper(config as TConfig)
 
   t.is(result.length, 2)
   
@@ -81,12 +78,11 @@ test('returns Green status if validations are valid', t => {
     "type": "error"
   }]
 
-  const fields_helper_not_fields_helper = {}
+
 
   const config = { form, validations, decorators: {} }
-  const helpers = create_helper_objects(config as TConfig)
 
-  const result = validations_fields_helper(validations, fields_helper_not_fields_helper, helpers)
+  const result = validations_fields_helper(config as TConfig)
 
   t.is(result.length, 1)
 

@@ -1,9 +1,7 @@
-import { TIrsTasker } from '../config_types/TIrsTasker';
-import { TMapFocus } from '../config_types/TMapFocus';
-import { THelpers } from '../helper_functions/create_helper_objects';
 import { ECustomEdgeStatus, TCustomEdgeResponses } from '../TCustomEdgeResponse';
+import { TConfig } from '../config_types/TConfig';
 
-export function irs_tasker_map_focus(_irs_tasker_config: TIrsTasker, _map_focus_config: TMapFocus, _helpers: THelpers): TCustomEdgeResponses {
+export function irs_tasker_map_focus(_config: TConfig): TCustomEdgeResponses {
   // Nothing to check. Schema validity and existence of nodes should already have been confirmed
   return [{
     message: 'Nothing to check',

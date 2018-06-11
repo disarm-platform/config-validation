@@ -1,18 +1,13 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
-import { TAggregations } from '../config_types/TAggregations';
+import { TConfig } from '../config_types/TConfig';
 import { TIrsMonitor } from '../config_types/TIrsMonitor';
-import { THelpers } from '../helper_functions/create_helper_objects';
 import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { irs_monitor_aggregations } from './irs_monitor_aggregations';
+import { TAggregations } from '../config_types/TAggregations';
 
 test('returns Red status if aggregation in map is not in aggregations', t => {
-  const aggregations_config: TAggregations = [{
-    "name": "number of rooms sprayed",
-    "numerator_expr": "number_sprayed"
-  }]
-
-  const irs_monitor_config : TIrsMonitor = {
+  const irs_monitor: TIrsMonitor = {
     charts: [],
     map: {
       aggregation_names: [
@@ -28,12 +23,22 @@ test('returns Red status if aggregation in map is not in aggregations', t => {
     table: {
       aggregation_names: [],
       bin_by: "location.selection.id",
+      chart_type: 'table',
       property_layers: []
     }
   }
-  
-  const empty_object = {}
-  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config, empty_object as THelpers)
+
+  const config = {
+    aggregations: [{
+      name: "number of rooms sprayed",
+      numerator_expr: "number_sprayed"
+    }],
+    applets: {
+      irs_monitor
+    }
+  }
+
+  const result = irs_monitor_aggregations(config as TConfig)
 
 
   t.is(result.length, 2)
@@ -46,12 +51,12 @@ test('returns Red status if aggregation in map is not in aggregations', t => {
 
 
 test('returns Red status if aggregation in table is not in aggregations', t => {
-  const aggregations_config: TAggregations = [{
+  const aggregations: TAggregations = [{
     "name": "number of rooms sprayed",
     "numerator_expr": "number_sprayed"
   }]
 
-  const irs_monitor_config: TIrsMonitor = {
+  const irs_monitor: TIrsMonitor = {
     charts: [],
     map: {
       aggregation_names: [],
@@ -68,8 +73,15 @@ test('returns Red status if aggregation in table is not in aggregations', t => {
     }
   }
 
-  const empty_object = {}
-  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config, empty_object as THelpers)
+  const config = {
+    aggregations,
+    applets:{
+      irs_monitor
+    }
+  }
+
+
+  const result = irs_monitor_aggregations(config as TConfig)
 
   t.is(result.length, 1)
   t.is(result[0].status, ECustomEdgeStatus.Red)
@@ -77,12 +89,12 @@ test('returns Red status if aggregation in table is not in aggregations', t => {
 })
 
 test('returns Red status if aggregation in multiseries chart is not in aggregations', t => {
-  const aggregations_config: TAggregations = [{
+  const aggregations: TAggregations = [{
     "name": "number of rooms sprayed",
     "numerator_expr": "number_sprayed"
   }]
 
-  const irs_monitor_config: TIrsMonitor = {
+  const irs_monitor: TIrsMonitor = {
     charts: [{
       id: "room_coverage",
       options: {
@@ -127,21 +139,26 @@ test('returns Red status if aggregation in multiseries chart is not in aggregati
     }
   }
 
-  const empty_object = {}
-  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config, empty_object as THelpers)
+  const config = {
+    aggregations,
+    applets:{
+      irs_monitor
+    }
+  }
+  const result = irs_monitor_aggregations(config as TConfig)
 
   t.is(result.length, 1)
   t.is(result[0].status, ECustomEdgeStatus.Red)
   t.is(result[0].message, "Aggregation room spray coverage (%) is required but is not available")
 })
-//
+
 test('returns Red status if aggregation in singleseries chart is not in aggregations', t => {
-  const aggregations_config: TAggregations = [{
+  const aggregations: TAggregations = [{
     "name": "number of rooms sprayed",
     "numerator_expr": "number_sprayed"
   }]
 
-  const irs_monitor_config: TIrsMonitor = {
+  const irs_monitor: TIrsMonitor = {
     charts: [{
       id: "room_coverage",
       options: {
@@ -183,8 +200,13 @@ test('returns Red status if aggregation in singleseries chart is not in aggregat
     }
   }
 
-  const empty_object = {}
-  const result = irs_monitor_aggregations(irs_monitor_config, aggregations_config, empty_object as THelpers)
+  const config = {
+    aggregations,
+    applets:{
+      irs_monitor
+    }
+  }
+  const result = irs_monitor_aggregations(config as TConfig)
 
   t.is(result.length, 1)
   t.is(result[0].status, ECustomEdgeStatus.Red)
