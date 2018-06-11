@@ -1,6 +1,6 @@
 import { TConfig } from '../config_types/TConfig';
 import { TCustomEdgeResponse } from '../TCustomEdgeResponse';
-import { aggregations_field_helper } from './aggregations_field_helper';
+import { aggregations_fields_helper } from './aggregations_field_helper';
 import { aggregations_spatial_hierarchy } from './aggregations_spatial_hierarchy';
 import { decorators_form } from './decorators_form';
 import { irs_monitor_aggregations } from './irs_monitor_aggregations';
@@ -24,7 +24,7 @@ export interface TCustomEdgeValidators {
 }
 
 export const CustomEdgeValidators: TCustomEdgeValidators = {
-  aggregations_field_helper,
+  aggregations_fields_helper,
   aggregations_spatial_hierarchy,
   decorators_form,
   irs_monitor_aggregations,

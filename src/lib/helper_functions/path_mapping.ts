@@ -11,6 +11,7 @@ const PathMap: TPathMap[] = [
   { name: 'irs_plan', path: 'applets.irs_plan' },
   { name: 'irs_record_point', path: 'applets.irs_record_point' },
   { name: 'irs_tasker', path: 'applets.irs_tasker' },
+  { name: 'fields_helper', path: 'form' },
   { name: 'location_selection', path: 'location_selection' },
   { name: 'map_focus', path: 'map_focus' },
   { name: 'meta', path: 'applets.meta' },

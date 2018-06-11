@@ -2,7 +2,7 @@
 import { test } from 'ava';
 import { TConfig } from '../config_types/TConfig';
 import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
-import { aggregations_field_helper } from './aggregations_field_helper';
+import { aggregations_fields_helper } from './aggregations_field_helper';
 
 test('returns Green status if field in aggregations is in form', t => {
   const config = {
@@ -35,7 +35,7 @@ test('returns Green status if field in aggregations is in form', t => {
     }
   }
 
-  const result = aggregations_field_helper(config as TConfig)
+  const result = aggregations_fields_helper(config as TConfig)
 
   t.is(result[0].status, ECustomEdgeStatus.Green)
 })
