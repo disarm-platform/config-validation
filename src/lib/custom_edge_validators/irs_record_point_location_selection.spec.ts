@@ -2,10 +2,10 @@
 import { test } from 'ava';
 import { TConfig } from '../config_types/TConfig';
 import { ECustomEdgeStatus } from "../TCustomEdgeResponse";
-import { irs_monitor_map_focus } from './irs_monitor_map_focus';
+import { irs_record_point_location_selection } from './irs_record_point_location_selection';
 
 test('should return Green status', t => {
-  const config = {}
-  const result = irs_monitor_map_focus(config as TConfig)
+  const empty_object = {}
+  const result = irs_record_point_location_selection(empty_object as TConfig)
   t.is(result[0].status, ECustomEdgeStatus.Green)
 })

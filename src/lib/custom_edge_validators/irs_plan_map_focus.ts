@@ -1,10 +1,8 @@
-import { TIrsPlan } from "../config_types/TIrsPlan";
-import { TMapFocus } from "../config_types/TMapFocus";
-import { THelpers } from "../helper_functions/create_helper_objects";
 import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse";
+import { TConfig } from "../config_types/TConfig";
 
 
-export function irs_plan_map_focus(_irs_plan_config: TIrsPlan, _map_focus_config: TMapFocus, _helpers: THelpers): TCustomEdgeResponses {
+export function irs_plan_map_focus(_config: TConfig): TCustomEdgeResponses {
   return [{
     message: 'Nothing to check',
     status: ECustomEdgeStatus.Green

@@ -9,14 +9,16 @@ export function decorator_fields(decorators: TDecorators) : string[] {
 }
 
 export function all_fields(config: TConfig) : TFields {
-  // TODO: Rethink. If we don't have decorators you don't get form fields. Probably want to reconsider.
-  if (!config.form || !config.decorators) {
-    console.log('Some problem. Bad way to handle it... this looks like an array of fields')
-    return []
+  let all_the_fields: string[] = []
+
+  if (config.form) {
+    all_the_fields = form_fields(config.form)
   }
 
-  const formFields = form_fields(config.form)
-  const decoratorFields = decorator_fields(config.decorators)
+  if (config.decorators) {
+    all_the_fields = [...all_the_fields, ...decorator_fields(config.decorators)]
+  }
 
-  return [...formFields, ...decoratorFields]
+
+  return all_the_fields
 }

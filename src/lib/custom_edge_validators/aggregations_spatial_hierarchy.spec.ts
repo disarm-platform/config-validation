@@ -2,10 +2,10 @@
 import { test } from 'ava';
 import { TConfig } from '../config_types/TConfig';
 import { ECustomEdgeStatus } from "../TCustomEdgeResponse";
-import { irs_monitor_map_focus } from './irs_monitor_map_focus';
+import { aggregations_spatial_hierarchy } from './aggregations_spatial_hierarchy';
 
 test('should return Green status', t => {
-  const config = {}
-  const result = irs_monitor_map_focus(config as TConfig)
+  const empty_object = {}
+  const result = aggregations_spatial_hierarchy(empty_object as TConfig)
   t.is(result[0].status, ECustomEdgeStatus.Green)
 })

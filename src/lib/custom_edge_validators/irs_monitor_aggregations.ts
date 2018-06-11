@@ -1,10 +1,15 @@
 import { get } from 'lodash';
 import { TAggregations } from '../config_types/TAggregations';
+import { TConfig } from '../config_types/TConfig';
 import { TIrsMonitor } from '../config_types/TIrsMonitor';
-import { THelpers } from '../helper_functions/create_helper_objects';
 import { ECustomEdgeStatus, TCustomEdgeResponses } from '../TCustomEdgeResponse';
 
-export function irs_monitor_aggregations(irs_monitor_config: TIrsMonitor, aggregations_config: TAggregations, _helpers: THelpers): TCustomEdgeResponses {
+export function irs_monitor_aggregations(config: TConfig): TCustomEdgeResponses {
+
+  const aggregations_config = config.aggregations as TAggregations
+  const irs_monitor_config = config.applets.irs_monitor as TIrsMonitor 
+
+
   const available_aggregations = aggregations_config.map(a => a.name);
   const required_aggregations = extract_aggregations_from_irs_monitor(irs_monitor_config);// TODO: Add missing aggregations from commented code 
 

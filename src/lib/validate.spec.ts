@@ -4,7 +4,7 @@ import { THeightConstraint, TWidthConstraint } from './config_types/TIrsMonitor'
 import { EUnifiedStatus } from './TUnifiedResponse'
 import { validate } from './validate'
 
-test.failing('returns Red for an invalid configreturns Red for an invalid config', t => {
+test('returns Red for an invalid configreturns Red for an invalid config', t => {
   // tslint:disable:object-literal-sort-keys
   const invalidNamConfig = {
     "config_id": "nam",
@@ -11449,7 +11449,7 @@ test.failing('returns Red for an invalid configreturns Red for an invalid config
   }
   // @ts-ignore
   const response = validate(invalidNamConfig)
-  // console.log(response)
+  console.log(response)
 
   // the title of the test says this is invalid, so why are we expecting Green? 
   // TODO: Fix failing test

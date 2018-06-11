@@ -1,9 +1,12 @@
 import { TValidations } from '../config_types/TValidations';
-import { THelpers } from '../helper_functions/create_helper_objects';
+import { create_helper_objects } from '../helper_functions/create_helper_objects';
 import { get_form_fields_for_validations } from '../helper_functions/expression_helpers';
 import { ECustomEdgeStatus, TCustomEdgeResponses,  } from '../TCustomEdgeResponse';
+import { TConfig } from '../config_types/TConfig';
 
-export function validations_fields_helper(validations_config: TValidations, _ignore: object, helpers: THelpers): TCustomEdgeResponses {
+export function validations_fields_helper(config: TConfig): TCustomEdgeResponses {
+  const helpers = create_helper_objects(config)
+  const validations_config: TValidations = config.validations as TValidations;
   const available_fields = helpers.all_fields
   const fields_in_validations = get_form_fields_for_validations(validations_config)
   
