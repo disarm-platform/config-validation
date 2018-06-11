@@ -4,7 +4,7 @@ import {test} from 'ava';
 import {EUnifiedStatus} from './TUnifiedResponse'
 import {validate} from './validate'
 
-test('returns Red for an invalid configreturns Red for an invalid config', (t, colour = "green") => {
+test('Config validations used by table, charts and map are not available', (t, colour = "green") => {
   // tslint:disable:object-literal-sort-keys
   //Invalid config, aggregations is an empty array
   const invalidNamConfig = {
@@ -4620,7 +4620,7 @@ test('returns Red for an invalid configreturns Red for an invalid config', (t, c
 
   // the title of the test says this is invalid, so why are we expecting Green?
   // TODO: Fix failing test
-  t.is(response.status, EUnifiedStatus.Green)
+  t.is(response.status, EUnifiedStatus.Red)
 })
 
 // TODO: test this when all the edges have been added.
