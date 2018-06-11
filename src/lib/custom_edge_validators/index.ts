@@ -3,6 +3,8 @@ import { TCustomEdgeResponse } from '../TCustomEdgeResponse';
 import { aggregations_fields_helper } from './aggregations_field_helper';
 import { aggregations_spatial_hierarchy } from './aggregations_spatial_hierarchy';
 import { decorators_form } from './decorators_form';
+import { fields_helper_decorators } from './fields_helper_decorators';
+import { fields_helper_form } from './fields_helper_form';
 import { irs_monitor_aggregations } from './irs_monitor_aggregations';
 import { irs_monitor_fields_helper } from './irs_monitor_fields_helper';
 import { irs_monitor_map_focus } from './irs_monitor_map_focus';
@@ -27,6 +29,8 @@ export const CustomEdgeValidators: TCustomEdgeValidators = {
   aggregations_fields_helper,
   aggregations_spatial_hierarchy,
   decorators_form,
+  fields_helper_decorators,
+  fields_helper_form,
   irs_monitor_aggregations,
   irs_monitor_fields_helper,
   irs_monitor_map_focus,
