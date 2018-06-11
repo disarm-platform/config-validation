@@ -1,12 +1,11 @@
 // tslint:disable:no-expression-statement
 import {test} from 'ava';
-//import { THeightConstraint, TWidthConstraint } from './config_types/TIrsMonitor';
 import {EUnifiedStatus} from './TUnifiedResponse'
 import {validate} from './validate'
 
 test('Config validations used by table, charts and map are not available', (t, colour = "green") => {
   // tslint:disable:object-literal-sort-keys
-  //Invalid config, aggregations is an empty array
+  // Invalid config, aggregations is an empty array
   const invalidNamConfig = {
     "_id": "nam@1.0.5",
     "config_id": "nam",
@@ -4616,7 +4615,10 @@ test('Config validations used by table, charts and map are not available', (t, c
   }
   // @ts-ignore
   const response = validate(invalidNamConfig)
-  console.log(response)
+  
+  if (response.status === EUnifiedStatus.Green) {
+    console.log(response)
+  }
 
   // the title of the test says this is invalid, so why are we expecting Green?
   // TODO: Fix failing test
@@ -9278,7 +9280,10 @@ test('returns Green for a valid config', t => {
   }
   // @ts-ignore
   const response = validate(validNamConfig)
-  // console.log(response)
+
+  if (response.status === EUnifiedStatus.Red) {
+    console.log(response)
+  }
 
   t.is(response.status, EUnifiedStatus.Green)
 })
