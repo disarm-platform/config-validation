@@ -5,11 +5,6 @@ import { TSpatialHierarchy } from '../config_types/TSpatialHierarchy';
 import { ECustomEdgeStatus } from "../TCustomEdgeResponse";
 import { spatial_hierarchy_geodata_levels } from './spatial_hierarchy_geodata_levels';
 
-test('should return Green status', t => {
-  const empty_object = {}
-  const result = spatial_hierarchy_geodata_levels(empty_object as TConfig)
-  t.is(result[0].status, ECustomEdgeStatus.Green)
-})
 
 test('should return Green when spatial_hierarchy is valid', t => {
   const spatial_hierarchy: TSpatialHierarchy =  {
@@ -79,7 +74,7 @@ test('should return Red when planning_level_name is missing', t => {
   t.is(result[0].status, ECustomEdgeStatus.Red)
 })
 
-test('should return Red when planning_level_name is missing', t => {
+test('should return Red when record_location_selection_level_name is missing', t => {
   const spatial_hierarchy: TSpatialHierarchy = {
     "data_version": 4,
     "levels": [
