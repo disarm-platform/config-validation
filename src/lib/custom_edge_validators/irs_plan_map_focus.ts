@@ -1,5 +1,5 @@
-import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse";
 import { TConfig } from "../config_types/TConfig";
+import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse";
 
 
 export function irs_plan_map_focus(_config: TConfig): TCustomEdgeResponses {
