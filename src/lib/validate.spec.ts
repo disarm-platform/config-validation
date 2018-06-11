@@ -1,5 +1,6 @@
 // tslint:disable:no-expression-statement
 import {test} from 'ava';
+import { TConfig } from './config_types/TConfig';
 import {EUnifiedStatus} from './TUnifiedResponse'
 import {validate} from './validate'
 
@@ -9280,6 +9281,29 @@ test('returns Green for a valid config', t => {
   }
   // @ts-ignore
   const response = validate(validNamConfig)
+
+  if (response.status === EUnifiedStatus.Red) {
+    console.log(response)
+  }
+
+  t.is(response.status, EUnifiedStatus.Green)
+})
+
+test('returns Green for a minimal valid config', t => {
+  const validConfig: TConfig = {
+    applets: {
+      meta: {}
+    },
+    config_id: 'id',
+    config_version: 'version',
+    instance: {
+      location_name: 'Location',
+      slug: 'loc',
+      title: 'title'
+    }
+  }
+
+  const response = validate(validConfig)
 
   if (response.status === EUnifiedStatus.Red) {
     console.log(response)

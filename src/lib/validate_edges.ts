@@ -28,9 +28,20 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
   const source_node = nodes.find(n => n.name === edge_definition.source_node_name);
   const target_node = nodes.find(n => n.name === edge_definition.target_node_name);
 
-  if (!source_node || !target_node) {
+  const source_node_exists = source_node && source_node.node
+  const target_node_exists = target_node && target_node.node
+
+  if (!source_node_exists) {
     nodes_exist = {
-      message: 'Missing source or target node',
+      message: 'Missing source node',
+      status: ENodeResponseStatus.Green
+    }
+    return determine_edge_result(edge_name, nodes_exist, false) // edge cannot be required if source node is not there
+  }
+  
+  if (!target_node_exists) {
+    nodes_exist = {
+      message: 'Missing source target node',
       status: ENodeResponseStatus.Red
     }
     return determine_edge_result(edge_name, nodes_exist, edge_required)
