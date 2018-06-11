@@ -1,10 +1,10 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
+import { TAggregations } from '../config_types/TAggregations';
 import { TConfig } from '../config_types/TConfig';
 import { TIrsMonitor } from '../config_types/TIrsMonitor';
 import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { irs_monitor_aggregations } from './irs_monitor_aggregations';
-import { TAggregations } from '../config_types/TAggregations';
 
 test('returns Red status if aggregation in map is not in aggregations', t => {
   const irs_monitor: TIrsMonitor = {
