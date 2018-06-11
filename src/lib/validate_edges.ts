@@ -58,7 +58,11 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
 
 export function determine_edge_result(edge_name: string, node_response: TNodeResponse, edge_required: boolean, custom_edge_responses?: TCustomEdgeResponses, ): TStandardEdgeResponse {
   // Create a default response in case none of the other cases match.
-  const response = {edge_name, status: EStandardEdgeStatus.Red, message: 'Default response - not caught by any other cases'}
+  const response = {
+    edge_name, 
+    message: `${edge_name} Default response - not caught by any other cases`,
+    status: EStandardEdgeStatus.Red
+  }
 
   // All the tools
   const edge_optional = !edge_required
@@ -73,7 +77,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_fail && edge_required) {
     return {
       ...response, 
-      message: 'Failed - some missing node' ,
+      message: `Failed - some missing node for edge ${edge_name}`,
       status: EStandardEdgeStatus.Red
     }
   }
@@ -81,7 +85,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_fail && edge_optional) {
     return {
       ...response, 
-      message: 'One or more missing nodes, but edge not required',
+      message: `One or more missing nodes, but edge not required for edge ${edge_name}`,
       status: EStandardEdgeStatus.Blue
     }
   }
@@ -89,7 +93,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_required && edge_passes) {
     return {
       ...response, 
-      message: 'Required edge, nodes present and edge passes',
+      message: `Required edge, nodes present and edge passes for edge ${edge_name}`,
       status: EStandardEdgeStatus.Green
     }
   }
@@ -97,7 +101,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_optional && edge_passes) {
     return {
       ...response, 
-      message: 'Optional edge, nodes present and edge passes',
+      message: `Optional edge, nodes present and edge passes for edge ${edge_name}`,
       status: EStandardEdgeStatus.Green
     }
   }
@@ -105,7 +109,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_required && edge_fails) {
     return {
       ...response, 
-      message: 'Required edge, nodes present and edge fails',
+      message: `Required edge, nodes present and edge fails for edge ${edge_name}`,
       status: EStandardEdgeStatus.Red
     }
   }
@@ -113,7 +117,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_optional && edge_fails) {
     return {
       ...response, 
-      message: 'Optional edge, nodes present and edge fails',
+      message: `Optional edge, nodes present and edge fails for edge ${edge_name}`,
       status: EStandardEdgeStatus.Red
     }
   }

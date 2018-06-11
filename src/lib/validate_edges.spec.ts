@@ -15,7 +15,7 @@ test('returns Red if nodes fail and the edge is required', t => {
   const result = determine_edge_result('edge_name', node_response, edge_required, custom_edge_responses)
 
   t.is(result.status, EStandardEdgeStatus.Red)
-  t.is(result.message, 'Failed - some missing node')
+  t.true(result.message.startsWith('Failed - some missing node'))
 })
 
 test('returns Blue if nodes fail and the edge is optional', t => {
@@ -28,7 +28,7 @@ test('returns Blue if nodes fail and the edge is optional', t => {
   const result = determine_edge_result('edge_name', node_response, edge_required, custom_edge_responses)
 
   t.is(result.status, EStandardEdgeStatus.Blue)
-  t.is(result.message, 'One or more missing nodes, but edge not required')
+  t.true(result.message.startsWith('One or more missing nodes, but edge not required'))
 })
 
 test('returns Green if nodes pass and the edge is required and edges pass', t => {
@@ -44,7 +44,7 @@ test('returns Green if nodes pass and the edge is required and edges pass', t =>
   const result = determine_edge_result('edge_name', node_response, edge_required, custom_edge_responses)
 
   t.is(result.status, EStandardEdgeStatus.Green)
-  t.is(result.message, 'Required edge, nodes present and edge passes')
+  t.true(result.message.startsWith('Required edge, nodes present and edge passes'))
 })
 
 test('returns Green if nodes pass and the edge is optional and edges pass', t => {
@@ -60,7 +60,7 @@ test('returns Green if nodes pass and the edge is optional and edges pass', t =>
   const result = determine_edge_result('edge_name', node_response, edge_required, custom_edge_responses)
 
   t.is(result.status, EStandardEdgeStatus.Green)
-  t.is(result.message, 'Optional edge, nodes present and edge passes')
+  t.true(result.message.startsWith('Optional edge, nodes present and edge passes'))
 })
 
 test('returns Red if nodes pass and the edge is required and edges fail', t => {
@@ -76,7 +76,7 @@ test('returns Red if nodes pass and the edge is required and edges fail', t => {
   const result = determine_edge_result('edge_name', node_response, edge_required, custom_edge_responses)
 
   t.is(result.status, EStandardEdgeStatus.Red)
-  t.is(result.message, 'Required edge, nodes present and edge fails')
+  t.true(result.message.startsWith('Required edge, nodes present and edge fails'))
 })
 
 test('returns Red if nodes pass and the edge is optional and edges fail', t => {
@@ -92,5 +92,5 @@ test('returns Red if nodes pass and the edge is optional and edges fail', t => {
   const result = determine_edge_result('edge_name', node_response, edge_required, custom_edge_responses)
 
   t.is(result.status, EStandardEdgeStatus.Red)
-  t.is(result.message, 'Optional edge, nodes present and edge fails')
+  t.true(result.message.startsWith('Optional edge, nodes present and edge fails'))
 })
