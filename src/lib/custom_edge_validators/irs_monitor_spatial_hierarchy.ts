@@ -3,7 +3,6 @@ import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse"
 
 
 export function irs_monitor_spatial_hierarchy(_config: TConfig): TCustomEdgeResponses {
-  // TODO: ensure fields from irs_monitor.map.property_layers & irs_monitor.table.property_layers exist on spatial_hierarchy
   return [{
     message: 'Nothing to check',
     status: ECustomEdgeStatus.Green
