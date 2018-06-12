@@ -25,6 +25,7 @@ import { location_selection_spatial_hierarchy } from './location_selection_spati
 import { meta_instance } from './meta_instance';
 import { spatial_hierarchy_geodata_levels } from './spatial_hierarchy_geodata_levels';
 import { validations_fields_helper } from './validations_fields_helper';
+import { irs_record_point_form } from './irs_record_point_form'
 
 
 export interface TCustomEdgeValidators {
@@ -44,6 +45,7 @@ export const CustomEdgeValidators: TCustomEdgeValidators = {
   fields_helper_form,
   irs_monitor_aggregations,
   irs_monitor_fields_helper,
+  irs_record_point_form,
   irs_monitor_map_focus,
   irs_monitor_spatial_hierarchy,
   irs_plan_map_focus,
