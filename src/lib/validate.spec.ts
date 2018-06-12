@@ -11511,7 +11511,7 @@ test('returns Red for config with irs_record_point missing form and location_sel
   t.is(response.status, EUnifiedStatus.Red)
 })
 
-test.failing('returns Green for config with irs_record_point', t => {
+test('returns Green for config with irs_record_point', t => {
   const validConfig: TConfig = {
     applets: {
       irs_record_point: {
