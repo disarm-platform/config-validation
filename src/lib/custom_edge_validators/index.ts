@@ -1,6 +1,6 @@
 import { TConfig } from '../config_types/TConfig';
 import { TCustomEdgeResponse } from '../TCustomEdgeResponse';
-import { aggregations_fields_helper } from './aggregations_field_helper';
+import { aggregations_fields_helper } from './aggregations_fields_helper';
 import { aggregations_spatial_hierarchy } from './aggregations_spatial_hierarchy';
 import { applets_irs_monitor } from './applets_irs_monitor';
 import { applets_irs_plan } from './applets_irs_plan';
