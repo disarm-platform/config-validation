@@ -17,6 +17,7 @@ import { irs_monitor_spatial_hierarchy } from './irs_monitor_spatial_hierarchy';
 import { irs_plan_map_focus } from './irs_plan_map_focus'
 import { irs_plan_spatial_hierarchy } from './irs_plan_spatial_hierarchy'
 import { irs_record_point_fields_helper } from './irs_record_point_fields_helper';
+import { irs_record_point_form } from './irs_record_point_form'
 import { irs_record_point_location_selection } from './irs_record_point_location_selection';
 import { irs_record_point_validations } from './irs_record_point_validations';
 import { irs_tasker_map_focus } from './irs_tasker_map_focus';
@@ -25,7 +26,6 @@ import { location_selection_spatial_hierarchy } from './location_selection_spati
 import { meta_instance } from './meta_instance';
 import { spatial_hierarchy_geodata_levels } from './spatial_hierarchy_geodata_levels';
 import { validations_fields_helper } from './validations_fields_helper';
-import { irs_record_point_form } from './irs_record_point_form'
 
 
 export interface TCustomEdgeValidators {
@@ -45,12 +45,12 @@ export const CustomEdgeValidators: TCustomEdgeValidators = {
   fields_helper_form,
   irs_monitor_aggregations,
   irs_monitor_fields_helper,
-  irs_record_point_form,
   irs_monitor_map_focus,
   irs_monitor_spatial_hierarchy,
   irs_plan_map_focus,
   irs_plan_spatial_hierarchy,
   irs_record_point_fields_helper,
+  irs_record_point_form,
   irs_record_point_location_selection,
   irs_record_point_validations,
   irs_tasker_map_focus,
