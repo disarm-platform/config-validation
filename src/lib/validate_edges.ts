@@ -21,7 +21,7 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
   let nodes_exist: TNodeResponse;
 
   // Tell me about this Edge
-  const edge_required = edge_definition.required;
+  let edge_required = edge_definition.required;
   const edge_name = `${edge_definition.source_node_name}_${edge_definition.target_node_name}`;
 
   // Basic checks for Node existence
@@ -36,7 +36,8 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
       message: 'Missing source node',
       status: ENodeResponseStatus.Red
     }
-    return determine_edge_result(edge_name, nodes_exist, false) // edge cannot be required if source node is not there
+    edge_required = false; // We cannot require the edge if the source_node doesn't exist
+    return determine_edge_result(edge_name, nodes_exist, edge_required) // edge cannot be required if source node is not there
   }
   
   if (!target_node_exists) {
