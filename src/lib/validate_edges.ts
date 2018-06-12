@@ -101,6 +101,15 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
     }
   }
 
+  // Added this one
+  if (nodes_pass && edge_optional) {
+    return {
+      ...response,
+      message: `Optional edge, source node not present for ${edge_name}`,
+      status: EStandardEdgeStatus.Green
+    }
+  }
+
   if (nodes_pass && edge_required && edge_passes) {
     return {
       ...response, 

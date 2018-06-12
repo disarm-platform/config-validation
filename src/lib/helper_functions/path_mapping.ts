@@ -12,7 +12,7 @@ export const PathMap: TPathMap[] = [
   { name: 'irs_plan', path: 'applets.irs_plan' },
   { name: 'irs_record_point', path: 'applets.irs_record_point' },
   { name: 'irs_tasker', path: 'applets.irs_tasker' },
-  { name: 'fields_helper', path: 'applets' }, // this needs to be a node that is always there
+  { name: 'fields_helper', path: 'form' }, // this needs to be a node that is always there
   { name: 'form', path: 'form' },
   { name: 'geodata_levels', path: 'spatial_hierarchy.levels' },
   { name: 'location_selection', path: 'location_selection' },
