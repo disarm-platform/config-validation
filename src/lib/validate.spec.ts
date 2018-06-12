@@ -11555,3 +11555,51 @@ test('returns Green for config with irs_record_point', t => {
 
   t.is(response.status, EUnifiedStatus.Green)
 })
+
+test('returns Red for invalid config with irs_plan and irs_record_point', t => {
+  const validConfig: TConfig = {
+    applets: {
+      irs_record_point: {
+        metadata: {
+          show: false,
+          optional_fields: []
+        }
+      },
+      irs_plan: {
+        table_output: []
+      },
+      meta: {},
+    },
+    config_id: 'id',
+    config_version: 'version',
+    form: {
+      pages: [{
+        elements: [{
+          name: 'q1',
+          type: 'text'
+        }],
+        name: 'p1'
+      }]
+    },
+    instance: {
+      location_name: 'Location',
+      slug: 'loc',
+      title: 'title'
+    },
+    location_selection: {
+      'villages': [{
+        category: '',
+        id: 'id',
+        name: 'name'
+      }]
+    },
+  }
+
+  const response = validate(validConfig)
+
+  if (response.status === EUnifiedStatus.Green) {
+    console.log(response)
+  }
+
+  t.is(response.status, EUnifiedStatus.Red)
+})
