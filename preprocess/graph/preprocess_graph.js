@@ -9,7 +9,7 @@ async function run(input_filename) {
   const result = create_list(res);
 
   const basename = path.basename(input_filename);
-  const output_filename = path.join('output', `edge_graph.json`);
+  const output_filename = path.join('../../src/', `edge_graph.json`);
   fs.writeFileSync(output_filename, JSON.stringify(result));
 }
 
@@ -88,4 +88,4 @@ function functions_needed(nodes, edges) {
   });
 }
 
-run('./input/config graph v18.graphml');
+run('./input/config graph v19.graphml');
