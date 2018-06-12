@@ -11481,3 +11481,77 @@ test('returns Green for a minimal valid config', t => {
 
   t.is(response.status, EUnifiedStatus.Green)
 })
+
+test('returns Red for config with irs_record_point missing form and location_selection', t => {
+  const validConfig: TConfig = {
+    applets: {
+      irs_record_point: {
+        metadata: {
+          show: false,
+          optional_fields: []
+        }
+      },
+      meta: {},
+    },
+    config_id: 'id',
+    config_version: 'version',
+    instance: {
+      location_name: 'Location',
+      slug: 'loc',
+      title: 'title'
+    }
+  }
+
+  const response = validate(validConfig)
+
+  if (response.status === EUnifiedStatus.Green) {
+    console.log(response)
+  }
+
+  t.is(response.status, EUnifiedStatus.Red)
+})
+
+test.failing('returns Green for config with irs_record_point', t => {
+  const validConfig: TConfig = {
+    applets: {
+      irs_record_point: {
+        metadata: {
+          show: false,
+          optional_fields: []
+        }
+      },
+      meta: {},
+    },
+    config_id: 'id',
+    config_version: 'version',
+    form: {
+      pages: [{
+        elements: [{
+          name: 'q1',
+          type: 'text'
+        }],
+        name: 'p1'
+      }]
+    },
+    instance: {
+      location_name: 'Location',
+      slug: 'loc',
+      title: 'title'
+    },
+    location_selection: {
+      'villages': [{
+        category: '',
+        id: 'id',
+        name: 'name'
+      }]
+    },
+  }
+
+  const response = validate(validConfig)
+
+  if (response.status === EUnifiedStatus.Red) {
+    console.log(response)
+  }
+
+  t.is(response.status, EUnifiedStatus.Green)
+})
