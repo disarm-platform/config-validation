@@ -11,7 +11,7 @@ export function irs_monitor_aggregations(config: TConfig): TCustomEdgeResponses 
 
 
   const available_aggregations = aggregations_config.map(a => a.name);
-  const required_aggregations = extract_aggregations_from_irs_monitor(irs_monitor_config);// TODO: Add missing aggregations from commented code 
+  const required_aggregations = extract_aggregations_from_irs_monitor(irs_monitor_config);
 
   return required_aggregations.map(required_aggregation => {
     if (available_aggregations.includes(required_aggregation)) {
