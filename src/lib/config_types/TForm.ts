@@ -1,6 +1,10 @@
+export interface Element {
+  type: string;
+  name: string;
+}
+
 export interface Page {
-  // TODO: Write schema for elements
-  elements: any[];
+  elements: Element[];
   name: string;
 }
 
