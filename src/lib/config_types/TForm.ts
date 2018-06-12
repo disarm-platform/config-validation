@@ -1,6 +1,12 @@
+// tslint:disable:no-mixed-interface
+export interface Element {
+  type: string;
+  name: string;
+  [k: string]: any;
+}
+
 export interface Page {
-  // TODO: Write schema for elements
-  elements: any[];
+  elements: Element[];
   name: string;
 }
 

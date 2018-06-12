@@ -4622,11 +4622,9 @@ test('Config validations used by table, charts and map are not available', (t, c
   }
 
   // the title of the test says this is invalid, so why are we expecting Green?
-  // TODO: Fix failing test
   t.is(response.status, EUnifiedStatus.Red)
 })
 
-// TODO: test this when all the edges have been added.
 test('returns Green for a valid config', t => {
   // tslint:disable:object-literal-sort-keys
   const validNamConfig = {

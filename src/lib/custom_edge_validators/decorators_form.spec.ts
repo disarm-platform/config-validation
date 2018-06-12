@@ -79,7 +79,7 @@ test('returns Green if fields in decorator is in form', t => {
     ]
   }
 
-  const form = {
+  const form: TForm = {
     "pages": [
       {
         "elements": [

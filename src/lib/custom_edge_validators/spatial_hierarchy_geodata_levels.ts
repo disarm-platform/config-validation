@@ -4,7 +4,6 @@ import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse"
 
 
 export function spatial_hierarchy_geodata_levels(config: TConfig): TCustomEdgeResponses {
-  // TODO: Need to check denominator_fields exist on levels. Do we even use them? I don't think so.
   const spatial_hierarchy = config.spatial_hierarchy as TSpatialHierarchy
   const planning_level_name = spatial_hierarchy.markers.planning_level_name
   const record_location_selection_level_name = spatial_hierarchy.markers.record_location_selection_level_name
