@@ -1,12 +1,14 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
 import { TConfig } from '../config_types/TConfig';
+import { TForm } from '../config_types/TForm';
+import { TValidations } from '../config_types/TValidations';
 import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { validations_fields_helper } from './validations_fields_helper';
 
 
 test('returns Red status if validations expression form field is not in form', t => {
-  const form =  {
+  const form: TForm =  {
     pages: [
       {
         "elements": [
@@ -28,14 +30,18 @@ test('returns Red status if validations expression form field is not in form', t
         }
     ]
   }
-  const validations = [{
+  const validations: TValidations = [{
     "expression": "numbersprayed_ddt <= number_sprayable",
     "message": "Sprayed more with DDT than total",
     "name": "sprayed more with ddt than total",
     "type": "error"
   }]
 
-  const config = { form, validations, decorators: {}}
+  const config = { 
+    decorators: {},
+    form, 
+    validations
+  }
   
 
   const result = validations_fields_helper(config as TConfig)
@@ -49,7 +55,7 @@ test('returns Red status if validations expression form field is not in form', t
 
 
 test('returns Green status if validations are valid', t => {
-  const form = {
+  const form: TForm = {
     pages: [
       {
         "elements": [
@@ -71,7 +77,7 @@ test('returns Green status if validations are valid', t => {
       }
     ]
   }
-  const validations = [{
+  const validations: TValidations = [{
     "expression": "number_sprayable > 0",
     "message": "Sprayed more with DDT than total",
     "name": "sprayed more with ddt than total",

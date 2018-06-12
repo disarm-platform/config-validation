@@ -1,38 +1,44 @@
 // // tslint:disable:no-expression-statement
 import { test } from 'ava';
+import { TAggregations } from '../config_types/TAggregations';
 import { TConfig } from '../config_types/TConfig';
+import { TForm } from '../config_types/TForm';
 import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { aggregations_fields_helper } from './aggregations_field_helper';
 
 test('returns Green status if field in aggregations is in form', t => {
+  const aggregations: TAggregations = [{
+    "name": "number of rooms sprayed",
+    "numerator_expr": "number_sprayed"
+  }]; 
+
+  const form: TForm = {
+    pages: [
+      {
+        "elements": [
+          {
+            "inputType": "number",
+            "isRequired": true,
+            "name": "number_sprayed",
+            "title": "How many sprayable structures in the household/homestead?",
+            "type": "text",
+            "validators": [
+              {
+                "text": "Minimum Value is Zero",
+                "type": "numeric",
+              }
+            ]
+          }
+        ],
+        "name": "page1"
+      }
+    ]
+  }
+
   const config = {
-    aggregations: [{
-      "name": "number of rooms sprayed",
-      "numerator_expr": "number_sprayed"
-    }],
+    aggregations,
     decorators: {},
-    form: {
-      pages: [
-        {
-          "elements": [
-            {
-              "inputType": "number",
-              "isRequired": true,
-              "name": "number_sprayed",
-              "title": "How many sprayable structures in the household/homestead?",
-              "type": "text",
-              "validators": [
-                {
-                  "text": "Minimum Value is Zero",
-                  "type": "numeric",
-                }
-              ]
-            }
-          ],
-          "name": "page1"
-        }
-      ]
-    }
+    form
   }
 
   const result = aggregations_fields_helper(config as TConfig)
