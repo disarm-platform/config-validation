@@ -2,12 +2,10 @@
 import { test } from 'ava';
 import { TConfig } from '../config_types/TConfig';
 import { ECustomEdgeStatus } from "../TCustomEdgeResponse";
-import { irs_plan_map_focus } from './irs_plan_map_focus';
+import { applets_meta } from './applets_meta';
 
 test('should return Green status', t => {
-  const config = {
-    
-  }
-  const result = irs_plan_map_focus(config as TConfig)
+  const empty_object = {}
+  const result = applets_meta(empty_object as TConfig)
   t.is(result[0].status, ECustomEdgeStatus.Green)
 })

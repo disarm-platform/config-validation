@@ -40,6 +40,8 @@ test('returns Green status if field in aggregations is in form', t => {
   t.is(result[0].status, ECustomEdgeStatus.Green)
 })
 
+// TODO: Restore tests
+
 //
 // test.skip('returns Yellow status if aggregation field not present in form', t => {
 //   const config = {

@@ -21,16 +21,28 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
   let nodes_exist: TNodeResponse;
 
   // Tell me about this Edge
-  const edge_required = edge_definition.required;
+  let edge_required = edge_definition.required;
   const edge_name = `${edge_definition.source_node_name}_${edge_definition.target_node_name}`;
 
   // Basic checks for Node existence
   const source_node = nodes.find(n => n.name === edge_definition.source_node_name);
   const target_node = nodes.find(n => n.name === edge_definition.target_node_name);
 
-  if (!source_node || !target_node) {
+  const source_node_exists = source_node && source_node.node
+  const target_node_exists = target_node && target_node.node
+
+  if (!source_node_exists) {
     nodes_exist = {
-      message: 'Missing source or target node',
+      message: 'Missing source node',
+      status: ENodeResponseStatus.Red
+    }
+    edge_required = false; // We cannot require the edge if the source_node doesn't exist
+    return determine_edge_result(edge_name, nodes_exist, edge_required) // edge cannot be required if source node is not there
+  }
+  
+  if (!target_node_exists) {
+    nodes_exist = {
+      message: 'Missing source target node',
       status: ENodeResponseStatus.Red
     }
     return determine_edge_result(edge_name, nodes_exist, edge_required)
@@ -65,13 +77,13 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   }
 
   // All the tools
-  const edge_optional = !edge_required
+  const edge_optional = !edge_required // defined by the "*" on the edge label OR if source_node is not provided
   const nodes_pass = node_response.status === ENodeResponseStatus.Green
   const nodes_fail = !nodes_pass
   const edge_passes = custom_edge_responses && custom_edge_responses.every(r => r.status === ECustomEdgeStatus.Green)
   const edge_fails  = !edge_passes
 
-  // There are 3 binary variables (required, nodes pass, edge passes), so 8 cases
+  // There are 3 binary variables (edge_required, nodes_pass, edge_passes), so 8 cases (2^3)
   // 2 cases are dealt with by short-circuiting if nodes fail
   // Leaves 6 cases to deal with explicitly
   if (nodes_fail && edge_required) {
@@ -85,7 +97,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_fail && edge_optional) {
     return {
       ...response, 
-      message: `One or more missing nodes, but edge not required for edge ${edge_name}`,
+      message: `One or more missing nodes, but edge not required for ${edge_name}`,
       status: EStandardEdgeStatus.Blue
     }
   }
@@ -93,7 +105,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_required && edge_passes) {
     return {
       ...response, 
-      message: `Required edge, nodes present and edge passes for edge ${edge_name}`,
+      message: `Required edge, nodes present and edge passes for ${edge_name}`,
       status: EStandardEdgeStatus.Green
     }
   }
@@ -101,7 +113,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_optional && edge_passes) {
     return {
       ...response, 
-      message: `Optional edge, nodes present and edge passes for edge ${edge_name}`,
+      message: `Optional edge, nodes present and edge passes for ${edge_name}`,
       status: EStandardEdgeStatus.Green
     }
   }
@@ -109,7 +121,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_required && edge_fails) {
     return {
       ...response, 
-      message: `Required edge, nodes present and edge fails for edge ${edge_name}`,
+      message: `Required edge, nodes present and edge fails for ${edge_name}`,
       status: EStandardEdgeStatus.Red
     }
   }
@@ -117,7 +129,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_optional && edge_fails) {
     return {
       ...response, 
-      message: `Optional edge, nodes present and edge fails for edge ${edge_name}`,
+      message: `Optional edge, nodes present and edge fails for ${edge_name}`,
       status: EStandardEdgeStatus.Red
     }
   }
