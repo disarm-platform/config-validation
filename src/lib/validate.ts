@@ -9,7 +9,11 @@ import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse';
 import { validate_edges } from './validate_edges';
 import { validate_schema } from './validate_schema';
 
-
+/**
+ * Validate the given `config` object
+ * @param {TConfig} config
+ * @returns {TUnifiedResponse}
+ */
 export function validate(config: TConfig): TUnifiedResponse {
   //
   // STEP 0: gather what you need - after this point, no data/config is imported
