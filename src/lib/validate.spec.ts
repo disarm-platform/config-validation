@@ -11660,5 +11660,6 @@ test('returns Green for valid config with irs_plan and irs_record_point', t => {
     console.log(response)
   }
 
+  console.log(response)
   t.is(response.status, EUnifiedStatus.Green)
 })

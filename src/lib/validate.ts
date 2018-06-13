@@ -32,6 +32,7 @@ export function validate(config: TConfig): TUnifiedResponse {
     return {
       message: 'Schema validation failed',
       status: EUnifiedStatus.Red,
+      edge_messages:[],
       support_messages: [schema_response.errors],
     };
   }
