@@ -9,9 +9,8 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
-    "generate-types": "typescript-json-schema './tsconfig.json' 'Config' --include ./src/**/* --out 'src/schema.ts' --required true; sed -i.old '1s;^;export default ;' src/schema.ts; rm src/schema.ts.old",
     "info": "npm-scripts-info",
-    "build": "run-s clean && run-p build:*",
+    "build": "run-s clean && run-p build:*; run-s copy-schema copy-edge-graph",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
     "fix": "run-s fix:*",
@@ -21,7 +20,7 @@
     "test:lint": "tslint --project . && prettier \"src/**/*.ts\" --list-different",
     "test:unit": "nyc --silent ava",
     "test:nsp": "nsp check",
-    "watch": "run-s clean build:main && run-p \"build:main -- -w\" \"test:unit -- --watch\"",
+    "watch": "run-s clean build:main build:module copy-schema copy-edge-graph && run-p \"build:main -- -w\" \"test:unit -- --watch\"",
     "cov": "run-s build test:unit cov:html && opn coverage/index.html",
     "cov:html": "nyc report --reporter=html",
     "cov:send": "nyc report --reporter=lcov > coverage.lcov && codecov",
@@ -34,7 +33,10 @@
     "reset": "git clean -dfx && git reset --hard && npm i",
     "clean": "trash build test",
     "all": "run-s reset test cov:check doc:html",
-    "prepare-release": "run-s all version doc:publish"
+    "prepare-release": "run-s all version doc:publish",
+    "generate-schema": "typescript-json-schema './tsconfig.json' 'TConfig' --include ./src/lib/config_types/TConfig.ts --out 'src/config_schema.json' --required true",
+    "copy-schema": "cp src/config_schema.json build/main/; cp src/config_schema.json build/module/",
+    "copy-edge-graph": "cp src/edge_graph.json build/main/; cp src/edge_graph.json build/module/"
   },
   "scripts-info": {
     "info": "Display information about the package scripts",
@@ -47,15 +49,25 @@
     "doc:json": "Generate API documentation in typedoc JSON format",
     "version": "Bump package.json version, update CHANGELOG.md, tag release",
     "reset": "Delete all untracked files and reset the repo to the last commit",
-    "prepare-release": "One-step: clean, build, test, publish docs, and prep a release"
+    "prepare-release": "One-step: clean, build, test, publish docs, and prep a release",
+    "generate-schema": "Convert TConfig type to json-schema, output to src/config_schema.ts",
+    "copy-schema": "Copy the generated schema into the build folders"
   },
   "engines": {
     "node": ">=8.9"
   },
   "dependencies": {
+    "@types/graphlib": "^2.1.4",
+    "@types/json-schema": "^6.0.1",
+    "@types/lodash": "^4.14.109",
+    "ajv": "^6.5.0",
+    "expr-eval": "^1.2.1",
+    "graphlib": "^2.1.5",
+    "json-schema": "^0.2.3",
+    "lodash": "^4.17.10",
+    "lodash.flatten": "^4.4.0",
     "lodash.get": "^4.4.2",
-    "xml2js": "^0.4.19",
-    "ajv": "^6.5.0"
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
     "ava": "^1.0.0-beta.3",
@@ -78,7 +90,6 @@
     "typescript-json-schema": "^0.24.1"
   },
   "ava": {
-    "failFast": true,
     "files": [
       "build/main/**/*.spec.js"
     ],

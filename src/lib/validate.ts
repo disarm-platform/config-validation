@@ -1,52 +1,52 @@
-import { TConfig } from './Config';
-import { ENodeStatus, TNodeResponse } from './NodeResponse'
-import { validateJsonSchema } from './validate_json_schema'
+import { JSONSchema6 } from 'json-schema';
+import ConfigSchema from '../config_schema.json';
+import { EdgeDefinitions } from '../EdgeDefinitions';
+import { TConfig } from './config_types/TConfig';
+import { determine_unified_response } from './determine_unified_response';
+import { PathMap } from './helper_functions/path_mapping';
+import { ESchemaStatus } from './TSchemaResponse';
+import { EUnifiedStatus, TUnifiedResponse } from './TUnifiedResponse';
+import { validate_edges } from './validate_edges';
+import { validate_schema } from './validate_schema';
 
-export function runNumberValidation(config: TConfig): TNodeResponse {
-  // validates that 'number' exists in 'array_of_numbers'
-  if (config.number_config && config.number_config.array_of_numbers.includes(config.number_config.number)) {
+/**
+ * Validate the given `config` object
+ * @param {TConfig} config
+ * @returns {TUnifiedResponse}
+ */
+export function validate(config: TConfig): TUnifiedResponse {
+  //
+  // STEP 0: gather what you need - after this point, no data/config is imported
+  //
+  const config_schema: JSONSchema6 = ConfigSchema;
+  const path_map = PathMap;
+  const edge_definitions = EdgeDefinitions;
+
+  //
+  // STEP 1: Schema validation
+  // Ensure that config meets basic schema validation requirements
+  //
+  const schema_response = validate_schema(config, config_schema);
+  // Return early if failing schema validation. End of the road.
+  if (schema_response.status === ESchemaStatus.Red) {
     return {
-      messages: [],
-      status: ENodeStatus.Green
-    }
-  } else {
-    return {
-      messages: [{description: 'number does not exist'}],
-      status: ENodeStatus.Yellow
-    }
+      message: 'Schema validation failed',
+      status: EUnifiedStatus.Red,
+      edge_messages:[],
+      support_messages: [schema_response.errors],
+    };
   }
+
+  //
+  // STEP 2: Edges validation
+  // Check that requirements are met for all required edges
+  //
+  const edge_responses = validate_edges(config, path_map, edge_definitions);
+
+  //
+  // STEP 3: Combine responses, and determine unified response
+  // Put it all together, and what have you got?
+  //
+  return determine_unified_response(edge_responses);
 }
 
-
-
-
-export function runOptionalStringValidation(config: TConfig): TNodeResponse {
-  // first runtime validate
-  const valid = validateJsonSchema('StringConfig', config.string_config)
-  if (!valid) {
-    return {
-      messages: [{description: 'failed internal validation'}],
-      status: ENodeStatus.Red
-    }
-  }
-  
-  // validates that optional_string is in strings, if it exists
-  if (config.string_config && config.string_config.optional_string) {
-    if (config.string_config && config.string_config.strings.includes(config.string_config.optional_string)) {
-      return {
-        messages: [],
-        status: ENodeStatus.Green
-      }
-    } else {
-      return {
-        messages: [{description: 'optional_string does not exist'}],
-        status: ENodeStatus.Yellow
-      }
-    }
-  } else {
-    return {
-      messages: [],
-      status: ENodeStatus.Green
-    }
-  }
-}

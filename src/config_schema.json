@@ -1,0 +1,724 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "definitions": {
+        "Page": {
+            "properties": {
+                "elements": {
+                    "items": {
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "elements",
+                "name"
+            ],
+            "type": "object"
+        },
+        "TAggregation": {
+            "properties": {
+                "denominator_aggregation": {
+                    "type": "string"
+                },
+                "denominator_field": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "numerator_expr": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "numerator_expr"
+            ],
+            "type": "object"
+        },
+        "TApplet": {
+            "properties": {
+                "icon": {
+                    "description": "The icon for the applet",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "The title for the applet",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TApplets": {
+            "properties": {
+                "debug": {
+                    "$ref": "#/definitions/TApplet"
+                },
+                "irs_monitor": {
+                    "$ref": "#/definitions/TIrsMonitor"
+                },
+                "irs_plan": {
+                    "$ref": "#/definitions/TIrsPlan"
+                },
+                "irs_record_point": {
+                    "$ref": "#/definitions/TIrsRecordPoint"
+                },
+                "irs_tasker": {
+                    "$ref": "#/definitions/TIrsTasker"
+                },
+                "meta": {
+                    "$ref": "#/definitions/TApplet"
+                },
+                "seasons": {
+                    "$ref": "#/definitions/TApplet"
+                }
+            },
+            "required": [
+                "meta"
+            ],
+            "type": "object"
+        },
+        "TCentre": {
+            "properties": {
+                "lat": {
+                    "type": "number"
+                },
+                "lng": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "lat",
+                "lng"
+            ],
+            "type": "object"
+        },
+        "TChartConfig": {
+            "properties": {
+                "chart_type": {
+                    "enum": [
+                        "text"
+                    ],
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "options": {
+                    "$ref": "#/definitions/TChartOptions"
+                },
+                "style": {
+                    "$ref": "#/definitions/TChartStyle"
+                }
+            },
+            "required": [
+                "id",
+                "options",
+                "style"
+            ],
+            "type": "object"
+        },
+        "TChartMap": {
+            "properties": {
+                "aggregation_names": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "bin_by": {
+                    "type": "string"
+                },
+                "chart_type": {
+                    "enum": [
+                        "map"
+                    ],
+                    "type": "string"
+                },
+                "property_layers": {
+                    "items": {
+                        "$ref": "#/definitions/TPropertyLayer"
+                    },
+                    "type": "array"
+                },
+                "response_point_fields": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "aggregation_names",
+                "bin_by",
+                "property_layers",
+                "response_point_fields"
+            ],
+            "type": "object"
+        },
+        "TChartMultiSeries": {
+            "properties": {
+                "aggregation_name": {
+                    "type": "string"
+                },
+                "colour": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "aggregation_name"
+            ],
+            "type": "object"
+        },
+        "TChartOptions": {
+            "properties": {
+                "bin_by": {
+                    "type": "string"
+                },
+                "chart_type": {
+                    "enum": [
+                        "bar",
+                        "line",
+                        "pie",
+                        "text"
+                    ],
+                    "type": "string"
+                },
+                "cumulative": {
+                    "type": "boolean"
+                },
+                "generate_series_from": {
+                    "type": "string"
+                },
+                "geographic_level_refactor_this_key_name": {
+                    "type": "string"
+                },
+                "layout": {
+                    "$ref": "#/definitions/TChartOptionsLayout"
+                },
+                "multi_series": {
+                    "items": {
+                        "$ref": "#/definitions/TChartMultiSeries"
+                    },
+                    "type": "array"
+                },
+                "single_series": {
+                    "$ref": "#/definitions/TChartSingleSeries"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "time_series": {
+                    "type": "boolean"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TChartOptionsLayout": {
+            "properties": {
+                "barmode": {
+                    "enum": [
+                        "stack"
+                    ],
+                    "type": "string"
+                },
+                "showlegend": {
+                    "type": "boolean"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "xaxis": {
+                    "$ref": "#/definitions/TChartOptionsLayoutAxis"
+                },
+                "yaxis": {
+                    "$ref": "#/definitions/TChartOptionsLayoutAxis"
+                }
+            },
+            "required": [
+                "title"
+            ],
+            "type": "object"
+        },
+        "TChartOptionsLayoutAxis": {
+            "properties": {
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title"
+            ],
+            "type": "object"
+        },
+        "TChartSingleSeries": {
+            "properties": {
+                "aggregation_name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "aggregation_name"
+            ],
+            "type": "object"
+        },
+        "TChartStyle": {
+            "properties": {
+                "height_constraint": {
+                    "$ref": "#/definitions/THeightConstraint"
+                },
+                "width_constraint": {
+                    "$ref": "#/definitions/TWidthConstraint"
+                }
+            },
+            "required": [
+                "height_constraint",
+                "width_constraint"
+            ],
+            "type": "object"
+        },
+        "TChartTable": {
+            "properties": {
+                "aggregation_names": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "bin_by": {
+                    "type": "string"
+                },
+                "chart_type": {
+                    "enum": [
+                        "table"
+                    ],
+                    "type": "string"
+                },
+                "property_layers": {
+                    "items": {
+                        "$ref": "#/definitions/TPropertyLayer"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "aggregation_names",
+                "bin_by",
+                "property_layers"
+            ],
+            "type": "object"
+        },
+        "TDecoratorOption": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "TDecorators": {
+            "additionalProperties": {
+                "items": {
+                    "$ref": "#/definitions/TDecoratorOption"
+                },
+                "type": "array"
+            },
+            "type": "object"
+        },
+        "TDenominatorFields": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
+        "TForm": {
+            "properties": {
+                "pages": {
+                    "items": {
+                        "$ref": "#/definitions/Page"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "pages"
+            ],
+            "type": "object"
+        },
+        "THeightConstraint": {
+            "enum": [
+                "full",
+                "none"
+            ],
+            "type": "string"
+        },
+        "TInstance": {
+            "properties": {
+                "location_name": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "location_name",
+                "slug",
+                "title"
+            ],
+            "type": "object"
+        },
+        "TIrsMonitor": {
+            "description": "The configuration for the IRS Monitor applet for douma",
+            "properties": {
+                "charts": {
+                    "items": {
+                        "$ref": "#/definitions/TChartConfig"
+                    },
+                    "type": "array"
+                },
+                "icon": {
+                    "description": "The icon for the applet",
+                    "type": "string"
+                },
+                "map": {
+                    "$ref": "#/definitions/TChartMap",
+                    "description": "Map configuration"
+                },
+                "season_start_dates": {
+                    "description": "The start of the current season",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "table": {
+                    "$ref": "#/definitions/TChartTable",
+                    "description": "Table configuration"
+                },
+                "title": {
+                    "description": "The title for the applet",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "charts",
+                "map",
+                "season_start_dates",
+                "table"
+            ],
+            "type": "object"
+        },
+        "TIrsPlan": {
+            "properties": {
+                "icon": {
+                    "description": "The icon for the applet",
+                    "type": "string"
+                },
+                "table_output": {
+                    "items": {
+                        "$ref": "#/definitions/TTableOutput"
+                    },
+                    "type": "array"
+                },
+                "title": {
+                    "description": "The title for the applet",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "table_output"
+            ],
+            "type": "object"
+        },
+        "TIrsRecordPoint": {
+            "properties": {
+                "icon": {
+                    "description": "The icon for the applet",
+                    "type": "string"
+                },
+                "metadata": {
+                    "$ref": "#/definitions/TMetaData"
+                },
+                "title": {
+                    "description": "The title for the applet",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "metadata"
+            ],
+            "type": "object"
+        },
+        "TIrsTasker": {
+            "properties": {
+                "icon": {
+                    "description": "The icon for the applet",
+                    "type": "string"
+                },
+                "no_known_properties": {
+                    "type": "boolean"
+                },
+                "title": {
+                    "description": "The title for the applet",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TLevel": {
+            "properties": {
+                "display_field_name": {
+                    "type": "string"
+                },
+                "field_name": {
+                    "type": "string"
+                },
+                "group_by_field": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "display_field_name",
+                "field_name",
+                "name"
+            ],
+            "type": "object"
+        },
+        "TLocationSelection": {
+            "additionalProperties": {
+                "items": {
+                    "$ref": "#/definitions/TLocationSelectionOption"
+                },
+                "type": "array"
+            },
+            "type": "object"
+        },
+        "TLocationSelectionOption": {
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "category",
+                "id",
+                "name"
+            ],
+            "type": "object"
+        },
+        "TMapFocus": {
+            "properties": {
+                "centre": {
+                    "$ref": "#/definitions/TCentre"
+                },
+                "zoom": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "centre",
+                "zoom"
+            ],
+            "type": "object"
+        },
+        "TMarkers": {
+            "properties": {
+                "denominator_fields": {
+                    "$ref": "#/definitions/TDenominatorFields"
+                },
+                "planning_level_name": {
+                    "type": "string"
+                },
+                "record_location_selection_level_name": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "denominator_fields",
+                "planning_level_name",
+                "record_location_selection_level_name"
+            ],
+            "type": "object"
+        },
+        "TMetaData": {
+            "properties": {
+                "optional_fields": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "show": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "optional_fields",
+                "show"
+            ],
+            "type": "object"
+        },
+        "TPropertyLayer": {
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "property": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "property"
+            ],
+            "type": "object"
+        },
+        "TSpatialHierarchy": {
+            "properties": {
+                "data_version": {
+                    "type": "number"
+                },
+                "ignore_planning_level_restriction": {
+                    "type": "boolean"
+                },
+                "levels": {
+                    "items": {
+                        "$ref": "#/definitions/TLevel"
+                    },
+                    "type": "array"
+                },
+                "markers": {
+                    "$ref": "#/definitions/TMarkers"
+                }
+            },
+            "required": [
+                "data_version",
+                "levels",
+                "markers"
+            ],
+            "type": "object"
+        },
+        "TTableOutput": {
+            "properties": {
+                "display_name": {
+                    "type": "string"
+                },
+                "source_field": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "display_name",
+                "source_field"
+            ],
+            "type": "object"
+        },
+        "TValidation": {
+            "properties": {
+                "expression": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "precondition": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "expression",
+                "message",
+                "name",
+                "type"
+            ],
+            "type": "object"
+        },
+        "TWidthConstraint": {
+            "enum": [
+                "full",
+                "half"
+            ],
+            "type": "string"
+        }
+    },
+    "properties": {
+        "aggregations": {
+            "items": {
+                "$ref": "#/definitions/TAggregation"
+            },
+            "type": "array"
+        },
+        "applets": {
+            "$ref": "#/definitions/TApplets"
+        },
+        "config_id": {
+            "type": "string"
+        },
+        "config_version": {
+            "type": "string"
+        },
+        "decorators": {
+            "$ref": "#/definitions/TDecorators"
+        },
+        "fake_form": {
+            "items": {
+            },
+            "type": "array"
+        },
+        "form": {
+            "$ref": "#/definitions/TForm"
+        },
+        "instance": {
+            "$ref": "#/definitions/TInstance"
+        },
+        "location_selection": {
+            "$ref": "#/definitions/TLocationSelection"
+        },
+        "map_focus": {
+            "$ref": "#/definitions/TMapFocus"
+        },
+        "spatial_hierarchy": {
+            "$ref": "#/definitions/TSpatialHierarchy"
+        },
+        "validations": {
+            "items": {
+                "$ref": "#/definitions/TValidation"
+            },
+            "type": "array"
+        }
+    },
+    "required": [
+        "applets",
+        "config_id",
+        "config_version",
+        "instance"
+    ],
+    "type": "object"
+}
+
