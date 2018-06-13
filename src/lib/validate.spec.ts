@@ -4,7 +4,7 @@ import { TConfig } from './config_types/TConfig';
 import {EUnifiedStatus} from './TUnifiedResponse'
 import {validate} from './validate'
 
-test('Config validations used by table, charts and map are not available', (t, colour = "green") => {
+test('Config validations used by table, charts and map are not available', t => {
   // tslint:disable:object-literal-sort-keys
   // Invalid config, aggregations is an empty array
   const invalidNamConfig = {
@@ -50,7 +50,7 @@ test('Config validations used by table, charts and map are not available', (t, c
             },
             "multi_series": [{
               "aggregation_name": "# Sprayed structures",
-              "colour": colour
+              "colour": "green"
             }, {"aggregation_name": "sprayable structures not sprayed", "colour": "red"}]
           }
         }]
