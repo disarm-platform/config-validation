@@ -37,7 +37,7 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
       status: ENodeResponseStatus.Red
     }
     edge_required = false; // We cannot require the edge if the source_node doesn't exist
-    return determine_edge_result(edge_name, nodes_exist, edge_required) // edge cannot be required if source node is not there
+    return determine_edge_result(edge_name, nodes_exist, edge_required, []) // edge cannot be required if source node is not there
   }
   
   if (!target_node_exists) {
@@ -45,7 +45,7 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
       message: 'Missing target node',
       status: ENodeResponseStatus.Red
     }
-    return determine_edge_result(edge_name, nodes_exist, edge_required)
+    return determine_edge_result(edge_name, nodes_exist, edge_required, [])
   } 
   
   nodes_exist = {
@@ -56,6 +56,7 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
   // Find and run the custom edge validation
   if (!(edge_name in CustomEdgeValidators)) {
     return {
+      custom_edge_responses: [],
       edge_name,
       message: `Cannot find ${edge_name} edge`,
       status: EStandardEdgeStatus.Red,
@@ -68,9 +69,10 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
   return determine_edge_result(edge_name, nodes_exist, edge_required, custom_edge_responses)
 }
 
-export function determine_edge_result(edge_name: string, node_response: TNodeResponse, edge_required: boolean, custom_edge_responses?: TCustomEdgeResponses, ): TStandardEdgeResponse {
+export function determine_edge_result(edge_name: string, node_response: TNodeResponse, edge_required: boolean, custom_edge_responses: TCustomEdgeResponses, ): TStandardEdgeResponse {
   // Create a default response in case none of the other cases match.
   const response = {
+    custom_edge_responses,
     edge_name, 
     message: `${edge_name} Default response - not caught by any other cases`,
     status: EStandardEdgeStatus.Red
@@ -89,6 +91,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_fail && edge_required) {
     return {
       ...response, 
+      custom_edge_responses,
       message: `Failed - some missing node for edge ${edge_name}`,
       status: EStandardEdgeStatus.Red
     }
@@ -97,6 +100,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_fail && edge_optional) {
     return {
       ...response, 
+      custom_edge_responses,
       message: `One or more missing nodes, but edge not required for ${edge_name}`,
       status: EStandardEdgeStatus.Blue
     }
@@ -105,6 +109,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_required && edge_passes) {
     return {
       ...response, 
+      custom_edge_responses,
       message: `Required edge, nodes present and edge passes for ${edge_name}`,
       status: EStandardEdgeStatus.Green
     }
@@ -113,6 +118,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_optional && edge_passes) {
     return {
       ...response, 
+      custom_edge_responses,
       message: `Optional edge, nodes present and edge passes for ${edge_name}`,
       status: EStandardEdgeStatus.Green
     }
@@ -121,6 +127,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_required && edge_fails) {
     return {
       ...response, 
+      custom_edge_responses,
       message: `Required edge, nodes present and edge fails for ${edge_name}`,
       status: EStandardEdgeStatus.Red
     }
@@ -129,6 +136,7 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   if (nodes_pass && edge_optional && edge_fails) {
     return {
       ...response, 
+      custom_edge_responses,
       message: `Optional edge, nodes present and edge fails for ${edge_name}`,
       status: EStandardEdgeStatus.Red
     }
