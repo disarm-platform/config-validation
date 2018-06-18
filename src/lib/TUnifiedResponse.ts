@@ -5,6 +5,7 @@ import { TStandardEdgeResponse } from "./TStandardEdgeResponse";
  * Green: The given config file is valid, and can be used.
  */
 export enum EUnifiedStatus {
+  RedSchema = 'Red, schema failed',
   Red = 'Red',
   Green = 'Green'
 }

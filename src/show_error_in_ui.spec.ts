@@ -1,6 +1,8 @@
 import test from 'ava'
 import { validate } from './index'
 import { TConfig } from './lib/config_types/TConfig';
+import { EUnifiedStatus } from './lib/TUnifiedResponse';
+import { EStandardEdgeStatus } from './lib/TStandardEdgeResponse';
 
 test('missing location_selection for irs_plan', t => {
   const invalidConfig: TConfig = {
@@ -101,9 +103,14 @@ test('missing location_selection for irs_plan and invalid aggregations', t => {
   const edge_statuses_that_fail = response.edge_messages.filter(e => e.status.startsWith('Red'))
 
   const messages_to_show = edge_statuses_that_fail.map(e => {
+    if (e.status === EStandardEdgeStatus.RedSchema) {
+
+    } else if (e.status === EStandardEdgeStatus.Red) {
+
+    }
     if (e.custom_edge_responses.length) {
       const custom_message = e.custom_edge_responses
-        .filter(cer => cer.status.startsWith('Red'))
+        // .filter(cer => cer.status.startsWith('Red'))
         .map(cer => cer.message)
 
       return {
@@ -122,4 +129,21 @@ test('missing location_selection for irs_plan and invalid aggregations', t => {
 
   t.true(true)
 })
+
+const stuff_we_get_in_ui = [
+  {
+    edge_name: 'aggregations_fields_helper',
+    message: 'Some aggregation is missing a field called "my_field"',
+    source_node_name: 'aggregations',
+    status: 'Red', // or severity
+    target_node_name: 'fields_helper',
+  },
+  {
+    edge_name: 'aggregations_fields_helper',
+    message: 'Some aggregation is missing a field called "other_field"',
+    source_node_name: 'aggregations',
+    status: 'Red', // or severity
+    target_node_name: 'fields_helper',
+  }
+]
 
