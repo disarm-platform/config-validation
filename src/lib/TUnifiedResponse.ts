@@ -12,6 +12,6 @@ export enum EUnifiedStatus {
 export interface TUnifiedResponse {
   status: EUnifiedStatus;
   message: string;
-  edge_messages:TStandardEdgeResponse[];
-  support_messages?: string[]
+  edge_messages: TStandardEdgeResponse[];
+  support_messages?: string[] // TODO: Remove this, already included in edge_messages
 }
