@@ -6,17 +6,19 @@ import { EUnifiedStatus } from './TUnifiedResponse';
 
 test('returns Red if any Red TStandardEdgeResponses', t => {
   const edge_responses = [{
+    custom_edge_responses: [],
     edge_name: 'name',
-    source_node_name: 'source',
-    target_node_name: 'target',
     message: 'message',
-    status: EStandardEdgeStatus.Red
+    source_node_name: 'source',
+    status: EStandardEdgeStatus.Red,
+    target_node_name: 'target'
   }, {
-      edge_name: 'name',
-      source_node_name: 'source',
-      target_node_name: 'target',
-      message: 'message',
-      status: EStandardEdgeStatus.Green
+    custom_edge_responses: [],
+    edge_name: 'name',
+    message: 'message',
+    source_node_name: 'source',
+    status: EStandardEdgeStatus.Green,
+    target_node_name: 'target'
   }]
   const result = determine_unified_response(edge_responses)
 
@@ -26,17 +28,19 @@ test('returns Red if any Red TStandardEdgeResponses', t => {
 
 test('returns Green if all Green TStandardEdgeResponses', t => {
   const edge_responses = [{
+    custom_edge_responses: [],
     edge_name: 'name',
+    message: 'message',
     source_node_name:'source',
-    target_node_name:'target',
-    message: 'message',
-    status: EStandardEdgeStatus.Green
+    status: EStandardEdgeStatus.Green,
+    target_node_name:'target'
   }, {
+    custom_edge_responses: [],
     edge_name: 'name',
-    source_node_name: 'source',
-    target_node_name: 'target',
     message: 'message',
-    status: EStandardEdgeStatus.Green
+    source_node_name: 'source',
+    status: EStandardEdgeStatus.Green,
+    target_node_name: 'target'
   }]
   const result = determine_unified_response(edge_responses)
 
@@ -46,17 +50,19 @@ test('returns Green if all Green TStandardEdgeResponses', t => {
 
 test('returns Green if Green and Blue TStandardEdgeResponses', t => {
   const edge_responses = [{
+    custom_edge_responses: [],
     edge_name: 'name',
-    source_node_name: 'source',
-    target_node_name: 'target',
     message: 'message',
-    status: EStandardEdgeStatus.Blue
+    source_node_name: 'source',
+    status: EStandardEdgeStatus.Blue,
+    target_node_name: 'target',
   }, {
+    custom_edge_responses: [],
     edge_name: 'name',
-    source_node_name: 'source',
-    target_node_name: 'target',
     message: 'message',
-    status: EStandardEdgeStatus.Green
+    source_node_name: 'source',
+    status: EStandardEdgeStatus.Green,
+    target_node_name: 'target'
   }]
   const result = determine_unified_response(edge_responses)
 
