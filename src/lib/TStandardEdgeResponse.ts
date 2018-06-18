@@ -8,6 +8,8 @@ export enum EStandardEdgeStatus {
 export interface TStandardEdgeResponse {
   status: EStandardEdgeStatus;
   message: string;
+  source_node_name: string;
+  target_node_name: string;
   edge_name: string;
   support_messages?: string[]; // TODO: Might want to include all the component responses at some point.
 }

@@ -7,10 +7,14 @@ import { EUnifiedStatus } from './TUnifiedResponse';
 test('returns Red if any Red TStandardEdgeResponses', t => {
   const edge_responses = [{
     edge_name: 'name',
+    source_node_name: 'source',
+    target_node_name: 'target',
     message: 'message',
     status: EStandardEdgeStatus.Red
   }, {
       edge_name: 'name',
+      source_node_name: 'source',
+      target_node_name: 'target',
       message: 'message',
       status: EStandardEdgeStatus.Green
   }]
@@ -23,10 +27,14 @@ test('returns Red if any Red TStandardEdgeResponses', t => {
 test('returns Green if all Green TStandardEdgeResponses', t => {
   const edge_responses = [{
     edge_name: 'name',
+    source_node_name:'source',
+    target_node_name:'target',
     message: 'message',
     status: EStandardEdgeStatus.Green
   }, {
     edge_name: 'name',
+    source_node_name: 'source',
+    target_node_name: 'target',
     message: 'message',
     status: EStandardEdgeStatus.Green
   }]
@@ -39,10 +47,14 @@ test('returns Green if all Green TStandardEdgeResponses', t => {
 test('returns Green if Green and Blue TStandardEdgeResponses', t => {
   const edge_responses = [{
     edge_name: 'name',
+    source_node_name: 'source',
+    target_node_name: 'target',
     message: 'message',
     status: EStandardEdgeStatus.Blue
   }, {
     edge_name: 'name',
+    source_node_name: 'source',
+    target_node_name: 'target',
     message: 'message',
     status: EStandardEdgeStatus.Green
   }]
