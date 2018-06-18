@@ -1,5 +1,4 @@
 import test from 'ava'
-import {flatten} from 'lodash'
 import { validate } from './index'
 import { TConfig } from './lib/config_types/TConfig';
 
@@ -103,13 +102,12 @@ test('missing location_selection for irs_plan and invalid aggregations', t => {
 
   const messages_to_show = edge_statuses_that_fail.map(e => {
     if (e.custom_edge_responses.length) {
-      const flat_custom_edge_responses = flatten(e.custom_edge_responses)
-      const custom_message = flat_custom_edge_responses
+      const custom_message = e.custom_edge_responses
         .filter(cer => cer.status.startsWith('Red'))
         .map(cer => cer.message)
 
       return {
-        message: custom_message,
+        message: custom_message.join(','),
         nodes: [e.source_node_name, e.target_node_name]
       }
     } else {
