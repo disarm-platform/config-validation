@@ -4,6 +4,18 @@ import { TConfig } from './config_types/TConfig';
 import {EUnifiedStatus} from './TUnifiedResponse'
 import {validate} from './validate'
 
+test("returns Red for a config that doesn't match schema", t => {
+  const config_not_matching_schema = {
+    applets: {},
+    not_schema: true,
+  }
+
+  // @ts-ignore
+  const response = validate(config_not_matching_schema)
+
+  t.is(response.status, EUnifiedStatus.Red)
+})
+
 test('Config validations used by table, charts and map are not available', t => {
   // tslint:disable:object-literal-sort-keys
   // Invalid config, aggregations is an empty array
@@ -11660,6 +11672,5 @@ test('returns Green for valid config with irs_plan and irs_record_point', t => {
     console.log(response)
   }
 
-  console.log(response)
   t.is(response.status, EUnifiedStatus.Green)
 })
