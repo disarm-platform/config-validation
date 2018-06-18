@@ -8,7 +8,6 @@ export enum ESchemaStatus {
 }
 
 export interface TSchemaResponse {
-  status: ESchemaStatus,
+  status: ESchemaStatus;
   errors: string;
 }
-

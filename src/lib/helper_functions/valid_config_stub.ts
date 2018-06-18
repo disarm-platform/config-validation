@@ -20,6 +20,6 @@ const valid_config_stub: TConfig = {
     slug: 'loc',
     title: 'title'
   }
-}
+};
 
-export {valid_config_stub}
+export { valid_config_stub };

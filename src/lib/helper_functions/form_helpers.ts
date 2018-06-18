@@ -1,4 +1,4 @@
-import { TForm } from "../config_types/TForm";
+import { TForm } from '../config_types/TForm';
 
 export interface TFormElement {
   page: number;
@@ -6,31 +6,30 @@ export interface TFormElement {
   type: string;
 }
 
-export function get_form_elements(form: TForm): TFormElement[] {  
+export function get_form_elements(form: TForm): TFormElement[] {
   if (!form.pages) {
-    return []
+    return [];
   }
 
-  const arr: TFormElement[] = []
+  const arr: TFormElement[] = [];
   form.pages.forEach((page, i) => {
     if (page.elements) {
       page.elements.forEach(element => {
         if (arr.find(j => j.name === element.name)) {
-          return
+          return;
         }
 
         arr.push({
           name: element.name,
           page: i,
           type: element.type
-        })
-      })
+        });
+      });
     }
-  })
-  return arr
+  });
+  return arr;
 }
 
-export function form_fields(form: TForm) : string[] {
-  return get_form_elements(form).map(e => e.name)
+export function form_fields(form: TForm): string[] {
+  return get_form_elements(form).map(e => e.name);
 }
-

@@ -20,7 +20,7 @@ test('returns Red status if response_point_fields from form are missing', t => {
         name: 'page1'
       }
     ]
-  }
+  };
 
   const irs_monitor: TIrsMonitor = {
     charts: [],
@@ -28,9 +28,7 @@ test('returns Red status if response_point_fields from form are missing', t => {
       aggregation_names: [],
       bin_by: '',
       property_layers: [],
-      response_point_fields: [
-        'form_data.not_there'
-      ],
+      response_point_fields: ['form_data.not_there']
     },
     season_start_dates: [],
     table: {
@@ -38,7 +36,7 @@ test('returns Red status if response_point_fields from form are missing', t => {
       bin_by: '',
       property_layers: []
     }
-  }
+  };
 
   const config = {
     applets: {
@@ -47,10 +45,10 @@ test('returns Red status if response_point_fields from form are missing', t => {
     decorators: {},
     form
   };
-  
+
   const result = irs_monitor_fields_helper(config as TConfig);
 
-  t.is(result.length, 1)
+  t.is(result.length, 1);
   t.is(result[0].status, ECustomEdgeStatus.Red);
 });
 
@@ -61,9 +59,7 @@ test('returns Red status if response_point_fields from decorators are missing', 
       aggregation_names: [],
       bin_by: '',
       property_layers: [],
-      response_point_fields: [
-        '_decorated.not_there'
-      ],
+      response_point_fields: ['_decorated.not_there']
     },
     season_start_dates: [],
     table: {
@@ -71,7 +67,7 @@ test('returns Red status if response_point_fields from decorators are missing', 
       bin_by: '',
       property_layers: []
     }
-  }
+  };
 
   const form: TForm = {
     pages: [
@@ -85,7 +81,7 @@ test('returns Red status if response_point_fields from decorators are missing', 
         name: 'page1'
       }
     ]
-  }
+  };
 
   const config = {
     applets: {
@@ -94,10 +90,10 @@ test('returns Red status if response_point_fields from decorators are missing', 
     decorators: {},
     form
   };
-  
+
   const result = irs_monitor_fields_helper(config as TConfig);
 
-  t.is(result.length, 1)
+  t.is(result.length, 1);
   t.is(result[0].status, ECustomEdgeStatus.Red);
 });
 
@@ -105,17 +101,17 @@ test('returns Red status if generate_series_from from decorators are missing', t
   const irs_monitor: TIrsMonitor = {
     charts: [
       {
-        'id': 'spray_status_pie',
-        'options': {
-          'chart_type': 'pie',
-          'generate_series_from': '_decorated.sprayed_status',
-          'layout': {
-            'title': 'Sprayed status proportion'
+        id: 'spray_status_pie',
+        options: {
+          chart_type: 'pie',
+          generate_series_from: '_decorated.sprayed_status',
+          layout: {
+            title: 'Sprayed status proportion'
           }
         },
-        'style': {
-          'height_constraint': 'none',
-          'width_constraint': 'half'
+        style: {
+          height_constraint: 'none',
+          width_constraint: 'half'
         }
       }
     ],
@@ -123,7 +119,7 @@ test('returns Red status if generate_series_from from decorators are missing', t
       aggregation_names: [],
       bin_by: '',
       property_layers: [],
-      response_point_fields: [],
+      response_point_fields: []
     },
     season_start_dates: [],
     table: {
@@ -131,7 +127,7 @@ test('returns Red status if generate_series_from from decorators are missing', t
       bin_by: '',
       property_layers: []
     }
-  }
+  };
 
   const form: TForm = {
     pages: [
@@ -145,16 +141,16 @@ test('returns Red status if generate_series_from from decorators are missing', t
         name: 'page1'
       }
     ]
-  }
+  };
 
   const config = {
     applets: {
-      irs_monitor,
+      irs_monitor
     },
     decorators: {},
-    form,
-  }
-  
+    form
+  };
+
   const result = irs_monitor_fields_helper(config as TConfig);
 
   t.is(result.length, 1);
@@ -165,17 +161,17 @@ test('returns Red status if generate_series_from from form are missing', t => {
   const irs_monitor: TIrsMonitor = {
     charts: [
       {
-        'id': 'spray_status_pie',
-        'options': {
-          'chart_type': 'pie',
-          'generate_series_from': 'form_data.sprayed_status',
-          'layout': {
-            'title': 'Sprayed status proportion'
+        id: 'spray_status_pie',
+        options: {
+          chart_type: 'pie',
+          generate_series_from: 'form_data.sprayed_status',
+          layout: {
+            title: 'Sprayed status proportion'
           }
         },
-        'style': {
-          'height_constraint': 'none',
-          'width_constraint': 'half'
+        style: {
+          height_constraint: 'none',
+          width_constraint: 'half'
         }
       }
     ],
@@ -183,7 +179,7 @@ test('returns Red status if generate_series_from from form are missing', t => {
       aggregation_names: [],
       bin_by: '',
       property_layers: [],
-      response_point_fields: [],
+      response_point_fields: []
     },
     season_start_dates: [],
     table: {
@@ -191,7 +187,7 @@ test('returns Red status if generate_series_from from form are missing', t => {
       bin_by: '',
       property_layers: []
     }
-  }
+  };
 
   const form: TForm = {
     pages: [
@@ -205,7 +201,7 @@ test('returns Red status if generate_series_from from form are missing', t => {
         name: 'page1'
       }
     ]
-  }
+  };
 
   const config = {
     applets: {
@@ -214,7 +210,7 @@ test('returns Red status if generate_series_from from form are missing', t => {
     decorators: {},
     form
   };
-  
+
   const result = irs_monitor_fields_helper(config as TConfig);
 
   t.is(result.length, 1);
@@ -225,17 +221,17 @@ test('returns Green status if all fields are available', t => {
   const irs_monitor: TIrsMonitor = {
     charts: [
       {
-        'id': 'spray_status_pie',
-        'options': {
-          'chart_type': 'pie',
-          'generate_series_from': 'form_data.question1',
-          'layout': {
-            'title': 'Sprayed status proportion'
+        id: 'spray_status_pie',
+        options: {
+          chart_type: 'pie',
+          generate_series_from: 'form_data.question1',
+          layout: {
+            title: 'Sprayed status proportion'
           }
         },
-        'style': {
-          'height_constraint': 'none',
-          'width_constraint': 'half'
+        style: {
+          height_constraint: 'none',
+          width_constraint: 'half'
         }
       }
     ],
@@ -251,18 +247,18 @@ test('returns Green status if all fields are available', t => {
       bin_by: '',
       property_layers: []
     }
-  }
+  };
 
   const decorators: TDecorators = {
-    "status": [
+    status: [
       {
-        "red": "question1 == 0"
+        red: 'question1 == 0'
       },
       {
-        "green": "question1 > 0"
+        green: 'question1 > 0'
       }
     ]
-  }
+  };
 
   const form: TForm = {
     pages: [
@@ -276,7 +272,7 @@ test('returns Green status if all fields are available', t => {
         name: 'page1'
       }
     ]
-  }
+  };
 
   const config = {
     applets: {
@@ -285,7 +281,7 @@ test('returns Green status if all fields are available', t => {
     decorators,
     form
   };
-  
+
   const result = irs_monitor_fields_helper(config as TConfig);
 
   t.is(result.length, 3);
@@ -293,4 +289,3 @@ test('returns Green status if all fields are available', t => {
   t.is(result[1].status, ECustomEdgeStatus.Green);
   t.is(result[2].status, ECustomEdgeStatus.Green);
 });
-

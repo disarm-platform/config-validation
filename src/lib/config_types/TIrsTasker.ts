@@ -1,5 +1,5 @@
-import { TApplet } from "./TApplet";
+import { TApplet } from './TApplet';
 
 export interface TIrsTasker extends TApplet {
-  no_known_properties?: boolean
+  no_known_properties?: boolean;
 }

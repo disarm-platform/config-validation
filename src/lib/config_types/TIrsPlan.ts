@@ -1,4 +1,4 @@
-import { TApplet } from "./TApplet";
+import { TApplet } from './TApplet';
 
 export interface TTableOutput {
   display_name: string;

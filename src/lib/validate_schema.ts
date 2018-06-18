@@ -12,7 +12,10 @@ const ajv = new Ajv();
 // tslint:disable:no-expression-statement
 ajv.addMetaSchema(draft_6);
 
-export function validate_schema(config: TConfig, config_schema: JSONSchema6): TSchemaResponse {
+export function validate_schema(
+  config: TConfig,
+  config_schema: JSONSchema6
+): TSchemaResponse {
   const schema_valid = ajv.validate(config_schema, config);
 
   if (schema_valid) {

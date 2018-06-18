@@ -3,5 +3,5 @@ export interface TDecoratorOption {
 }
 
 export interface TDecorators {
-  [k: string]: TDecoratorOption[]
+  [k: string]: TDecoratorOption[];
 }

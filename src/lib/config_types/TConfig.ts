@@ -1,5 +1,5 @@
 import { TAggregations } from './TAggregations';
-import { TApplets } from './TApplets'
+import { TApplets } from './TApplets';
 import { TDecorators } from './TDecorators';
 import { TForm } from './TForm';
 import { TInstance } from './TInstance';

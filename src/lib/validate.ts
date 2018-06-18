@@ -30,10 +30,10 @@ export function validate(config: TConfig): TUnifiedResponse {
   // Return early if failing schema validation. End of the road.
   if (schema_response.status === ESchemaStatus.Red) {
     return {
-      edge_messages:[],
+      edge_messages: [],
       message: 'Schema validation failed',
       status: EUnifiedStatus.Red,
-      support_messages: [schema_response.errors],
+      support_messages: [schema_response.errors]
     };
   }
 
@@ -49,4 +49,3 @@ export function validate(config: TConfig): TUnifiedResponse {
   //
   return determine_unified_response(edge_responses);
 }
-

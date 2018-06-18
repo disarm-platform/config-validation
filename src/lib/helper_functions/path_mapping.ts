@@ -4,7 +4,7 @@ export interface TPathMap {
 }
 
 export const PathMap: TPathMap[] = [
-  { name: 'applets', path: 'applets'},
+  { name: 'applets', path: 'applets' },
   { name: 'aggregations', path: 'aggregations' },
   { name: 'decorators', path: 'decorators' },
   { name: 'instance', path: 'instance' },

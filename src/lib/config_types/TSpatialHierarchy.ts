@@ -8,7 +8,6 @@ export interface TMarkers {
   denominator_fields: TDenominatorFields;
 }
 
-
 export interface TLevel {
   group_by_field?: string;
   field_name: string;

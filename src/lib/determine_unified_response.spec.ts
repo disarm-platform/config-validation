@@ -5,61 +5,70 @@ import { EStandardEdgeStatus } from './TStandardEdgeResponse';
 import { EUnifiedStatus } from './TUnifiedResponse';
 
 test('returns Red if any Red TStandardEdgeResponses', t => {
-  const edge_responses = [{
-    edge_name: 'name',
-    source_node_name: 'source',
-    target_node_name: 'target',
-    message: 'message',
-    status: EStandardEdgeStatus.Red
-  }, {
+  const edge_responses = [
+    {
       edge_name: 'name',
-      source_node_name: 'source',
-      target_node_name: 'target',
       message: 'message',
-      status: EStandardEdgeStatus.Green
-  }]
-  const result = determine_unified_response(edge_responses)
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Red,
+      target_node_name: 'target'
+    },
+    {
+      edge_name: 'name',
+      message: 'message',
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Green,
+      target_node_name: 'target'
+    }
+  ];
+  const result = determine_unified_response(edge_responses);
 
-  t.is(result.status, EUnifiedStatus.Red)
-  t.is(result.message, 'Failed')
-})
+  t.is(result.status, EUnifiedStatus.Red);
+  t.is(result.message, 'Failed');
+});
 
 test('returns Green if all Green TStandardEdgeResponses', t => {
-  const edge_responses = [{
-    edge_name: 'name',
-    source_node_name:'source',
-    target_node_name:'target',
-    message: 'message',
-    status: EStandardEdgeStatus.Green
-  }, {
-    edge_name: 'name',
-    source_node_name: 'source',
-    target_node_name: 'target',
-    message: 'message',
-    status: EStandardEdgeStatus.Green
-  }]
-  const result = determine_unified_response(edge_responses)
+  const edge_responses = [
+    {
+      edge_name: 'name',
+      message: 'message',
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Green,
+      target_node_name: 'target'
+    },
+    {
+      edge_name: 'name',
+      message: 'message',
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Green,
+      target_node_name: 'target'
+    }
+  ];
+  const result = determine_unified_response(edge_responses);
 
-  t.is(result.status, EUnifiedStatus.Green)
-  t.is(result.message, 'All passed')
-})
+  t.is(result.status, EUnifiedStatus.Green);
+  t.is(result.message, 'All passed');
+});
 
 test('returns Green if Green and Blue TStandardEdgeResponses', t => {
-  const edge_responses = [{
-    edge_name: 'name',
-    source_node_name: 'source',
-    target_node_name: 'target',
-    message: 'message',
-    status: EStandardEdgeStatus.Blue
-  }, {
-    edge_name: 'name',
-    source_node_name: 'source',
-    target_node_name: 'target',
-    message: 'message',
-    status: EStandardEdgeStatus.Green
-  }]
-  const result = determine_unified_response(edge_responses)
+  const edge_responses = [
+    {
+      edge_name: 'name',
+      message: 'message',
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Blue,
+      target_node_name: 'target'
+    },
+    {
+      edge_name: 'name',
+      message: 'message',
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Green,
+      target_node_name: 'target'
+    }
+  ];
+  const result = determine_unified_response(edge_responses);
 
-  t.is(result.status, EUnifiedStatus.Green)
-  t.is(result.message, 'Passed with some optional edges')
-})
+  t.is(result.status, EUnifiedStatus.Green);
+  t.is(result.message, 'Passed with some optional edges');
+});
