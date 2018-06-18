@@ -42,7 +42,7 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
   
   if (!target_node_exists) {
     nodes_exist = {
-      message: 'Missing source target node',
+      message: 'Missing target node',
       status: ENodeResponseStatus.Red
     }
     return determine_edge_result(edge_name, nodes_exist, edge_required)
