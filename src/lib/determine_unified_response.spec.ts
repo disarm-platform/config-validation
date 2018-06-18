@@ -9,6 +9,8 @@ test('returns Red if any Red TStandardEdgeResponses', t => {
     custom_edge_responses: [],
     edge_name: 'name',
     message: 'message',
+    relationship_hint: '',
+    required: true,
     source_node_name: 'source',
     status: EStandardEdgeStatus.Red,
     target_node_name: 'target'
@@ -16,6 +18,8 @@ test('returns Red if any Red TStandardEdgeResponses', t => {
     custom_edge_responses: [],
     edge_name: 'name',
     message: 'message',
+    relationship_hint: '',
+    required: true,
     source_node_name: 'source',
     status: EStandardEdgeStatus.Green,
     target_node_name: 'target'
@@ -31,6 +35,8 @@ test('returns Green if all Green TStandardEdgeResponses', t => {
     custom_edge_responses: [],
     edge_name: 'name',
     message: 'message',
+    relationship_hint: '',
+    required: true,
     source_node_name:'source',
     status: EStandardEdgeStatus.Green,
     target_node_name:'target'
@@ -38,6 +44,8 @@ test('returns Green if all Green TStandardEdgeResponses', t => {
     custom_edge_responses: [],
     edge_name: 'name',
     message: 'message',
+    relationship_hint: '',
+    required: true,
     source_node_name: 'source',
     status: EStandardEdgeStatus.Green,
     target_node_name: 'target'
@@ -53,6 +61,8 @@ test('returns Green if Green and Blue TStandardEdgeResponses', t => {
     custom_edge_responses: [],
     edge_name: 'name',
     message: 'message',
+    relationship_hint: '',
+    required: true,
     source_node_name: 'source',
     status: EStandardEdgeStatus.Blue,
     target_node_name: 'target',
@@ -60,6 +70,8 @@ test('returns Green if Green and Blue TStandardEdgeResponses', t => {
     custom_edge_responses: [],
     edge_name: 'name',
     message: 'message',
+    relationship_hint: '',
+    required: true,
     source_node_name: 'source',
     status: EStandardEdgeStatus.Green,
     target_node_name: 'target'

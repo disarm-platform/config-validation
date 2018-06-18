@@ -12,7 +12,8 @@ export interface TStandardEdgeResponse {
   message: string;
   source_node_name: string;
   target_node_name: string;
-  edge_name: string;
+  relationship_hint: string;
+  required: boolean;
   custom_edge_responses: TCustomEdgeResponse[];
   support_messages?: string[]; // TODO: Might want to include all the component responses at some point.
 }

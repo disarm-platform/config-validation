@@ -20,8 +20,6 @@ export function validate_edges(config: TConfig, path_map: TPathMap[], edge_defin
 function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TEdgeDefinition): TStandardEdgeResponse {
   let nodes_exist: TNodeResponse;
 
-  const {source_node_name, target_node_name} = edge_definition
-
   // Tell me about this Edge
   let edge_required = edge_definition.required;
   const edge_name = `${edge_definition.source_node_name}_${edge_definition.target_node_name}`;
@@ -59,12 +57,10 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
   // Find and run the custom edge validation
   if (!(edge_name in CustomEdgeValidators)) {
     return {
+      ...edge_definition,
       custom_edge_responses: [],
-      edge_name,
       message: `Cannot find ${edge_name} edge`,
-      source_node_name,
       status: EStandardEdgeStatus.Red,
-      target_node_name
     }
   }
   
@@ -80,12 +76,10 @@ export function determine_edge_result(edge_definition: TEdgeDefinition, node_res
   
   // Create a default response in case none of the other cases match.
   const response = {
+    ...edge_definition,
     custom_edge_responses,
-    edge_name, 
     message: `${edge_name} Default response - not caught by any other cases`,
-    source_node_name,
     status: EStandardEdgeStatus.Red,
-    target_node_name,
   }
 
   // All the tools
@@ -103,9 +97,7 @@ export function determine_edge_result(edge_definition: TEdgeDefinition, node_res
       ...response,
       custom_edge_responses,
       message: `Failed - some missing node for edge ${edge_name}`,
-      source_node_name,
       status: EStandardEdgeStatus.Red,
-      target_node_name
     }
   }
 
@@ -114,9 +106,7 @@ export function determine_edge_result(edge_definition: TEdgeDefinition, node_res
       ...response,
       custom_edge_responses,
       message: `One or more missing nodes, but edge not required for ${edge_name}`,
-      source_node_name,
-      status: EStandardEdgeStatus.Blue,
-      target_node_name
+      status: EStandardEdgeStatus.Blue
     }
   }
 
@@ -125,9 +115,7 @@ export function determine_edge_result(edge_definition: TEdgeDefinition, node_res
       ...response,
       custom_edge_responses,
       message: `Required edge, nodes present and edge passes for ${edge_name}`,
-      source_node_name,
-      status: EStandardEdgeStatus.Green,
-      target_node_name
+      status: EStandardEdgeStatus.Green
     }
   }
 
@@ -136,9 +124,7 @@ export function determine_edge_result(edge_definition: TEdgeDefinition, node_res
       ...response,
       custom_edge_responses,
       message: `Optional edge, nodes present and edge passes for ${edge_name}`,
-      source_node_name,
-      status: EStandardEdgeStatus.Green,
-      target_node_name
+      status: EStandardEdgeStatus.Green
     }
   }
 
@@ -147,9 +133,7 @@ export function determine_edge_result(edge_definition: TEdgeDefinition, node_res
       ...response,
       custom_edge_responses,
       message: `Required edge, nodes present and edge fails for ${edge_name}`,
-      source_node_name,
-      status: EStandardEdgeStatus.Red,
-      target_node_name
+      status: EStandardEdgeStatus.Red
     }
   }
 
@@ -158,9 +142,7 @@ export function determine_edge_result(edge_definition: TEdgeDefinition, node_res
       ...response,
       custom_edge_responses,
       message: `Optional edge, nodes present and edge fails for ${edge_name}`,
-      source_node_name,
-      status: EStandardEdgeStatus.Red,
-      target_node_name
+      status: EStandardEdgeStatus.Red
     }
   }
 

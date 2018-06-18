@@ -1,10 +1,10 @@
 // tslint:disable:no-expression-statement
 import { test } from 'ava';
 import { ECustomEdgeStatus, TCustomEdgeResponse } from './TCustomEdgeResponse';
+import { TEdgeDefinition } from './TEdgeDefinition';
 import { ENodeResponseStatus, TNodeResponse,  } from './TNodeResponse';
 import { EStandardEdgeStatus } from './TStandardEdgeResponse';
 import { determine_edge_result } from './validate_edges';
-import { TEdgeDefinition } from './TEdgeDefinition';
 
 test('returns Red if nodes fail and the edge is required', t => {
   const node_response: TNodeResponse = {
@@ -14,9 +14,9 @@ test('returns Red if nodes fail and the edge is required', t => {
   const edge_required = true
   const custom_edge_responses: TCustomEdgeResponse[] = []
   const  edge_definition: TEdgeDefinition = {
-    source_node_name:'edge',
     relationship_hint:'',
     required:true,
+    source_node_name:'edge',
     target_node_name:'name',
   }
   const result = determine_edge_result(edge_definition, node_response, edge_required, custom_edge_responses)
@@ -33,9 +33,9 @@ test('returns Blue if nodes fail and the edge is optional', t => {
   const edge_required = false
   const custom_edge_responses: TCustomEdgeResponse[] = [];
   const  edge_definition: TEdgeDefinition = {
-    source_node_name:'edge',
     relationship_hint:'',
     required:true,
+    source_node_name:'edge',
     target_node_name:'name',
   }
   const result = determine_edge_result(edge_definition, node_response, edge_required, custom_edge_responses)
@@ -56,9 +56,9 @@ test('returns Green if nodes pass and the edge is required and edges pass', t =>
   }]
 
   const  edge_definition: TEdgeDefinition = {
-    source_node_name:'edge',
     relationship_hint:'',
     required:true,
+    source_node_name:'edge',
     target_node_name:'name',
   }
 
@@ -80,9 +80,9 @@ test('returns Green if nodes pass and the edge is optional and edges pass', t =>
   }]
 
   const  edge_definition: TEdgeDefinition = {
-    source_node_name:'edge',
     relationship_hint:'',
     required:true,
+    source_node_name:'edge',
     target_node_name:'name',
   }
 
@@ -104,9 +104,9 @@ test('returns Red if nodes pass and the edge is required and edges fail', t => {
   }]
 
   const  edge_definition: TEdgeDefinition = {
-    source_node_name:'edge',
     relationship_hint:'',
     required:true,
+    source_node_name:'edge',
     target_node_name:'name',
   } 
 
@@ -128,9 +128,9 @@ test('returns Red if nodes pass and the edge is optional and edges fail', t => {
   }]
 
   const  edge_definition: TEdgeDefinition = {
-    source_node_name:'edge',
     relationship_hint:'',
     required:true,
+    source_node_name:'edge',
     target_node_name:'name',
   }
 
