@@ -1,15 +1,12 @@
 import { flatten } from 'lodash'
 import { TConfig } from "../config_types/TConfig";
-import { EFieldType, TFieldSummary, TGeodataSummary, TSpatialHierarchy  } from "../config_types/TSpatialHierarchy";
+import { EFieldType, TFieldSummary, TGeodataSummary, TSpatialHierarchy } from "../config_types/TSpatialHierarchy";
+import { markers_valid } from '../helper_functions/markers_valid';
 import { required_properties_on_sh_level } from '../helper_functions/required_properties_spatial_hierarchy_level';
-import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse";
+import { ECustomEdgeStatus, TCustomEdgeResponse, TCustomEdgeResponses } from "../TCustomEdgeResponse";
 
 
-export interface TValidationResponse {
-  support_messages: string[];
-  message: string;
-  status: ECustomEdgeStatus;
-}
+
 
 export function spatial_hierarchy_geodata_summary(config: TConfig): TCustomEdgeResponses {
   const spatial_hierarchy = config.spatial_hierarchy as TSpatialHierarchy
@@ -58,7 +55,7 @@ export function spatial_hierarchy_geodata_summary(config: TConfig): TCustomEdgeR
   const markers_are_valid = markers_valid(spatial_hierarchy, geodata_summary);
   if (markers_are_valid.status !== ECustomEdgeStatus.Green) {
     responses.push({
-      message: 'Some fields missing from the level definition: ' + markers_are_valid.support_messages.join(', '),
+      message: 'Some fields missing from the level definition: ' + markers_are_valid.message,
       status: ECustomEdgeStatus.Red
     });
   }
@@ -66,7 +63,7 @@ export function spatial_hierarchy_geodata_summary(config: TConfig): TCustomEdgeR
   // The given ID fields are unique, exist on all features, and are of consistent type
   const id_fields_are_valid = valid_id_fields(spatial_hierarchy, geodata_summary)
   if (!id_fields_are_valid.every(l => l.status === ECustomEdgeStatus.Green)) {
-    const support_messages = flatten(id_fields_are_valid.map(v => v.support_messages));
+    const support_messages = flatten(id_fields_are_valid.map(v => v.message));
     responses.push({
       message: 'Problems with fields used as IDs:' + support_messages.join(', '),
       status: ECustomEdgeStatus.Red,
@@ -84,54 +81,7 @@ export function spatial_hierarchy_geodata_summary(config: TConfig): TCustomEdgeR
 }
 
 
-
-
-export function markers_valid(spatial_hierarchy: TSpatialHierarchy, geodata_summary: TGeodataSummary): TValidationResponse {
-  const markers = spatial_hierarchy.markers;
-  const geodata_layer_names = Object.keys(geodata_summary);
-
-  // planning_level_name is a level
-  const planning_level_name_valid = geodata_layer_names.includes(markers.planning_level_name);
-  if (!planning_level_name_valid) {
-    return {
-      message: 'planning_level_name invalid',
-      status: ECustomEdgeStatus.Red,
-      support_messages: [`Cannot find ${markers.planning_level_name} in markers ${JSON.stringify(markers)}`]
-    }
-  }
-  // record_location_selection_level_name is a level
-  const record_location_selection_level_name_valid = geodata_layer_names.includes(markers.record_location_selection_level_name);
-  if (!record_location_selection_level_name_valid) {
-    return {
-      message: 'record_location_selection_level_name invalid',
-      status: ECustomEdgeStatus.Red,
-      support_messages: [`Cannot find ${markers.planning_level_name} in markers ${JSON.stringify(markers)}`]
-    }
-  }
-
-  // denominator_fields exist on the planning_level_name level
-  // Only check these if the planning_level_name is valid
-  const denominator_fields = Object.values(markers.denominator_fields);
-  const denominator_level = geodata_summary[markers.planning_level_name];
-  const level_fields = denominator_level.map(l => l.field_name);
-  const denominator_fields_valid = denominator_fields.every(f => level_fields.includes(f));
-  if (!denominator_fields_valid) {
-    return {
-      message: 'Denominator fields invalid',
-      status: ECustomEdgeStatus.Red,
-      support_messages: [`Looking for: ${denominator_fields}`, `Found: ${level_fields}`]
-    }
-  } else {
-    return {
-      message: 'Markers valid',
-      status: ECustomEdgeStatus.Green,
-      support_messages: [],
-    }
-  }
-
-}
-
-export function valid_id_fields(spatial_hierarchy: TSpatialHierarchy, geodata_summary: TGeodataSummary): TValidationResponse[] {
+export function valid_id_fields(spatial_hierarchy: TSpatialHierarchy, geodata_summary: TGeodataSummary): TCustomEdgeResponse[] {
   return spatial_hierarchy.levels.map(level => {
     const level_summary = geodata_summary[level.name]
     // level.field_name needs to exist_on_all, be unique, consistent type

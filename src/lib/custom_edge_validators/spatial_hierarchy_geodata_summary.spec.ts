@@ -1,7 +1,7 @@
 // // tslint:disable:no-expression-statement
 import { test } from 'ava';
 import { TConfig } from '../config_types/TConfig';
-import { TSpatialHierarchy } from '../config_types/TSpatialHierarchy';
+import { EFieldType, TSpatialHierarchy,  } from '../config_types/TSpatialHierarchy';
 import { ECustomEdgeStatus } from "../TCustomEdgeResponse";
 import { spatial_hierarchy_geodata_summary } from './spatial_hierarchy_geodata_summary';
 
@@ -9,7 +9,54 @@ import { spatial_hierarchy_geodata_summary } from './spatial_hierarchy_geodata_s
 test('should return Green when spatial_hierarchy is valid', t => {
   const spatial_hierarchy: TSpatialHierarchy =  {
     "data_version": 4,
-    geodata_summary: {},
+    geodata_summary: {
+      constituencies: [
+        {
+          exists_on_all: true,
+          field_name: 'CONST',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'OBJECTID',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'REGION',
+          type: EFieldType.String,
+          unique: true
+        }
+      ],
+      villages: [
+        {
+          exists_on_all: true,
+          field_name: 'mp_NAME',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'uID',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'CONSTIT',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'NumStructu',
+          type: EFieldType.Number,
+          unique: true
+        }
+      ],
+    },
     "levels": [
       {
         "display_field_name": "CONST",
@@ -44,7 +91,48 @@ test('should return Green when spatial_hierarchy is valid', t => {
 test('should return Red when planning_level_name is missing', t => {
   const spatial_hierarchy: TSpatialHierarchy = {
     "data_version": 4,
-    geodata_summary: {},
+    geodata_summary: {
+      constituencies: [
+        {
+          exists_on_all: true,
+          field_name: 'CONST',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'OBJECTID',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'REGION',
+          type: EFieldType.String,
+          unique: true
+        }
+      ],
+      villages: [
+        {
+          exists_on_all: true,
+          field_name: 'mp_NAME',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'uID',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'CONSTIT',
+          type: EFieldType.String,
+          unique: true
+        }
+      ],
+    },
     "levels": [
       {
         "display_field_name": "CONST",
@@ -79,7 +167,48 @@ test('should return Red when planning_level_name is missing', t => {
 test('should return Red when record_location_selection_level_name is missing', t => {
   const spatial_hierarchy: TSpatialHierarchy = {
     "data_version": 4,
-    geodata_summary: {},
+    geodata_summary: {
+      constituencies: [
+        {
+          exists_on_all: true,
+          field_name: 'CONST',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'OBJECTID',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'REGION',
+          type: EFieldType.String,
+          unique: true
+        }
+      ],
+      villages: [
+        {
+          exists_on_all: true,
+          field_name: 'mp_NAME',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'uID',
+          type: EFieldType.String,
+          unique: true
+        },
+        {
+          exists_on_all: true,
+          field_name: 'CONSTIT',
+          type: EFieldType.String,
+          unique: true
+        }
+      ],
+    },
     "levels": [
       {
         "display_field_name": "CONST",
