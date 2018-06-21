@@ -22,7 +22,7 @@ import { irs_record_point_validations } from './irs_record_point_validations';
 import { irs_tasker_map_focus } from './irs_tasker_map_focus';
 import { irs_tasker_spatial_hierarchy } from './irs_tasker_spatial_hierarchy';
 import { meta_instance } from './meta_instance';
-import { spatial_hierarchy_geodata_levels } from './spatial_hierarchy_geodata_levels';
+import { spatial_hierarchy_geodata_summary } from './spatial_hierarchy_geodata_summary';
 import { validations_fields_helper } from './validations_fields_helper';
 
 
@@ -53,6 +53,6 @@ export const CustomEdgeValidators: TCustomEdgeValidators = {
   irs_tasker_map_focus,
   irs_tasker_spatial_hierarchy,
   meta_instance,
-  spatial_hierarchy_geodata_levels,
+  spatial_hierarchy_geodata_summary,
   validations_fields_helper
 };

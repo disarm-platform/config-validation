@@ -1,6 +1,7 @@
 // tslint:disable:no-expression-statement
 import {test} from 'ava';
 import { TConfig } from './config_types/TConfig';
+import { EFieldType } from './config_types/TSpatialHierarchy';
 import {EUnifiedStatus} from './TUnifiedResponse'
 import {validate} from './validate'
 
@@ -4971,6 +4972,62 @@ test('returns Green for a valid BWA config' , t => {
           "estimated_rooms": "Num_Rooms"
         }
       },
+      geodata_summary: {
+        districts: [
+          {
+            exists_on_all: true,
+            field_name: 'NAME',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'CODE',
+            type: EFieldType.String,
+            unique: true
+          }
+        ],
+        villages: [
+          {
+            exists_on_all: true,
+            field_name: 'name_2',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'Id',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'VILLAGE',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'Num_Rooms',
+            type: EFieldType.String,
+            unique: true
+          }
+        ],
+        clusters: [
+          {
+            exists_on_all: true,
+            field_name: 'ClusterID',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'SP_ID_1',
+            type: EFieldType.String,
+            unique: true
+          }
+        ]
+      },
       "levels": [
         {
           "field_name": "NAME",
@@ -6882,12 +6939,65 @@ test('returns Green for a valid config', t => {
         "record_location_selection_level_name": "villages",
         "denominator_fields": {"structures": "NumStructu"}
       },
+      geodata_summary: {
+        constituencies: [
+          {
+            exists_on_all: true,
+            field_name: 'CONST',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'OBJECTID',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'REGION',
+            type: EFieldType.String,
+            unique: true
+          }
+        ],
+        villages: [
+          {
+            exists_on_all: true,
+            field_name: 'mp_NAME',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'uID',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'CONSTIT',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'NumStructu',
+            type: EFieldType.Number,
+            unique: true
+          }
+        ],
+      },
       "levels": [{
         "group_by_field": "REGION",
         "field_name": "OBJECTID",
         "display_field_name": "CONST",
         "name": "constituencies"
-      }, {"group_by_field": "CONSTIT", "field_name": "uID", "display_field_name": "mp_NAME", "name": "villages"}]
+      }, {
+        "group_by_field": "CONSTIT", 
+        "field_name": "uID", 
+        "display_field_name": "mp_NAME", 
+        "name": "villages"
+      }]
     },
     "form": {
       "pages": [{
@@ -11655,14 +11765,41 @@ test('returns Green for valid config with irs_plan and irs_record_point', t => {
     },
     spatial_hierarchy: {
       data_version: 1,
-      markers: {
-        planning_level_name: 'a',
-        record_location_selection_level_name: 'b',
-        denominator_fields: {
-          something: 'else'
-        }
+      geodata_summary: {
+        constituencies: [
+          {
+            exists_on_all: true,
+            field_name: 'CONST',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'OBJECTID',
+            type: EFieldType.String,
+            unique: true
+          },
+          {
+            exists_on_all: true,
+            field_name: 'REGION',
+            type: EFieldType.String,
+            unique: true
+          }
+        ]
       },
-      levels: []
+      markers: {
+        planning_level_name: 'constituencies',
+        record_location_selection_level_name: 'constituencies',
+        denominator_fields: {}
+      },
+      levels: [
+        {
+          "group_by_field": "REGION",
+          "field_name": "OBJECTID",
+          "display_field_name": "CONST",
+          "name": "constituencies"
+        }
+      ]
     }
   }
 
