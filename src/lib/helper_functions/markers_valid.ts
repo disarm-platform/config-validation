@@ -1,9 +1,10 @@
-import { TGeodataSummary, TSpatialHierarchy } from "../config_types/TSpatialHierarchy";
+import { TSpatialHierarchy } from "../config_types/TSpatialHierarchy";
 import { ECustomEdgeStatus, TCustomEdgeResponse } from "../TCustomEdgeResponse";
 
 
-export function markers_valid(spatial_hierarchy: TSpatialHierarchy, geodata_summary: TGeodataSummary): TCustomEdgeResponse {
+export function markers_valid(spatial_hierarchy: TSpatialHierarchy): TCustomEdgeResponse {
   const markers = spatial_hierarchy.markers;
+  const geodata_summary = spatial_hierarchy.geodata_summary;
   const geodata_layer_names = Object.keys(geodata_summary);
 
   // planning_level_name is a level

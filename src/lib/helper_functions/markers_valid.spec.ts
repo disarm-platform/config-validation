@@ -12,7 +12,7 @@ test('planning_level_name is a level in geodata', t => {
 
   const sh: TSpatialHierarchy = {
     data_version: 0,
-    geodata_summary: {},
+    geodata_summary,
     levels: [],
     markers: {
       denominator_fields: {
@@ -23,7 +23,7 @@ test('planning_level_name is a level in geodata', t => {
     }
   };
 
-  const actual = markers_valid(sh, geodata_summary);
+  const actual = markers_valid(sh);
   const expected = ECustomEdgeStatus.Green;
   t.is(actual.status, expected)
 });
@@ -35,7 +35,7 @@ test('planning_level_name is NOT a level in geodata', t => {
 
   const sh: TSpatialHierarchy = {
     data_version: 0,
-    geodata_summary: {},
+    geodata_summary,
     levels: [],
     markers: {
       denominator_fields: {
@@ -46,7 +46,7 @@ test('planning_level_name is NOT a level in geodata', t => {
     }
   }
 
-  const actual = markers_valid(sh, geodata_summary);
+  const actual = markers_valid(sh);
   const expected = ECustomEdgeStatus.Red;
   t.is(actual.status, expected)
 });
@@ -58,7 +58,7 @@ test('record_location_selection_level_name is a level in geodata', t => {
 
   const sh: TSpatialHierarchy = {
     data_version: 0,
-    geodata_summary: {},
+    geodata_summary,
     levels: [],
     markers: {
       denominator_fields: {
@@ -69,7 +69,7 @@ test('record_location_selection_level_name is a level in geodata', t => {
     }
   }
 
-  const actual = markers_valid(sh, geodata_summary);
+  const actual = markers_valid(sh);
   const expected = ECustomEdgeStatus.Green;
   t.is(actual.status, expected)
 });
@@ -81,7 +81,7 @@ test('record_location_selection_level_name is NOT a level in geodata', t => {
 
   const sh: TSpatialHierarchy = {
     data_version: 0,
-    geodata_summary: {},
+    geodata_summary,
     levels: [],
     markers: {
       denominator_fields: {
@@ -92,7 +92,7 @@ test('record_location_selection_level_name is NOT a level in geodata', t => {
     }
   }
 
-  const actual = markers_valid(sh, geodata_summary);
+  const actual = markers_valid(sh);
   const expected = ECustomEdgeStatus.Red;
   t.is(actual.status, expected)
 });
@@ -105,7 +105,7 @@ test('denominator_fields exist on geodata', t => {
 
   const sh: TSpatialHierarchy = {
     data_version: 0,
-    geodata_summary: {},
+    geodata_summary,
     levels: [],
     markers: {
       denominator_fields: {
@@ -116,7 +116,7 @@ test('denominator_fields exist on geodata', t => {
     }
   }
 
-  const actual = markers_valid(sh, geodata_summary);
+  const actual = markers_valid(sh);
   const expected = ECustomEdgeStatus.Green;
   t.is(actual.status, expected)
 });
@@ -128,7 +128,7 @@ test('denominator_fields DO NOT exist on geodata', t => {
 
   const sh: TSpatialHierarchy = {
     data_version: 0,
-    geodata_summary: {},
+    geodata_summary,
     levels: [],
     markers: {
       denominator_fields: {
@@ -139,7 +139,7 @@ test('denominator_fields DO NOT exist on geodata', t => {
     }
   }
 
-  const actual = markers_valid(sh, geodata_summary);
+  const actual = markers_valid(sh);
   const expected = ECustomEdgeStatus.Red;
   t.is(actual.status, expected)
 });
