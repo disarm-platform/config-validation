@@ -10,7 +10,7 @@ export interface TValidationResponse {
   status: ECustomEdgeStatus;
 }
 
-export function spatial_hierarchy_geodata_levels(config: TConfig): TCustomEdgeResponses {
+export function spatial_hierarchy_geodata_summary(config: TConfig): TCustomEdgeResponses {
   const spatial_hierarchy = config.spatial_hierarchy as TSpatialHierarchy
   const geodata_summary = spatial_hierarchy.geodata_summary as TGeodataSummary;
   const planning_level_name = spatial_hierarchy.markers.planning_level_name

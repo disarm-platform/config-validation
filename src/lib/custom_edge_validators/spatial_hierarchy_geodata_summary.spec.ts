@@ -3,7 +3,7 @@ import { test } from 'ava';
 import { TConfig } from '../config_types/TConfig';
 import { TSpatialHierarchy } from '../config_types/TSpatialHierarchy';
 import { ECustomEdgeStatus } from "../TCustomEdgeResponse";
-import { spatial_hierarchy_geodata_levels } from './spatial_hierarchy_geodata_summary';
+import { spatial_hierarchy_geodata_summary } from './spatial_hierarchy_geodata_summary';
 
 
 test('should return Green when spatial_hierarchy is valid', t => {
@@ -37,7 +37,7 @@ test('should return Green when spatial_hierarchy is valid', t => {
     spatial_hierarchy
   }
 
-  const result = spatial_hierarchy_geodata_levels(config as TConfig)
+  const result = spatial_hierarchy_geodata_summary(config as TConfig)
   t.is(result[0].status, ECustomEdgeStatus.Green)
 })
 
@@ -72,7 +72,7 @@ test('should return Red when planning_level_name is missing', t => {
     spatial_hierarchy
   }
 
-  const result = spatial_hierarchy_geodata_levels(config as TConfig)
+  const result = spatial_hierarchy_geodata_summary(config as TConfig)
   t.is(result[0].status, ECustomEdgeStatus.Red)
 })
 
@@ -107,6 +107,6 @@ test('should return Red when record_location_selection_level_name is missing', t
     spatial_hierarchy
   }
 
-  const result = spatial_hierarchy_geodata_levels(config as TConfig)
+  const result = spatial_hierarchy_geodata_summary(config as TConfig)
   t.is(result[0].status, ECustomEdgeStatus.Red)
 })
