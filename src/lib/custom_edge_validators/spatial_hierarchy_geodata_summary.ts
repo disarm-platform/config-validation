@@ -1,6 +1,7 @@
-import { flatten, get } from 'lodash'
+import { flatten } from 'lodash'
 import { TConfig } from "../config_types/TConfig";
-import { EFieldType, TFieldSummary, TGeodataSummary, TLevel, TSpatialHierarchy  } from "../config_types/TSpatialHierarchy";
+import { EFieldType, TFieldSummary, TGeodataSummary, TSpatialHierarchy  } from "../config_types/TSpatialHierarchy";
+import { required_properties_on_sh_level } from '../helper_functions/required_properties_spatial_hierarchy_level';
 import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse";
 
 
@@ -46,7 +47,7 @@ export function spatial_hierarchy_geodata_summary(config: TConfig): TCustomEdgeR
   });
 
   if (!required_properties_on_all_levels.every(l => l.status === ECustomEdgeStatus.Green)) {
-    const support_messages = flatten(required_properties_on_all_levels.map(v => v.support_messages));
+    const support_messages = required_properties_on_all_levels.map(v => v.message);
     responses.push({
       message: 'Some fields missing from the level definition: ' + support_messages.join(', '),
       status: ECustomEdgeStatus.Red,
@@ -83,42 +84,7 @@ export function spatial_hierarchy_geodata_summary(config: TConfig): TCustomEdgeR
 }
 
 
-export function required_properties_on_sh_level(spatial_hierarchy_level: TLevel, geodata_properties_summary: TFieldSummary[]): TValidationResponse {
-  const required_fields = ['group_by_field', 'field_name']
-    .map(n => get(spatial_hierarchy_level, n))
-    .filter(i => i);
 
-  const all_required_fields_exist = required_fields.map((field_name): TValidationResponse => {
-    const found = geodata_properties_summary.find(s => s.field_name === field_name);
-    if (found) {
-      return {
-        message: 'Found',
-        status: ECustomEdgeStatus.Green,
-        support_messages: []
-      };
-    } else {
-      return {
-        message: `${field_name} missing`,
-        status: ECustomEdgeStatus.Red,
-        support_messages: [`${field_name} missing from geodata properties`]
-      };
-    }
-  });
-
-  if (all_required_fields_exist.every(e => e.status === ECustomEdgeStatus.Green)) {
-    return {
-      message: 'All required fields exist',
-      status: ECustomEdgeStatus.Green,
-      support_messages: []
-    };
-  } else {
-    return {
-      message: 'Missing fields',
-      status: ECustomEdgeStatus.Red,
-      support_messages: flatten(all_required_fields_exist.map(e => e.support_messages))
-    };
-  }
-}
 
 export function markers_valid(spatial_hierarchy: TSpatialHierarchy, geodata_summary: TGeodataSummary): TValidationResponse {
   const markers = spatial_hierarchy.markers;
