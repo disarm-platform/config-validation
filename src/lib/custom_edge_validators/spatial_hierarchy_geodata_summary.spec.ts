@@ -3,12 +3,13 @@ import { test } from 'ava';
 import { TConfig } from '../config_types/TConfig';
 import { TSpatialHierarchy } from '../config_types/TSpatialHierarchy';
 import { ECustomEdgeStatus } from "../TCustomEdgeResponse";
-import { spatial_hierarchy_geodata_levels } from './spatial_hierarchy_geodata_levels';
+import { spatial_hierarchy_geodata_levels } from './spatial_hierarchy_geodata_summary';
 
 
 test('should return Green when spatial_hierarchy is valid', t => {
   const spatial_hierarchy: TSpatialHierarchy =  {
     "data_version": 4,
+    geodata_summary: {},
     "levels": [
       {
         "display_field_name": "CONST",
@@ -43,6 +44,7 @@ test('should return Green when spatial_hierarchy is valid', t => {
 test('should return Red when planning_level_name is missing', t => {
   const spatial_hierarchy: TSpatialHierarchy = {
     "data_version": 4,
+    geodata_summary: {},
     "levels": [
       {
         "display_field_name": "CONST",
@@ -77,6 +79,7 @@ test('should return Red when planning_level_name is missing', t => {
 test('should return Red when record_location_selection_level_name is missing', t => {
   const spatial_hierarchy: TSpatialHierarchy = {
     "data_version": 4,
+    geodata_summary: {},
     "levels": [
       {
         "display_field_name": "CONST",

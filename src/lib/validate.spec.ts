@@ -11655,6 +11655,7 @@ test('returns Green for valid config with irs_plan and irs_record_point', t => {
     },
     spatial_hierarchy: {
       data_version: 1,
+      geodata_summary: {},
       markers: {
         planning_level_name: 'a',
         record_location_selection_level_name: 'b',

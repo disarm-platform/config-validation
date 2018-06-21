@@ -19,5 +19,6 @@ export const PathMap: TPathMap[] = [
   { name: 'map_focus', path: 'map_focus' },
   { name: 'meta', path: 'applets.meta' },
   { name: 'spatial_hierarchy', path: 'spatial_hierarchy' },
+  { name: 'geodata_summary', path: 'spatial_hierarchy.geodata_summary' },
   { name: 'validations', path: 'validations' }
 ];
