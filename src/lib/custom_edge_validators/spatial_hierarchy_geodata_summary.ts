@@ -12,31 +12,19 @@ import { ECustomEdgeStatus, TCustomEdgeResponses } from "../TCustomEdgeResponse"
 export function spatial_hierarchy_geodata_summary(config: TConfig): TCustomEdgeResponses {
   const spatial_hierarchy = config.spatial_hierarchy as TSpatialHierarchy
   const geodata_summary = spatial_hierarchy.geodata_summary as TGeodataSummary;
-  const planning_level_name = spatial_hierarchy.markers.planning_level_name
-  const record_location_selection_level_name = spatial_hierarchy.markers.record_location_selection_level_name
-  const level_names = spatial_hierarchy.levels.map(l => l.name)
-  
-
   const responses: TCustomEdgeResponses = []
 
-  if (!level_names.includes(planning_level_name)) {
-    responses.push({
-      message: `planning_level_name (${planning_level_name}) missing from spatial_hierarchy.levels`,
+  const all_levels_exist_on_geodata_summary = spatial_hierarchy.levels.every(level => {
+    return geodata_summary.hasOwnProperty(level.name)
+  })
+  
+  if (!all_levels_exist_on_geodata_summary) {
+    // we need to return early as the functions below rely on all things being present
+    return [{
+      message: 'Levels on spatial_hierarchy are missing geodata_summaries',
       status: ECustomEdgeStatus.Red
-    })
+    }]
   }
-
-  if (!level_names.includes(record_location_selection_level_name)) {
-    responses.push({
-      message: `record_location_selection_level_name (${record_location_selection_level_name}) missing from spatial_hierarchy.levels`,
-      status: ECustomEdgeStatus.Red
-    })
-  }
-
-
-  // insert validate_spatial_hierarchy_function here
-
-  // TODO: Check every spatial_hierarchy level exists in the geodata_summary
 
   // Every property given in spatial_hierarchy level exists in the geodata
   const required_properties_on_all_levels = spatial_hierarchy.levels.map(level => {
