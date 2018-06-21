@@ -239,3 +239,23 @@ test('should return Red when record_location_selection_level_name is missing', t
   const result = spatial_hierarchy_geodata_summary(config as TConfig)
   t.is(result[0].status, ECustomEdgeStatus.Red)
 })
+
+test('should return Red when spatial_hierarchy level is missing from geodata_summary', t => {
+  //
+  t.true(false)
+})
+
+test('should return Red when id fields are not unique', t => {
+  //
+  t.true(false)
+})
+
+test('should return Red when id fields are not on all features', t => {
+  //
+  t.true(false)
+})
+
+test('should return Red when id fields are not all of same type', t => {
+  //
+  t.true(false)
+})
