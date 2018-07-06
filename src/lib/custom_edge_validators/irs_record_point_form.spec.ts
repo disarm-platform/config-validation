@@ -5,7 +5,13 @@ import { ECustomEdgeStatus } from "../TCustomEdgeResponse";
 import { irs_record_point_form } from './irs_record_point_form';
 
 test('should return Green status', t => {
-  const empty_object = {form: {}}
-  const result = irs_record_point_form(empty_object as TConfig)
+  const config = {form: {}, applets:{}}
+  const result = irs_record_point_form(config as TConfig)
   t.is(result[0].status, ECustomEdgeStatus.Green)
+})
+
+test('if filter_field is given, must exist on form', t => {
+  const config = {form: {}, applets:{irs_record_point: {filter_field: 'a'}}}
+  const result = irs_record_point_form(config as TConfig)
+  t.is(result[0].status, ECustomEdgeStatus.Red)
 })
