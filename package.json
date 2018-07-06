@@ -1,5 +1,5 @@
 {
-  "name": "config-validation",
+  "name": "@locational/config-validation",
   "version": "0.0.2",
   "description": "config validation",
   "main": "build/main/index.js",

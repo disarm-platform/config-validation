@@ -1,3 +1,5 @@
+import { TCustomEdgeResponse } from "./TCustomEdgeResponse";
+
 export enum EStandardEdgeStatus {
   Red = 'Red, fails node or edge validation',
   Green = 'Green, passed node and edge validation',
@@ -8,6 +10,10 @@ export enum EStandardEdgeStatus {
 export interface TStandardEdgeResponse {
   status: EStandardEdgeStatus;
   message: string;
-  edge_name: string;
+  source_node_name: string;
+  target_node_name: string;
+  relationship_hint: string;
+  required: boolean;
+  custom_edge_responses: TCustomEdgeResponse[];
   support_messages?: string[]; // TODO: Might want to include all the component responses at some point.
 }

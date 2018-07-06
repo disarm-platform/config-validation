@@ -37,15 +37,16 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
       status: ENodeResponseStatus.Red
     }
     edge_required = false; // We cannot require the edge if the source_node doesn't exist
-    return determine_edge_result(edge_name, nodes_exist, edge_required) // edge cannot be required if source node is not there
+
+    return determine_edge_result(edge_definition, nodes_exist, edge_required, []) // edge cannot be required if source node is not there
   }
   
   if (!target_node_exists) {
     nodes_exist = {
-      message: 'Missing source target node',
+      message: 'Missing target node',
       status: ENodeResponseStatus.Red
     }
-    return determine_edge_result(edge_name, nodes_exist, edge_required)
+    return determine_edge_result(edge_definition, nodes_exist, edge_required, [])
   } 
   
   nodes_exist = {
@@ -56,7 +57,8 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
   // Find and run the custom edge validation
   if (!(edge_name in CustomEdgeValidators)) {
     return {
-      edge_name,
+      ...edge_definition,
+      custom_edge_responses: [],
       message: `Cannot find ${edge_name} edge`,
       status: EStandardEdgeStatus.Red,
     }
@@ -65,15 +67,19 @@ function validate_edge(config: TConfig, nodes: MappedNode[], edge_definition: TE
   const edge_fn = CustomEdgeValidators[edge_name]
   const custom_edge_responses = edge_fn(config);
 
-  return determine_edge_result(edge_name, nodes_exist, edge_required, custom_edge_responses)
+  return determine_edge_result(edge_definition, nodes_exist, edge_required, custom_edge_responses)
 }
 
-export function determine_edge_result(edge_name: string, node_response: TNodeResponse, edge_required: boolean, custom_edge_responses?: TCustomEdgeResponses, ): TStandardEdgeResponse {
+export function determine_edge_result(edge_definition: TEdgeDefinition, node_response: TNodeResponse, edge_required: boolean, custom_edge_responses: TCustomEdgeResponses, ): TStandardEdgeResponse {
+  const {source_node_name, target_node_name} = edge_definition
+  const edge_name:string =  `${source_node_name}_${target_node_name}`;
+  
   // Create a default response in case none of the other cases match.
   const response = {
-    edge_name, 
+    ...edge_definition,
+    custom_edge_responses,
     message: `${edge_name} Default response - not caught by any other cases`,
-    status: EStandardEdgeStatus.Red
+    status: EStandardEdgeStatus.Red,
   }
 
   // All the tools
@@ -88,15 +94,17 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
   // Leaves 6 cases to deal with explicitly
   if (nodes_fail && edge_required) {
     return {
-      ...response, 
+      ...response,
+      custom_edge_responses,
       message: `Failed - some missing node for edge ${edge_name}`,
-      status: EStandardEdgeStatus.Red
+      status: EStandardEdgeStatus.Red,
     }
   }
 
   if (nodes_fail && edge_optional) {
     return {
-      ...response, 
+      ...response,
+      custom_edge_responses,
       message: `One or more missing nodes, but edge not required for ${edge_name}`,
       status: EStandardEdgeStatus.Blue
     }
@@ -104,7 +112,8 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
 
   if (nodes_pass && edge_required && edge_passes) {
     return {
-      ...response, 
+      ...response,
+      custom_edge_responses,
       message: `Required edge, nodes present and edge passes for ${edge_name}`,
       status: EStandardEdgeStatus.Green
     }
@@ -112,7 +121,8 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
 
   if (nodes_pass && edge_optional && edge_passes) {
     return {
-      ...response, 
+      ...response,
+      custom_edge_responses,
       message: `Optional edge, nodes present and edge passes for ${edge_name}`,
       status: EStandardEdgeStatus.Green
     }
@@ -120,7 +130,8 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
 
   if (nodes_pass && edge_required && edge_fails) {
     return {
-      ...response, 
+      ...response,
+      custom_edge_responses,
       message: `Required edge, nodes present and edge fails for ${edge_name}`,
       status: EStandardEdgeStatus.Red
     }
@@ -128,7 +139,8 @@ export function determine_edge_result(edge_name: string, node_response: TNodeRes
 
   if (nodes_pass && edge_optional && edge_fails) {
     return {
-      ...response, 
+      ...response,
+      custom_edge_responses,
       message: `Optional edge, nodes present and edge fails for ${edge_name}`,
       status: EStandardEdgeStatus.Red
     }
