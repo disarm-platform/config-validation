@@ -11,7 +11,7 @@ export function irs_record_point_form(_config: TConfig): TCustomEdgeResponses {
 
   // If given, check filter_field in form fields
   const filter_field_given = irs_record_point.filter_field;
-  const filter_field_exists = fields.includes(irs_record_point.filter_field);
+  const filter_field_exists = irs_record_point.filter_field &&  fields.includes(irs_record_point.filter_field);
 
   if (filter_field_given && !filter_field_exists) {
     return [{
