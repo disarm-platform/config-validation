@@ -6,5 +6,6 @@ export interface TMetaData {
 }
 
 export interface TIrsRecordPoint extends TApplet {
-  metadata: TMetaData
+  metadata: TMetaData,
+  filter_field?: string,
 }
