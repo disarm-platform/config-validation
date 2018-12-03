@@ -83,7 +83,6 @@ test('Config validations used by table, charts and map are not available', t => 
       "debug": {}
     },
     "map_focus": {"centre": {"lat": -19.186677697957833, "lng": 16.940917968750004}, "zoom": 6},
-    "instance": {"title": "Namibia IRS Tool", "location_name": "Namibia", "slug": "nam"},
     "spatial_hierarchy": {
       "data_version": 4,
       "markers": {
@@ -4957,11 +4956,6 @@ test('returns Green for a valid BWA config' , t => {
       },
       "zoom": 7
     },
-    "instance": {
-      "title": "Botswana IRS Database",
-      "location_name": "Botswana",
-      "slug": "bwa"
-    },
     "spatial_hierarchy": {
       "ignore_planning_level_restriction": true,
       "data_version": 11,
@@ -6931,7 +6925,6 @@ test('returns Green for a valid config', t => {
       "debug": {}
     },
     "map_focus": {"centre": {"lat": -19.186677697957833, "lng": 16.940917968750004}, "zoom": 6},
-    "instance": {"title": "Namibia IRS Tool", "location_name": "Namibia", "slug": "nam"},
     "spatial_hierarchy": {
       "data_version": 4,
       "markers": {
@@ -11588,11 +11581,6 @@ test('returns Green for a minimal valid config', t => {
     },
     config_id: 'id',
     config_version: 'version',
-    instance: {
-      location_name: 'Location',
-      slug: 'loc',
-      title: 'title'
-    }
   }
 
   const response = validate(validConfig)
@@ -11617,11 +11605,6 @@ test('returns Red for config with irs_record_point missing form and location_sel
     },
     config_id: 'id',
     config_version: 'version',
-    instance: {
-      location_name: 'Location',
-      slug: 'loc',
-      title: 'title'
-    }
   }
 
   const response = validate(validConfig)
@@ -11654,11 +11637,6 @@ test('returns Green for config with irs_record_point', t => {
         }],
         name: 'p1'
       }]
-    },
-    instance: {
-      location_name: 'Location',
-      slug: 'loc',
-      title: 'title'
     },
     location_selection: {
       'villages': [{
@@ -11703,11 +11681,6 @@ test('returns Red for invalid config with irs_plan and irs_record_point', t => {
         name: 'p1'
       }]
     },
-    instance: {
-      location_name: 'Location',
-      slug: 'loc',
-      title: 'title'
-    },
     location_selection: {
       'villages': [{
         category: '',
@@ -11750,11 +11723,6 @@ test('returns Green for valid config with irs_plan and irs_record_point', t => {
         }],
         name: 'p1'
       }]
-    },
-    instance: {
-      location_name: 'Location',
-      slug: 'loc',
-      title: 'title'
     },
     location_selection: {
       'villages': [{

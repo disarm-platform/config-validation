@@ -15,11 +15,6 @@ const valid_config_stub: TConfig = {
   },
   config_id: 'id',
   config_version: 'version',
-  instance: {
-    location_name: 'Location',
-    slug: 'loc',
-    title: 'title'
-  }
 }
 
 export {valid_config_stub}

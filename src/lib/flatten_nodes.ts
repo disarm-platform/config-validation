@@ -3,7 +3,6 @@ import { TAggregation } from './config_types/TAggregations';
 import { TConfig } from './config_types/TConfig';
 import { TDecorators } from './config_types/TDecorators';
 import { TForm } from './config_types/TForm';
-import { TInstance } from './config_types/TInstance';
 import { TIrsMonitor } from './config_types/TIrsMonitor';
 import { TIrsPlan } from './config_types/TIrsPlan';
 import { TIrsRecordPoint } from './config_types/TIrsRecordPoint';
@@ -17,7 +16,6 @@ import { TPathMap } from './helper_functions/path_mapping';
 export type Node =  TDecorators |
   TAggregation[] |
   TForm |
-  TInstance |
   TIrsMonitor |
   TIrsPlan |
   TIrsRecordPoint |
