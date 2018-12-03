@@ -22,6 +22,7 @@ test('Config validations used by table, charts and map are not available', t => 
   // Invalid config, aggregations is an empty array
   const invalidNamConfig = {
     _id: 'nam@1.0.5',
+    instance_id: 'id',
     applets: {
       irs_monitor: {
         season_start_dates: ['2011-10-01', '2017-10-01', '2018-01-01'],
@@ -6942,6 +6943,7 @@ test('Config validations used by table, charts and map are not available', t => 
 test('returns Green for a valid BWA config', t => {
   const validBWAConfig = {
     _id: 'bwa@1.0.6',
+    instance_id: 'id',
     applets: {
       irs_monitor: {
         season_start_dates: [
@@ -9182,6 +9184,7 @@ test('returns Green for a valid config', t => {
   // tslint:disable:object-literal-sort-keys
   const validNamConfig = {
     _id: 'nam@1.0.5',
+    instance_id: 'id',
     applets: {
       irs_monitor: {
         season_start_dates: ['2011-10-01', '2017-10-01', '2018-01-01'],
@@ -16227,6 +16230,7 @@ test('returns Green for a valid config', t => {
 
 test('returns Green for a minimal valid config', t => {
   const validConfig: TConfig = {
+    instance_id: 'id',
     applets: {
       meta: {}
     }
@@ -16243,6 +16247,7 @@ test('returns Green for a minimal valid config', t => {
 
 test('returns Red for config with irs_record_point missing form and location_selection', t => {
   const validConfig: TConfig = {
+    instance_id: 'id',
     applets: {
       irs_record_point: {
         metadata: {
@@ -16265,6 +16270,7 @@ test('returns Red for config with irs_record_point missing form and location_sel
 
 test('returns Green for config with irs_record_point', t => {
   const validConfig: TConfig = {
+    instance_id: 'id',
     applets: {
       irs_record_point: {
         metadata: {
@@ -16309,6 +16315,7 @@ test('returns Green for config with irs_record_point', t => {
 
 test('returns Red for invalid config with irs_plan and irs_record_point', t => {
   const validConfig: TConfig = {
+    instance_id: 'id',
     applets: {
       irs_record_point: {
         metadata: {
@@ -16356,6 +16363,7 @@ test('returns Red for invalid config with irs_plan and irs_record_point', t => {
 
 test('returns Green for valid config with irs_plan and irs_record_point', t => {
   const validConfig: TConfig = {
+    instance_id: 'id',
     applets: {
       irs_record_point: {
         metadata: {

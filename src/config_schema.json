@@ -742,6 +742,9 @@
         "form": {
             "$ref": "#/definitions/TForm"
         },
+        "instance_id": {
+            "type": "string"
+        },
         "location_selection": {
             "$ref": "#/definitions/TLocationSelection"
         },
@@ -759,7 +762,8 @@
         }
     },
     "required": [
-        "applets"
+        "applets",
+        "instance_id"
     ],
     "type": "object"
 }
