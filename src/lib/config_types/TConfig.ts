@@ -8,6 +8,7 @@ import { TSpatialHierarchy } from './TSpatialHierarchy';
 import { TValidations } from './TValidations';
 
 export interface TConfig {
+  _id: string | null;
   instance_id: string;
 
   applets: TApplets;

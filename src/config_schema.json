@@ -722,6 +722,12 @@
         }
     },
     "properties": {
+        "_id": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
         "aggregations": {
             "items": {
                 "$ref": "#/definitions/TAggregation"
@@ -762,6 +768,7 @@
         }
     },
     "required": [
+        "_id",
         "applets",
         "instance_id"
     ],

@@ -7,6 +7,7 @@ import { validate } from './validate';
 
 test("returns Red for a config that doesn't match schema", t => {
   const config_not_matching_schema = {
+    // Missing _id property
     applets: {},
     not_schema: true
   };
@@ -16230,6 +16231,7 @@ test('returns Green for a valid config', t => {
 
 test('returns Green for a minimal valid config', t => {
   const validConfig: TConfig = {
+    _id: 'randomstring',
     instance_id: 'id',
     applets: {
       meta: {}
@@ -16247,6 +16249,7 @@ test('returns Green for a minimal valid config', t => {
 
 test('returns Red for config with irs_record_point missing form and location_selection', t => {
   const validConfig: TConfig = {
+    _id: 'randomstring',
     instance_id: 'id',
     applets: {
       irs_record_point: {
@@ -16270,6 +16273,7 @@ test('returns Red for config with irs_record_point missing form and location_sel
 
 test('returns Green for config with irs_record_point', t => {
   const validConfig: TConfig = {
+    _id: 'randomstring',
     instance_id: 'id',
     applets: {
       irs_record_point: {
@@ -16315,6 +16319,7 @@ test('returns Green for config with irs_record_point', t => {
 
 test('returns Red for invalid config with irs_plan and irs_record_point', t => {
   const validConfig: TConfig = {
+    _id: 'randomstring',
     instance_id: 'id',
     applets: {
       irs_record_point: {
@@ -16363,6 +16368,7 @@ test('returns Red for invalid config with irs_plan and irs_record_point', t => {
 
 test('returns Green for valid config with irs_plan and irs_record_point', t => {
   const validConfig: TConfig = {
+    _id: 'randomstring',
     instance_id: 'id',
     applets: {
       irs_record_point: {

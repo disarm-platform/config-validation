@@ -2,6 +2,7 @@ import { TConfig } from '../config_types/TConfig';
 
 // Minimum required properties for a valid config
 const valid_config_stub: TConfig = {
+  _id: 'randomstring',
   instance_id: 'an_id',
   applets: {
     irs_plan: {
