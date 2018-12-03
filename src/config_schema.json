@@ -1,10 +1,38 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
     "definitions": {
+        "EFieldType": {
+            "enum": [
+                "Boolean",
+                "NotSet",
+                "Number",
+                "String",
+                "Unreliable"
+            ],
+            "type": "string"
+        },
+        "Element": {
+            "additionalProperties": {
+            },
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "type"
+            ],
+            "type": "object"
+        },
         "Page": {
             "properties": {
                 "elements": {
                     "items": {
+                        "$ref": "#/definitions/Element"
                     },
                     "type": "array"
                 },
@@ -335,6 +363,35 @@
             },
             "type": "object"
         },
+        "TFieldSummary": {
+            "properties": {
+                "exists_on_all": {
+                    "type": "boolean"
+                },
+                "field_name": {
+                    "type": "string"
+                },
+                "sample_values": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "$ref": "#/definitions/EFieldType"
+                },
+                "unique": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "exists_on_all",
+                "field_name",
+                "type",
+                "unique"
+            ],
+            "type": "object"
+        },
         "TForm": {
             "properties": {
                 "pages": {
@@ -349,31 +406,21 @@
             ],
             "type": "object"
         },
+        "TGeodataSummary": {
+            "additionalProperties": {
+                "items": {
+                    "$ref": "#/definitions/TFieldSummary"
+                },
+                "type": "array"
+            },
+            "type": "object"
+        },
         "THeightConstraint": {
             "enum": [
                 "full",
                 "none"
             ],
             "type": "string"
-        },
-        "TInstance": {
-            "properties": {
-                "location_name": {
-                    "type": "string"
-                },
-                "slug": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "location_name",
-                "slug",
-                "title"
-            ],
-            "type": "object"
         },
         "TIrsMonitor": {
             "description": "The configuration for the IRS Monitor applet for douma",
@@ -440,6 +487,9 @@
         },
         "TIrsRecordPoint": {
             "properties": {
+                "filter_field": {
+                    "type": "string"
+                },
                 "icon": {
                     "description": "The icon for the applet",
                     "type": "string"
@@ -598,6 +648,9 @@
                 "data_version": {
                     "type": "number"
                 },
+                "geodata_summary": {
+                    "$ref": "#/definitions/TGeodataSummary"
+                },
                 "ignore_planning_level_restriction": {
                     "type": "boolean"
                 },
@@ -613,6 +666,7 @@
             },
             "required": [
                 "data_version",
+                "geodata_summary",
                 "levels",
                 "markers"
             ],
@@ -694,9 +748,6 @@
         "form": {
             "$ref": "#/definitions/TForm"
         },
-        "instance": {
-            "$ref": "#/definitions/TInstance"
-        },
         "location_selection": {
             "$ref": "#/definitions/TLocationSelection"
         },
@@ -716,8 +767,7 @@
     "required": [
         "applets",
         "config_id",
-        "config_version",
-        "instance"
+        "config_version"
     ],
     "type": "object"
 }
