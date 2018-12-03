@@ -1,6 +1,9 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { EFieldType, TSpatialHierarchy,  } from '../config_types/TSpatialHierarchy';
+import {
+  EFieldType,
+  TSpatialHierarchy
+} from '../config_types/TSpatialHierarchy';
 import { ECustomEdgeStatus } from '../TCustomEdgeResponse';
 import { valid_id_fields } from './valid_id_fields';
 
@@ -13,7 +16,7 @@ test('basic', t => {
           exists_on_all: true,
           field_name: 'id',
           type: EFieldType.Number,
-          unique: true,
+          unique: true
         }
       ]
     },
@@ -21,7 +24,7 @@ test('basic', t => {
       {
         display_field_name: 'id',
         field_name: 'id',
-        name: 'villages',
+        name: 'villages'
       }
     ],
     markers: {
@@ -29,7 +32,7 @@ test('basic', t => {
         denominator_fields1: 'id'
       },
       planning_level_name: 'villages',
-      record_location_selection_level_name: 'villages',
+      record_location_selection_level_name: 'villages'
     }
   };
 
@@ -47,7 +50,7 @@ test('fail with duplicate ids', t => {
           exists_on_all: true,
           field_name: 'id',
           type: EFieldType.Number,
-          unique: false,
+          unique: false
         }
       ]
     },
@@ -55,7 +58,7 @@ test('fail with duplicate ids', t => {
       {
         display_field_name: 'id',
         field_name: 'id',
-        name: 'villages',
+        name: 'villages'
       }
     ],
     markers: {
@@ -63,7 +66,7 @@ test('fail with duplicate ids', t => {
         denominator_fields1: 'id'
       },
       planning_level_name: 'villages',
-      record_location_selection_level_name: 'villages',
+      record_location_selection_level_name: 'villages'
     }
   };
 

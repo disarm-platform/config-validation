@@ -6,4 +6,4 @@ export interface TValidation {
   precondition?: string;
 }
 
-export type TValidations = TValidation[]
+export type TValidations = TValidation[];

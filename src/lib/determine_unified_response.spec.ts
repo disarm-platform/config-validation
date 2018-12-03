@@ -5,79 +5,88 @@ import { EStandardEdgeStatus } from './TStandardEdgeResponse';
 import { EUnifiedStatus } from './TUnifiedResponse';
 
 test('returns Red if any Red TStandardEdgeResponses', t => {
-  const edge_responses = [{
-    custom_edge_responses: [],
-    edge_name: 'name',
-    message: 'message',
-    relationship_hint: '',
-    required: true,
-    source_node_name: 'source',
-    status: EStandardEdgeStatus.Red,
-    target_node_name: 'target'
-  }, {
-    custom_edge_responses: [],
-    edge_name: 'name',
-    message: 'message',
-    relationship_hint: '',
-    required: true,
-    source_node_name: 'source',
-    status: EStandardEdgeStatus.Green,
-    target_node_name: 'target'
-  }]
-  const result = determine_unified_response(edge_responses)
+  const edge_responses = [
+    {
+      custom_edge_responses: [],
+      edge_name: 'name',
+      message: 'message',
+      relationship_hint: '',
+      required: true,
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Red,
+      target_node_name: 'target'
+    },
+    {
+      custom_edge_responses: [],
+      edge_name: 'name',
+      message: 'message',
+      relationship_hint: '',
+      required: true,
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Green,
+      target_node_name: 'target'
+    }
+  ];
+  const result = determine_unified_response(edge_responses);
 
-  t.is(result.status, EUnifiedStatus.Red)
-  t.is(result.message, 'Failed')
-})
+  t.is(result.status, EUnifiedStatus.Red);
+  t.is(result.message, 'Failed');
+});
 
 test('returns Green if all Green TStandardEdgeResponses', t => {
-  const edge_responses = [{
-    custom_edge_responses: [],
-    edge_name: 'name',
-    message: 'message',
-    relationship_hint: '',
-    required: true,
-    source_node_name:'source',
-    status: EStandardEdgeStatus.Green,
-    target_node_name:'target'
-  }, {
-    custom_edge_responses: [],
-    edge_name: 'name',
-    message: 'message',
-    relationship_hint: '',
-    required: true,
-    source_node_name: 'source',
-    status: EStandardEdgeStatus.Green,
-    target_node_name: 'target'
-  }]
-  const result = determine_unified_response(edge_responses)
+  const edge_responses = [
+    {
+      custom_edge_responses: [],
+      edge_name: 'name',
+      message: 'message',
+      relationship_hint: '',
+      required: true,
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Green,
+      target_node_name: 'target'
+    },
+    {
+      custom_edge_responses: [],
+      edge_name: 'name',
+      message: 'message',
+      relationship_hint: '',
+      required: true,
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Green,
+      target_node_name: 'target'
+    }
+  ];
+  const result = determine_unified_response(edge_responses);
 
-  t.is(result.status, EUnifiedStatus.Green)
-  t.is(result.message, 'All passed')
-})
+  t.is(result.status, EUnifiedStatus.Green);
+  t.is(result.message, 'All passed');
+});
 
 test('returns Green if Green and Blue TStandardEdgeResponses', t => {
-  const edge_responses = [{
-    custom_edge_responses: [],
-    edge_name: 'name',
-    message: 'message',
-    relationship_hint: '',
-    required: true,
-    source_node_name: 'source',
-    status: EStandardEdgeStatus.Blue,
-    target_node_name: 'target',
-  }, {
-    custom_edge_responses: [],
-    edge_name: 'name',
-    message: 'message',
-    relationship_hint: '',
-    required: true,
-    source_node_name: 'source',
-    status: EStandardEdgeStatus.Green,
-    target_node_name: 'target'
-  }]
-  const result = determine_unified_response(edge_responses)
+  const edge_responses = [
+    {
+      custom_edge_responses: [],
+      edge_name: 'name',
+      message: 'message',
+      relationship_hint: '',
+      required: true,
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Blue,
+      target_node_name: 'target'
+    },
+    {
+      custom_edge_responses: [],
+      edge_name: 'name',
+      message: 'message',
+      relationship_hint: '',
+      required: true,
+      source_node_name: 'source',
+      status: EStandardEdgeStatus.Green,
+      target_node_name: 'target'
+    }
+  ];
+  const result = determine_unified_response(edge_responses);
 
-  t.is(result.status, EUnifiedStatus.Green)
-  t.is(result.message, 'Passed with some optional edges')
-})
+  t.is(result.status, EUnifiedStatus.Green);
+  t.is(result.message, 'Passed with some optional edges');
+});

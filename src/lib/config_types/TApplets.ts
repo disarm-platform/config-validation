@@ -1,5 +1,5 @@
 import { TApplet } from './TApplet';
-import { TIrsMonitor } from './TIrsMonitor'
+import { TIrsMonitor } from './TIrsMonitor';
 import { TIrsPlan } from './TIrsPlan';
 import { TIrsRecordPoint } from './TIrsRecordPoint';
 import { TIrsTasker } from './TIrsTasker';

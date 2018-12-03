@@ -8,7 +8,6 @@ export interface TMarkers {
   denominator_fields: TDenominatorFields;
 }
 
-
 export interface TLevel {
   group_by_field?: string;
   field_name: string;
@@ -21,7 +20,7 @@ export enum EFieldType {
   String = 'String',
   Number = 'Number',
   Boolean = 'Boolean',
-  Unreliable = 'Unreliable',
+  Unreliable = 'Unreliable'
 }
 
 export interface TFieldSummary {
@@ -33,7 +32,7 @@ export interface TFieldSummary {
 }
 
 export interface TGeodataSummary {
-  [k: string]: TFieldSummary[]
+  [k: string]: TFieldSummary[];
 }
 
 export interface TSpatialHierarchy {

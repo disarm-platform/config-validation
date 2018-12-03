@@ -7,17 +7,17 @@ export const AvailableApplets = [
   'irs_monitor',
   'irs_plan',
   'irs_record_point',
-  'irs_tasker',
-]
+  'irs_tasker'
+];
 
 export const PathMap: TPathMap[] = [
   ...AvailableApplets.map(applet => {
     return {
       name: applet,
       path: `applets.${applet}`
-    }
+    };
   }),
-  { name: 'applets', path: 'applets'},
+  { name: 'applets', path: 'applets' },
   { name: 'meta', path: 'applets.meta' },
 
   { name: 'aggregations', path: 'aggregations' },

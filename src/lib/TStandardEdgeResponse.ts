@@ -1,4 +1,4 @@
-import { TCustomEdgeResponse } from "./TCustomEdgeResponse";
+import { TCustomEdgeResponse } from './TCustomEdgeResponse';
 
 export enum EStandardEdgeStatus {
   Red = 'Red, fails node or edge validation',

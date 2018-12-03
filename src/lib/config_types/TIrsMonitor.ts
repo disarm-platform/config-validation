@@ -1,4 +1,4 @@
-import { TApplet } from "./TApplet";
+import { TApplet } from './TApplet';
 
 // tslint:disable:no-mixed-interface
 
@@ -14,11 +14,11 @@ export interface TChartMultiSeries {
 
 export interface TChartSingleSeries {
   aggregation_name: string;
-};
+}
 
-export type THeightConstraint = 'none' | 'full'
+export type THeightConstraint = 'none' | 'full';
 
-export type TWidthConstraint = 'half' | 'full'
+export type TWidthConstraint = 'half' | 'full';
 
 export interface TChartStyle {
   // need to check if full or something else
@@ -28,9 +28,9 @@ export interface TChartStyle {
 
 export interface TChartOptionsLayoutAxis {
   title: string;
-};
+}
 
-export type TBarMode = 'stack'
+export type TBarMode = 'stack';
 
 export interface TChartOptionsLayout {
   showlegend?: boolean;
@@ -40,7 +40,7 @@ export interface TChartOptionsLayout {
   barmode?: TBarMode;
 }
 
-export type TChartType = 'bar' | 'text' | 'line' | 'pie'
+export type TChartType = 'bar' | 'text' | 'line' | 'pie';
 
 export interface TChartOptions {
   chart_type?: TChartType;
@@ -56,7 +56,7 @@ export interface TChartOptions {
   generate_series_from?: string;
 }
 
-export type TTextChart = 'text'
+export type TTextChart = 'text';
 
 export interface TChartConfig {
   // id is required for all
@@ -66,7 +66,7 @@ export interface TChartConfig {
   chart_type?: TTextChart;
 }
 
-export type TMap = 'map'
+export type TMap = 'map';
 
 export interface TChartMap {
   chart_type?: TMap;
@@ -76,8 +76,7 @@ export interface TChartMap {
   property_layers: TPropertyLayer[];
 }
 
-export type TTable = 'table'
-
+export type TTable = 'table';
 
 export interface TChartTable {
   chart_type?: TTable;

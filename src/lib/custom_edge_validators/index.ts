@@ -14,9 +14,9 @@ import { irs_monitor_aggregations } from './irs_monitor_aggregations';
 import { irs_monitor_fields_helper } from './irs_monitor_fields_helper';
 import { irs_monitor_map_focus } from './irs_monitor_map_focus';
 import { irs_monitor_spatial_hierarchy } from './irs_monitor_spatial_hierarchy';
-import { irs_plan_map_focus } from './irs_plan_map_focus'
-import { irs_plan_spatial_hierarchy } from './irs_plan_spatial_hierarchy'
-import { irs_record_point_form } from './irs_record_point_form'
+import { irs_plan_map_focus } from './irs_plan_map_focus';
+import { irs_plan_spatial_hierarchy } from './irs_plan_spatial_hierarchy';
+import { irs_record_point_form } from './irs_record_point_form';
 import { irs_record_point_location_selection } from './irs_record_point_location_selection';
 import { irs_record_point_validations } from './irs_record_point_validations';
 import { irs_tasker_map_focus } from './irs_tasker_map_focus';
@@ -24,9 +24,8 @@ import { irs_tasker_spatial_hierarchy } from './irs_tasker_spatial_hierarchy';
 import { spatial_hierarchy_geodata_summary } from './spatial_hierarchy_geodata_summary';
 import { validations_fields_helper } from './validations_fields_helper';
 
-
 export interface TCustomEdgeValidators {
-  [k: string]: (config: TConfig) => TCustomEdgeResponse[]
+  [k: string]: (config: TConfig) => TCustomEdgeResponse[];
 }
 
 export const CustomEdgeValidators: TCustomEdgeValidators = {

@@ -7,4 +7,3 @@ export interface TMapFocus {
   centre: TCentre;
   zoom: number;
 }
-

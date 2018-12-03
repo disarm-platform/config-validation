@@ -4,6 +4,6 @@ export enum ENodeResponseStatus {
 }
 
 export interface TNodeResponse {
-  status: ENodeResponseStatus,
-  message: string
+  status: ENodeResponseStatus;
+  message: string;
 }

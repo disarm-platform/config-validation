@@ -1,4 +1,4 @@
-import { get } from 'lodash'
+import { get } from 'lodash';
 import { TAggregation } from './config_types/TAggregations';
 import { TConfig } from './config_types/TConfig';
 import { TDecorators } from './config_types/TDecorators';
@@ -13,24 +13,28 @@ import { TSpatialHierarchy } from './config_types/TSpatialHierarchy';
 import { TValidation } from './config_types/TValidations';
 import { TPathMap } from './helper_functions/path_mapping';
 
-export type Node =  TDecorators |
-  TAggregation[] |
-  TForm |
-  TIrsMonitor |
-  TIrsPlan |
-  TIrsRecordPoint |
-  TIrsTasker |
-  TLocationSelection |
-  TMapFocus |
-  TSpatialHierarchy |
-  TValidation[]; 
+export type Node =
+  | TDecorators
+  | TAggregation[]
+  | TForm
+  | TIrsMonitor
+  | TIrsPlan
+  | TIrsRecordPoint
+  | TIrsTasker
+  | TLocationSelection
+  | TMapFocus
+  | TSpatialHierarchy
+  | TValidation[];
 
 export interface MappedNode {
   name: string;
-  node: Node
+  node: Node;
 }
 
-export function mapped_nodes(config: TConfig, path_map: TPathMap[]): MappedNode[] {
+export function mapped_nodes(
+  config: TConfig,
+  path_map: TPathMap[]
+): MappedNode[] {
   return path_map.map(el => {
     return {
       name: el.name,

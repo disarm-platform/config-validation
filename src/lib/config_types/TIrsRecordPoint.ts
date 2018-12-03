@@ -1,4 +1,4 @@
-import { TApplet } from "./TApplet";
+import { TApplet } from './TApplet';
 
 export interface TMetaData {
   show: boolean;
@@ -6,6 +6,6 @@ export interface TMetaData {
 }
 
 export interface TIrsRecordPoint extends TApplet {
-  metadata: TMetaData,
-  filter_field?: string,
+  metadata: TMetaData;
+  filter_field?: string;
 }

@@ -5,4 +5,4 @@ export interface TAggregation {
   denominator_aggregation?: string;
 }
 
-export type TAggregations = TAggregation[]
+export type TAggregations = TAggregation[];

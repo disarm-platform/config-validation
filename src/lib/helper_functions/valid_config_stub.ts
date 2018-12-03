@@ -14,7 +14,7 @@ const valid_config_stub: TConfig = {
     meta: {}
   },
   config_id: 'id',
-  config_version: 'version',
-}
+  config_version: 'version'
+};
 
-export {valid_config_stub}
+export { valid_config_stub };
