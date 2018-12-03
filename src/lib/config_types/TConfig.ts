@@ -8,9 +8,6 @@ import { TSpatialHierarchy } from './TSpatialHierarchy';
 import { TValidations } from './TValidations';
 
 export interface TConfig {
-  config_id: string;
-  config_version: string;
-
   applets: TApplets;
   map_focus?: TMapFocus;
 

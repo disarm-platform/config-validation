@@ -22,8 +22,6 @@ test('Config validations used by table, charts and map are not available', t => 
   // Invalid config, aggregations is an empty array
   const invalidNamConfig = {
     _id: 'nam@1.0.5',
-    config_id: 'nam',
-    config_version: '1.0.5',
     applets: {
       irs_monitor: {
         season_start_dates: ['2011-10-01', '2017-10-01', '2018-01-01'],
@@ -6944,8 +6942,6 @@ test('Config validations used by table, charts and map are not available', t => 
 test('returns Green for a valid BWA config', t => {
   const validBWAConfig = {
     _id: 'bwa@1.0.6',
-    config_id: 'bwa',
-    config_version: '1.0.6',
     applets: {
       irs_monitor: {
         season_start_dates: [
@@ -9186,8 +9182,6 @@ test('returns Green for a valid config', t => {
   // tslint:disable:object-literal-sort-keys
   const validNamConfig = {
     _id: 'nam@1.0.5',
-    config_id: 'nam',
-    config_version: '1.0.5',
     applets: {
       irs_monitor: {
         season_start_dates: ['2011-10-01', '2017-10-01', '2018-01-01'],
@@ -16235,9 +16229,7 @@ test('returns Green for a minimal valid config', t => {
   const validConfig: TConfig = {
     applets: {
       meta: {}
-    },
-    config_id: 'id',
-    config_version: 'version'
+    }
   };
 
   const response = validate(validConfig);
@@ -16259,9 +16251,7 @@ test('returns Red for config with irs_record_point missing form and location_sel
         }
       },
       meta: {}
-    },
-    config_id: 'id',
-    config_version: 'version'
+    }
   };
 
   const response = validate(validConfig);
@@ -16284,8 +16274,6 @@ test('returns Green for config with irs_record_point', t => {
       },
       meta: {}
     },
-    config_id: 'id',
-    config_version: 'version',
     form: {
       pages: [
         {
@@ -16333,8 +16321,6 @@ test('returns Red for invalid config with irs_plan and irs_record_point', t => {
       },
       meta: {}
     },
-    config_id: 'id',
-    config_version: 'version',
     form: {
       pages: [
         {
@@ -16382,8 +16368,6 @@ test('returns Green for valid config with irs_plan and irs_record_point', t => {
       },
       meta: {}
     },
-    config_id: 'id',
-    config_version: 'version',
     form: {
       pages: [
         {

@@ -731,12 +731,6 @@
         "applets": {
             "$ref": "#/definitions/TApplets"
         },
-        "config_id": {
-            "type": "string"
-        },
-        "config_version": {
-            "type": "string"
-        },
         "decorators": {
             "$ref": "#/definitions/TDecorators"
         },
@@ -765,9 +759,7 @@
         }
     },
     "required": [
-        "applets",
-        "config_id",
-        "config_version"
+        "applets"
     ],
     "type": "object"
 }
