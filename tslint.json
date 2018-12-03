@@ -29,7 +29,9 @@
       { "ignore-prefix": ["console.", "process.exit"] }
     ],
     "variable-name": ["allow-snake-case"],
-
+    
+    // Added by hand
+    "object-literal-sort-keys": false,
     "no-console": false
   }
 }
