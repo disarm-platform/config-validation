@@ -1,6 +1,6 @@
 {
   "name": "@disarm/config-validation",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "config validation",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
