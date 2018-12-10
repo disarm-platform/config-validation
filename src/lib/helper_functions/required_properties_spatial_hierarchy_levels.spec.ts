@@ -10,6 +10,7 @@ import { required_properties_on_sh_level } from './required_properties_spatial_h
 
 test('basic', t => {
   const sh_level: TLevel = {
+    level_id: 'id',
     display_field_name: 'display',
     field_name: 'id',
     name: 'name'
@@ -32,6 +33,7 @@ test('basic', t => {
 
 test('two, both present', t => {
   const sh_level: TLevel = {
+    level_id: 'id',
     display_field_name: 'display',
     field_name: 'id',
     group_by_field: 'group_by_this',
@@ -61,6 +63,7 @@ test('two, both present', t => {
 
 test('two, one missing', t => {
   const sh_level: TLevel = {
+    level_id: 'id',
     display_field_name: 'display',
     field_name: 'id',
     group_by_field: 'group_by_this',

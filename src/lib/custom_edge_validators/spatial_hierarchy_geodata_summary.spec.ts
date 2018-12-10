@@ -61,12 +61,14 @@ test('should return Green when spatial_hierarchy is valid', t => {
     },
     levels: [
       {
+        level_id: 'id',
         display_field_name: 'CONST',
         field_name: 'OBJECTID',
         group_by_field: 'REGION',
         name: 'constituencies'
       },
       {
+        level_id: 'id',
         display_field_name: 'mp_NAME',
         field_name: 'uID',
         group_by_field: 'CONSTIT',
@@ -138,12 +140,14 @@ test('should return Red when planning_level_name is missing', t => {
     },
     levels: [
       {
+        level_id: 'id',
         display_field_name: 'CONST',
         field_name: 'OBJECTID',
         group_by_field: 'REGION',
         name: 'constituencies'
       },
       {
+        level_id: 'id',
         display_field_name: 'mp_NAME',
         field_name: 'uID',
         group_by_field: 'CONSTIT',
@@ -214,12 +218,14 @@ test('should return Red when record_location_selection_level_name is missing', t
     },
     levels: [
       {
+        level_id: 'id',
         display_field_name: 'CONST',
         field_name: 'OBJECTID',
         group_by_field: 'REGION',
         name: 'constituencies'
       },
       {
+        level_id: 'id',
         display_field_name: 'mp_NAME',
         field_name: 'uID',
         group_by_field: 'CONSTIT',
@@ -277,12 +283,14 @@ test('should return Red when spatial_hierarchy level is missing from geodata_sum
     },
     levels: [
       {
+        level_id: 'id',
         display_field_name: 'CONST',
         field_name: 'OBJECTID',
         group_by_field: 'REGION',
         name: 'constituencies'
       },
       {
+        level_id: 'id',
         display_field_name: 'mp_NAME',
         field_name: 'uID',
         group_by_field: 'CONSTIT',
@@ -359,12 +367,14 @@ test('should return Red when id fields are not unique', t => {
     },
     levels: [
       {
+        level_id: 'id',
         display_field_name: 'CONST',
         field_name: 'OBJECTID',
         group_by_field: 'REGION',
         name: 'constituencies'
       },
       {
+        level_id: 'id',
         display_field_name: 'mp_NAME',
         field_name: 'uID',
         group_by_field: 'CONSTIT',
@@ -441,12 +451,14 @@ test('should return Red when id fields are not on all features', t => {
     },
     levels: [
       {
+        level_id: 'id',
         display_field_name: 'CONST',
         field_name: 'OBJECTID',
         group_by_field: 'REGION',
         name: 'constituencies'
       },
       {
+        level_id: 'id',
         display_field_name: 'mp_NAME',
         field_name: 'uID',
         group_by_field: 'CONSTIT',
@@ -523,12 +535,14 @@ test('should return Red when id fields are not all of same type', t => {
     },
     levels: [
       {
+        level_id: 'id',
         display_field_name: 'CONST',
         field_name: 'OBJECTID',
         group_by_field: 'REGION',
         name: 'constituencies'
       },
       {
+        level_id: 'id',
         display_field_name: 'mp_NAME',
         field_name: 'uID',
         group_by_field: 'CONSTIT',

@@ -22,6 +22,7 @@ test('basic', t => {
     },
     levels: [
       {
+        level_id: 'id',
         display_field_name: 'id',
         field_name: 'id',
         name: 'villages'
@@ -56,6 +57,7 @@ test('fail with duplicate ids', t => {
     },
     levels: [
       {
+        level_id: 'id',
         display_field_name: 'id',
         field_name: 'id',
         name: 'villages'

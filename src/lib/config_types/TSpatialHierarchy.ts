@@ -9,6 +9,7 @@ export interface TMarkers {
 }
 
 export interface TLevel {
+  level_id: string;
   group_by_field?: string;
   field_name: string;
   display_field_name: string;

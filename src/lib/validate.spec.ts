@@ -120,12 +120,14 @@ test('Config validations used by table, charts and map are not available', t => 
       },
       levels: [
         {
+          level_id: 'id',
           group_by_field: 'REGION',
           field_name: 'OBJECTID',
           display_field_name: 'CONST',
           name: 'constituencies'
         },
         {
+          level_id: 'id',
           group_by_field: 'CONSTIT',
           field_name: 'uID',
           display_field_name: 'mp_NAME',
@@ -7328,18 +7330,21 @@ test('returns Green for a valid BWA config', t => {
         ]
       },
       levels: [
-        {
+        { 
+          level_id: 'id',
           field_name: 'NAME',
           display_field_name: 'CODE',
           name: 'districts'
         },
-        {
+        { 
+          level_id: 'id',
           group_by_field: 'name_2',
           field_name: 'Id',
           display_field_name: 'VILLAGE',
           name: 'villages'
         },
-        {
+        { 
+          level_id: 'id',
           field_name: 'ClusterID',
           display_field_name: 'SP_ID_1',
           name: 'clusters'
@@ -9330,12 +9335,14 @@ test('returns Green for a valid config', t => {
       },
       levels: [
         {
+          level_id: 'id',
           group_by_field: 'REGION',
           field_name: 'OBJECTID',
           display_field_name: 'CONST',
           name: 'constituencies'
         },
         {
+          level_id: 'id',
           group_by_field: 'CONSTIT',
           field_name: 'uID',
           display_field_name: 'mp_NAME',
@@ -16435,6 +16442,7 @@ test('returns Green for valid config with irs_plan and irs_record_point', t => {
       },
       levels: [
         {
+          level_id: 'id',
           group_by_field: 'REGION',
           field_name: 'OBJECTID',
           display_field_name: 'CONST',
